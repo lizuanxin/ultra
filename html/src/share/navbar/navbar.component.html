@@ -1,0 +1,33 @@
+<div class="fixed-top header">
+    <nav class="navbar navbar-toggleable-md navbar-light bg-faded no-padding">
+        <button class="navbar-toggler navbar-toggler-right" (click)="toggleSidebar()">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="container">
+            <ul class="collapse navbar-collapse">
+                <li class="nav-item dropdown" ngbDropdown>
+                    <a href="javascript:void(0)" class="text-uppercase nav-link flex-box align-items-center" ngbDropdownToggle>
+                        <i icon>&#xe90d;</i>&nbsp;<a>{{App.Language|translate}}</a>&nbsp;<b class="caret"></b>
+                    </a>
+                    <div class="dropdown-menu dropdown-menu-right">
+                        <a *ngFor="let lang of App.Languages" class="dropdown-item" href="javascript:void(0)" (click)="ChangeLang(lang)">{{lang|translate}}</a>
+                    </div>
+                </li>
+            </ul>
+            <ul class="collapse navbar-collapse navbar-tabs">
+                <li *ngFor="let item of MenuItems" routerLink="{{item.Link}}" [routerLinkActive]="['active']">{{item.LangId|translate}}</li>
+            </ul>
+
+            <ul class="collapse navbar-collapse navbar-snap" align-items-center>
+                <li class="nav-item">
+                    <a href="javascript:void(0)" class="nav-link" [routerLink]="['/login']" *ngIf="! Auth.IsLogin">
+                        <span>{{'button.login'|translate}}</span>
+                    </a>
+                    <a href="javascript:void(0)" class="nav-link flex-box align-items-center" (click)="Logout()" *ngIf="Auth.IsLogin">
+                        <i icon>&#xe917;</i>&nbsp;<span>{{'button.logout'|translate}}</span>
+                    </a>
+                </li>
+            </ul>
+        </div>
+    </nav>
+</div>
