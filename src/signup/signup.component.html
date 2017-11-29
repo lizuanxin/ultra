@@ -1,0 +1,32 @@
+<div class="login-page">
+        <div class="login-wrap">
+            <div class="row login-form justify-content-between">
+                <div class="col-md-5">
+                    <img class="img-fluid" src="/assets/images/sign-up.jpg">
+                </div>
+                <div class="col-md-6 login-in">
+                    <form novalidate [formGroup]="Sheet" autocomplete="off">
+                        <h1>{{'button.register'|translate}}</h1>
+                        <ul>
+                            <li b-line flex-box align-items-center [ngClass]="{'err': Email.invalid && (Email.dirty || Email.touched)}">
+                                <input type="mail" formControlName="Email" placeholder="{{'auth.email'|translate}}" required>
+                                <i icon>&#xe902;</i>
+                            </li>
+                            <li b-line flex-box align-items-center [ngClass]="{'err': Pass.invalid && (Pass.dirty || Pass.touched)}">
+                                <input type="password" formControlName="Pass" placeholder="{{'auth.pass'|translate}}" required>
+                                <i icon>&#xe913;</i>
+                            </li>
+                            <li b-line flex-box align-items-center [ngClass]="{'err': RenterPass.invalid && (RenterPass.dirty || RenterPass.touched)}">
+                                    <input type="password" formControlName="RenterPass" placeholder="{{'auth.pass_renter'|translate}}" required>
+                                    <i icon>&#xe913;</i>
+                                </li>
+                            <li>
+                                <button type="button" class="btn btn-success btn-lg btn-block" (click)="Submit()" [disabled]="!Sheet.valid">{{'button.register'|translate}}</button>
+                            </li>
+                            <li text-right><a class="btn" [routerLink]="['/login']">{{'button.login'|translate}}</a></li>
+                        </ul>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>

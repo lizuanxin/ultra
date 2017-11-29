@@ -1,0 +1,145 @@
+{
+    "en": "English",
+    "zh-chs": "简体中文",
+    "zh-cht": "繁体中文",
+
+    "button":
+    {
+        "register": "Signup",
+        "login": "Login",
+        "logout": "Logout",
+        "modify": "Modify",
+        "save": "Save",
+        "edit": "Edit",
+        "close": "Close",
+        "confirm": "Confirm"
+    },
+
+    "auth":
+    {
+        "email": "Email",
+        "pass": "Password",
+        "pass_renter": "Reenter the Password",
+        "pass_reset": "Reset Password",
+
+        "email_required": "Email is required",
+        "email_pattern": "The email address must contain at least the @ character",
+
+        "pass_required": "Password is required",
+        "pass_pattern": "Pass must be 6 characters long.",
+        "pass_renter_mismatch": "These passwords don't match."
+    },
+
+    "account":
+    {
+        "title": "Account",
+        "expand": {
+            "member_manage": "Member manage",
+            "base_info": "Member info",
+            "consultation_evaluation": "consultation & evaluation"
+        },
+
+        "member_manage": {
+            "title": "Member manage"
+        },
+
+        "member_level": {
+            "title": "Member level"
+        },
+
+        "consultation":{
+            "title": "Consultation"
+        },
+
+        "evaluation":{
+            "title": "Evaluation"
+        },
+
+        "profile":
+        {
+            "title": "Profile",
+            "email": "Email",
+            "firstname": "First Name",
+            "surname": "Sur Name"
+        },
+
+        "security":
+        {
+            "title": "Security",
+            "change_pass": "Change password"
+        },
+
+        "delivery":
+        {
+            "title": "Delivery",
+            "new": "New address",
+            "edit": "Edit address",
+            "default": "Default",
+            "recipient": "Recipient",
+            "tel": "Tel",
+            "location": "Location",
+            "street": "Street",
+            "zip": "Zip",
+            "city": "City",
+            "country": "Country"
+        }
+    },
+
+    "items":
+    {
+        "title": "Items",
+
+        "expand": {
+            "manage": "Manage",
+            "setting": "Setting"
+        },
+
+        "commodity":{
+            "title": "Commodity"
+        },
+        "drafts": {
+            "title": "Drafts"
+        },
+        "classified": {
+            "title": "Classified"
+        },
+        "type": {
+            "title": "Type"
+        },
+        "specification": {
+            "title": "Specification"
+        }
+    },
+
+    "order":
+    {
+        "title": "Order"
+    },
+
+    "marketing":
+    {
+        "title": "Marketing"
+    },
+
+    "setting":
+    {
+        "title": "Setting"
+    },
+
+    "site":
+    {
+        "home": "home",
+        "about_us": "about us",
+        "product": "product",
+        "support": "support",
+        "world_wide": "world wide",
+        "navigation": "navigation",
+        "contact": "contact",
+        "login": "login",
+        "get_touch": "get in touch",
+        "privacy_policy": "privacy policy",
+        "teams_conditions": "teams & conditions",
+        "share_page": "share this page",
+        "follow": "follow us on twitter"
+    }
+}

@@ -1,0 +1,42 @@
+
+<div class="login-page">
+    <div class="login-wrap">
+        <div class="row login-form justify-content-between">
+            <div class="col-md-6 login-in">
+                <form novalidate [formGroup]="Sheet" autocomplete="off">
+                    <h1>Login Into Your Account</h1>
+                    <ul>
+                        <li b-line flex-box align-items-center [ngClass]="{'err': Email.invalid && (Email.dirty || Email.touched)}">
+                            <input type="mail" formControlName="Email" placeholder="{{'auth.email'|translate}}" required>
+                            <i icon>&#xe902;</i>
+                        </li>
+                        <li b-line flex-box align-items-center [ngClass]="{'err': Pass.invalid && (Pass.dirty || Pass.touched)}">
+                            <input type="password" formControlName="Pass" placeholder="{{'auth.pass'|translate}}" required>
+                            <i icon>&#xe913;</i>
+                        </li>
+                        <li>
+                            <button type="button" class="btn btn-success btn-lg btn-block" (click)="Submit()" [disabled]="!Sheet.valid">{{'button.login'|translate}}</button>
+                        </li>
+                        <li text-right>forgot password?</li>
+                    </ul>
+                </form>
+            </div>
+            <div class="col-md-5 login-plugin">
+                <h2 text-right><a [routerLink]="['/signup']">Don' have an account? Sign Up!</a></h2>
+                <ul>
+                    <li flex-box align-items-center class="facebook">
+                        <i icon>&#xe914;</i><span p-l-15>Sign In with Facebook</span>
+                    </li>
+                    <li flex-box align-items-center class="twitter">
+                        <i icon>&#xe915;</i><span p-l-15>Sign In with Twitter</span>
+                    </li>
+                    <li flex-box justify-content-end>
+                        <i icon class="color-wx">&#xe90e;</i>
+                        <i icon class="color-qq">&#xe910;</i>
+                        <i icon class="color-wb">&#xe90f;</i>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </div>
+</div>
