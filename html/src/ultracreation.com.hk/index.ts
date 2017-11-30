@@ -3,14 +3,14 @@ import {CommonModule} from '@angular/common';
 import {Routes, RouterModule} from '@angular/router';
 import {TranslateModule} from '@ngx-translate/core';
 
-import {PagesComponent} from './pages.cmp';
+import {UltraCreationComponent} from './index.cmp';
 import {SharedModule} from 'share';
 import {HeaderComponent, FooterComponent} from './components';
 import {TAuthService} from 'services';
 
 
 const routes: Routes = [
-    {path: '', component: PagesComponent,
+    {path: '', component: UltraCreationComponent,
         children: [
             {path: 'home', loadChildren: './home/index#HomePageModule'},
             // {path: 'about', loadChildren: './about/index#AboutPageModule'},
@@ -32,7 +32,7 @@ const routes: Routes = [
     exports: [
     ],
     declarations: [
-        PagesComponent,
+        UltraCreationComponent,
         HeaderComponent,
         FooterComponent
     ]
