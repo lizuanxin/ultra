@@ -1,23 +1,15 @@
-import { NgModule } from '@angular/core';
-import { Routes, RouterModule } from '@angular/router';
+import { Component, OnInit, ViewChild } from '@angular/core';
 
-import { SharedModule } from 'share';
-import { HomePageComponent } from './home.cmp';
-
-
-const routes: Routes = [
-    {path: '', component: HomePageComponent}
-];
-
-@NgModule({
-    imports: [
-        RouterModule.forChild(routes),
-        SharedModule,
-    ],
-    declarations: [
-        HomePageComponent,
-    ]
-})
-export class HomePageModule
+@Component({templateUrl: './index.html'})
+export class HomePage implements OnInit
 {
+    constructor()
+    {
+
+    }
+    ngOnInit()
+    {
+
+    }
+
 }
