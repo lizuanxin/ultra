@@ -1,0 +1,71 @@
+
+        <div class="container" m-t-30>
+            <div class="row" align-items-center>
+                <div class="col-md-3">
+                    <span class="logo-tx">Ultra Creation</span>
+                    <!-- <img src="assets/images/ultracreation.jpg" class="img-fluid">
+                    <p text-gray text-nowrap class="text-uppercase">premium wordpress theme</p> -->
+                </div>
+                <div class="col-md-8 offset-1" text-right>
+                    <span>share this page：</span>
+                    <i icon f-24>&#xe90a;</i>
+                    <i icon f-24>&#xe90b;</i>
+                    <i icon f-24>&#xe90c;</i>
+                    <i icon f-24>&#xe90e;</i>
+                    <i icon f-24>&#xe90f;</i>
+                    <i icon f-24>&#xe910;</i>
+                </div>
+            </div>
+        </div>
+
+        <div class="nav-primary" m-t-30>
+            <div class="container">
+                <nav class="navbar navbar-toggleable-md">
+                    <div class="navbar-left">
+                        <div class="collapse ac-info">
+                            <ng-template [ngIf]="Auth.IsLogin">
+                                <a class="flex-box align-items-center" [routerLink]="['/sup']" href="javascript:void(0)"><i icon>&#xe902;</i>&nbsp;<span>{{Auth.Me.FirstName}}</span></a>&nbsp;&nbsp;&nbsp;
+                                <button type="button" class="btn btn-sm btn-danger no-radius" (click)="Logout()">Sign out</button>
+                            </ng-template>
+                            <ng-template [ngIf]="!Auth.IsLogin">
+                                <button type="button" class="btn btn-sm btn-success no-radius" [routerLink]="['/login']">login</button>
+                            </ng-template>
+                        </div>
+                        <ul class="navbar-nav">
+                            <li class="nav-item" [routerLinkActive]="['state']">
+                                <a class="nav-link" [routerLink]="['/home']">{{ 'site.home' | translate }}</a>
+                            </li>
+                            <li class="nav-item" [routerLinkActive]="['state']" ngbDropdown>
+                                <a class="nav-link" href="javascript:void(0)" ngbDropdownToggle>{{ 'site.about_us' | translate }}</a>
+                                <div class="dropdown-menu dropdown-menu-left">
+                                    <ul>
+                                        <li><a [routerLink]="['/about']">company profile</a></li>
+                                        <li><a href="#">teams & services</a></li>
+                                        <li><a href="#">contact</a></li>
+                                    </ul>
+                                </div>
+                            </li>
+                            <li class="nav-item" [routerLinkActive]="['state']">
+                                <a class="nav-link" [routerLink]="['/product']">{{ 'site.product' | translate }}</a>
+                            </li>
+                            <li class="nav-item" ngbDropdown>
+                                <a class="nav-link" href="javascript:void(0)" ngbDropdownToggle>{{ 'site.support' | translate }}</a>
+                                <div class="dropdown-menu dropdown-menu-left">
+                                    <ul>
+                                        <li><a href="#">Specifications</a></li>
+                                        <li><a href="#">Maunal</a></li>
+                                        <li><a href="#">FAQ</a></li>
+                                    </ul>
+                                </div>
+                            </li>
+                            <li class="nav-item"><a class="nav-link">{{ 'site.world_wide' | translate }}</a></li>
+                        </ul>
+                    </div>
+                    <!-- <div class="navbar-toggler-right">
+                        <span id="cart" class="btn-cart" [routerLink]="['/cart']"><i icon f-24>&#xe912;</i><em>10</em></span>
+                        <span class="icart" [routerLink]="['/cart']">购物车</span>
+                    </div> -->
+                </nav>
+            </div>
+        </div>
+

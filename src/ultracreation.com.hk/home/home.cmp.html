@@ -1,0 +1,79 @@
+
+<div style="height:480px;position:relative">
+     <swiper BannerSwiper #BannerSwiper [Config]="{pagination:'.swiper-pagination',loop:true,paginationClickable: true}">
+            <div class="swiper-wrapper">
+                <div class="swiper-slide" style="background-image:url(assets/images/site/slide1.jpg)">
+                    <div class="container">
+                        <div class="content" pull-right>
+                            <h2 class="text-capitalize">commncication make real</h2>
+                            <p class="text-capitalize">the pursult excellence and constant</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="swiper-slide">
+                    <div class="container">
+                        <ul class="row" align-items-center justify-content-center>
+                            <li class="col-md-6">
+                                <h2 m-t-30 text-gray-light f-w-l>Compact and portable</h2>
+                                <h1 m-t-15 text-gray>Want to use that is used</h1>
+                                <p m-t-30 m-b-50 text-gray>Our development team is leaded by senior engineers has over 20years' experience in the industry, we are the expert of DFM(Design for manufacture). </p>
+                                <button r-20 class="btn gradient-primary" type="button">buy now</button>
+                            </li>
+                            <li class="col-md-4">
+                                <img src="assets/images/site/pro-2.jpg" class="img-fluid">
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="swiper-slide">333</div>
+            </div>
+            <div class="swiper-pagination"></div>
+    </swiper>
+</div>
+<div class="container">
+    <div class="item-content">
+        <h3 text-center class="text-uppercase title-text">
+            service-items
+            <span state w-50></span>
+        </h3>
+        <div class="row" justify-content-center>
+            <div class="col-md-6">
+                <p class="text-capitalize f-12" text-gray text-center>
+                    The team is the core of value. The company is composed of two teams of market and technology.
+                </p>
+            </div>
+        </div>
+
+        <ul class="row" justify-content-center>
+            <li class="col-md-3" text-center>
+                <img rd-out-line src="assets/images/site/pro-1.jpg">
+                <span state w-30></span>
+                <p>design</p>
+            </li>
+            <li class="col-md-3" text-center>
+                <img rd-out-line src="assets/images/site/pro-1.jpg">
+                <span state w-30></span>
+                <p>design</p>
+            </li>
+            <li class="col-md-3" text-center>
+                <img rd-out-line src="assets/images/site/pro-1.jpg">
+                <span state w-30></span>
+                <p>design</p>
+                <button nz-button [nzType]="'primary'">测试按钮</button>
+                <nz-radio-group [(ngModel)]="size">
+                    <label nz-radio-button [nzValue]="'large'"><span>Large</span></label>
+                    <label nz-radio-button [nzValue]="'default'"><span>Default</span></label>
+                    <label nz-radio-button [nzValue]="'small'"><span>Small</span></label>
+                  </nz-radio-group>
+            </li>
+        </ul>
+    </div>
+    <div class="row">
+        <div class="col-md-7"></div>
+        <div class="col-md-5">
+            <h3 class="text-uppercase title-text">about us</h3>
+            <p text-gray>We are set up with the goal to improve the quality of people's life. We focus on developing products with BLE & Wi-Fi. we have already transformed universal remote controller, TENS(medical device), Thermometer into smartphone related wireless devices.</p>
+        </div>
+    </div>
+</div>
+

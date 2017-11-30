@@ -1,0 +1,38 @@
+<div class="container" m-t-30>
+    <ng-template [ngIf]="!App.IsMinScreen">
+        <div class="row row-content" justify-content-between>
+            <div class="col-md-3">
+                <h5 class="text-uppercase">{{'site.navigation'|translate}}</h5>
+                <ul class="text-uppercase">
+                    <li><a href="#">{{'site.home'|translate}}</a></li>
+                    <li><a href="#">{{'site.contact'|translate}}</a></li>
+                    <li><a href="#">{{'site.login'|translate}}</a></li>
+                </ul>
+            </div>
+            <div class="col-md-3">
+                <h5 class="text-uppercase">{{'site.get_touch'|translate}}</h5>
+                <ul class="text-uppercase">
+                    <li><a href="#">{{'site.privacy_policy'|translate}}</a></li>
+                    <li><a href="#">{{'site.teams_conditions'|translate}}</a></li>
+                </ul>
+            </div>
+            <div class="col-md-3">
+                <h5 class="text-uppercase">{{'site.share_page'|translate}}</h5>
+                <ul>
+                    <li>
+                        <i icon f-24>&#xe90a;</i>
+                        <i icon f-24>&#xe90b;</i>
+                        <i icon f-24>&#xe90c;</i>
+                        <i icon f-24>&#xe90e;</i>
+                        <i icon f-24>&#xe90f;</i>
+                        <i icon f-24>&#xe910;</i>
+                    </li>
+                    <li class="text-uppercase" text-gray-light f-12>{{'site.follow'|translate}}</li>
+                </ul>
+            </div>
+        </div>
+    </ng-template>
+    <p class="text-uppercase" text-gray-light m-t-30 f-12>&copy; 2013 ultracreation.net. all right reserved.</p>
+</div>
+
+
