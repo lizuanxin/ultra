@@ -17,9 +17,9 @@ import {SwiperComp} from 'UltraCreation/ng-ion/swiper';
         TranslateModule,
     ],
     declarations: [
-        SwiperComp,
         NavbarComponent,
         SidebarComponent,
+        SwiperComp,
     ],
     exports: [
         CommonModule,
