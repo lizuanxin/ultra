@@ -1,0 +1,89 @@
+*
+{
+    @include FontGeneration();
+    @include textStyle();
+    @include textAlign();
+    @include InOutSide();
+    @include cursor();
+
+    &:focus{
+        outline: none;
+    }
+
+    &[pull-right]
+    {
+        float:right;
+    }
+
+    &.inline-block
+    {
+        display: inline-block
+    }
+
+    &.relative
+    {
+        position:relative;
+    }
+
+    &.absolute
+    {
+        position:absolute;
+    }
+
+    &[flex-box],&.flex-box{
+        display: -webkit-box;
+        display: -webkit-flex;
+        display: -ms-flexbox;
+        display: flex;
+    }
+
+    &.visible-icon,&.unvisible-icon{
+        font-family: Ionicons;
+        font-style: normal;
+    }
+
+    &.visible-icon{
+        color:$green;
+        &:before{
+            content:"\f2bc";
+        }
+    }
+
+    &.unvisible-icon{
+        color:$red;
+        &:before{
+            content:"\f2c0";
+        }
+    }
+
+    @include flex();
+}
+.main-container{
+    margin-top: 46px;
+    margin-left: 235px;
+    padding: 10px;
+    -ms-overflow-x: hidden;
+    overflow-x: hidden;
+    overflow-y: scroll;
+    position: relative;
+    overflow: hidden;
+}
+
+.bread-layer{
+    padding:0.75rem 1.25rem;
+    font-size:1.2rem;
+    margin-bottom:10px;
+    border-bottom:solid 1px #f3f3f3;
+}
+
+.container-layer{
+    padding:0.75rem 1.25rem;
+}
+
+@media screen and (max-width: 992px) {
+    .main-container {
+        margin-left: 0px !important;
+    }
+}
+
+@import 'pagination';

@@ -1,0 +1,24 @@
+$site-primary:             #4fa4fe !default;
+$size:16px;
+
+$InsideOutsideEdge:(
+    margin: (margin, $size),
+    no-margin:(margin, 0),
+    margin-horizontal:(margin,0 $size),
+    margin-vertical:(margin,$size 0),
+    margin-left:(margin-left,$size),
+    margin-right:(margin-right,$size),
+    margin-top:(margin-top,$size),
+    margin-bottom:(margin-bottom,$size),
+    padding:(padding,$size),
+    no-padding:(padding,0),
+    padding-horizontal:(padding,0 $size),
+    padding-vertical:(padding,$size 0),
+    padding-left:(padding-left,$size),
+    padding-right:(padding-right,$size),
+    padding-top:(padding-top,$size),
+    padding-bottom:(padding-bottom,$size)
+);
+$InsideOutsideTag: 'm','n-m','p';
+$InsideOutsideDirection: '','v','h','l','r','t','b';
+

@@ -1,0 +1,22 @@
+.list-items{
+    &.list-items-gray{
+        li{
+            background-color:$gray-lightest;
+        }
+    }
+    ul{
+        margin:0;
+    }
+    li{
+        list-style: none;
+        padding:0.55rem 1.25rem;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        >.title{
+            flex: 1 0 auto;
+            padding:0 0.85rem;
+        }
+    }
+
+}

@@ -1,0 +1,123 @@
+:host {
+    display: block;
+}
+
+.login-page {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    overflow: auto;
+    background: url(/assets/images/login_bg.jpg) no-repeat;
+    background-attachment: fixed;
+    background-position: center;
+    background-size: cover;
+    color: #fff;
+    padding: 1em;
+    display: flex;
+    align-items:center;
+}
+
+
+.login-wrap{
+	width: 50%;
+    margin: 0 auto;
+}
+.login-form{
+    background-color:white;
+    border-radius: 12px;
+    -webkit-border-radius:12px;
+    padding:3%;
+    h1,h2{
+        font-family: 'Rokkitt', serif;
+        color:$gray-dark;
+
+    }
+    h1{
+        margin-top: 20px;
+        margin-bottom: 10px;
+        font-size:1.2rem;
+    }
+    h2{
+        margin-top: 25px;
+        margin-bottom: 15px;
+        font-size:1rem;
+    }
+    .login-in,.login-plugin{
+        ul li{
+            outline: none;
+            font-size: 1.2em;
+            color: #B6B6B6;
+            margin-top: 8%;
+            position: relative;
+            height: 44px;
+
+            i.color-qq{
+                font-size:1.8rem;
+                color:#10a9ff;
+            }
+            i.color-wx{
+                font-size:1.8rem;
+                color:#00cc00;
+            }
+            i.color-wb{
+                font-size:1.8rem;
+                color:#e4393c;
+            }
+        }
+    }
+    .login-in li{
+
+        &[b-line]{
+            padding:0 30px 0 15px;
+            border: 1px solid #DDDDDD;
+            border-radius: 2px;
+            -webkit-border-radius: 2px;
+        }
+        &.err{
+            border: 1px solid $brand-danger;
+        }
+
+        i[icon]{
+            float:right;
+            margin-right:-15px;
+            opacity: .3;
+            font-size:1.2rem;
+        }
+
+        input[type="mail"],input[type="text"],input[type="password"]{
+            width:100%;
+            color:$gray-dark;
+            border:none;
+            outline: none;
+        }
+    }
+    .login-plugin li{
+        i,span{
+            display: inline-block;
+            color:white;
+        }
+        &.facebook{
+            background-color:#3B5998;
+            i{
+                background-color:darken(#3B5998,10%);
+            }
+        }
+        &.twitter{
+            background-color:#45B0E3;
+            i{
+                background-color:darken(#45B0E3,10%);
+            }
+        }
+        i{
+            width:44px;
+            height:44px;
+            line-height:44px;
+            text-align:center;
+            font-size:1.4rem;
+        }
+
+    }
+}
+

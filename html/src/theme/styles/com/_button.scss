@@ -1,0 +1,23 @@
+button.btn
+{
+    @include Radius();
+
+    &.gradient-primary
+    {
+        border:none;
+        text-transform: uppercase;
+        color:white;
+        background: -webkit-linear-gradient(left, #45a8fb , #28e0fa);
+        background: -o-linear-gradient(right, #45a8fb , #28e0fa);
+        background: -moz-linear-gradient(right, #45a8fb , #28e0fa);
+        background: linear-gradient(to right, #45a8fb , #28e0fa);
+    }
+
+
+}
+
+button{
+    &:focus{
+        outline: none
+    }
+}

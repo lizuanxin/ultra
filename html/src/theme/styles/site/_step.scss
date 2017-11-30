@@ -1,0 +1,46 @@
+.step-bar{
+    margin:30px 0 60px;
+    position: relative;
+    .step-definner-bar{
+        background-color:$gray-lighter;
+        height:5px;
+    }
+    ul{
+        width:100%;
+        position:absolute;
+        top:0;
+        display: flex;
+        flex-wrap: nowrap;
+        li{
+            flex:1 1 auto;
+            text-align:center;
+            p{
+                padding-top:20px;
+            }
+        }
+        .step-inner-bar{
+            position: relative;
+            height:5px;
+            &.last-inner-bar,&.last-inner-bar span{
+                 background-color:lighten($green,30%);
+            }
+
+            &.cur-inner-bar,&.cur-inner-bar span{
+                background-color:$green;
+            }
+
+            span{
+                position: absolute;
+                top:-8px;
+                margin-left:-10px;
+                width:20px;
+                height:20px;
+                line-height:20px;
+                border-radius: 50%;
+                background-color:darken($gray-lighter,10%);
+                color:$white;
+                font-size:12px;
+            }
+        }
+    }
+}

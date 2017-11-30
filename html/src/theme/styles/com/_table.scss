@@ -1,0 +1,105 @@
+table.table{
+    thead th{
+        vertical-align: middle;
+        white-space: nowrap;
+    }
+    &[grid-tree]{
+        tr.parent{
+            background-color:$gray-lighter;
+        }
+        tr.child-tree{
+            td{
+                &:first-child{
+                    margin-left:15px;
+                    // border-left:solid 1px #ccc;
+                    // background:url('/assets/images/child-tree.gif') 15px top repeat-y;
+                    background-size:contain;
+                }
+            }
+        }
+        tr.last-child-tree {
+            td{
+                &:first-child{
+                    // background:url('/assets/images/last-child-tree.gif') 15px top repeat-y;
+                    background-size:contain;
+                }
+            }
+        }
+        td{
+            vertical-align: middle;
+            span.open,span.shrink{
+                font-family: 'iconfont';
+                display: inline-block;
+                vertical-align: middle;
+                font-size:20px;
+                margin-left:5px;
+                margin-right:5px;
+                width:12px;
+                height:12px;
+                line-height:10px;
+                text-align:center;
+                color:#000;
+            }
+            span.shrink{
+                &:before{
+                    content:'\f102';
+                }
+            }
+
+            span.shrink-child{
+                margin-left:28px
+            }
+
+            span.open{
+                &:before{
+                    content:'\f1fc';
+                }
+            }
+
+            span.open-child{
+                margin-left:28px
+            }
+        }
+    }
+    &.table-header-normal{
+        thead{
+            th{
+                font-weight: normal;
+                font-size:14px;
+            }
+        }
+    }
+    &.table-header-center{
+        thead{
+            th{
+                text-align: center;
+            }
+        }
+    }
+
+    &.table-order{
+        tbody{
+            border-top:none;
+            td{
+                border:solid 1px lighten($gray-light,30%);
+                text-align: center;
+                font-size: 12px;
+            }
+            .spacing{
+                background-color:transparent;
+                td{
+                    height:20px;
+                    border:none;
+                }
+            }
+            tr.t-title{
+                background-color: $gray-lighter;
+            }
+        }
+    }
+    tfoot.no-border{
+        tr td{
+            border: solid 1px transparent;
+        }
+    }
+}

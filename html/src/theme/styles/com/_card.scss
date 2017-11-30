@@ -1,0 +1,23 @@
+.card{
+    .default-tips,.action-tips{
+        display: inline-block;
+        color:white;
+        font-size: 12px;
+        padding: 5px;
+    }
+    .default-tips{
+        background-color:$gray;
+
+    }
+    .action-tips{
+        cursor: pointer;
+        background-color:$brand-primary;
+    }
+    .card-header{
+        .title{
+            display: inline-block;
+            font-size:.9rem;
+            padding: 0.25rem 0.5rem;
+        }
+    }
+}
