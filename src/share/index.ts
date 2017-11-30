@@ -4,6 +4,7 @@ import {CommonModule} from '@angular/common';
 import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 import {Routes, RouterModule} from '@angular/router';
 import {TranslateModule} from '@ngx-translate/core';
+
 import {NavbarComponent} from 'share/navbar';
 import {SidebarComponent} from 'share/sidebar';
 import {SwiperComp} from 'UltraCreation/ng-ion/swiper';
