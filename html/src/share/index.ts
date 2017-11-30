@@ -2,8 +2,11 @@ import {NgModule} from '@angular/core';
 
 import {CommonModule} from '@angular/common';
 import {FormsModule, ReactiveFormsModule} from '@angular/forms';
-import {RouterModule} from '@angular/router';
+import {Routes, RouterModule} from '@angular/router';
 import {TranslateModule} from '@ngx-translate/core';
+
+import {NavbarComponent} from 'share/navbar';
+import {SidebarComponent} from 'share/sidebar';
 
 @NgModule({
     imports: [
@@ -13,6 +16,8 @@ import {TranslateModule} from '@ngx-translate/core';
         TranslateModule,
     ],
     declarations: [
+        NavbarComponent,
+        SidebarComponent,
     ],
     exports: [
         CommonModule,
@@ -22,11 +27,13 @@ import {TranslateModule} from '@ngx-translate/core';
         // NgbModule,
         // SwiperComp,
         // ImageUploadModule,
-        // NavBarComponent,
-        // SidebarComponent,
+        NavbarComponent,
+        SidebarComponent,
         // ReceivingComponent
     ]
 })
 export class SharedModule
 {
 }
+
+export {Routes, RouterModule};
