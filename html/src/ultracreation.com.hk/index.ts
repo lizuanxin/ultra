@@ -1,22 +1,21 @@
-import {NgModule} from '@angular/core';
+import {NgModule, Component} from '@angular/core';
 import {CommonModule} from '@angular/common';
 import {Routes, RouterModule} from '@angular/router';
 import {TranslateModule} from '@ngx-translate/core';
-
-import {UltraCreationComponent} from './index.cmp';
 import {SharedModule} from 'share';
-import {HeaderComponent, FooterComponent} from './components';
-import {TAuthService} from 'services';
+// import {HeaderComponent, FooterComponent} from './components';
+// import {TAuthService} from 'services';
 
+@Component({templateUrl: '../share/layout.domain.html'})
+export class LayoutComponent
+{
+}
 
 const routes: Routes = [
-    {path: '', component: UltraCreationComponent,
+    {path: '', component: LayoutComponent,
         children: [
-            {path: 'home', loadChildren: './home/index#HomePageModule'},
-            // {path: 'about', loadChildren: './about/index#AboutPageModule'},
-            // {path: 'cart', loadChildren: '../theme/components/shopcart/index#CartPageModule'},
-            // {path: 'order', loadChildren: './orderlist/index#OrderPageModule', canActivate: [TAuthService]},
-            // {path: 'product', loadChildren: './product/index#ProductPageModule'},
+            {path: 'home',
+                loadChildren: './home/index#HomePageModule'},
             {path: '', redirectTo: 'home'}
         ]
 }
@@ -32,9 +31,7 @@ const routes: Routes = [
     exports: [
     ],
     declarations: [
-        UltraCreationComponent,
-        HeaderComponent,
-        FooterComponent
+        LayoutComponent,
     ]
 })
 export class UltraCreationDomain
