@@ -8,11 +8,15 @@ import {ServiceModule} from 'services';
 
 const routes: Routes =
 [
-    {path: '', loadChildren: '../ultracreation.com.hk/#UltraCreationDomain'},
+    {path: '',
+        loadChildren: '../ultracreation.com.hk/#UltraCreationDomain'},
 
-    {path: 'login', loadChildren: '../login/#LoginModule'},
-    {path: 'signup', loadChildren: '../signup/#SignupModule'},
-    {path: 'not-found', loadChildren: '../not-found/#NotFoundModule'},
+    {path: 'login',
+        loadChildren: '../login/#LoginModule'},
+    {path: 'signup',
+        loadChildren: '../signup/#SignupModule'},
+    {path: 'not-found',
+        loadChildren: '../not-found/#NotFoundModule'},
     /// ...
     {path: '**', redirectTo: 'not-found'},
 ];
