@@ -1,0 +1,46 @@
+.detail-component{
+    background-color:$gray-lighter;
+    padding:16px 8px;
+    h2{
+        font-size:14px;
+    }
+    p{
+        color:$gray-light;
+        font-size:12px;
+        margin-top:10px;
+        margin-bottom:0;
+    }
+}
+
+[has-mask]{
+    .detail-mask{
+        display: none;
+    }
+    &:hover{
+        .detail-mask{
+            display: block;
+        }
+    }
+}
+.detail-mask{
+    z-index:1;
+    position:absolute;
+    left: 25px;
+    right:25px;
+    top:0;
+    bottom:0;
+    background-color:rgba(0,0,0,.05)
+}
+
+[outline]{
+    border:solid 1px lighten($gray-light,30%);
+    &:hover,&.active{
+        border-color: lighten($brand-primary,20%);
+    }
+}
+
+.gallery-clone{
+    z-index:1;
+    position: fixed;
+    overflow:hidden;
+}

@@ -1,0 +1,32 @@
+.tabs-content{
+    border:solid 1px;
+    border-color:transparent #ddd #ddd;
+    ul{
+        margin:32px;
+        h2{
+            font-size:16px;
+            margin-bottom:16px;
+        }
+        li{
+            padding:3px 0;
+        }
+        &.list-disc{
+            li{
+                margin:0 16px;
+                list-style: disc
+            }
+        }
+        &.list-circle{
+            li{
+                margin:0 16px;
+                list-style: circle
+            }
+        }
+        &.list-decimal{
+            li{
+                margin:0 16px;
+                list-style: decimal;
+            }
+        }
+    }
+}

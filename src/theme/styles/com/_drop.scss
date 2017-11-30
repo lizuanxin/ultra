@@ -1,0 +1,43 @@
+.drop-list{
+    display: inline-block;
+    position:relative;
+    &:hover >ul{
+        display: block;
+        li i.arrow{
+            transform: rotate(180deg);
+        }
+    }
+    ul,ol,li{
+        margin:0;
+        padding:0;
+    }
+    ul{
+        display: none;
+        z-index:1;
+        position:absolute;
+        box-shadow: 1px 1px 5px rgba(0,0,0,.2);
+        left:-0.75rem;
+        top:-0.75rem;
+        right:-0.75rem;
+        background-color:white;
+        li{
+            padding:0.75rem 0.75rem 0;
+            &:last-child(){
+                padding-bottom:0.75rem;
+            }
+        }
+    }
+    li{
+        text-align: left;
+        i{
+            display: inline-block;
+            margin-left:5px;
+        }
+        i.arrow:before{
+            font-family: iconfont;
+            font-style: normal;
+            content: "\f3d8";
+        }
+    }
+
+}

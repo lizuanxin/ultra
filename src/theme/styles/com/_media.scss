@@ -1,0 +1,49 @@
+
+
+@media only screen and (max-width: 1440px){
+	.login-wrap{
+		width:56%;
+    }
+
+}
+@media only screen and (max-width: 1366px){
+	.login-wrap{
+		width:59%;
+	}
+}
+@media only screen and (max-width: 1280px){
+	.login-wrap{
+		width:63%;
+	}
+}
+@media only screen and (max-width: 1024px){
+	.login-wrap{
+		width:79%;
+	}
+}
+
+@media only screen and (max-width: 768px)
+{
+    .login-wrap{
+		width:100%;
+    }
+
+    .ac-info{
+        display: flex;
+    }
+
+    .nav-primary .navbar-nav{
+        max-height:0;
+        overflow-y: hidden;
+        z-index:999;
+        position:fixed;
+        left:0;
+        right:0;
+        top:54px;
+        background-color:#f9f9f9;
+    }
+
+}
+
+
+

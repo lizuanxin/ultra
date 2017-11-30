@@ -1,0 +1,252 @@
+@mixin cursor()
+{
+    &[cursor-default]
+    {
+        cursor:default;
+    }
+    &[cursor-pointer]
+    {
+        cursor:pointer;
+    }
+}
+
+@mixin textStyle()
+{
+    &[text-nowrap]
+    {
+        white-space: nowrap
+    }
+
+    &[text-light]
+    {
+        color:$white;
+    }
+
+    &[text-red]{
+        color:red;
+    }
+
+    &[text-gray]
+    {
+        color:$gray;
+    }
+
+    &[text-gray-light]
+    {
+        color:lighten($gray,30%);
+    }
+
+    &[text-gray-lighter]
+    {
+        color:$gray-lighter;
+    }
+
+    &[text-primary]
+    {
+        color:$brand-primary;
+    }
+
+    &[text-success]
+    {
+        color:$brand-success;
+    }
+
+    &[text-danger],&.text-danger
+    {
+        color:$brand-danger;
+    }
+
+    &[f-w-l]
+    {
+        font-weight: lighter;
+    }
+}
+
+
+@mixin flex()
+{
+    &[align-items-center], &.align-items-center
+    {
+        align-items: center;
+    }
+
+    &[justify-content-center], &.justify-content-center
+    {
+        justify-content: center;
+    }
+
+    &[justify-content-end], &.justify-content-end
+    {
+        justify-content: flex-end;
+    }
+
+    &[justify-content-between], &.justify-content-between
+    {
+        justify-content: space-between;
+    }
+
+    &[align-self-start]
+    {
+        align-self: flex-start;
+    }
+
+    &[align-self-end]
+    {
+        align-self: flex-end;
+    }
+
+    &[align-self-center]
+    {
+        align-self: center;
+    }
+
+    &[align-self-stretch]
+    {
+        align-self: stretch;
+    }
+
+    &[align-self-baseline]
+    {
+        align-self: baseline;
+    }
+}
+
+@mixin textAlign()
+{
+    &[text-left]
+    {
+        text-align:left;
+    }
+    &[text-center]
+    {
+        text-align:center;
+    }
+    &[text-right]
+    {
+        text-align:right;
+    }
+    &[v-m]{
+        vertical-align: middle;
+    }
+
+}
+
+@mixin ReTagNameResult($tag, $name, $size)
+{
+    $tagName: IsMargin($tag);
+    $tosize: #{IsNeg($tag)}$size+px;
+    @if($name == "")
+    {
+        #{$tagName}: $tosize;
+    }
+    @if($name == "v")
+    {
+        #{$tagName}-top: $tosize;
+        #{$tagName}-bottom: $tosize;
+    }
+    @if($name == "h")
+    {
+        #{$tagName}-left: $tosize;
+        #{$tagName}-right: $tosize;
+    }
+    @if($name == "l")
+    {
+        #{$tagName}-left: $tosize;
+    }
+    @if($name == "r")
+    {
+        #{$tagName}-right: $tosize;
+    }
+    @if($name == "t")
+    {
+        #{$tagName}-top: $tosize;
+    }
+    @if($name == "b")
+    {
+        #{$tagName}-bottom: $tosize;
+    }
+}
+
+@mixin InOutSide($maxsize:50)
+{
+    @each $name,$keys in $InsideOutsideEdge
+    {
+        &[#{$name}],&.#{$name}
+        {
+            #{nth($keys, 1)}: #{nth($keys, 2)};
+        }
+    }
+
+    @each $tag in $InsideOutsideTag
+    {
+        @each $name in $InsideOutsideDirection
+        {
+            @for $i from 5 through $maxsize
+            {
+                @if($i%5==0)
+                {
+                   &[#{$tag}#{ReTagName($name)}-#{$i}],&.#{$tag}#{ReTagName($name)}-#{$i}
+                   {
+                        @include ReTagNameResult($tag,$name,$i);
+                   }
+                }
+            }
+        }
+    }
+}
+
+@mixin FontGeneration()
+{
+    @for $i from 12 through 50
+    {
+        &[f-#{$i}]{
+            font-size:$i + px;
+        }
+    }
+}
+
+@mixin Radius($max:20)
+{
+    &.no-radius,&[no-radius]
+    {
+        border-radius: 0;
+    }
+
+    &.no-focus
+    {
+        box-shadow: none;
+    }
+
+    &.clear-link{
+        text-decoration:none;
+    }
+
+    @for $i from 5 through $max
+    {
+        @if($i%5==0)
+        {
+            &[r-#{$i}]
+            {
+                border-radius: $i+px;
+            }
+        }
+    }
+}
+
+@mixin transitionAnimate()
+{
+    transition-property: all;
+    -ms-transition-property: all;
+    -moz-transition-property: all;
+    -webkit-transition-property: all;
+
+    transition-duration: .5s;
+    -ms-transition-duration: .5s;
+    -moz-transition-duration: .5s;
+    -webkit-transition-duration: .5s;
+
+    transition-timing-function: cubic-bezier(0, 1, 0.5, 1);
+    -ms-transition-timing-function: cubic-bezier(0, 1, 0.5, 1);
+    -moz-transition-timing-function: cubic-bezier(0, 1, 0.5, 1);
+    -webkit-transition-timing-function: cubic-bezier(0, 1, 0.5, 1);
+}

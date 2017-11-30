@@ -1,0 +1,27 @@
+div.pagination-notflex{
+    padding:30px 0;
+    text-align:center;
+    a{
+        border:solid 1px #ccdbe4;
+        padding:2px 8px;
+        margin-right:3px;
+        text-decoration: none;
+        color:#0061de;
+        &:hover,&.next{
+           border:solid 1px #0061de;
+           background-color:#0061de;
+           color:#FFFFFF;
+        }
+    }
+    span.disabled{
+        display: none;
+    }
+    span.current{
+        padding:2px 6px;
+    }
+}
+
+.pagination{
+    justify-content: center;
+}
+
