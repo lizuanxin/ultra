@@ -8,7 +8,7 @@ import {Platform} from 'UltraCreation/Core/Platform';
 import {Config} from './config';
 export {Config};
 
-import {NgbModal, NgbTooltipConfig} from '@ng-bootstrap/ng-bootstrap';
+// import {NgbModal, NgbTooltipConfig} from '@ng-bootstrap/ng-bootstrap';
 import {TShoppingCart} from './shopping_cart';
 
 declare global
@@ -34,7 +34,7 @@ export class TApplication
         this.Translation = Injector.get(TranslateService);
         this.InitializeLanguage();
 
-        this.Modal = Injector.get(NgbModal);
+        // this.Modal = Injector.get(NgbModal);
     }
 
 /* langulage support */
@@ -94,9 +94,12 @@ export class TApplication
         return this.Translation.instant(Key);
     }
 
+    ShowAlert(Message: string)
+    {
+    }
+
     ShowError(err: any)
     {
-
     }
 
     ShowToast(type: 'success' | 'info' | 'warning' | 'error',
@@ -109,5 +112,4 @@ export class TApplication
     Router: Router;
     Translation: TranslateService;
     ShoppingCart: TShoppingCart;
-    Modal: NgbModal;
 }
