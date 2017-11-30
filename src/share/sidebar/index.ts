@@ -55,16 +55,13 @@ export class SidebarComponent implements OnInit
             }
 
             this.MenuEntries.push(Menu);
-
         });
     }
 
     sidebarClose()
     {
-
         const dom: any = document.querySelector('body');
         if (dom.classList.contains('push-right')) dom.classList.remove('push-right');
-
     }
 
     App = window.App;
