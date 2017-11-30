@@ -1,0 +1,22 @@
+<nav class="sidebar" (click)="sidebarClose()">
+    <div class="list-group">
+        <ng-container *ngFor="let menu of MenuEntries">
+            <div class="nested-menu">
+                <a class="list-group-item" (click)="$event.stopPropagation()" routerLink="{{menu.Link}}">
+                    <i icon f-16 m-r-10 [innerHTML]="menu.Icon"></i>
+                    <span>{{menu.LangId|translate}}</span>
+                    <i class="icon-right" [class.active]="menu.Children"></i>
+                </a>
+                <ng-template [ngIf]="menu.Children">
+                    <div class="nested expand">
+                        <ul class="submenu animate">
+                            <li *ngFor="let sub of menu.Children">
+                                <a (click)="sidebarClose()"  routerLink="{{sub.Link}}" [routerLinkActive]="['router-link-active']">{{sub.LangId|translate}}</a>
+                            </li>
+                        </ul>
+                    </div>
+                </ng-template>
+            </div>
+        </ng-container>
+    </div>
+</nav>

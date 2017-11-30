@@ -38,7 +38,7 @@ export class TAuthService implements CanActivate
 
         this.OnStateChange.subscribe(state =>
         {
-            let last_path = localStorage.getItem('last_path');
+            const last_path = localStorage.getItem('last_path');
             if (TypeInfo.Assigned(last_path))
             {
                 App.Router.navigate([last_path]);
@@ -57,10 +57,10 @@ export class TAuthService implements CanActivate
 
     get DefaultAddress(): Types.IUserAddress
     {
-        let values = this.AddressHash.values();
+        const values = this.AddressHash.values();
 
         let iter = values.next();
-        let first = iter.value;
+        const first = iter.value;
 
         if (this.AddressHash.size === 1)
             return first;
@@ -86,8 +86,8 @@ export class TAuthService implements CanActivate
 
     async SignIn(Email: string, Password: string, Name?: string): Promise<void>
     {
-        let res = await this.Auth.Post('register', {Email: Email, Password: Password, FirstName: Name}).toPromise();
-        let user = res.Content as Types.IUserResponse;
+        const res = await this.Auth.Post('register', {Email: Email, Password: Password, FirstName: Name}).toPromise();
+        const user = res.Content as Types.IUserResponse;
         localStorage.setItem('auth:user', JSON.stringify(user));
 
         (this.constructor as typeof TAuthService).Me = user;
@@ -96,8 +96,8 @@ export class TAuthService implements CanActivate
 
     async Login(Email: string, Password: string): Promise<void>
     {
-        let res = await this.Auth.Post('login', {Email: Email, Password: Password}).toPromise();
-        let user = res.Content as Types.IUserResponse;
+        const res = await this.Auth.Post('login', {Email: Email, Password: Password}).toPromise();
+        const user = res.Content as Types.IUserResponse;
         localStorage.setItem('auth:user', JSON.stringify(user));
 
         (this.constructor as typeof TAuthService).Me = user;
@@ -132,7 +132,7 @@ export class TAuthService implements CanActivate
             this.Grant(this.Addr);
             await this.Addr.Get('/').toPromise().then(res =>
             {
-                for (let iter of  res.Content as Array<Types.IUserAddress>)
+                for (const iter of  res.Content as Array<Types.IUserAddress>)
                     this.AddressHash.set(iter.Id, iter);
             });
         }
@@ -143,7 +143,7 @@ export class TAuthService implements CanActivate
     async AppendAddress(Addr: Types.IUserAddress): Promise<Array<Types.IUserAddress>>
     {
         this.Grant(this.Addr);
-        let res = await this.Addr.Post('append', Addr).toPromise();
+        const res = await this.Addr.Post('append', Addr).toPromise();
 
         Addr.Id = res.Content.Id;
         this.AddressHash.set(Addr.Id, Addr);
@@ -241,7 +241,7 @@ export class TAuthService implements CanActivate
 
         if (TypeInfo.Assigned(this.UpdatingToken))
         {
-            let succ = await this.UpdatingToken;
+            const succ = await this.UpdatingToken;
 
             if (! succ)
             {
