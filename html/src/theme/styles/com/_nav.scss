@@ -149,10 +149,12 @@
     }
 }
 
-.nav-item .nav-link{
-    color:#333;
+.nav-item{
+    position:relative;
+    .nav-link{
+        color:#333;
+    }
 }
-
 
 
 
