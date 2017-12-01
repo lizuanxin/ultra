@@ -27,7 +27,6 @@ import {SwiperComp} from 'UltraCreation/ng-ion/swiper';
         FormsModule, ReactiveFormsModule,
         RouterModule,
         TranslateModule,
-        // NgbModule,
         SwiperComp,
         // ImageUploadModule,
         NavbarComponent,
