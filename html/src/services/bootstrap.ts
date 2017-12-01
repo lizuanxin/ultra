@@ -24,6 +24,25 @@ import * as NgxBootstrap from 'ngx-bootstrap';
         NgxBootstrap.TooltipModule.forRoot(),
         NgxBootstrap.TypeaheadModule.forRoot(),
     ],
+    exports: [
+        NgxBootstrap.AccordionModule,
+        NgxBootstrap.AlertModule,
+        NgxBootstrap.ButtonsModule,
+        NgxBootstrap.CarouselModule,
+        NgxBootstrap.CollapseModule,
+        NgxBootstrap.DatepickerModule,
+        NgxBootstrap.BsDropdownModule,
+        NgxBootstrap.ModalModule,
+        NgxBootstrap.PaginationModule,
+        NgxBootstrap.PopoverModule,
+        NgxBootstrap.ProgressbarModule,
+        NgxBootstrap.RatingModule,
+        NgxBootstrap.SortableModule,
+        NgxBootstrap.TabsModule,
+        NgxBootstrap.TimepickerModule,
+        NgxBootstrap.TooltipModule,
+        NgxBootstrap.TypeaheadModule
+    ]
 })
 export class NgxBootstrapModule
 {

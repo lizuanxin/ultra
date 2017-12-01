@@ -152,7 +152,13 @@
 .nav-item{
     position:relative;
     .nav-link{
+        font-size:.8rem;
         color: $gray-dark;
+    }
+
+    .dropdown-menu{
+        min-width:5rem;
+        font-size:.8rem;
     }
 }
 
