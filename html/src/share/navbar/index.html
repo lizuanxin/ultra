@@ -1,24 +1,37 @@
 <div class="fixed-top header">
-    <nav class="navbar navbar-toggleable-md navbar-light bg-faded no-padding">
+    <nav class="navbar navbar-toggleable-md navbar-light bg-faded">
         <button class="navbar-toggler navbar-toggler-right" (click)="toggleSidebar()">
             <span class="navbar-toggler-icon"></span>
         </button>
         <div class="container">
-            <ul class="collapse navbar-collapse">
-                <li class="nav-item dropdown" ngbDropdown>
-                    <a href="javascript:void(0)" class="text-uppercase nav-link flex-box align-items-center" ngbDropdownToggle>
+            <div class="navbar-brand"><span class="logo-tx">Ultra Creation</span></div>
+            <div class="collapse navbar-collapse">
+                <ul class="navbar-nav">
+                    <li class="nav-item active">
+                        <a class="nav-link" href="#">Home</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#">Features</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#">Pricing</a>
+                    </li>
+                </ul>
+            </div>
+            <ul class="collapse navbar-collapse navbar-snap" align-items-center>
+                <li class="nav-item" dropdown>
+                    <a href="javascript:void(0)" class="text-uppercase nav-link flex-box align-items-center dropdown-toggle" dropdownToggle>
                         <i icon>&#xe90d;</i>&nbsp;<a>{{App.Language|translate}}</a>&nbsp;<b class="caret"></b>
                     </a>
-                    <div class="dropdown-menu dropdown-menu-right">
+                    <div *dropdownMenu class="dropdown-menu">
                         <a *ngFor="let lang of App.Languages" class="dropdown-item" href="javascript:void(0)" (click)="ChangeLang(lang)">{{lang|translate}}</a>
                     </div>
                 </li>
-            </ul>
-            <ul class="collapse navbar-collapse navbar-tabs">
-                <li *ngFor="let item of MenuItems" routerLink="{{item.Link}}" [routerLinkActive]="['active']">{{item.LangId|translate}}</li>
-            </ul>
-
-            <ul class="collapse navbar-collapse navbar-snap" align-items-center>
+                <li class="nav-item">
+                    <a href="javascript:void(0)" class="nav-link flex-box align-items-center" [routerLink]="['/u']">
+                        <i icon>&#xe902;</i>&nbsp;<span>{{Auth.Me.FirstName}}</span>&nbsp;<b class="caret"></b>
+                    </a>
+                </li>
                 <li class="nav-item">
                     <a href="javascript:void(0)" class="nav-link" [routerLink]="['/login']" *ngIf="! Auth.IsLogin">
                         <span>{{'button.login'|translate}}</span>
@@ -31,3 +44,4 @@
         </div>
     </nav>
 </div>
+

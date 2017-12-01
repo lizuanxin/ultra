@@ -4,7 +4,7 @@ import {CommonModule} from '@angular/common';
 import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 import {Routes, RouterModule} from '@angular/router';
 import {TranslateModule} from '@ngx-translate/core';
-
+import {BsDropdownModule} from 'ngx-bootstrap';
 import {NavbarComponent} from 'share/navbar';
 import {SidebarComponent} from 'share/sidebar';
 import {SwiperComp} from 'UltraCreation/ng-ion/swiper';
@@ -15,6 +15,7 @@ import {SwiperComp} from 'UltraCreation/ng-ion/swiper';
         FormsModule, ReactiveFormsModule,
         RouterModule,
         TranslateModule,
+        BsDropdownModule.forRoot()
     ],
     declarations: [
         NavbarComponent,
