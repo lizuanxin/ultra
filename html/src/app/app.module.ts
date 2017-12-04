@@ -5,7 +5,6 @@ import {Routes, RouterModule} from '@angular/router';
 
 import {AppComponent} from './app.component';
 import {ServiceModule} from 'services';
-import {NgxBootstrapModule} from 'services/bootstrap';
 
 const routes: Routes =
 [
