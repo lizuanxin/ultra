@@ -57,4 +57,5 @@ export class NavbarComponent implements OnInit
 
     App = window.App;
     MenuItems = new Array<object>();
+    isCollapsed: boolean = true;
 }
