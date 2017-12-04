@@ -22,7 +22,9 @@
         "../node_modules/bootstrap/scss/bootstrap.scss",
         "theme/styles/app.scss"
       ],
-      "scripts": [],
+      "scripts": [
+
+      ],
       "environmentSource": "environments/environment.ts",
       "environments": {
         "dev": "environments/environment.ts",
