@@ -5,7 +5,7 @@ import {TranslateModule, TranslateLoader} from '@ngx-translate/core';
 import {TranslateHttpLoader} from '@ngx-translate/http-loader';
 import {TApplication} from './application';
 
-import {TAuthService} from './auth';
+import {TAuthService} from './cloud/auth';
 import {TItemService} from 'services/item';
 
 import {TShoppingCart} from './shopping_cart';
@@ -36,5 +36,5 @@ export class ServiceModule
 export {TApplication, TAuthService, TShoppingCart};
 export {TItemService} from './item';
 
-import * as Types from './types';
+import * as Types from './cloud/types';
 export {Types};
