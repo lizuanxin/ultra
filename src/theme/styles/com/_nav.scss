@@ -151,6 +151,7 @@
 
 .nav-item{
     position:relative;
+    white-space: nowrap;
     .nav-link{
         font-size:.8rem;
         color: $gray-dark;
@@ -160,7 +161,27 @@
         min-width:5rem;
         font-size:.8rem;
     }
+    i{
+        display: inline-block;
+        &.rotate{
+            transform: rotate(180deg);
+        }
+    }
 }
 
+
+.navbar-right-top{
+    position:absolute;
+    right:0;
+    top:8px;
+    .nav-item{
+        a{
+            font-size:.7rem;
+        }
+        .nav-hover-item li{
+            font-size:.7rem;
+        }
+    }
+}
 
 

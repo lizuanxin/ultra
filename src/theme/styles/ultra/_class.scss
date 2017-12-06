@@ -1,0 +1,15 @@
+.row-solet{
+    li{
+        @include flex-item-center();
+        min-height:200px;
+        &:nth-child(1){
+            background-color:#eeeeee;
+        }
+        &:nth-child(2){
+            background-color:#ffffff;
+        }
+        &:nth-child(3){
+            background-color:#d9d9d9;
+        }
+    }
+}

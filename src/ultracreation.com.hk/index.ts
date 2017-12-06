@@ -7,6 +7,7 @@ import {SharedModule} from 'share';
 // import {TAuthService} from 'services';
 import {HomePage} from './home';
 import {TensPage} from './tens';
+import {FooterComponent} from './share/footer';
 
 @Component({templateUrl: '../share/layout.domain.html'})
 export class LayoutComponent
@@ -36,6 +37,7 @@ const routes: Routes = [
         LayoutComponent,
         HomePage,
         TensPage,
+        FooterComponent
     ]
 })
 export class UltraCreationDomain
