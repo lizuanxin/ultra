@@ -1,7 +1,12 @@
 img{
     &[rd-out-line]{
         border-radius:50%;
-        border:solid 1px #8d8d8d;
+        border:solid 1px #efefef;
+        background-color:#f4f4f4;
+        padding:10px;
+    }
+    &[out-line]{
+        border:solid 1px #efefef;
         background-color:#f4f4f4;
         padding:10px;
     }
