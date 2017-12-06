@@ -1,9 +1,36 @@
 .navbar-ultra{
     min-height:90px;
+    .logo{
+        min-height:90px;
+        font-size:3rem;
+    }
     .navbar-nav{
         .nav-item{
             text-transform:uppercase;
             padding:0  15px;
+        }
+    }
+}
+
+.navbar-fixed{
+    min-height:70px;
+    .logo{
+        min-height:70px;
+        font-size:2.4rem;
+    }
+    .navbar-nav{
+        .nav-item > a.btn{
+            font-size:.8rem;
+        }
+    }
+    .navbar-right-top{
+        .nav-item{
+            a{
+                font-size:.725rem;
+            }
+            .nav-hover-item li{
+                font-size:.7rem;
+            }
         }
     }
 }
@@ -47,8 +74,6 @@
                 color:#82d0cb;
             }
         }
-    }
-    &:hover{
         .nav-hover-item{
             display: block;
         }
@@ -59,8 +84,6 @@
     justify-content: center;
     align-items: center;
     flex-direction:column;
-    min-height:90px;
-    font-size:3rem;
     color:white;
     background-color:#82d0cb;
     span{

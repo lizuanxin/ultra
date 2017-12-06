@@ -1,13 +1,18 @@
-import {Component, OnInit} from '@angular/core';
+import {Component, OnInit, Inject, HostListener} from '@angular/core';
+import {DOCUMENT} from '@angular/platform-browser';
 import {TypeInfo} from 'UltraCreation/Core/TypeInfo';
 
 import {TAuthService} from 'services';
+import { log } from 'util';
 
 @Component({selector: 'navbar', templateUrl: './index.html'})
+
 export class NavbarComponent implements OnInit
 {
-    constructor(public Auth: TAuthService)
+
+    constructor(public Auth: TAuthService, @Inject(DOCUMENT) private document: Document)
     {
+
     }
 
     ngOnInit()
@@ -27,6 +32,18 @@ export class NavbarComponent implements OnInit
             });
 
         });
+    }
+
+    @HostListener('window:scroll', [])
+    onWindowScroll() {
+      const number =  this.document.documentElement.scrollTop || this.document.body.scrollTop || 0;
+
+      if (number > 50) {
+            this.navIsFixed = true;
+      } else {
+        this.navIsFixed = false;
+      }
+
     }
 
     toggleSidebar()
@@ -58,4 +75,5 @@ export class NavbarComponent implements OnInit
     App = window.App;
     MenuItems = new Array<object>();
     isCollapsed: boolean = true;
+    navIsFixed: boolean = false;
 }
