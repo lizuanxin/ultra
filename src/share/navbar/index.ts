@@ -41,7 +41,7 @@ export class NavbarComponent implements OnInit
       if (number > 50) {
             this.navIsFixed = true;
       } else {
-        this.navIsFixed = false;
+            this.navIsFixed = false;
       }
 
     }
