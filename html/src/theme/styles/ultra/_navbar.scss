@@ -82,10 +82,7 @@
 }
 .logo{
     @extend .animate;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    flex-direction:column;
+    @include flex-item-center(column);
     color:white;
     background-color:#82d0cb;
     span{

@@ -111,11 +111,12 @@
     }
 }
 
-@mixin flex-item-center()
+@mixin flex-item-center($deriction)
 {
     display: flex;
     align-items: center;
     justify-content: center;
+    flex-direction: $deriction;
 }
 
 @mixin textAlign()
