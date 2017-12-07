@@ -1,6 +1,6 @@
 .row-solet{
     li{
-        @include flex-item-center(row);
+        @include flex-item-center();
         min-height:230px;
         &:nth-child(1){
             background-color:#eeeeee;

@@ -4,15 +4,3 @@
     transition: all .3s ease .2s;
 }
 
-@keyframes slideDown {
-    0% {
-        max-height:0;
-        opacity: 0;
-        overflow: hidden;
-    }
-    100% {
-        max-height:500px;
-        opacity:1;
-        overflow: visible;
-    }
-}
