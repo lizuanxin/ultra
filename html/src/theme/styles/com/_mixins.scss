@@ -111,7 +111,7 @@
     }
 }
 
-@mixin flex-item-center($deriction)
+@mixin flex-item-center($deriction:row)
 {
     display: flex;
     align-items: center;
