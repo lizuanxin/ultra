@@ -55,6 +55,7 @@
         }
     }
     >a.btn{
+        @extend .animate;
         font-weight:500;
         color:#a8a8a8;
         border:none;
@@ -80,6 +81,7 @@
     }
 }
 .logo{
+    @extend .animate;
     display: flex;
     justify-content: center;
     align-items: center;
