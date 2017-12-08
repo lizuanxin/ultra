@@ -15,9 +15,5 @@
             "es2016",
             "dom"
         ]
-    },
-    "exclude": [
-      "**/nodejs.*.ts",
-      "**/appcontroller.ts"
-    ]
+    }
 }
