@@ -13,5 +13,4 @@ export class HomePage implements OnInit
         const dom: any = document.querySelector('body');
         dom.className = 'violet';
     }
-
 }
