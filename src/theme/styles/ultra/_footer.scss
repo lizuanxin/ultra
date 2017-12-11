@@ -1,0 +1,23 @@
+.app-store{
+    background-color: #1aa0de;
+    min-height:130px;
+}
+
+.most-link{
+    background-color: #28347e;
+    background-image:url(/assets/images/site/bg-footer.jpg);
+    background-size:contain;
+    background-position: center;
+    background-repeat: no-repeat;
+    min-height:220px;
+}
+
+.copyright{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: #222e69;
+    color:$white;
+    font-size:1rem;
+    min-height:120px;
+}
