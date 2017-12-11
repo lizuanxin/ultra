@@ -16,8 +16,6 @@ export class TensPage implements OnInit
     foobar()
     {
         const form = new FormData();
-
-        form.append('foo', 'bar');
         form.append('file', this.flist[0]);
 
         const client = new THttpClient();
