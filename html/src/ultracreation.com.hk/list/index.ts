@@ -10,7 +10,7 @@ export class ListPage implements OnInit
     ngOnInit()
     {
         const dom: any = document.querySelector('body');
-        dom.className = 'violet';
+        dom.className = '';
     }
 
 }

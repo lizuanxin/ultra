@@ -11,6 +11,6 @@ export class HomePage implements OnInit
     ngOnInit()
     {
         const dom: any = document.querySelector('body');
-        dom.className = 'violet';
+        // dom.className = 'violet';
     }
 }
