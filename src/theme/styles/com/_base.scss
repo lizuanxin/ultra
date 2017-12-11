@@ -21,6 +21,10 @@
         display: inline-block
     }
 
+    &.border-none{
+        border:none;
+    }
+
     &.relative
     {
         position:relative;

@@ -9,6 +9,7 @@ import {TranslateModule} from '@ngx-translate/core';
 import {NavbarComponent} from 'share/navbar';
 import {SidebarComponent} from 'share/sidebar';
 import {SwiperComp} from 'UltraCreation/ng-ion/swiper';
+import {ScrollToModule} from '@nicky-lenaers/ngx-scroll-to';
 
 @NgModule({
     imports: [
@@ -16,6 +17,7 @@ import {SwiperComp} from 'UltraCreation/ng-ion/swiper';
         FormsModule, ReactiveFormsModule,
         RouterModule,
         TranslateModule,
+        ScrollToModule.forRoot(),
         NgxBootstrapModule
     ],
     declarations: [
@@ -29,6 +31,7 @@ import {SwiperComp} from 'UltraCreation/ng-ion/swiper';
         RouterModule,
         TranslateModule,
         SwiperComp,
+        ScrollToModule,
         // ImageUploadModule,
         NavbarComponent,
         SidebarComponent,
