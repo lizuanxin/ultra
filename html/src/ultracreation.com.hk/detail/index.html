@@ -1,0 +1,69 @@
+
+    <div class="container" [class.card-tabs-fixed]="tabIsFixed">
+        <div class="card-tabs">
+            <ul class="row align-items-center justify-content-md-center">
+                <li class="col-2">
+                    <a class="btn btn-sm btn-light active" href="javascript:void(0)" [ngx-scroll-to]="'#product'">product photo</a>
+                </li>
+                <li class="col-2">
+                    <a class="btn btn-sm btn-light" href="javascript:void(0)" [ngx-scroll-to]="'#feature'">feature</a>
+                </li>
+                <li class="col-2">
+                    <a class="btn btn-sm btn-light" href="javascript:void(0)" [ngx-scroll-to]="'#spec'">specification</a>
+                </li>
+                <li class="col-2">
+                    <a class="btn btn-sm btn-light" href="javascript:void(0)" [ngx-scroll-to]="'#help'">help</a>
+                </li>
+            </ul>
+        </div>
+    </div>
+
+    <div class="container">
+        <div class="destination">
+            <ul class="row" id="product">
+                <li class="col-6"><img class="img-fluid p-30" src="assets/images/site/t1_u5.png"></li>
+                <li class="col-6">
+                    <h2>CableMagic</h2>
+                    <div class="attached">In stock</div>
+                    <div class="line"></div>
+                    <div class="detail">
+                        <h3>what is includ?</h3>
+                        <p>CableMagic</p>
+                    </div>
+                    <div class="price"><span>RMB</span> <b>349</b></div>
+                    <ul class="row align-items-center margin-top">
+                        <li class="col-4">
+                            <div class="input-group" padding-horizontal>
+                                <span class="input-group-addon" id="btnGroupAddon">-</span>
+                                <span class="form-control justify-content-center">1</span>
+                                <span class="input-group-addon" id="btnGroupAddon">+</span>
+                            </div>
+                        </li>
+                        <li class="col"><button type="button" class="button">Add to cart</button></li>
+                    </ul>
+
+                </li>
+            </ul>
+            <h2 class="text-capitalize">feature</h2>
+            <ul class="row" id="feature">
+                <li class="col-4">
+                    <div class="double-outline">
+                        <span></span>
+                    </div>
+                        <img class="img-fluid" src="assets/images/site/t1_u5.png" rd-out-line>
+                </li>
+                <li class="col-4">
+                        <img class="img-fluid p-30" src="assets/images/site/t1_u5.png">
+                </li>
+                <li class="col-4">
+                        <img class="img-fluid p-30" src="assets/images/site/t1_u5.png">
+                </li>
+            </ul>
+            <ul class="row" id="spec">
+                <li class="col-12"><h2 class="text-capitalize">specification</h2></li>
+            </ul>
+            <ul class="row" id="help">
+                <li class="col-12"><h2 class="text-capitalize">help</h2></li>
+            </ul>
+        </div>
+    </div>

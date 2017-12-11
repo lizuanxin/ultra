@@ -8,7 +8,9 @@ import {SharedModule} from 'share';
 import {HomePage} from './home';
 import {TensPage} from './tens';
 import {ListPage} from './list';
+import {DetailPage} from './detail';
 import {FooterComponent} from './share/footer';
+
 
 @Component({templateUrl: '../share/layout.domain.html'})
 export class LayoutComponent
@@ -20,6 +22,7 @@ const routes: Routes = [
         children: [
             {path: 'home', component: HomePage},
             {path: 'list', component: ListPage},
+            {path: 'detail/:id', component: DetailPage},
             {path: 'tens', component: TensPage},
             /// ...
             {path: '', redirectTo: 'home'}
@@ -40,6 +43,7 @@ const routes: Routes = [
         HomePage,
         TensPage,
         ListPage,
+        DetailPage,
         FooterComponent
     ]
 })

@@ -23,6 +23,7 @@
     "@angular/router": "^5.0.5",
     "@ngx-translate/core": "^9.0.1",
     "@ngx-translate/http-loader": "^2.0.0",
+    "@nicky-lenaers/ngx-scroll-to": "^0.5.0",
     "@types/swiper": "^3.4.5",
     "bootstrap": "^4.0.0-beta.2",
     "core-js": "^2.4.1",
