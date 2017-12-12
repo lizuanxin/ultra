@@ -1,7 +1,7 @@
 import {Component, OnInit} from '@angular/core';
 import {TypeInfo} from 'UltraCreation/Core';
 
-import * as Types from 'services/types';
+import * as Types from 'services/cloud/types';
 import {TItemService} from 'services/item';
 
 
