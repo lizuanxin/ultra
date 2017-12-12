@@ -1,4 +1,4 @@
-.navbar-ultra{
+.header-site{
     min-height:90px;
     background-image: url(/assets/images/overlay.png), -moz-linear-gradient(45deg, #2a3886 15%, #009cdb 85%);
     background-image: url(/assets/images/overlay.png), -webkit-linear-gradient(45deg, #2a3886 15%, #009cdb 85%);
@@ -41,11 +41,11 @@
 
 .nav-item{
     .nav-hover-item{
-        margin-top:3px;
+        margin-top:-5px;
         border-radius:3px;
         min-width:100%;
         background: $white;
-        box-shadow: 0 1px 3px rgba(0,0,0,.1);
+        box-shadow: 0 2px 3px rgba(0,0,0,.1);
         position: absolute;
         display: none;
         li{
@@ -86,11 +86,10 @@
 .logo{
     @extend .animate;
     @include flex-item-center(column);
+    cursor: pointer;
     color: $white;
-
-        min-height:70px;
-        font-size:2rem;
-
+    min-height:70px;
+    font-size:2rem;
     background-color:#829dd0;
     span{
         font-size:.8rem;
