@@ -17,21 +17,26 @@ export class NavbarComponent implements OnInit
 
     ngOnInit()
     {
+        if (!this.IsAdmin) return;
         this.App.Router.config.forEach(route =>
         {
-            if (! TypeInfo.Assigned(route.canActivate))
-                return;
+            // if (! TypeInfo.Assigned(route.canActivate))
+            //     return;
 
-            route.children.forEach(item =>
+            if (route.path === 'admin')
             {
-                if (item.path !== '')
+                route.children.forEach(item =>
                 {
-                    const Item = {  Link: '/' + route.path + '/' + item.path, LangId: item.data.LangId + '.title'};
-                    this.MenuItems.push(Item);
-                }
-            });
+                    if (item.path !== '')
+                    {
+                        const Item = {  Link: '/' + route.path + '/' + item.path, LangId: item.data.LangId + '.title'};
+                        this.MenuItems.push(Item);
+                    }
+                });
+            }
 
         });
+
     }
 
     @HostListener('window:scroll', [])
@@ -74,6 +79,7 @@ export class NavbarComponent implements OnInit
 
     App = window.App;
     MenuItems = new Array<object>();
+    IsAdmin: boolean = App.Router.routerState.snapshot.url.split('/')[1] === 'admin';
     isCollapsed: boolean = true;
     navIsFixed: boolean = false;
 }

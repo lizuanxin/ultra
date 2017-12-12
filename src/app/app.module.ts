@@ -4,12 +4,21 @@ import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 import {Routes, RouterModule} from '@angular/router';
 
 import {AppComponent} from './app.component';
-import {ServiceModule} from 'services';
+import {ServiceModule, TAuthService} from 'services';
 
 const routes: Routes =
 [
     {path: '',
         loadChildren: '../ultracreation.com.hk/#UltraCreationDomain'},
+
+    {path: 'admin',
+        // canActivate: [TAuthService], data: {LangId: 'me', Role: ''},
+        children: [
+            {path: 'account', loadChildren: '../profile/#ProfileModule', data: {LangId: 'account', Icon: '&#xe909;', Role: ''}},
+            {path: 'items', loadChildren: '../items/#ItemsModule', data: {LangId: 'items', Role: ''}},
+            {path: '', redirectTo: 'account', pathMatch: 'full'}
+        ]
+    },
 
     {path: 'login',
         loadChildren: '../login/#LoginModule'},

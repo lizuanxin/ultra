@@ -1,6 +1,7 @@
 import {Component, OnInit} from '@angular/core';
 import {ActivatedRoute, Data, Route} from '@angular/router';
 import {TypeInfo} from 'UltraCreation/Core/TypeInfo';
+import * as Types from 'services/types';
 
 @Component({selector: 'sidebar', templateUrl: './index.html'})
 export class SidebarComponent implements OnInit
@@ -11,51 +12,31 @@ export class SidebarComponent implements OnInit
 
     ngOnInit(): void
     {
-        App.Router.config.forEach(RootRoute =>
+        this.getChildrenNode(this.Route.snapshot.routeConfig);
+    }
+
+    getChildrenNode(NodeItem: any)
+    {
+        if (TypeInfo.Assigned(NodeItem.data))
         {
-
-            if (! TypeInfo.Assigned(RootRoute.canActivate))
-                return;
-            if (! TypeInfo.Assigned(RootRoute.data))
-                return;
-
-            const data = RootRoute.data as any;
-
-            const LangId = data.LangId;
-            const Menu: IMenuItem = {Icon: data.Icon, Role: data.Role,
-                LangId: LangId + './title',
-                Link: '/' + RootRoute.path,
+            let _item: IMenuItem = {
+                Icon: NodeItem.data.Icon,
+                Role: NodeItem.data.Icon,
+                LangId: NodeItem.data.LangId,
+                Children: new Array<IMenuItem>()
             };
 
-            Menu.LangId = LangId + '.title';
-            Menu.Link = '/' + RootRoute.path;
-
-
-            if (this.Route.snapshot.data.LangId === LangId)
-            {
-                Menu.Children = new Array<IMenuItem>();
-
-                for (const SubRoute of this.Route.snapshot.routeConfig.children)
+            NodeItem.children.forEach(item => {
+                if (TypeInfo.Assigned(item.data))
                 {
-                    if (! TypeInfo.Assigned(SubRoute.data))
-                        continue;
-
-                    const data = SubRoute.data as any;
-                    const SubLangId = data.LangId;
-
-                    if (!TypeInfo.Assigned(data.IsShow))
-                    {
-                        const SubMenu: IMenuItem = {Icon: data.Icon, Role: data.Role,
-                            LangId: LangId + '.' + SubLangId + '.title',
-                            Link: Menu.Link + '/' + SubRoute.path};
-
-                        Menu.Children.push(SubMenu);
-                    }
+                    item.data.Link = item.path;
+                    _item.Children.push(item.data);
                 }
-            }
+            });
 
-            this.MenuEntries.push(Menu);
-        });
+            this.MenuEntries.push(_item);
+
+        }
     }
 
     sidebarClose()
@@ -70,7 +51,7 @@ export class SidebarComponent implements OnInit
 
 interface IMenuItem
 {
-    Link: string;
+    Link?: string;
 
     Icon?: string;
     LangId: string;

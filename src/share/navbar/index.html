@@ -1,77 +1,93 @@
 <div class="fixed-top header">
-    <nav class="navbar navbar-expand-lg navbar-light bg-light navbar-ultra" [class.navbar-fixed]="navIsFixed" no-padding>
-        <div class="container relative">
-            <button class="navbar-toggler navbar-toggler-right" (click)="isCollapsed = !isCollapsed">
-                <span class="navbar-toggler-icon"></span>
-            </button>
 
-            <div class="navbar-brand" no-padding>
-                <div class="logo">
-                    <i icon>&#xe919;</i>
-                    <span>Simple & easy</span>
+        <nav class="navbar navbar-expand-lg navbar-light bg-light" [ngClass]="{'navbar-ultra': !IsAdmin}" [class.navbar-fixed]="navIsFixed" no-padding>
+            <!-- <div [ngClass]="{'container relative': !IsAdmin}"> -->
+                <button class="navbar-toggler navbar-toggler-right" (click)="isCollapsed = !isCollapsed">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+
+                <div class="navbar-brand" no-padding>
+                    <div class="logo">
+                        <i icon>&#xe919;</i>
+                        <span>Simple & easy</span>
+                    </div>
                 </div>
-            </div>
-            <div class="collapse navbar-collapse" [collapse]="isCollapsed">
-                <ul class="navbar-nav navbar-right">
-                    <li class="nav-item">
-                            <a class="btn btn-light" href="javascript:void(0)" [routerLink]="['/home']" [routerLinkActive]="['active']">home</a>
+                <ng-template [ngIf]="!IsAdmin">
+                        <div class="collapse navbar-collapse" [collapse]="isCollapsed">
+                            <ul class="navbar-nav navbar-right">
+                                <li class="nav-item">
+                                        <a class="btn btn-light" href="javascript:void(0)" [routerLink]="['/home']" [routerLinkActive]="['active']">home</a>
+                                    </li>
+                                <li class="nav-item active">
+                                    <a class="btn btn-light" href="javascript:void(0)" [routerLink]="['/list']" [routerLinkActive]="['active']">Health &nbsp;<i icon class="rotate">&#xf3d8;</i></a>
+                                    <ul class="nav-hover-item">
+                                        <li [routerLink]="['/list']">bluetens</li>
+                                        <li>cablemagic</li>
+                                        <li>bbmon</li>
+                                    </ul>
+                                </li>
+                                <li class="nav-item">
+                                    <a class="btn btn-light" href="javascript:void(0)">Av Product</a>
+                                </li>
+                                <li class="nav-item">
+                                    <a class="btn btn-light" href="javascript:void(0)">Symphony</a>
+                                </li>
+                            </ul>
+                        </div>
+                </ng-template>
+                <ng-template [ngIf]="IsAdmin">
+                        <div class="collapse navbar-collapse" id="navbarNav">
+                            <ul class="navbar-nav">
+                                <li class="nav-item" *ngFor="let item of MenuItems" routerLink="{{item.Link}}" [routerLinkActive]="['active']">
+                                    <a class="nav-link" href="javascript:void(0)">{{item.LangId|translate}}</a>
+                                </li>
+                            </ul>
+                        </div>
+                    <!-- <ul class="collapse navbar-collapse navbar-tabs">
+                        <li *ngFor="let item of MenuItems" routerLink="{{item.Link}}" [routerLinkActive]="['active']">{{item.LangId|translate}}</li>
+                    </ul> -->
+                </ng-template>
+                <div class="navbar-right-top">
+                    <ul class="collapse navbar-collapse" [collapse]="isCollapsed">
+                        <li class="nav-item active">
+                            <a class="btn btn-light" href="javascript:void(0)">{{App.Language|translate}} &nbsp;<i icon class="rotate">&#xf3d8;</i></a>
+
+                            <ul class="nav-hover-item">
+                                <li *ngFor="let lang of App.Languages" (click)="ChangeLang(lang)">
+                                {{lang|translate}}
+                                </li>
+                            </ul>
                         </li>
-                    <li class="nav-item active">
-                        <a class="btn btn-light" href="javascript:void(0)" [routerLink]="['/list']" [routerLinkActive]="['active']">Health &nbsp;<i icon class="rotate">&#xf3d8;</i></a>
-                        <ul class="nav-hover-item">
-                            <li [routerLink]="['/list']">bluetens</li>
-                            <li>cablemagic</li>
-                            <li>bbmon</li>
-                        </ul>
-                    </li>
-                    <li class="nav-item">
-                        <a class="btn btn-light" href="javascript:void(0)">Av Product</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="btn btn-light" href="javascript:void(0)">Symphony</a>
-                    </li>
-                </ul>
-            </div>
-            <div class="navbar-right-top">
-                <ul class="collapse navbar-collapse" [collapse]="isCollapsed">
-                    <li class="nav-item active">
-                        <a class="btn btn-light" href="javascript:void(0)">{{App.Language|translate}} &nbsp;<i icon class="rotate">&#xf3d8;</i></a>
+                        <li class="nav-item active">
+                            <a class="btn btn-light" href="javascript:void(0)">{{Auth.Me.FirstName}} &nbsp;<i icon class="rotate">&#xf3d8;</i></a>
 
-                        <ul class="nav-hover-item">
-                            <li *ngFor="let lang of App.Languages" (click)="ChangeLang(lang)">
-                               {{lang|translate}}
-                            </li>
-                        </ul>
-                    </li>
-                    <li class="nav-item active">
-                        <a class="btn btn-light" href="javascript:void(0)">{{Auth.Me.FirstName}} &nbsp;<i icon class="rotate">&#xf3d8;</i></a>
+                            <ul class="nav-hover-item">
+                                <li *ngIf="Auth.IsLogin" [routerLink]="['/admin']">
+                                    {{'site.ucenter.title'|translate}}
+                                </li>
+                                <li *ngIf="!Auth.IsLogin" [routerLink]="['/login']">
+                                    {{'button.login'|translate}}
+                                </li>
+                                <li *ngIf="Auth.IsLogin" (click)="Logout()">
+                                    {{'button.logout'|translate}}
+                                </li>
+                            </ul>
+                        </li>
+                        <!-- <li class="nav-item" dropdown placement="bottom right">
+                            <button dropdownToggle type="button" class="btn btn-sm btn-light dropdown-toggle">
+                                {{Auth.Me.FirstName}} <span class="caret"></span>
+                            </button>
+                            <ul *dropdownMenu class="dropdown-menu dropdown-menu-right" role="menu">
+                                <li role="menuitem" *ngIf="Auth.IsLogin"><a class="dropdown-item" href="javascript:void(0)">{{'site.ucenter.title'|translate}}</a></li>
+                                <li role="menuitem" *ngIf="!Auth.IsLogin"><a class="dropdown-item" href="javascript:void(0)" [routerLink]="['/login']">{{'button.login'|translate}}</a></li>
+                                <li class="divider dropdown-divider" *ngIf="Auth.IsLogin"></li>
+                                <li role="menuitem"><a class="dropdown-item" href="javascript:void(0)" (click)="Logout()" *ngIf="Auth.IsLogin">{{'button.logout'|translate}}</a></li>
+                            </ul>
+                        </li> -->
+                    </ul>
+                </div>
+            <!-- </div> -->
+        </nav>
 
-                        <ul class="nav-hover-item">
-                            <li *ngIf="Auth.IsLogin">
-                                {{'site.ucenter.title'|translate}}
-                            </li>
-                            <li *ngIf="!Auth.IsLogin" [routerLink]="['/login']">
-                                {{'button.login'|translate}}
-                            </li>
-                            <li *ngIf="Auth.IsLogin" (click)="Logout()">
-                                {{'button.logout'|translate}}
-                            </li>
-                        </ul>
-                    </li>
-                    <!-- <li class="nav-item" dropdown placement="bottom right">
-                        <button dropdownToggle type="button" class="btn btn-sm btn-light dropdown-toggle">
-                            {{Auth.Me.FirstName}} <span class="caret"></span>
-                        </button>
-                        <ul *dropdownMenu class="dropdown-menu dropdown-menu-right" role="menu">
-                            <li role="menuitem" *ngIf="Auth.IsLogin"><a class="dropdown-item" href="javascript:void(0)">{{'site.ucenter.title'|translate}}</a></li>
-                            <li role="menuitem" *ngIf="!Auth.IsLogin"><a class="dropdown-item" href="javascript:void(0)" [routerLink]="['/login']">{{'button.login'|translate}}</a></li>
-                            <li class="divider dropdown-divider" *ngIf="Auth.IsLogin"></li>
-                            <li role="menuitem"><a class="dropdown-item" href="javascript:void(0)" (click)="Logout()" *ngIf="Auth.IsLogin">{{'button.logout'|translate}}</a></li>
-                        </ul>
-                    </li> -->
-                </ul>
-            </div>
-        </div>
-    </nav>
 </div>
 
