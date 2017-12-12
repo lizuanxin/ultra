@@ -21,9 +21,10 @@ export class SidebarComponent implements OnInit
             let _item: IMenuItem = {
                 Icon: NodeItem.data.Icon,
                 Role: NodeItem.data.Icon,
-                LangId: NodeItem.data.LangId,
+                LangId: NodeItem.data.LangId + '.title',
                 Children: new Array<IMenuItem>()
             };
+            console.log(NodeItem.data.LangId);
 
             NodeItem.children.forEach(item => {
                 if (TypeInfo.Assigned(item.data))

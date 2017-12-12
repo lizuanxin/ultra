@@ -1,13 +1,16 @@
-import {Component, OnInit} from '@angular/core';
+import {Component, OnInit, TemplateRef} from '@angular/core';
 import {TypeInfo} from 'UltraCreation/Core';
 
 import {Types} from 'services';
 import {TItemService} from 'services/item';
 
+import {BsModalService} from 'ngx-bootstrap';
+import {BsModalRef} from 'ngx-bootstrap/modal/bs-modal-ref.service';
+
 @Component({selector: 'item-list', templateUrl: './index.html'})
 export class ListComponent implements OnInit
 {
-    constructor(private Items: TItemService)
+    constructor(private Items: TItemService, private modalService: BsModalService)
     {
     }
 
@@ -85,7 +88,14 @@ export class ListComponent implements OnInit
 
     }
 
+    openModal(template: TemplateRef<any>) {
+        this.modalRef = this.modalService.show(template, Object.assign({}, { class: 'gray modal-lg' }));
+    }
+
     App = window.App;
+    Modal: TemplateRef<any>;
+    modalRef: BsModalRef;
+
     ModalTitle: string;
     ModalProduct: Types.IProduct;
 
