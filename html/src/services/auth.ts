@@ -1,8 +1,10 @@
+import {Injectable} from '@angular/core';
 import {CanActivate} from '@angular/router';
 
 import {TypeInfo} from 'UltraCreation/Core';
 import {TAuthService as TBasicAuthService} from './cloud/auth'
 
+@Injectable()
 export class TAuthService extends TBasicAuthService implements CanActivate
 {
     async canActivate(): Promise<boolean>
