@@ -1,7 +1,6 @@
 import {Component, OnInit} from '@angular/core';
 import {ActivatedRoute, Data, Route} from '@angular/router';
 import {TypeInfo} from 'UltraCreation/Core/TypeInfo';
-import * as Types from 'services/types';
 
 @Component({selector: 'sidebar', templateUrl: './index.html'})
 export class SidebarComponent implements OnInit

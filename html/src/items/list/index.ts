@@ -4,9 +4,8 @@ import {TypeInfo} from 'UltraCreation/Core';
 import * as Types from 'services/cloud/types';
 import {TItemService} from 'services/item';
 
-
-@Component({selector: 'item-commodity', templateUrl: './commodity.cmp.html'})
-export class CommodityComponent implements OnInit
+@Component({selector: 'item-list', templateUrl: './index.html'})
+export class ListComponent implements OnInit
 {
     constructor(private Items: TItemService)
     {

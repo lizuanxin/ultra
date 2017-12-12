@@ -17,6 +17,8 @@ const routes: Routes = [
             {path: 'info', component: InfoComponent, data: {LangId: 'info'}},
             {path: 'security', component: SecurityComponent,  data: {LangId: 'security', Role: ''}},
             {path: 'delivery', component: DeliveryComponent, data: {LangId: 'delivery', Role: ''}},
+
+            /// ...
             {path: '', redirectTo: 'info'}
         ]
     }
