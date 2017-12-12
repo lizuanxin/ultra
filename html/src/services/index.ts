@@ -26,7 +26,7 @@ export function HttpLoaderFactory(http: HttpClient)
         TranslateModule,
     ],
     providers: [
-        TApplication, TAuthService, TItemService, TShoppingCart
+        TApplication, TAuthService, TItemService, TShoppingCart,
     ],
 })
 export class ServiceModule

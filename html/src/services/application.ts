@@ -1,9 +1,10 @@
-import {Injectable, Injector} from '@angular/core';
+import {Injectable, Injector, TemplateRef, Inject } from '@angular/core';
 import {Router} from '@angular/router';
 import {TranslateService} from '@ngx-translate/core';
 
 import {TypeInfo} from 'UltraCreation/Core';
 import {Platform} from 'UltraCreation/Core/Platform';
+
 
 // import {NgbModal, NgbTooltipConfig} from '@ng-bootstrap/ng-bootstrap';
 import {TShoppingCart} from './shopping_cart';
@@ -26,7 +27,7 @@ export class TApplication
     {
         console.log('TApplication construct');
         window.App = this;
-
+        // this.Modal = Injector.get(BsModalService);
         this.Router = Injector.get(Router);
         this.Translation = Injector.get(TranslateService);
         this.InitializeLanguage();
@@ -91,6 +92,11 @@ export class TApplication
         return this.Translation.instant(Key);
     }
 
+    ShowModal(temp: TemplateRef<any>)
+    {
+
+    }
+
     ShowAlert(Message: string)
     {
     }
@@ -103,7 +109,6 @@ export class TApplication
         message: string, title?: string): void
     {
     }
-
 
     Platform = new Platform();
     Router: Router;
