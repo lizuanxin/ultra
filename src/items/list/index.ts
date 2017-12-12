@@ -1,7 +1,7 @@
 import {Component, OnInit} from '@angular/core';
 import {TypeInfo} from 'UltraCreation/Core';
 
-import * as Types from 'services/cloud/types';
+import {Types} from 'services';
 import {TItemService} from 'services/item';
 
 @Component({selector: 'item-list', templateUrl: './index.html'})
