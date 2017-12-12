@@ -5,7 +5,7 @@ import {TranslateModule, TranslateLoader} from '@ngx-translate/core';
 import {TranslateHttpLoader} from '@ngx-translate/http-loader';
 import {TApplication} from './application';
 
-import {TAuthService} from './cloud/auth';
+import {TAuthService} from './auth';
 import {TItemService} from 'services/item';
 
 import {TShoppingCart} from './shopping_cart';

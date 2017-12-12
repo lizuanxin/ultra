@@ -2,7 +2,9 @@ import {Injectable} from '@angular/core';
 import {TypeInfo} from 'UltraCreation/Core/TypeInfo';
 import {TRestClient} from 'UltraCreation/Core/Http';
 
-import {CloudTypes, Config, TAuthService} from './cloud';
+import {Config} from './cloud/config';
+import * as Types from './cloud/types';
+import {TAuthService} from 'services/cloud/auth';
 
 @Injectable()
 export class TItemService
@@ -11,16 +13,16 @@ export class TItemService
     {
     }
 
-    async List(): Promise<Array<CloudTypes.IItem>>
+    async List(): Promise<Array<Types.IItem>>
     {
         console.log(this.Snap);
 
         if (! TypeInfo.Assigned(this.Snap))
         {
             this.Auth.Grant(this.Http);
-            const ary: Array<CloudTypes.IItem> = await this.Http.Get('/').toPromise().then(res => res.Content);
+            const ary: Array<Types.IItem> = await this.Http.Get('/').toPromise().then(res => res.Content);
 
-            this.Snap = new Map<string, CloudTypes.IItem>();
+            this.Snap = new Map<string, Types.IItem>();
             for (const iter of ary)
                 this.Snap.set(iter.Id, iter);
         }
@@ -29,15 +31,15 @@ export class TItemService
         return Array.from(this.Snap.values());
     }
 
-    async Open(Id: number): Promise<CloudTypes.IItem>
+    async Open(Id: number): Promise<Types.IItem>
     {
         return null;
     }
 
-    async AppendProduct(item: CloudTypes.IProduct): Promise<void>
+    async AppendProduct(item: Types.IProduct): Promise<void>
     {
         this.Auth.Grant(this.Http);
-        item.TypeId = CloudTypes.TItemTypeId.Product;
+        item.TypeId = Types.TItemTypeId.Product;
 
         const res = await this.Http.Post('/append', item).toPromise();
         item.Id = res.Content.Id;
@@ -45,24 +47,24 @@ export class TItemService
         this.Snap.set(item.Id, item);
     }
 
-    async AppendPackage(item: CloudTypes.IPackage): Promise<void>
+    async AppendPackage(item: Types.IPackage): Promise<void>
     {
         this.Auth.Grant(this.Http);
-        item.TypeId = CloudTypes.TItemTypeId.Package;
+        item.TypeId = Types.TItemTypeId.Package;
 
         const res = await this.Http.Post('/append', item).toPromise();
         item.Id = res.Content.Id;
     }
 
-    async Update(item: CloudTypes.IProduct | CloudTypes.IPackage): Promise<void>
+    async Update(item: Types.IProduct | Types.IPackage): Promise<void>
     {
         this.Auth.Grant(this.Http);
 
         switch (item.TypeId)
         {
-        case CloudTypes.TItemTypeId.Package:
-            const Package = item as CloudTypes.IPackage;
-            const ProductList = Package.ProductList as Array<CloudTypes.IProduct>;
+        case Types.TItemTypeId.Package:
+            const Package = item as Types.IPackage;
+            const ProductList = Package.ProductList as Array<Types.IProduct>;
 
             Package.ProductList = new Array<string>();
             ProductList.forEach(iter => Package.ProductList.push(iter.Id));
@@ -76,13 +78,13 @@ export class TItemService
             }
             break;
 
-        case CloudTypes.TItemTypeId.Product:
+        case Types.TItemTypeId.Product:
             await this.Http.Post('/update', item).toPromise();
             break;
         }
     }
 
-    async Remove(item: CloudTypes.IProduct | CloudTypes.IPackage): Promise<void>
+    async Remove(item: Types.IProduct | Types.IPackage): Promise<void>
     {
         this.Auth.Grant(this.Http);
 
@@ -91,5 +93,5 @@ export class TItemService
     }
 
     private Http = new TRestClient(Config.API_ENDPOINT + '/item');
-    private Snap: Map<string, CloudTypes.IItem>;
+    private Snap: Map<string, Types.IItem>;
 }
