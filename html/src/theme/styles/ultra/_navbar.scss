@@ -87,6 +87,10 @@
     @extend .animate;
     @include flex-item-center(column);
     color: $white;
+
+        min-height:70px;
+        font-size:2rem;
+
     background-color:#829dd0;
     span{
         font-size:.8rem;

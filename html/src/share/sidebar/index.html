@@ -2,7 +2,7 @@
     <div class="list-group">
         <ng-container *ngFor="let menu of MenuEntries">
             <div class="nested-menu">
-                <a class="list-group-item" (click)="$event.stopPropagation()" routerLink="{{menu.Link}}">
+                <a class="list-group-item" (click)="$event.stopPropagation()">
                     <i icon f-16 m-r-10 [innerHTML]="menu.Icon"></i>
                     <span>{{menu.LangId|translate}}</span>
                     <i class="icon-right" [class.active]="menu.Children"></i>
