@@ -11,8 +11,7 @@ const routes: Routes =
     {path: '',
         loadChildren: '../ultracreation.com.hk/#UltraCreationDomain'},
 
-    {path: 'admin',
-        // canActivate: [TAuthService], data: {LangId: 'me', Role: ''},
+    {path: 'admin', data: {LangId: 'me', Role: ''}, canActivate: [TAuthService],
         children: [
             {path: 'account', loadChildren: '../profile/#ProfileModule', data: {LangId: 'account', Icon: '&#xe909;', Role: ''}},
             {path: 'items', loadChildren: '../items/#ItemsModule', data: {LangId: 'items', Role: ''}},
