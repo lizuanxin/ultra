@@ -106,6 +106,13 @@ export class ListComponent implements OnInit
         .catch(err => {});
     }
 
+    private UpdateFileList()
+    {
+        this.FileSvc.List()
+            .then((List) => this.UploadedFiles = List)
+            .catch((err) => console.log(err));
+    }
+
     SetModTitle(data?: Types.IItem): string
     {
         if (!TypeInfo.Assigned(data)) return App.Translate('items.commodity.button.add') + App.Translate('items.commodity.field.goods');
