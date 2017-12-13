@@ -17,3 +17,4 @@ IF NOT EXIST .\src\services\cloud (
 )
 
 svn update
+npm config set package-lock false
