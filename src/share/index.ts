@@ -3,9 +3,8 @@ import {NgModule} from '@angular/core';
 import {CommonModule} from '@angular/common';
 import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 import {Routes, RouterModule} from '@angular/router';
-import {NgxBootstrapModule} from 'services/bootstrap';
 import {TranslateModule} from '@ngx-translate/core';
-
+import {NgbModule} from '@ng-bootstrap/ng-bootstrap';
 import {NavbarComponent} from 'share/navbar';
 import {SidebarComponent} from 'share/sidebar';
 import {SwiperComp} from 'UltraCreation/ng-ion/swiper';
@@ -17,8 +16,8 @@ import {ScrollToModule} from '@nicky-lenaers/ngx-scroll-to';
         FormsModule, ReactiveFormsModule,
         RouterModule,
         TranslateModule,
-        ScrollToModule.forRoot(),
-        NgxBootstrapModule
+        NgbModule,
+        ScrollToModule.forRoot()
     ],
     declarations: [
         NavbarComponent,
@@ -30,6 +29,7 @@ import {ScrollToModule} from '@nicky-lenaers/ngx-scroll-to';
         FormsModule, ReactiveFormsModule,
         RouterModule,
         TranslateModule,
+        NgbModule,
         SwiperComp,
         ScrollToModule,
         // ImageUploadModule,

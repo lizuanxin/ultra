@@ -81,7 +81,7 @@
                             <td text-center text-nowrap>2017-09-11<br/>
                                     19:15</td>
                             <td>100</td>
-                            <td text-center>未发布</td>
+                            <td text-center><button (click)="Remove(item);$event.stopPropagation()">{{'items.commodity.button.del'|translate}}</button></td>
                         </tr>
                     </tbody>
                   </table>
@@ -89,85 +89,56 @@
     </div>
 </div>
 
-<!-- <ngb-pagination [collectionSize]="120" size="sm" [maxSize]="5" [rotate]="true"  [(page)]="currentPage"></ngb-pagination> -->
-<!-- <div class="pagination-notflex">
-    <span class="disabled">&lt; Prev</span>
-    <span class="current">1</span>
-    <a href="#">2</a>
-    <a href="#">3</a>
-    <a href="#">4</a>
-    <a href="#">5</a>
-    <a href="#">6</a>
-    <a href="#">7</a> ...
-    <a href="#">199</a>
-    <a href="#">200</a>
-    <a href="#" class="next">Next &gt;</a>
-</div> -->
-<ng-template #template>
+<ng-template #template let-c="close" let-d="dismiss">
     <div class="modal-header">
         <h4 class="modal-title pull-left">{{ModalTitle}}</h4>
-        <button type="button" class="close pull-right" aria-label="Close" (click)="modalRef.hide()">
-        <span aria-hidden="true">&times;</span>
+        <button type="button" class="close" aria-label="Close" (click)="d()">
+            <span aria-hidden="true">&times;</span>
         </button>
     </div>
     <div class="modal-body">
-            <div class="row" align-items-center m-t-15>
-                    <label text-gray-light text-nowrap text-right class="col-md-2">关联商品：</label>
-                    <div class="col-md-3"></div>
-                </div>
-                <div class="row" align-items-center m-t-15>
-                    <label text-gray-light text-nowrap text-right class="col-md-2">{{'items.commodity.field.name'|translate}}<span text-danger>（包）</span>：</label>
-                    <div class="col-md-3"><input type="text" class="form-control" [(ngModel)]="ModalProduct.Name" placeholder=""></div>
-                </div>
-                <div class="row" align-items-center m-t-15>
-                    <label text-gray-light text-nowrap text-right class="col-md-2">{{'items.commodity.field.snap'|translate}}：</label>
-                    <div class="col-md-3"><input type="text" class="form-control" [(ngModel)]="ModalProduct.Snap" placeholder=""></div>
-                </div>
+            <ngb-tabset>
+                <ngb-tab title="Simple">
+                    <ng-template ngbTabContent>
+                            <div class="row" align-items-center m-t-15>
+                                <label text-gray-light text-nowrap text-right class="col-md-2">{{'items.commodity.field.name'|translate}}：</label>
+                                <div class="col-md-3"><input type="text" class="form-control" [(ngModel)]="CurProduct.Name"></div>
+                            </div>
+                            <!-- <div class="row" align-items-center m-t-15>
+                                <label text-gray-light text-nowrap text-right class="col-md-2">{{'items.commodity.field.number'|translate}}：</label>
+                                <div class="col-md-3"><input type="text" class="form-control" [(ngModel)]="CurProduct.RefCode" placeholder=""></div>
+                            </div> -->
+                            <div class="row" align-items-center m-t-15>
+                                <label text-gray-light text-nowrap text-right class="col-md-2">{{'items.commodity.field.snap'|translate}}：</label>
+                                <!-- <div class="col-md-3"><input type="text" class="form-control" [(ngModel)]="CurProduct.Category_Id" placeholder=""></div> -->
+                            </div>
+                            <div class="row" align-items-center m-t-30>
+                                <label text-gray-light text-nowrap text-right class="col-md-2" for="member-name">{{'produce.public.pro_img'|translate}}：</label>
+                                <div class="col-md-9">
+                                    <!-- <span m-r-10 text-gray-lighter f-16>上传商品</span> -->
+                                    <button type="button" class="btn btn-lg btn-link btn-file">
+                                        <label for="fileupload"><i icon f-50>&#xf100;</i></label>
+                                        <input type="file" id="fileupload" (change)="flist=$event.target.files">
+                                    </button>
+                                </div>
+                            </div>
+                    </ng-template>
+                </ngb-tab>
+                <ngb-tab>
+                    <ng-template ngbTabTitle><b>Fancy</b> title</ng-template>
+                    <ng-template ngbTabContent>
+                    </ng-template>
+                </ngb-tab>
+                <ngb-tab title="Disabled" [disabled]="true">
+                    <ng-template ngbTabContent>
 
-                <div class="row" align-items-center m-t-15>
-                    <label text-gray-light text-nowrap text-right class="col-md-2">{{'items.commodity.field.select_category'|translate}}：</label>
-                    <div class="col-md-2">
-                        <div class="dropdown" ngbDropdown>
-                            <button class="btn btn-sm btn-secondary dropdown-toggle" type="button" ngbDropdownToggle>
-                                顶级分类
-                            </button>
-                            <div class="dropdown-menu">
-                                <a class="dropdown-item">......</a>
-                                <a class="dropdown-item">......</a>
-                                <a class="dropdown-item">......</a>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="row" align-items-center m-t-15>
-                    <label text-gray-light text-nowrap text-right class="col-md-2" for="member-tel">{{'produce.public.select_extend_category'|translate}}：</label>
-                    <div class="col-md-2">
-                        <div class="dropdown" ngbDropdown>
-                            <button class="btn btn-sm btn-secondary dropdown-toggle" type="button" ngbDropdownToggle>
-                                扩展分类
-                            </button>
-                            <div class="dropdown-menu">
-                                <a class="dropdown-item">......</a>
-                                <a class="dropdown-item">......</a>
-                                <a class="dropdown-item">......</a>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="row" align-items-center m-t-30>
-                    <label text-gray-light text-nowrap text-right class="col-md-2" for="member-name">{{'produce.public.pro_img'|translate}}：</label>
-                    <div class="col-md-9">
-                        <span m-r-10 text-gray-lighter f-16>上传商品</span>
-                        <button type="button" class="btn btn-lg btn-outline-secondary btn-file">
-                        <i class="ion" f-30>&#xf102;</i>
-                        <input type="file" class="form-control-file">
-                    </button>
-                    </div>
-                </div>
+                    </ng-template>
+                </ngb-tab>
+            </ngb-tabset>
     </div>
     <div class="modal-footer">
-            <button type="button" class="btn btn-default" (click)="modalRef.hide()" >{{'button.close'|translate}}</button>
-            <button type="button" class="btn btn-primary" (click)="OnSave()" >{{'button.confirm'|translate}}</button>
+            <button type="button" class="btn btn-default" (click)="d()" >{{'button.close'|translate}}</button>
+            <button type="button" class="btn btn-primary" (click)="c()" >{{'button.confirm'|translate}}</button>
     </div>
 </ng-template>
 

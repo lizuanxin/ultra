@@ -1,16 +1,14 @@
-import {Component, OnInit, TemplateRef} from '@angular/core';
-import {TypeInfo} from 'UltraCreation/Core';
+import {Component, OnInit, TemplateRef } from '@angular/core';
+import {TypeInfo, THttpClient} from 'UltraCreation/Core';
 
 import {Types} from 'services';
 import {TItemService} from 'services/item';
-
-import {BsModalService} from 'ngx-bootstrap';
-import {BsModalRef} from 'ngx-bootstrap/modal/bs-modal-ref.service';
+import {TAuthService} from 'services';
 
 @Component({selector: 'item-list', templateUrl: './index.html'})
 export class ListComponent implements OnInit
 {
-    constructor(private Items: TItemService, private modalService: BsModalService)
+    constructor(private Items: TItemService, private AuthSvc: TAuthService)
     {
     }
 
@@ -29,9 +27,9 @@ export class ListComponent implements OnInit
     }
 
 
-    Remove(): void
+    Remove(data: Types.IItem): void
     {
-        console.log(this.SelectId);
+        this.Items.Remove(data);
     }
 
     ToggleSelectAll()
@@ -68,38 +66,59 @@ export class ListComponent implements OnInit
 
     OpenModal(template: TemplateRef<any>, data?: Types.IItem)
     {
-        this.ModalProduct = new Object() as any;
-        if (TypeInfo.Assigned(data))
+        this.ModalTitle = this.SetModTitle(data);
+        if (!TypeInfo.Assigned(data))
         {
-            this.ModalTitle = App.Translate('items.operat.edit');
-            this.IsEdit = true;
-            Object.assign(this.ModalProduct, data);
+            this.CurProduct = new Object() as any;
         }
         else
         {
-            this.IsEdit = false;
-            this.ModalTitle = App.Translate('items.operat.publish');
+            this.CurProduct = data;
         }
 
-        this.modalRef = this.modalService.show(template, Object.assign({}, { class: 'gray modal-lg' }));
+        App.Modal.open(template, {size: 'lg'}).result
+        .then(ok =>
+        {
+            console.log('test');
+
+                // console.log(this.flist);
+                // if (TypeInfo.Assigned(this.flist))
+                // {
+                //     const form = new FormData();
+                //     form.append('file', this.flist[0]);
+                //     this.CurProduct.Pictures.push(this.flist[0].name);
+                // }
+
+
+                if (!TypeInfo.Assigned(data))
+                {
+                    this.Items.AppendProduct(this.CurProduct)
+                    .catch(err => console.log(err));
+                }
+                else
+                {
+                    this.Items.Update(this.CurProduct)
+                    .catch(err => console.log(err));
+                }
+
+
+        })
+        .catch(err => {});
     }
 
-    OnSave()
+    SetModTitle(data?: Types.IItem): string
     {
-        this.IsEdit ? this.Items.Update(this.ModalProduct) : this.Items.AppendProduct(this.ModalProduct);
-        this.modalRef.hide();
-        this.modalService.onHide.subscribe((reason: string) => {
-            this.Refresh();
-        });
+        if (!TypeInfo.Assigned(data)) return App.Translate('items.commodity.button.add') + App.Translate('items.commodity.field.goods');
+
+        return App.Translate('items.commodity.button.edit') + App.Translate('items.commodity.field.goods');
     }
 
     App = window.App;
     Modal: TemplateRef<any>;
-    modalRef: BsModalRef;
+
 
     ModalTitle: string;
-    ModalProduct: Types.IProduct;
-    IsEdit: boolean;
+    CurProduct: Types.IProduct;
 
     SelectAll: boolean = false;
     SelectId: Array<string> = [];
@@ -107,4 +126,6 @@ export class ListComponent implements OnInit
     currentPage: number;
 
     List: Array<Types.IItem>;
+    flist: FileList;
+
 }
