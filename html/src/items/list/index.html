@@ -98,24 +98,30 @@
     </div>
     <div class="modal-body">
             <ngb-tabset>
-                <ngb-tab title="Simple">
+                <ngb-tab title="{{'items.commodity.field.info'|translate}}">
                     <ng-template ngbTabContent>
-                            <div class="row" align-items-center m-t-15>
+                            <div class="row justify-content-md-center" align-items-center  m-t-30>
                                 <label text-gray-light text-nowrap text-right class="col-md-2">{{'items.commodity.field.name'|translate}}：</label>
                                 <div class="col-md-3"><input type="text" class="form-control" [(ngModel)]="CurProduct.Name"></div>
+                                <label text-gray-light text-nowrap text-right class="col-md-2">{{'items.commodity.field.snap'|translate}}：</label>
+                                <div class="col-md-3"><input type="text" class="form-control"></div>
                             </div>
                             <!-- <div class="row" align-items-center m-t-15>
                                 <label text-gray-light text-nowrap text-right class="col-md-2">{{'items.commodity.field.number'|translate}}：</label>
                                 <div class="col-md-3"><input type="text" class="form-control" [(ngModel)]="CurProduct.RefCode" placeholder=""></div>
                             </div> -->
-                            <div class="row" align-items-center m-t-15>
-                                <label text-gray-light text-nowrap text-right class="col-md-2">{{'items.commodity.field.snap'|translate}}：</label>
-                                <!-- <div class="col-md-3"><input type="text" class="form-control" [(ngModel)]="CurProduct.Category_Id" placeholder=""></div> -->
-                            </div>
-                            <div class="row" align-items-center m-t-30>
+                            <div class="row justify-content-md-center" align-items-center m-t-15>
                                 <label text-gray-light text-nowrap text-right class="col-md-2" for="member-name">{{'produce.public.pro_img'|translate}}：</label>
-                                <div class="col-md-9">
-                                    <!-- <span m-r-10 text-gray-lighter f-16>上传商品</span> -->
+                                <div class="col-md-8">
+                                    <button type="button" class="btn btn-lg btn-link btn-file">
+                                        <label for="fileupload"><i icon f-50>&#xf100;</i></label>
+                                        <input type="file" id="fileupload" (change)="flist=$event.target.files">
+                                    </button>
+                                </div>
+                            </div>
+                            <div class="row justify-content-md-center" align-items-center>
+                                <label text-gray-light text-nowrap text-right class="col-md-2" for="member-name">其它：</label>
+                                <div class="col-md-8">
                                     <button type="button" class="btn btn-lg btn-link btn-file">
                                         <label for="fileupload"><i icon f-50>&#xf100;</i></label>
                                         <input type="file" id="fileupload" (change)="flist=$event.target.files">
@@ -124,12 +130,11 @@
                             </div>
                     </ng-template>
                 </ngb-tab>
-                <ngb-tab>
-                    <ng-template ngbTabTitle><b>Fancy</b> title</ng-template>
+                <ngb-tab title="{{'produce.public.commodity_attributes'|translate}}">
                     <ng-template ngbTabContent>
                     </ng-template>
                 </ngb-tab>
-                <ngb-tab title="Disabled" [disabled]="true">
+                <ngb-tab title="{{'produce.public.related_goods'|translate}}">
                     <ng-template ngbTabContent>
 
                     </ng-template>
