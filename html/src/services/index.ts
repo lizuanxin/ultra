@@ -7,6 +7,7 @@ import {TApplication} from './application';
 
 import {TAuthService} from './auth';
 import {TItemService} from 'services/item';
+import {TFileService} from './file';
 
 import {TShoppingCart} from './shopping_cart';
 
@@ -26,14 +27,14 @@ export function HttpLoaderFactory(http: HttpClient)
         TranslateModule,
     ],
     providers: [
-        TApplication, TAuthService, TItemService, TShoppingCart,
+        TApplication, TAuthService, TItemService, TShoppingCart, TFileService
     ],
 })
 export class ServiceModule
 {
 }
 
-export {TApplication, TAuthService, TShoppingCart};
+export {TApplication, TAuthService, TShoppingCart, TFileService};
 export {TItemService} from './item';
 
 import * as Types from './cloud/types';

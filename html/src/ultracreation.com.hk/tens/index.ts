@@ -1,29 +1,43 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import {THttpClient} from 'UltraCreation/Core';
-import { TAuthService } from 'services';
+import { TFileService } from 'services/file';
+
+import * as Types from 'services/cloud/types';
 
 @Component({templateUrl: './index.html'})
 export class TensPage implements OnInit
 {
-    constructor(private AuthSvc: TAuthService)
+    constructor(private FileSvc: TFileService)
     {
-
+        this.UploadedFiles = [];
     }
 
     ngOnInit()
     {
+        setTimeout(() => this.UpdateFileList(), 500);
     }
 
     foobar()
     {
-        const form = new FormData();
-        form.append('file', this.flist[0]);
-
-        const client = new THttpClient();
-        this.AuthSvc.Grant(client);
-        client.Post('http://localhost:8200/file/upload', form).toPromise()
+        this.FileSvc.Upload(this.flist[0])
+            .then(() => this.UpdateFileList())
             .catch(err => console.log(err));
     }
 
+    remove(File: Types.IFile)
+    {
+        this.FileSvc.Remove(File)
+            .then(() => this.UpdateFileList())
+            .catch((err) => console.log(err));
+    }
+
+    private UpdateFileList()
+    {
+        this.FileSvc.List()
+            .then((List) => this.UploadedFiles = List)
+            .catch((err) => console.log(err));
+    }
+
     flist: FileList;
+    UploadedFiles: Array<Types.IFile>;
 }
