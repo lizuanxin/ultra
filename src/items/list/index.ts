@@ -3,12 +3,12 @@ import {TypeInfo, THttpClient} from 'UltraCreation/Core';
 
 import {Types} from 'services';
 import {TItemService} from 'services/item';
-import {TAuthService} from 'services';
+import {TFileService} from 'services/file';
 
 @Component({selector: 'item-list', templateUrl: './index.html'})
 export class ListComponent implements OnInit
 {
-    constructor(private Items: TItemService, private AuthSvc: TAuthService)
+    constructor(private Items: TItemService, private FileSvc: TFileService)
     {
     }
 
@@ -126,6 +126,6 @@ export class ListComponent implements OnInit
     currentPage: number;
 
     List: Array<Types.IItem>;
-    flist: FileList;
+    UploadedFiles: Array<Types.IFile>;
 
 }
