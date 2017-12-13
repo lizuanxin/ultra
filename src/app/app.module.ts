@@ -11,6 +11,13 @@ const routes: Routes =
     {path: '',
         loadChildren: '../ultracreation.com.hk/#UltraCreationDomain'},
 
+    {path: 'login',
+        loadChildren: '../login/#LoginModule'},
+    {path: 'signup',
+        loadChildren: '../signup/#SignupModule'},
+    {path: 'not-found',
+        loadChildren: '../not-found/#NotFoundModule'},
+
     {path: 'admin', data: {LangId: 'me', Role: ''}, canActivate: [TAuthService],
         children: [
             {path: 'account', loadChildren: '../profile/#ProfileModule', data: {LangId: 'account', Icon: '&#xe909;', Role: ''}},
@@ -19,12 +26,6 @@ const routes: Routes =
         ]
     },
 
-    {path: 'login',
-        loadChildren: '../login/#LoginModule'},
-    {path: 'signup',
-        loadChildren: '../signup/#SignupModule'},
-    {path: 'not-found',
-        loadChildren: '../not-found/#NotFoundModule'},
     /// ...
     {path: '**', redirectTo: 'not-found'},
 ];
