@@ -15,7 +15,7 @@
                     </div>
 
                     <ng-template [ngIf]="!IsAdmin">
-                            <div class="collapse navbar-collapse" [collapse]="isCollapsed">
+                            <div class="collapse navbar-collapse" [ngbCollapse]="isCollapsed">
                                 <ul class="navbar-nav navbar-right">
                                     <li class="nav-item">
                                             <a class="btn btn-light" href="javascript:void(0)" [routerLink]="['/home']" [routerLinkActive]="['active']">home</a>
@@ -48,7 +48,7 @@
                     </ng-template>
 
                     <div class="navbar-right-top">
-                        <ul class="collapse navbar-collapse" [collapse]="isCollapsed">
+                        <ul class="collapse navbar-collapse" [ngbCollapse]="isCollapsed">
                             <li class="nav-item">
                                 <a class="btn btn-light" href="javascript:void(0)">{{App.Language|translate}} &nbsp;<i icon class="rotate">&#xf3d8;</i></a>
 

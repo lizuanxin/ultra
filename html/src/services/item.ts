@@ -38,6 +38,7 @@ export class TItemService
 
     async AppendProduct(item: Types.IProduct): Promise<void>
     {
+        console.log(item);
         this.Auth.Grant(this.Http);
         item.TypeId = Types.TItemTypeId.Product;
 

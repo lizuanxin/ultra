@@ -4,9 +4,7 @@ import {TranslateService} from '@ngx-translate/core';
 
 import {TypeInfo} from 'UltraCreation/Core';
 import {Platform} from 'UltraCreation/Core/Platform';
-
-
-// import {NgbModal, NgbTooltipConfig} from '@ng-bootstrap/ng-bootstrap';
+import {NgbModal, NgbTooltipConfig} from '@ng-bootstrap/ng-bootstrap';
 import {TShoppingCart} from './shopping_cart';
 
 declare global
@@ -27,12 +25,12 @@ export class TApplication
     {
         console.log('TApplication construct');
         window.App = this;
-        // this.Modal = Injector.get(BsModalService);
+
         this.Router = Injector.get(Router);
         this.Translation = Injector.get(TranslateService);
         this.InitializeLanguage();
 
-        // this.Modal = Injector.get(NgbModal);
+        this.Modal = Injector.get(NgbModal);
     }
 
 /* langulage support */
@@ -113,5 +111,6 @@ export class TApplication
     Platform = new Platform();
     Router: Router;
     Translation: TranslateService;
+    Modal: NgbModal;
     ShoppingCart: TShoppingCart;
 }

@@ -13,6 +13,10 @@ button.btn
         background: linear-gradient(to right, #45a8fb , #28e0fa);
     }
 
+    &.btn-file input[type="file"]{
+        display: none;
+    }
+
 
 }
 
