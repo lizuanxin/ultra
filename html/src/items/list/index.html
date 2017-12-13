@@ -3,7 +3,7 @@
     <ng-template [ngIf]="App.IsMinScreen">
         <div pull-right>
                 <div class="d-inline-block">
-                    <button class="btn btn-sm btn-outline-primary" type="button" (click)="App.ShowModal(template)">{{'items.commodity.button.add'|translate}}</button>
+                    <button class="btn btn-sm btn-outline-primary" type="button" (click)="OpenModal(template)">{{'items.commodity.button.add'|translate}}</button>
                 </div>
                 <div class="dropdown d-inline-block" ngbDropdown>
                     <button class="btn btn-sm btn-secondary dropdown-toggle" type="button" ngbDropdownToggle>
@@ -23,7 +23,7 @@
         <div class="col-md-6">
             <ng-template [ngIf]="!App.IsMinScreen">
                 <div class="d-inline-block">
-                    <button class="btn btn-sm btn-outline-primary" type="button" (click)="openModal(template)">{{'items.commodity.button.add'|translate}}</button>
+                    <button class="btn btn-sm btn-outline-primary" type="button" (click)="OpenModal(template)">{{'items.commodity.button.add'|translate}}</button>
                 </div>
                 <div class="dropdown d-inline-block" ngbDropdown>
                     <button class="btn btn-sm btn-secondary dropdown-toggle" type="button" ngbDropdownToggle>
@@ -64,7 +64,7 @@
                       </tr>
                     </thead>
                     <tbody>
-                        <tr *ngFor="let item of List" [routerLink]="['/items/commodity-publish',item.Id]" >
+                        <tr *ngFor="let item of List" (click)="OpenModal(template,item)" >
                             <td text-center (click)="$event.stopPropagation()">
                                 <input type="checkbox" [(ngModel)]="item.selected" (ngModelChange)="ToggleSelectId(item)">
                             </td>
@@ -85,54 +85,7 @@
                         </tr>
                     </tbody>
                   </table>
-        <!-- <table class="table table-sm table-middled table-bordered table-hover">
-            <thead>
-                <tr>
-                    <th width="2%"><input type="checkbox" [(ngModel)]="SelectAll" (ngModelChange)="ToggleSelectAll()"></th>
-                    <th width="6%">{{'items.commodity.field.pro_thums'|translate}}</th>
-                    <th width="12%">{{'items.commodity.field.number'|translate}}</th>
-                    <th width="15%">{{'items.commodity.field.title'|translate}}</th>
-                    <th width="15%" text-center>{{'items.commodity.field.pricing'|translate}}
-                        &nbsp;
-                        <div class="dropdown d-inline-block" ngbDropdown>
-                            <button class="btn btn-sm btn-info dropdown-toggle" type="button" ngbDropdownToggle>
-                                人民币
-                            </button>
-                            <div class="dropdown-menu dropdown-menu-right">
-                                <a class="dropdown-item">人民币</a>
-                                <a class="dropdown-item">美元</a>
-                            </div>
-                        </div>
-                    </th>
-                    <th width="6%" text-center>{{'items.commodity.field.in_stock'|translate}}</th>
-                    <th width="10%" text-center>{{'items.commodity.field.total_sales'|translate}}</th>
-                    <th width="12%" text-center>{{'items.commodity.field.release_time'|translate}}</th>
-                    <th width="12%">{{'items.commodity.field.description'|translate}}</th>
-                    <th text-center>{{'items.commodity.field.status'|translate}}</th>
-                </tr>
-            </thead>
-            <tbody>
-                <tr *ngFor="let item of List" [routerLink]="['/items/commodity-publish',item.Id]" >
-                        <td text-center (click)="$event.stopPropagation()">
-                            <input type="checkbox" [(ngModel)]="item.selected" (ngModelChange)="ToggleSelectId(item)">
-                        </td>
-                        <td>
-                            <img width=60 src="assets/images/portfolio-1.jpg">
-                        </td>
-                        <td>{{item.RefCode}}</td>
-                        <td>{{item.Name}}</td>
-                        <td text-right>
-                            <b text-danger m-r-10>￥699.0</b>
-                        </td>
-                        <td text-center>100</td>
-                        <td></td>
-                        <td text-center text-nowrap>2017-09-11<br/>
-                                19:15</td>
-                        <td>100</td>
-                        <td text-center>未发布</td>
-                </tr>
-            </tbody>
-        </table> -->
+
     </div>
 </div>
 
@@ -163,7 +116,7 @@
                     <div class="col-md-3"></div>
                 </div>
                 <div class="row" align-items-center m-t-15>
-                    <label text-gray-light text-nowrap text-right class="col-md-2">{{'items.commodity.field.title'|translate}}<span text-danger>（包）</span>：</label>
+                    <label text-gray-light text-nowrap text-right class="col-md-2">{{'items.commodity.field.name'|translate}}<span text-danger>（包）</span>：</label>
                     <div class="col-md-3"><input type="text" class="form-control" [(ngModel)]="ModalProduct.Name" placeholder=""></div>
                 </div>
                 <div class="row" align-items-center m-t-15>
@@ -213,81 +166,9 @@
                 </div>
     </div>
     <div class="modal-footer">
-            <button type="button" class="btn btn-default" (click)="confirm()" >{{'button.close'|translate}}</button>
-            <button type="button" class="btn btn-primary" (click)="decline()" >{{'button.confirm'|translate}}</button>
+            <button type="button" class="btn btn-default" (click)="modalRef.hide()" >{{'button.close'|translate}}</button>
+            <button type="button" class="btn btn-primary" (click)="OnSave()" >{{'button.confirm'|translate}}</button>
     </div>
 </ng-template>
 
-<ng-template #PublishModal let-c="close" let-d="dismiss">
-    <div class="modal-header">
-        <h6 class="modal-title" p-l-10>{{ModalTitle}}</h6>
-        <button type="button" class="close" aria-label="Close" (click)="d()">
-            <span aria-hidden="true">&times;</span>
-        </button>
-    </div>
-    <div class="modal-body" p-30>
-            <div class="row" align-items-center m-t-15>
-                <label text-gray-light text-nowrap text-right class="col-md-2">关联商品：</label>
-                <div class="col-md-3"></div>
-            </div>
-            <div class="row" align-items-center m-t-15>
-                <label text-gray-light text-nowrap text-right class="col-md-2">{{'items.commodity.field.title'|translate}}<span text-danger>（包）</span>：</label>
-                <div class="col-md-3"><input type="text" class="form-control" [(ngModel)]="ModalProduct.Name" placeholder=""></div>
-            </div>
-            <div class="row" align-items-center m-t-15>
-                <label text-gray-light text-nowrap text-right class="col-md-2">{{'items.commodity.field.snap'|translate}}：</label>
-                <div class="col-md-3"><input type="text" class="form-control" [(ngModel)]="ModalProduct.Snap" placeholder=""></div>
-            </div>
-            <div class="row" align-items-center m-t-15>
-                <label text-gray-light text-nowrap text-right class="col-md-2">{{'items.commodity.field.pricing'|translate}}：</label>
-                <label text-gray-light text-nowrap class="col-md-1">人民币<input type="text" class="form-control" placeholder=""></label>
-                <label text-gray-light text-nowrap class="col-md-1">美金<input type="text" class="form-control" placeholder=""></label>
-                <label text-gray-light text-nowrap class="col-md-1">XX<input type="text" class="form-control" placeholder=""></label>
-            </div>
-            <div class="row" align-items-center m-t-15>
-                <label text-gray-light text-nowrap text-right class="col-md-2">{{'items.commodity.field.select_category'|translate}}：</label>
-                <div class="col-md-2">
-                    <div class="dropdown" ngbDropdown>
-                        <button class="btn btn-sm btn-secondary dropdown-toggle" type="button" ngbDropdownToggle>
-                            顶级分类
-                        </button>
-                        <div class="dropdown-menu">
-                            <a class="dropdown-item">......</a>
-                            <a class="dropdown-item">......</a>
-                            <a class="dropdown-item">......</a>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div class="row" align-items-center m-t-15>
-                <label text-gray-light text-nowrap text-right class="col-md-2" for="member-tel">{{'produce.public.select_extend_category'|translate}}：</label>
-                <div class="col-md-2">
-                    <div class="dropdown" ngbDropdown>
-                        <button class="btn btn-sm btn-secondary dropdown-toggle" type="button" ngbDropdownToggle>
-                            扩展分类
-                        </button>
-                        <div class="dropdown-menu">
-                            <a class="dropdown-item">......</a>
-                            <a class="dropdown-item">......</a>
-                            <a class="dropdown-item">......</a>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div class="row" align-items-center m-t-30>
-                <label text-gray-light text-nowrap text-right class="col-md-2" for="member-name">{{'produce.public.pro_img'|translate}}：</label>
-                <div class="col-md-9">
-                    <span m-r-10 text-gray-lighter f-16>上传商品</span>
-                    <button type="button" class="btn btn-lg btn-outline-secondary btn-file">
-                    <i class="ion" f-30>&#xf102;</i>
-                    <input type="file" class="form-control-file">
-                </button>
-                </div>
-            </div>
 
-    </div>
-    <div class="modal-footer">
-        <button type="button" class="btn btn-secondary" (click)="d()">{{'button.close'|translate}}</button>
-        <button type="button" class="btn btn-primary" (click)="c()">{{'button.confirm'|translate}}</button>
-    </div>
-</ng-template>

@@ -28,28 +28,6 @@ export class ListComponent implements OnInit
         });
     }
 
-    Open(content: Object, data?: Types.IItem)
-    {
-        this.ModalProduct = new Object() as any;
-        if (TypeInfo.Assigned(data))
-        {
-            this.ModalTitle = App.Translate('items.operat.edit');
-            Object.assign(this.ModalProduct, data);
-        }
-        else
-            this.ModalTitle = App.Translate('items.operat.publish');
-
-        // App.Modal.open(content, {size: 'lg'}).result
-        //     .then(ok =>
-        //     {
-        //         if (TypeInfo.Assigned(data))
-        //             return this.Items.Update(this.ModalProduct);
-        //         else
-        //             return this.Items.AppendProduct(this.ModalProduct);
-
-        //     })
-        //     .catch(err => console.log(err));
-    }
 
     Remove(): void
     {
@@ -88,8 +66,31 @@ export class ListComponent implements OnInit
 
     }
 
-    openModal(template: TemplateRef<any>) {
+    OpenModal(template: TemplateRef<any>, data?: Types.IItem)
+    {
+        this.ModalProduct = new Object() as any;
+        if (TypeInfo.Assigned(data))
+        {
+            this.ModalTitle = App.Translate('items.operat.edit');
+            this.IsEdit = true;
+            Object.assign(this.ModalProduct, data);
+        }
+        else
+        {
+            this.IsEdit = false;
+            this.ModalTitle = App.Translate('items.operat.publish');
+        }
+
         this.modalRef = this.modalService.show(template, Object.assign({}, { class: 'gray modal-lg' }));
+    }
+
+    OnSave()
+    {
+        this.IsEdit ? this.Items.Update(this.ModalProduct) : this.Items.AppendProduct(this.ModalProduct);
+        this.modalRef.hide();
+        this.modalService.onHide.subscribe((reason: string) => {
+            this.Refresh();
+        });
     }
 
     App = window.App;
@@ -98,6 +99,7 @@ export class ListComponent implements OnInit
 
     ModalTitle: string;
     ModalProduct: Types.IProduct;
+    IsEdit: boolean;
 
     SelectAll: boolean = false;
     SelectId: Array<string> = [];
