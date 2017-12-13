@@ -1,10 +1,11 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import {THttpClient} from 'UltraCreation/Core';
+import { TAuthService } from 'services';
 
 @Component({templateUrl: './index.html'})
 export class TensPage implements OnInit
 {
-    constructor()
+    constructor(private AuthSvc: TAuthService)
     {
 
     }
@@ -19,7 +20,8 @@ export class TensPage implements OnInit
         form.append('file', this.flist[0]);
 
         const client = new THttpClient();
-        client.Post('http://localhost:8200/upload', form).toPromise()
+        this.AuthSvc.Grant(client);
+        client.Post('http://localhost:8200/file/upload', form).toPromise()
             .catch(err => console.log(err));
     }
 
