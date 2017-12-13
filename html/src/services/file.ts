@@ -29,6 +29,19 @@ export class TFileService
         return Array.from(this.FilesCache.values());
     }
 
+    GetFile(FileId: string): Types.IFile
+    {
+        if (TypeInfo.Assigned(this.FilesCache))
+        {
+            return this.FilesCache.get(FileId);
+        }
+        else
+        {
+            this.List().catch((err) => console.log(err));
+            return null;
+        }
+    }
+
     async Upload(UploadFile: any)
     {
         const form = new FormData();
