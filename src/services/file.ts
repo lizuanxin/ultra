@@ -11,6 +11,7 @@ export class TFileService
 {
     constructor(private AuthSvc: TAuthService)
     {
+        setTimeout(() => this.List(), 100);
     }
 
     async List(): Promise<Array<Types.IFile>>
