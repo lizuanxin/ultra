@@ -14,7 +14,6 @@ export class ListComponent implements OnInit
 
     ngOnInit()
     {
-        this.currentPage = 2;
         this.Refresh();
     }
 
@@ -79,7 +78,7 @@ export class ListComponent implements OnInit
         App.Modal.open(template, {size: 'lg'}).result
         .then(ok =>
         {
-            console.log('test');
+            console.log(this.ImgFile, this.ArrayImgFile);
 
                 // console.log(this.flist);
                 // if (TypeInfo.Assigned(this.flist))
@@ -88,26 +87,38 @@ export class ListComponent implements OnInit
                 //     form.append('file', this.flist[0]);
                 //     this.CurProduct.Pictures.push(this.flist[0].name);
                 // }
+            this.UploadImage(this.ImgFile);
 
-
-                if (!TypeInfo.Assigned(data))
-                {
-                    this.Items.AppendProduct(this.CurProduct)
-                    .catch(err => console.log(err));
-                }
-                else
-                {
-                    this.Items.Update(this.CurProduct)
-                    .catch(err => console.log(err));
-                }
+                // if (!TypeInfo.Assigned(data))
+                // {
+                //     this.Items.AppendProduct(this.CurProduct)
+                //     .catch(err => console.log(err));
+                // }
+                // else
+                // {
+                //     this.Items.Update(this.CurProduct)
+                //     .catch(err => console.log(err));
+                // }
 
 
         })
         .catch(err => {});
     }
 
+    UploadImage(file)
+    {
+        this.FileSvc.Upload(file)
+        .then((v) =>
+        {
+            console.log(v);
+
+        })
+        .catch(err => console.log(err));
+    }
+
     private UpdateFileList()
     {
+        this.UploadedFiles = [];
         this.FileSvc.List()
             .then((List) => this.UploadedFiles = List)
             .catch((err) => console.log(err));
@@ -120,6 +131,27 @@ export class ListComponent implements OnInit
         return App.Translate('items.commodity.button.edit') + App.Translate('items.commodity.field.goods');
     }
 
+
+    UpdateImageDisplay(file: any, type: number)
+    {
+
+        let imgView = document.querySelector('#image-' + type + '') as HTMLElement;
+        let image = document.createElement('img');
+        image.src = window.URL.createObjectURL(file);
+        imgView.appendChild(image);
+
+        if (type === 1)
+        {
+            this.ImgFile = file;
+        }
+        else {
+            this.ArrayImgFile.push(file);
+        }
+
+    }
+
+
+
     App = window.App;
     Modal: TemplateRef<any>;
 
@@ -130,9 +162,9 @@ export class ListComponent implements OnInit
     SelectAll: boolean = false;
     SelectId: Array<string> = [];
 
-    currentPage: number;
 
     List: Array<Types.IItem>;
     UploadedFiles: Array<Types.IFile>;
-
+    ImgFile: any;
+    ArrayImgFile = new Array<any>();
 }

@@ -113,18 +113,26 @@
                             <div class="row justify-content-md-center" align-items-center m-t-15>
                                 <label text-gray-light text-nowrap text-right class="col-md-2" for="member-name">{{'produce.public.pro_img'|translate}}：</label>
                                 <div class="col-md-8">
-                                    <button type="button" class="btn btn-lg btn-link btn-file">
-                                        <label for="fileupload"><i icon f-50>&#xf100;</i></label>
-                                        <input type="file" id="fileupload" (change)="flist=$event.target.files">
+                                    <span class="img-preview" id="image-1">
+                                        <img [src]="CurProduct.AvatarUrl" *ngIf="CurProduct.AvatarUrl">
+                                    </span>
+                                    <button type="button" class="btn btn-lg btn-link btn-file" *ngIf="!CurProduct.AvatarUrl">
+                                        <label for="fileupload-1"><i icon f-50>&#xf100;</i></label>
+                                        <input type="file" id="fileupload-1" (change)="UpdateImageDisplay($event.target.files[0],1)">
                                     </button>
                                 </div>
                             </div>
-                            <div class="row justify-content-md-center" align-items-center>
+                            <div class="row justify-content-md-center" align-items-center m-t-5>
                                 <label text-gray-light text-nowrap text-right class="col-md-2" for="member-name">其它：</label>
                                 <div class="col-md-8">
-                                    <button type="button" class="btn btn-lg btn-link btn-file">
-                                        <label for="fileupload"><i icon f-50>&#xf100;</i></label>
-                                        <input type="file" id="fileupload" (change)="flist=$event.target.files">
+                                    <span class="img-preview" id="image-2">
+                                        <ng-container *ngFor="let img of CurProduct.Pictures">
+                                            <img [src]="img">
+                                        </ng-container>
+                                    </span>
+                                    <button type="button" class="btn btn-lg btn-link btn-file" >
+                                        <label for="fileupload-2"><i icon f-50>&#xf100;</i></label>
+                                        <input type="file" id="fileupload-2" (change)="UpdateImageDisplay($event.target.files[0],2)">
                                     </button>
                                 </div>
                             </div>
