@@ -9,6 +9,7 @@ import {NavbarComponent} from 'share/navbar';
 import {SidebarComponent} from 'share/sidebar';
 import {SwiperComp} from 'UltraCreation/ng-ion/swiper';
 import {ScrollToModule} from '@nicky-lenaers/ngx-scroll-to';
+import {NgZorroAntdModule} from 'ng-zorro-antd';
 import {ReceivingComponent} from './component/receiving';
 
 @NgModule({
@@ -18,6 +19,7 @@ import {ReceivingComponent} from './component/receiving';
         RouterModule,
         TranslateModule,
         NgbModule,
+        NgZorroAntdModule,
         ScrollToModule.forRoot()
     ],
     declarations: [

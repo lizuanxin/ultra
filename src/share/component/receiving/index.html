@@ -81,27 +81,27 @@
             <i icon pull-right f-24 text-gray-light cursor-pointer (click)="Remove(addr)">&#xf2c1;</i>
         </h6>
         <div class="card-block">
-            <div class="form-group row" no-margin>
+            <div class="form-group row align-items-center" no-margin>
                 <label class="col-4 col-md-2 col-form-label" text-right text-nowrap text-gray-light>{{'account.delivery.recipient'|translate}}：</label>
                 <div class="col-8 col-md-4">
-                    <p class="form-control-static">{{addr.Recipient}}</p>
+                    {{addr.Recipient}}
                 </div>
                 <label class="col-4 col-md-2 col-form-label" text-right text-nowrap text-gray-light>{{'account.delivery.tel'|translate}}：</label>
                 <div class="col-8 col-md-4">
-                    <p class="form-control-static">{{addr.Tel}}</p>
+                    {{addr.Tel}}
                 </div>
             </div>
 
-            <div class="form-group row" no-margin>
+            <div class="form-group row row align-items-center" no-margin>
                 <label class="col-4 col-md-2 col-form-label" text-right text-nowrap text-gray-light>{{'account.delivery.location'|translate}}：</label>
                 <div class="col-8 col-md-10">
-                    <p class="form-control-static">{{addr.Country}}{{addr.City}}{{addr.Street}}</p>
+                    {{addr.Country}}{{addr.City}}{{addr.Street}}
                 </div>
             </div>
-            <div class="form-group row" no-margin>
+            <div class="form-group row row align-items-center" no-margin>
                 <label class="col-4 col-md-2 col-form-label" text-right text-nowrap text-gray-light>{{'account.delivery.zip'|translate}}：</label>
                 <div class="col-8 col-md-10">
-                    <p class="form-control-static">{{addr.Zip}}</p>
+                    {{addr.Zip}}
                 </div>
             </div>
         </div>
