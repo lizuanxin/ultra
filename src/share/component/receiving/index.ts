@@ -1,7 +1,6 @@
 import {Component, OnInit, Input, ViewChild} from '@angular/core';
 import {TypeInfo, THttpClient} from 'UltraCreation/Core';
 import {Types, TAuthService} from 'services';
-import {Config} from 'services/cloud/config';
 import {Observable} from 'rxjs/Observable';
 import 'rxjs/add/operator/map';
 import 'rxjs/add/operator/debounceTime';
@@ -156,7 +155,7 @@ export class ReceivingComponent implements OnInit
         Street: FormControl,
         Zip: FormControl
     };
-    private Http: THttpClient = new THttpClient('json', Config.API_ENDPOINT);
+    private Http: THttpClient = new THttpClient('json', '/api');
 
     SearchCity: (input: Observable<string>) => Observable<string[]>;
     SearchCountry: (input: Observable<string>) => Observable<string[]>;

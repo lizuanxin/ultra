@@ -2,7 +2,6 @@ import {Injectable} from '@angular/core';
 import {TypeInfo} from 'UltraCreation/Core/TypeInfo';
 import {TRestClient} from 'UltraCreation/Core/Http';
 
-import {Config} from './cloud/config';
 import * as Types from './cloud/types';
 import {TAuthService} from './auth';
 
@@ -93,6 +92,6 @@ export class TItemService
         this.Snap.delete(item.Id);
     }
 
-    private Http = new TRestClient(Config.API_ENDPOINT + '/item');
+    private Http = new TRestClient('/api/item');
     private Snap: Map<string, Types.IItem>;
 }

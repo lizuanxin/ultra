@@ -2,7 +2,6 @@ import {Injectable} from '@angular/core';
 import {TypeInfo} from 'UltraCreation/Core/TypeInfo';
 import {THttpClient} from 'UltraCreation/Core/Http';
 
-import {Config} from './cloud/config';
 import * as Types from './cloud/types';
 import {TAuthService} from './auth';
 
@@ -80,6 +79,6 @@ export class TFileService
         });
     }
 
-    private Http = new THttpClient('json', Config.API_ENDPOINT + '/file');
+    private Http = new THttpClient('json', '/api/file');
     private FilesCache: Map<string, Types.IFile>;
 }
