@@ -23,6 +23,8 @@ export class ListComponent implements OnInit
         {
             return null;
         });
+        console.log(this.List);
+
     }
 
 
@@ -78,40 +80,37 @@ export class ListComponent implements OnInit
         App.Modal.open(template, {size: 'lg'}).result
         .then(ok =>
         {
-            console.log(this.ImgFile, this.ArrayImgFile);
+            this.CurProduct.Pictures = [];
+            if (this.ArrayImgFile_fir.length > 0) this.UploadImage(this.ArrayImgFile_fir, 1);
+            if (this.ArrayImgFile_sec.length > 0) this.UploadImage(this.ArrayImgFile_sec, 2);
 
-                // console.log(this.flist);
-                // if (TypeInfo.Assigned(this.flist))
-                // {
-                //     const form = new FormData();
-                //     form.append('file', this.flist[0]);
-                //     this.CurProduct.Pictures.push(this.flist[0].name);
-                // }
-            this.UploadImage(this.ImgFile);
+            console.log(this.CurProduct);
 
-                // if (!TypeInfo.Assigned(data))
-                // {
-                //     this.Items.AppendProduct(this.CurProduct)
-                //     .catch(err => console.log(err));
-                // }
-                // else
-                // {
-                //     this.Items.Update(this.CurProduct)
-                //     .catch(err => console.log(err));
-                // }
+            if (!TypeInfo.Assigned(data))
+            {
+                this.Items.AppendProduct(this.CurProduct)
+                .catch(err => console.log(err));
+            }
+            else
+            {
+                this.Items.Update(this.CurProduct)
+                .catch(err => console.log(err));
+            }
 
 
         })
         .catch(err => {});
     }
 
-    UploadImage(file)
+    UploadImage(file, type: number)
     {
         this.FileSvc.Upload(file)
-        .then((v) =>
+        .then(v =>
         {
-            console.log(v);
-
+            if (type === 1) this.CurProduct.AvatarUrl = v[0].Path;
+            if (type === 2) {
+                v.forEach(item => this.CurProduct.Pictures.push(item.Path));
+            }
         })
         .catch(err => console.log(err));
     }
@@ -132,22 +131,19 @@ export class ListComponent implements OnInit
     }
 
 
-    UpdateImageDisplay(file: any, type: number)
+    UpdateImageDisplay(file: FileList, type: number)
     {
-
         let imgView = document.querySelector('#image-' + type + '') as HTMLElement;
-        let image = document.createElement('img');
-        image.src = window.URL.createObjectURL(file);
-        imgView.appendChild(image);
-
-        if (type === 1)
+        if (TypeInfo.Assigned(file.length))
         {
-            this.ImgFile = file;
+            for (let i = 0; i < file.length; i++)
+            {
+                let image = document.createElement('img');
+                image.src = window.URL.createObjectURL(file[i]);
+                imgView.appendChild(image);
+            }
+            type === 1 ? Object.assign(this.ArrayImgFile_fir, file) : Object.assign(this.ArrayImgFile_sec, file);
         }
-        else {
-            this.ArrayImgFile.push(file);
-        }
-
     }
 
 
@@ -165,6 +161,7 @@ export class ListComponent implements OnInit
 
     List: Array<Types.IItem>;
     UploadedFiles: Array<Types.IFile>;
-    ImgFile: any;
-    ArrayImgFile = new Array<any>();
+
+    ArrayImgFile_fir = new Array<any>();
+    ArrayImgFile_sec = new Array<any>();
 }

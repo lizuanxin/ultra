@@ -114,11 +114,11 @@
                                 <label text-gray-light text-nowrap text-right class="col-md-2" for="member-name">{{'produce.public.pro_img'|translate}}：</label>
                                 <div class="col-md-8">
                                     <span class="img-preview" id="image-1">
-                                        <img [src]="CurProduct.AvatarUrl" *ngIf="CurProduct.AvatarUrl">
+                                        <img [src]="CurProduct.AvatarUrl" *ngIf="CurProduct.AvatarUrl != null">
                                     </span>
-                                    <button type="button" class="btn btn-lg btn-link btn-file" *ngIf="!CurProduct.AvatarUrl">
+                                    <button type="button" class="btn btn-lg btn-link btn-file" *ngIf="CurProduct.AvatarUrl == null">
                                         <label for="fileupload-1"><i icon f-50>&#xf100;</i></label>
-                                        <input type="file" id="fileupload-1" (change)="UpdateImageDisplay($event.target.files[0],1)">
+                                        <input type="file" id="fileupload-1" (change)="UpdateImageDisplay($event.target.files,1)">
                                     </button>
                                 </div>
                             </div>
@@ -132,7 +132,7 @@
                                     </span>
                                     <button type="button" class="btn btn-lg btn-link btn-file" >
                                         <label for="fileupload-2"><i icon f-50>&#xf100;</i></label>
-                                        <input type="file" id="fileupload-2" (change)="UpdateImageDisplay($event.target.files[0],2)" multiple="multiple">
+                                        <input type="file" id="fileupload-2" (change)="UpdateImageDisplay($event.target.files,2)" multiple>
                                     </button>
                                 </div>
                             </div>

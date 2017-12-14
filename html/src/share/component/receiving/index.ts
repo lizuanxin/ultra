@@ -92,9 +92,12 @@ export class ReceivingComponent implements OnInit
 
     Remove(item): void
     {
-        this.Auth.RemoveAddress(item)
-            .then(() => this.AddressList.splice(this.AddressList.indexOf(item), 1))
-            .catch(err => console.log(err));
+        if (confirm('Are you sure to delete')) {
+            console.log('Implement delete functionality here');
+          }
+        // this.Auth.RemoveAddress(item)
+        //     .then(() => this.AddressList.splice(this.AddressList.indexOf(item), 1))
+        //     .catch(err => console.log(err));
     }
 
     DeliveryForm()
