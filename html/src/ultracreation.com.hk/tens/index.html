@@ -4,7 +4,7 @@
     <title>Simple Upload Example</title>
 </head>
 <body>
-    <input type="file" (change)="flist=$event.target.files" multiple>
+    <input type="file" (change)="OnInputFileChanged($event.target.files)" multiple="multiple">
     <button (click)="foobar()">foobar</button>
 
     <h4>Uploaded Files</h4>
