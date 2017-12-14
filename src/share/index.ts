@@ -9,6 +9,7 @@ import {NavbarComponent} from 'share/navbar';
 import {SidebarComponent} from 'share/sidebar';
 import {SwiperComp} from 'UltraCreation/ng-ion/swiper';
 import {ScrollToModule} from '@nicky-lenaers/ngx-scroll-to';
+import {ReceivingComponent} from './component/receiving';
 
 @NgModule({
     imports: [
@@ -23,6 +24,7 @@ import {ScrollToModule} from '@nicky-lenaers/ngx-scroll-to';
         NavbarComponent,
         SidebarComponent,
         SwiperComp,
+        ReceivingComponent
     ],
     exports: [
         CommonModule,
@@ -32,10 +34,9 @@ import {ScrollToModule} from '@nicky-lenaers/ngx-scroll-to';
         NgbModule,
         SwiperComp,
         ScrollToModule,
-        // ImageUploadModule,
         NavbarComponent,
         SidebarComponent,
-        // ReceivingComponent
+        ReceivingComponent
     ]
 })
 export class SharedModule
