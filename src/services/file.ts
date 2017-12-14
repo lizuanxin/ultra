@@ -43,10 +43,14 @@ export class TFileService
         }
     }
 
-    async Upload(UploadFile: any)
+    async Upload(UploadFiles: FileList | Array<File>): Promise<Array<Types.IFile>>
     {
+        if (UploadFiles.length === 0)
+            return Promise.reject(new Error('file is null'));
+
         const form = new FormData();
-        form.append('file', UploadFile);
+        for (let i = 0; i < UploadFiles.length; i++)
+            form.append('file' + i, UploadFiles[i]);
 
         let UploadHttp = new THttpClient('json', Config.API_ENDPOINT + '/file');
         this.AuthSvc.Grant(UploadHttp);
@@ -56,9 +60,13 @@ export class TFileService
             let Files = res.Content;
             if (TypeInfo.Assigned(Files))
             {
-                this.FilesCache.set(Files[0].Id, Files[0]);
-                return Files[0];
+                for (let DownloadFile of Files)
+                {
+                    this.FilesCache.set(DownloadFile.Id, DownloadFile);
+                }
+                return Files;
             }
+            return [];
         });
     }
 
