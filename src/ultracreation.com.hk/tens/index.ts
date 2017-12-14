@@ -19,7 +19,7 @@ export class TensPage implements OnInit
 
     foobar()
     {
-        this.FileSvc.Upload(this.flist[0])
+        this.FileSvc.Upload(this.flist)
             .then(() => this.UpdateFileList())
             .catch(err => console.log(err));
     }
@@ -29,6 +29,12 @@ export class TensPage implements OnInit
         this.FileSvc.Remove(File)
             .then(() => this.UpdateFileList())
             .catch((err) => console.log(err));
+    }
+
+    OnInputFileChanged(files: any)
+    {
+        console.log(files);
+        this.flist = files;
     }
 
     private UpdateFileList()
