@@ -51,7 +51,7 @@ export class TFileService
         for (let i = 0; i < UploadFiles.length; i++)
             form.append('file' + i, UploadFiles[i]);
 
-        let UploadHttp = new THttpClient('json', Config.API_ENDPOINT + '/file');
+        let UploadHttp = new THttpClient('json', '/api/file');
         this.AuthSvc.Grant(UploadHttp);
         return UploadHttp.Post('/upload', form).toPromise().then((res) =>
         {
