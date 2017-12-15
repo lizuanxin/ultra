@@ -138,12 +138,24 @@ export class ListComponent implements OnInit
         {
             for (let i = 0; i < file.length; i++)
             {
-                let image = document.createElement('img');
-                image.src = window.URL.createObjectURL(file[i]);
-                imgView.appendChild(image);
+                if (file[i].size > this.fileMax)
+                {
+                    return this.fileMaxWarning = true;
+                }
+                else
+                {
+                    let image = document.createElement('img');
+                    image.src = window.URL.createObjectURL(file[i]);
+                    imgView.appendChild(image);
+                }
             }
             type === 1 ? Object.assign(this.ArrayImgFile_fir, file) : Object.assign(this.ArrayImgFile_sec, file);
         }
+    }
+
+    getFileData(file: any)
+    {
+        console.log('knnk');
     }
 
 
@@ -161,7 +173,8 @@ export class ListComponent implements OnInit
 
     List: Array<Types.IItem>;
     UploadedFiles: Array<Types.IFile>;
-
+    fileMax: number = 1048576 / 2;
+    fileMaxWarning: boolean;
     ArrayImgFile_fir = new Array<any>();
     ArrayImgFile_sec = new Array<any>();
 }

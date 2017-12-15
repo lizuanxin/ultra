@@ -106,34 +106,32 @@
                                 <label text-gray-light text-nowrap text-right class="col-md-2">{{'items.commodity.field.snap'|translate}}：</label>
                                 <div class="col-md-3"><input type="text" class="form-control"></div>
                             </div>
-                            <!-- <div class="row" align-items-center m-t-15>
-                                <label text-gray-light text-nowrap text-right class="col-md-2">{{'items.commodity.field.number'|translate}}：</label>
-                                <div class="col-md-3"><input type="text" class="form-control" [(ngModel)]="CurProduct.RefCode" placeholder=""></div>
-                            </div> -->
                             <div class="row justify-content-md-center" align-items-center m-t-15>
                                 <label text-gray-light text-nowrap text-right class="col-md-2" for="member-name">{{'produce.public.pro_img'|translate}}：</label>
                                 <div class="col-md-8">
-                                    <span class="img-preview" id="image-1">
+                                    <file-upload ViewId="image_1" Num="1" (ArrayImage)="getFileData($event)"></file-upload>
+                                    <!-- <span class="img-preview" id="image-1">
                                         <img [src]="CurProduct.AvatarUrl" *ngIf="CurProduct.AvatarUrl != null">
                                     </span>
                                     <button type="button" class="btn btn-lg btn-link btn-file" *ngIf="CurProduct.AvatarUrl == null">
                                         <label for="fileupload-1"><i icon f-50>&#xf100;</i></label>
-                                        <input type="file" id="fileupload-1" (change)="UpdateImageDisplay($event.target.files,1)">
-                                    </button>
+                                        <input type="file" id="fileupload-1" (change)="UpdateImageDisplay($event.target.files,1)" accept=".jpg, .jpeg, .png">
+                                    </button> -->
                                 </div>
                             </div>
                             <div class="row justify-content-md-center" align-items-center m-t-5>
                                 <label text-gray-light text-nowrap text-right class="col-md-2" for="member-name">其它：</label>
                                 <div class="col-md-8">
-                                    <span class="img-preview" id="image-2">
+                                    <file-upload ViewId="image_2" Num = 5></file-upload>
+                                    <!-- <span class="img-preview" id="image-2">
                                         <ng-container *ngFor="let img of CurProduct.Pictures">
                                             <img [src]="img">
                                         </ng-container>
                                     </span>
                                     <button type="button" class="btn btn-lg btn-link btn-file" >
                                         <label for="fileupload-2"><i icon f-50>&#xf100;</i></label>
-                                        <input type="file" id="fileupload-2" (change)="UpdateImageDisplay($event.target.files,2)" multiple>
-                                    </button>
+                                        <input type="file" id="fileupload-2" (change)="UpdateImageDisplay($event.target.files,2)" accept=".jpg, .jpeg, .png" multiple>
+                                    </button> -->
                                 </div>
                             </div>
                     </ng-template>

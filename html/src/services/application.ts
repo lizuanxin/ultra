@@ -5,6 +5,8 @@ import {TranslateService} from '@ngx-translate/core';
 import {TypeInfo} from 'UltraCreation/Core';
 import {Platform} from 'UltraCreation/Core/Platform';
 import {NgbModal, NgbTooltipConfig} from '@ng-bootstrap/ng-bootstrap';
+
+
 import {TShoppingCart} from './shopping_cart';
 
 declare global
@@ -97,6 +99,7 @@ export class TApplication
 
     ShowAlert(Message: string)
     {
+
     }
 
     ShowError(err: any)
