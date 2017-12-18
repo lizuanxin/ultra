@@ -5,3 +5,67 @@
     background-image: url(/assets/images/overlay.png), -ms-linear-gradient(45deg, #8f96d2 15%, #97b9e6 85%);
     background-image: url(/assets/images/overlay.png), linear-gradient(45deg, #8f96d2 15%, #97b9e6 85%);
 }
+
+.container-block-home{
+    h2{
+
+    }
+
+    p{
+
+    }
+
+    img{
+
+    }
+
+    .score-img{
+        position:relative;
+        &:hover{
+            ul.rover-show{
+                display: flex;
+                transform: rotate(0);
+            }
+        }
+    }
+
+    ul.rover-show{
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        transform-style: preserve-3d;
+        transform-origin: center;
+        -webkit-transition: .5s ease-in-out;
+        -moz-transition: .5s ease-in-out;
+        backface-visibility:hidden;
+        position:absolute;
+        left: 0;
+        right: 0;
+        top: 0;
+        bottom: 0;
+        background-color: rgba(39, 39, 39, 0.7);
+        transform: rotateY(90deg);
+        li{
+            text-align: center
+        }
+
+        h5{
+            color: $white;
+        }
+
+        button{
+            margin-top: 10px;
+            appearance: none;
+            -moz-appearance: none;
+            -webkit-appearance: none;
+            border: none;
+            color: $white;
+            background-color: $gray-light;
+            padding: 3px 20px;
+            border-radius: 12px;
+            font-size: .8rem;
+
+        }
+    }
+
+}

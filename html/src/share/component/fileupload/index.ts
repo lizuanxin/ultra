@@ -1,22 +1,22 @@
-import {Component, EventEmitter, Input, Output, OnInit } from '@angular/core';
+import {Component, EventEmitter, Input, Output} from '@angular/core';
 import {TypeInfo, THttpClient} from 'UltraCreation/Core';
 import {TFileService} from 'services/file';
 import {Types} from 'services';
 
 @Component({selector: 'file-upload', templateUrl: './index.html'})
 
-export class FileUploadComponent implements OnInit
+export class FileUploadComponent
 {
 
     UpdateImageDisplay(file: FileList)
     {
-        let imgView = document.querySelector('.' + this.ViewId) as HTMLElement;
+        let imgView = document.querySelector('.' + this.viewId) as HTMLElement;
 
         if (TypeInfo.Assigned(file.length))
         {
             this.MaxNum = false;
 
-            if (TypeInfo.Assigned(this.Num) &&  (imgView.children.length + 1 > this.Num || file.length > this.Num))
+            if (TypeInfo.Assigned(this.num) &&  (imgView.children.length + 1 > this.num || file.length > this.num))
             {
                 return this.MaxNum = true;
             }
@@ -35,27 +35,16 @@ export class FileUploadComponent implements OnInit
                     imgView.appendChild(image);
                 }
             }
-            // Object.assign(this.ArrayImg, file);
-            // console.log(this.ArrayImg);
-            console.log('fuck');
-
-            this.ArrayImg.emit(file);
-
+            let _obj = {id: this.viewId, filed: file};
+            this.ArrayImage.emit(_obj);
         }
     }
 
-    ngOnInit()
-    {
-        // this.ArrayImg.subscribe((file) =>
-        // {
-        //     console.log('serwer');
-        // });
-    }
 
-    @Input() ViewId: string;
-    @Input() Num: number;
+    @Input() viewId: string;
+    @Input() num: number;
     @Input() DataList: Array<string>;
-    @Output() ArrayImg = new EventEmitter<any>();
+    @Output() ArrayImage = new EventEmitter<any>();
 
     private FileSvc: TFileService;
     UploadedFiles: Array<Types.IFile>;
