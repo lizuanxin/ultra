@@ -7,17 +7,7 @@
 }
 
 .container-block-home{
-    h2{
-
-    }
-
-    p{
-
-    }
-
-    img{
-
-    }
+    padding: 30px 0;
 
     .score-img{
         position:relative;
@@ -31,6 +21,7 @@
 
     ul.rover-show{
         display: flex;
+        cursor: pointer;
         flex-direction: column;
         justify-content: center;
         transform-style: preserve-3d;
@@ -43,8 +34,8 @@
         right: 0;
         top: 0;
         bottom: 0;
-        background-color: rgba(39, 39, 39, 0.7);
-        transform: rotateY(90deg);
+        background-color: rgba(39, 39, 39, 0.8);
+        transform: rotateX(180deg);
         li{
             text-align: center
         }
@@ -68,4 +59,33 @@
         }
     }
 
+}
+
+.container-block-header{
+
+    h2,.block-header-detail,.block-header-items
+    {
+        text-align: center;
+    }
+
+    h2
+    {
+        text-transform: uppercase;
+        font-size: 2rem;
+        color: $gray-dark;
+    }
+
+    .block-header-detail
+    {
+        font-size: 1rem;
+        color: $gray-light;
+        margin: 30px 0;
+    }
+
+    .block-header-items
+    {
+        font-size: 1.1rem;
+        color: $gray-light;
+        margin: 30px 0;
+    }
 }
