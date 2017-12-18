@@ -1,12 +1,12 @@
 <div class="file-upload">
-    <span class="img-preview" [ngClass]="ViewId">
+    <span class="img-preview" [ngClass]="viewId">
         <!-- <ng-container *ngFor="let img of CurProduct.Pictures">
             <img [src]="img">
         </ng-container> -->
     </span>
     <button type="button">
-        <label for="{{ViewId}}"><i icon f-50>&#xf100;</i></label>
-        <input type="file" [id]="ViewId" (change)="UpdateImageDisplay($event.target.files)" accept=".jpg, .jpeg, .png" multiple>
+        <label for="{{viewId}}"><i icon f-50>&#xf100;</i></label>
+        <input type="file" [id]="viewId" (change)="UpdateImageDisplay($event.target.files)" accept=".jpg, .jpeg, .png" multiple>
     </button>
     <ng-template [ngIf]="MaxNum">
         <span>Maximum {{Num}}</span>

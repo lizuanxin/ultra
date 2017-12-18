@@ -102,14 +102,14 @@
                     <ng-template ngbTabContent>
                             <div class="row justify-content-md-center" align-items-center  m-t-30>
                                 <label text-gray-light text-nowrap text-right class="col-md-2">{{'items.commodity.field.name'|translate}}：</label>
-                                <div class="col-md-3"><input type="text" class="form-control" [(ngModel)]="CurProduct.Name"></div>
+                                <div class="col-md-3"><input type="text" class="form-control" [(ngModel)]="CurrentIProduct.Name"></div>
                                 <label text-gray-light text-nowrap text-right class="col-md-2">{{'items.commodity.field.snap'|translate}}：</label>
                                 <div class="col-md-3"><input type="text" class="form-control"></div>
                             </div>
                             <div class="row justify-content-md-center" align-items-center m-t-15>
                                 <label text-gray-light text-nowrap text-right class="col-md-2" for="member-name">{{'produce.public.pro_img'|translate}}：</label>
                                 <div class="col-md-8">
-                                    <file-upload ViewId="image_1" Num="1" (ArrayImage)="getFileData($event)"></file-upload>
+                                    <file-upload viewId="image_1" *ngIf="!CurrentIProduct.AvatarUrl" [num]="MaxAvatar" (ArrayImage)="getFileData($event)"></file-upload>
                                     <!-- <span class="img-preview" id="image-1">
                                         <img [src]="CurProduct.AvatarUrl" *ngIf="CurProduct.AvatarUrl != null">
                                     </span>
@@ -122,7 +122,7 @@
                             <div class="row justify-content-md-center" align-items-center m-t-5>
                                 <label text-gray-light text-nowrap text-right class="col-md-2" for="member-name">其它：</label>
                                 <div class="col-md-8">
-                                    <file-upload ViewId="image_2" Num = 5></file-upload>
+                                    <file-upload viewId="image_2" [num]="MaxPicture" (ArrayImage)="getFileData($event)"></file-upload>
                                     <!-- <span class="img-preview" id="image-2">
                                         <ng-container *ngFor="let img of CurProduct.Pictures">
                                             <img [src]="img">
