@@ -1,0 +1,33 @@
+.list-horital{
+    h2{
+        margin: 60px auto 30px auto;
+        text-transform: capitalize;
+        text-align: center;
+        font-size: 1.6rem;
+        text-transform: uppercase;
+    }
+
+    .inner-item{
+        @extend .animate;
+        overflow:hidden;
+        border: solid 1px $gray-lighter;
+        border-radius: 8px;
+        background-color: $white;
+        &:hover{
+            transform: scale(1.05);
+            box-shadow: 0 0 5px rgba(0,0,0,.1);
+        }
+
+        h3,p{
+            padding: 10px;
+        }
+
+        h3 {
+            text-transform: capitalize;
+            text-align: center;
+            font-size: 1.4rem;
+        }
+    }
+
+
+}

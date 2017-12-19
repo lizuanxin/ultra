@@ -30,7 +30,7 @@
 swiper {
     &[BannerSwiper] {
         .swiper-slide {
-            background-size: cover;
+            background-size: contain;
             background-repeat: no-repeat;
             .content {
                 margin-top: 50px;

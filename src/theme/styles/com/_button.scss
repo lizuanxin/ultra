@@ -21,8 +21,28 @@ button.btn
 }
 
 button{
+    border: none;
     &:focus{
         outline: none
+    }
+
+    &.primary{
+        color: $white;
+        background-color: #009cdb;
+    }
+
+    &.round{
+        width:56px;
+        height:56px;
+        border-radius: 50%;
+        font-size: 2rem;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+
+    &.rotate{
+        transform: rotate(180deg)
     }
 }
 
