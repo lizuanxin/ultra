@@ -1,4 +1,4 @@
-import {Component, OnInit, TemplateRef, Input, Output } from '@angular/core';
+import {Component, OnInit, TemplateRef, Input, Output, EventEmitter} from '@angular/core';
 import {TypeInfo, THttpClient} from 'UltraCreation/Core';
 
 import {Types} from 'services';
@@ -14,18 +14,25 @@ export class PicturesComponent implements OnInit
 
     ngOnInit()
     {
-
-
+        this.UpdateFileList();
+        this.SelectedFiles = [];
     }
 
-    UploadImage(file, type: number)
+    UploadImage(file: any)
     {
         this.FileSvc.Upload(file)
-        .then(v =>
-        {
+            .then(() => this.UpdateFileList())
+            .catch(err => console.log(err));
+    }
 
-        })
-        .catch(err => console.log(err));
+    SelectedPicture(Picture: Types.IFile)
+    {
+        this.SelectedFiles.push(Picture);
+    }
+
+    OnSelectedEnd()
+    {
+        this.OnPictureSelected.emit(this.SelectedFiles);
     }
 
     private UpdateFileList()
@@ -36,7 +43,8 @@ export class PicturesComponent implements OnInit
     }
 
     UploadedFiles: Array<Types.IFile>;
+    SelectedFiles: Array<Types.IFile>;
 
     @Input() IsTitle: boolean = true;
-
+    @Output() OnPictureSelected = new EventEmitter<Array<Types.IFile>>();
 }
