@@ -40,7 +40,7 @@ export class FileUploadComponent
 
     OpenSelected(template: TemplateRef<any>)
     {
-        App.Modal.open(template);
+        App.Modal.open(template, {size: 'lg'});
     }
 
     @Input() viewId: string;

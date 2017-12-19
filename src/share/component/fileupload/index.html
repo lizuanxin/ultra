@@ -4,7 +4,7 @@
             <img [src]="img">
         </ng-container> -->
     </span>
-    <button type="button" placement="right" [ngbPopover]="SelectDialog" >
+    <button type="button" (click)="OpenSelected(SelectDialog)">
         <label><i icon f-50>&#xf100;</i></label>
         <!-- <input type="file" [id]="viewId" (change)="UpdateImageDisplay($event.target.files)" accept=".jpg, .jpeg, .png" multiple> -->
     </button>
@@ -18,10 +18,7 @@
 
 <ng-template #SelectDialog>
 
-        <ul>
-            <li><label for="{{viewId}}">添加</label> <input type="file" [id]="viewId" (change)="UpdateImageDisplay($event.target.files)" accept=".jpg, .jpeg, .png" multiple></li>
-            <li>从图片库中选择</li>
-        </ul>
+        <pic-list [IsTitle]="false"></pic-list>
 
 </ng-template>
 

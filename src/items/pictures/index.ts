@@ -1,4 +1,4 @@
-import {Component, OnInit, TemplateRef } from '@angular/core';
+import {Component, OnInit, TemplateRef, Input, Output } from '@angular/core';
 import {TypeInfo, THttpClient} from 'UltraCreation/Core';
 
 import {Types} from 'services';
@@ -36,5 +36,7 @@ export class PicturesComponent implements OnInit
     }
 
     UploadedFiles: Array<Types.IFile>;
+
+    @Input() IsTitle: boolean = true;
 
 }
