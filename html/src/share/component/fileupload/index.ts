@@ -1,4 +1,4 @@
-import {Component, EventEmitter, Input, Output} from '@angular/core';
+import {Component, EventEmitter, TemplateRef, Input, Output} from '@angular/core';
 import {TypeInfo, THttpClient} from 'UltraCreation/Core';
 import {TFileService} from 'services/file';
 import {Types} from 'services';
@@ -36,6 +36,11 @@ export class FileUploadComponent
             let _obj = {id: this.viewId, filed: file};
             this.ArrayImage.emit(_obj);
         }
+    }
+
+    OpenSelected(template: TemplateRef<any>)
+    {
+        App.Modal.open(template);
     }
 
     @Input() viewId: string;
