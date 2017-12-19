@@ -5,10 +5,10 @@
 <div class="container-layer">
     <div class="row">
         <div class="col-md-6">
-                <div class="d-inline-block">
-                    <input type="file" (change)="UploadImage($event.target.files)" multiple="multiple">
-                    <button class="btn btn-sm btn-outline-primary" type="button" (click)="OnSelectedEnd()">{{'button.add'|translate}}</button>
-                </div>
+            <button type="button" class="btn-file-upload" (click)="OnSelectedEnd()">
+                <label for="upload_file"><i icon f-50>&#xf100;</i></label>
+                <input type="file" id="upload_file" (change)="UploadImage($event.target.files)" accept=".jpg, .jpeg, .png" multiple>
+            </button>
         </div>
     </div>
     <ul class="row row-thumbnail" margin-top>
