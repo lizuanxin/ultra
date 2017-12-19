@@ -88,65 +88,64 @@ export class TItemService
     private Snap: Map<string, TItem>;
 }
 
-export class TPictureList
+export class TFileList
 {
-    constructor(protected Pictures: Array<Types.IPicture> = [])
+    constructor(protected Files: Array<Types.IFile> = [])
     {
-        Pictures.sort((A: Types.IPicture, B: Types.IPicture) => A.Idx - B.Idx);
     }
 
-    get Urls(): Array<string>
+    get Paths()
     {
-        return this.Pictures.map((Picture) => Picture.Url);
+        return this.Files.map((UserFile) => UserFile.Path);
     }
 
     get Size(): number
     {
-        return this.Pictures.length;
+        return this.Files.length;
     }
 
-    Remove(Idx: number)
+    Clear()
     {
-        let Picture = this.Picture(Idx);
-        if (TypeInfo.Assigned(Picture))
-            this.Pictures.splice(Idx);
+        this.Files = [];
     }
 
-    Add(Url: string)
+    Remove(UserFile: Types.IFile)
     {
-        let Idx: number = 0;
-        if (this.Size > 0)
-            Idx = this.Picture(this.Size - 1).Idx + 1;
+        let index = this.Files.indexOf(UserFile);
+        if (index !== -1)
+            this.Files.splice(index);
     }
 
-    Update(Idx: number, Url: string)
+    Add(UserFile: Types.IFile)
     {
-        let Picture = this.Picture(Idx);
-        if (TypeInfo.Assigned(Picture) && TypeInfo.Assigned(Url))
-            Picture.Url = Url;
+        if (TypeInfo.Assigned(UserFile.Id)
+            && UserFile.Id.length > 0
+            && this.Files.indexOf(UserFile) === -1)
+            this.Files.push(UserFile);
     }
 
-    Picture(Idx: number): Types.IPicture
+    Update(Index: number, UserFile: Types.IFile)
     {
-        if (Idx >= this.Size || Idx < 0)
-            return null;
-        return this.Pictures[Idx];
+        if (Index > this.Size || Index < 0)
+            return;
+
+        this.Files[Index] = UserFile;
     }
 }
 
 export class TItem extends TAssignable implements Types.IItem
 {
-    get PictureList(): TPictureList
+    get PictureList(): TFileList
     {
         if (! TypeInfo.Assigned(this._PictureList))
-            this._PictureList = new TPictureList(this.Pictures);
+            this._PictureList = new TFileList(this.Pictures);
 
         return this._PictureList;
     }
 
-    get Timestamp()
+    get PictureUrls()
     {
-        return null;
+        return this.PictureList.Paths;
     }
 
     Id: string;
@@ -154,8 +153,9 @@ export class TItem extends TAssignable implements Types.IItem
     Name: string;
     Pictures: Array<Types.IPicture>;
     AvatarUrl: string;
+    Timestamp: any;
 
-    protected _PictureList: TPictureList;
+    protected _PictureList: TFileList;
 }
 
 export class TProduct extends TItem implements Types.IProduct
