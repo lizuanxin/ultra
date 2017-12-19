@@ -105,7 +105,7 @@ export class ListComponent implements OnInit
         {
             if (type === 1) this.CurrentIProduct.AvatarUrl = v[0].Path;
             if (type === 2) {
-                v.forEach(item => this.CurrentIProduct.PictureList.Add(item.Path));
+                // v.forEach(item => this.CurrentIProduct.PictureList.Add(item.Path));
             }
         })
         .catch(err => console.log(err));
