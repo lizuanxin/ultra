@@ -15,7 +15,6 @@ export class PicturesComponent implements OnInit
     ngOnInit()
     {
         this.UpdateFileList();
-        this.SelectedFiles = [];
     }
 
     UploadImage(file: any)
@@ -27,12 +26,13 @@ export class PicturesComponent implements OnInit
 
     SelectedPicture(Picture: Types.IFile)
     {
-        this.SelectedFiles.push(Picture);
+        console.log('selected: ' + Picture.Id);
+        this.SelectedFiles.set(Picture.Id, Picture);
     }
 
     OnSelectedEnd()
     {
-        this.OnPictureSelected.emit(this.SelectedFiles);
+        this.OnPictureSelected.emit(Array.from(this.SelectedFiles.values()));
     }
 
     private UpdateFileList()
@@ -43,7 +43,7 @@ export class PicturesComponent implements OnInit
     }
 
     UploadedFiles: Array<Types.IFile>;
-    SelectedFiles: Array<Types.IFile>;
+    SelectedFiles: Map<string, Types.IFile> = new Map<string, Types.IFile>();
 
     @Input() IsTitle: boolean = true;
     @Output() OnPictureSelected = new EventEmitter<Array<Types.IFile>>();
