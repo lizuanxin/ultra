@@ -8,11 +8,23 @@
         "register": "Signup",
         "login": "Login",
         "logout": "Logout",
-        "modify": "Modify",
-        "save": "Save",
-        "edit": "Edit",
+
+        "ok": "Ok",
+        "cancel": "Cancel",
         "close": "Close",
-        "confirm": "Confirm"
+
+        "add": "Add",
+        "del": "Del",
+        "search": "Search",
+
+        "modify": "Modify",
+        "edit": "Edit",
+        "save": "Save",
+
+        "up": "Up",
+        "down": "Down",
+        "next": "Next",
+        "prior": "Piror"
     },
 
     "auth":
@@ -30,37 +42,16 @@
         "pass_renter_mismatch": "These passwords don't match."
     },
 
-    "account":
+    "profile":
     {
-        "title": "Account",
-        "expand": {
-            "member_manage": "Member manage",
-            "base_info": "Member info",
-            "consultation_evaluation": "consultation & evaluation"
-        },
+        "title": "Profile",
 
-        "member_manage": {
-            "title": "Member manage"
-        },
-
-        "member_level": {
-            "title": "Member level"
-        },
-
-        "consultation":{
-            "title": "Consultation"
-        },
-
-        "evaluation":{
-            "title": "Evaluation"
-        },
-
-        "profile":
+        "info":
         {
-            "title": "Profile",
+            "title": "Information",
             "email": "Email",
-            "firstname": "First Name",
-            "surname": "Sur Name"
+            "firstname": "Firstname",
+            "surname": "Surname"
         },
 
         "security":
@@ -71,17 +62,7 @@
 
         "delivery":
         {
-            "title": "Delivery",
-            "new": "New address",
-            "edit": "Edit address",
-            "default": "Default",
-            "recipient": "Recipient",
-            "tel": "Tel",
-            "location": "Location",
-            "street": "Street",
-            "zip": "Zip",
-            "city": "City",
-            "country": "Country"
+            "title": "Delivery"
         }
     },
 
@@ -89,57 +70,26 @@
     {
         "title": "Items",
 
-        "expand": {
-            "manage": "Manage",
-            "setting": "Setting"
+        "list":
+        {
+            "title": "List",
+
+            "categories": "Categories",
+            "pack": "Pack",
+
+            "field":
+            {
+                "id": "Id",
+                "name": "Name",
+                "timestamp": "Creation Time"
+            }
         },
 
-        "commodity":{
-            "title": "Commodity"
-        },
-        "drafts": {
-            "title": "Drafts"
-        },
-        "classified": {
-            "title": "Classified"
-        },
-        "type": {
-            "title": "Type"
-        },
-        "specification": {
-            "title": "Specification"
+        "editor":
+        {
+            "basic": "Basic",
+            "extra": "Extra Properties",
+            "related": "Related"
         }
-    },
-
-    "order":
-    {
-        "title": "Order"
-    },
-
-    "marketing":
-    {
-        "title": "Marketing"
-    },
-
-    "setting":
-    {
-        "title": "Setting"
-    },
-
-    "site":
-    {
-        "home": "home",
-        "about_us": "about us",
-        "product": "product",
-        "support": "support",
-        "world_wide": "world wide",
-        "navigation": "navigation",
-        "contact": "contact",
-        "login": "login",
-        "get_touch": "get in touch",
-        "privacy_policy": "privacy policy",
-        "teams_conditions": "teams & conditions",
-        "share_page": "share this page",
-        "follow": "follow us on twitter"
     }
 }

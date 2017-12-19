@@ -1,4 +1,4 @@
-<div class="bread-layer">{{'site.ucenter.account.profile.title'|translate}}
+<div class="bread-layer">{{'profile.info.title'|translate}}
     <button type="button" class="btn btn-link btn-sm no-focus" (click)="ToggleEdit()" pull-right>
         <ng-template [ngIf]="!Editing">{{'button.modify'|translate}}</ng-template>
         <ng-template [ngIf]="Editing">{{'button.save'|translate}}</ng-template>
@@ -6,13 +6,13 @@
 </div>
 <div>
     <div class="form-group row" align-items-center>
-        <label class="col-4 col-md-2 col-form-label" text-right text-nowrap text-gray-light>{{'account.profile.email'|translate}}:</label>
+        <label class="col-4 col-md-2 col-form-label" text-right text-nowrap text-gray-light>{{'profile.info.email'|translate}}:</label>
         <div class="col-8 col-md-10">
             <p class="form-control-static">{{Me.Email}}</p>
         </div>
     </div>
     <div class="form-group row" align-items-center>
-        <label class="col-4 col-md-2 col-form-label" text-right text-nowrap text-gray-light>{{'account.profile.firstname'|translate}}:</label>
+        <label class="col-4 col-md-2 col-form-label" text-right text-nowrap text-gray-light>{{'profile.info.firstname'|translate}}:</label>
         <div class="col-8 col-md-10 form-inline">
             <ng-template [ngIf]="!Editing">
                 <p class="form-control-static">{{Me.FirstName}}</p>
@@ -23,7 +23,7 @@
         </div>
     </div>
     <div class="form-group row" align-items-center>
-        <label class="col-4 col-md-2 col-form-label" text-right text-nowrap text-gray-light>{{'account.profile.surname'|translate}}:</label>
+        <label class="col-4 col-md-2 col-form-label" text-right text-nowrap text-gray-light>{{'profile.info.surname'|translate}}:</label>
         <div class="col-8 col-md-10 form-inline">
             <ng-template [ngIf]="!Editing">
                 <p class="form-control-static">{{Me.SurName}}</p>
@@ -34,5 +34,3 @@
         </div>
     </div>
 </div>
-
-

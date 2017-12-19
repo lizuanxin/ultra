@@ -4,10 +4,8 @@ import {TFileService} from 'services/file';
 import {Types} from 'services';
 
 @Component({selector: 'file-upload', templateUrl: './index.html'})
-
 export class FileUploadComponent
 {
-
     UpdateImageDisplay(file: FileList)
     {
         let imgView = document.querySelector('.' + this.viewId) as HTMLElement;
@@ -39,7 +37,6 @@ export class FileUploadComponent
             this.ArrayImage.emit(_obj);
         }
     }
-
 
     @Input() viewId: string;
     @Input() num: number;

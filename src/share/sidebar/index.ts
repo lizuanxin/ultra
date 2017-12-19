@@ -11,31 +11,28 @@ export class SidebarComponent implements OnInit
 
     ngOnInit(): void
     {
-        this.getChildrenNode(this.Route.snapshot.routeConfig);
-    }
+        let Config = this.Route.snapshot.routeConfig as any;
 
-    getChildrenNode(NodeItem: any)
-    {
-        if (TypeInfo.Assigned(NodeItem.data))
+        if (TypeInfo.Assigned(Config.data))
         {
-            let _item: IMenuItem = {
-                Icon: NodeItem.data.Icon,
-                Role: NodeItem.data.Icon,
-                LangId: NodeItem.data.LangId + '.title',
+            const Menu: IMenuItem = {
+                LangId: Config.data.LangId + '.title',
+                Icon: Config.data.Icon,
+                Role: Config.data.Role,
                 Children: new Array<IMenuItem>()
             };
-            console.log(NodeItem.data.LangId);
+            console.log(Menu);
 
-            NodeItem.children.forEach(item => {
-                if (TypeInfo.Assigned(item.data))
-                {
-                    item.data.Link = item.path;
-                    _item.Children.push(item.data);
-                }
+            Config.children.forEach(SubConfig => {
+                if (TypeInfo.Assigned(SubConfig.data))
+                Menu.Children.push({
+                    LangId: Config.data.LangId + '.' + SubConfig.data.LangId + '.title',
+                    Icon: SubConfig.data.Icon,
+                    Link: SubConfig.path,
+                    Role: SubConfig.data.Role});
             });
 
-            this.MenuEntries.push(_item);
-
+            this.MenuEntries.push(Menu);
         }
     }
 
