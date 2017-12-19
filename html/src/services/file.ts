@@ -5,6 +5,8 @@ import {THttpClient} from 'UltraCreation/Core/Http';
 import * as Types from './cloud/types';
 import {TAuthService} from './auth';
 
+const SERVER_HOST = 'http://localhost:4200';
+
 @Injectable()
 export class TFileService
 {
@@ -21,8 +23,11 @@ export class TFileService
             let Files = await this.Http.Get('/').toPromise().then((res) => res.Content);
 
             this.FilesCache = new Map<string, Types.IFile>();
-            for (let File of Files)
-                this.FilesCache.set(File.Id, File);
+            for (let UploadedFile of Files)
+            {
+                UploadedFile.Path = SERVER_HOST + UploadedFile.Path;
+                this.FilesCache.set(UploadedFile.Id, UploadedFile);
+            }
             console.log(this.FilesCache);
         }
 
