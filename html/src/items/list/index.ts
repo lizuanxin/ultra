@@ -27,7 +27,6 @@ export class ListComponent implements OnInit
 
     }
 
-
     Remove(data: TItem): void
     {
         this.Items.Remove(data);
@@ -173,8 +172,6 @@ export class ListComponent implements OnInit
 
         // file.forEach(item => this.CurProduct.Pictures.push(item.Path));
     }
-
-
 
     App = window.App;
     Modal: TemplateRef<any>;

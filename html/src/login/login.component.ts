@@ -37,10 +37,9 @@ export class LoginComponent implements OnInit, OnDestroy
             .then(() =>
                 this.router.navigate(['/']))
             .catch(err =>
-                this.App.ShowToast('error', err));
+                App.ShowError(err));
     }
 
-    App = window.App;
     Sheet: FormGroup;
     Email: FormControl;
     Pass: FormControl;
