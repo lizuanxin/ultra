@@ -2,7 +2,7 @@ import {Component, OnInit, TemplateRef } from '@angular/core';
 import {TypeInfo, THttpClient} from 'UltraCreation/Core';
 
 import {Types} from 'services';
-import {TItemService} from 'services/item';
+import {TItemService, TItem, TProduct, TPackage} from 'services/item';
 import {TFileService} from 'services/file';
 
 @Component({selector: 'item-list', templateUrl: './index.html'})
@@ -28,7 +28,7 @@ export class ListComponent implements OnInit
     }
 
 
-    Remove(data: Types.IItem): void
+    Remove(data: TItem): void
     {
         this.Items.Remove(data);
     }
@@ -65,7 +65,7 @@ export class ListComponent implements OnInit
 
     }
 
-    OpenModal(template: TemplateRef<any>, data?: Types.IItem)
+    OpenModal(template: TemplateRef<any>, data?: TItem)
     {
         this.ModalTitle = this.SetModTitle(data);
         if (!TypeInfo.Assigned(data))
@@ -85,7 +85,7 @@ export class ListComponent implements OnInit
         {
             if (!TypeInfo.Assigned(data))
             {
-                this.Items.AppendProduct(this.CurrentIProduct)
+                this.Items.Append(this.CurrentIProduct)
                 .catch(err => console.log(err));
             }
             else
@@ -106,7 +106,7 @@ export class ListComponent implements OnInit
         {
             if (type === 1) this.CurrentIProduct.AvatarUrl = v[0].Path;
             if (type === 2) {
-                v.forEach(item => this.CurrentIProduct.Pictures.push(item.Path));
+                v.forEach(item => this.CurrentIProduct.PictureList.Add(item.Path));
             }
         })
         .catch(err => console.log(err));
@@ -120,7 +120,7 @@ export class ListComponent implements OnInit
             .catch((err) => console.log(err));
     }
 
-    SetModTitle(data?: Types.IItem): string
+    SetModTitle(data?: TItem): string
     {
         if (!TypeInfo.Assigned(data)) return App.Translate('items.commodity.button.add') + App.Translate('items.commodity.field.goods');
 
@@ -181,13 +181,13 @@ export class ListComponent implements OnInit
 
 
     ModalTitle: string;
-    CurrentIProduct: Types.IProduct;
+    CurrentIProduct: TProduct;
 
     SelectAll: boolean = false;
     SelectId: Array<string> = [];
 
 
-    List: Array<Types.IItem>;
+    List: Array<TItem>;
     UploadedFiles: Array<Types.IFile>;
     fileMax: number = 1048576 / 2;
     fileMaxWarning: boolean;
