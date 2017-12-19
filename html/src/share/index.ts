@@ -12,6 +12,7 @@ import {ScrollToModule} from '@nicky-lenaers/ngx-scroll-to';
 import {NgZorroAntdModule} from 'ng-zorro-antd';
 import {ReceivingComponent} from './component/receiving';
 import {FileUploadComponent} from './component/fileupload';
+import {PicturesComponent} from 'items/pictures';
 
 @NgModule({
     imports: [
@@ -28,6 +29,7 @@ import {FileUploadComponent} from './component/fileupload';
         SidebarComponent,
         SwiperComp,
         ReceivingComponent,
+        PicturesComponent,
         FileUploadComponent
     ],
     exports: [
@@ -41,6 +43,7 @@ import {FileUploadComponent} from './component/fileupload';
         NavbarComponent,
         SidebarComponent,
         ReceivingComponent,
+        PicturesComponent,
         FileUploadComponent
     ]
 })

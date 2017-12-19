@@ -30,7 +30,6 @@ const routes: Routes = [
     declarations: [
         LayoutComponent,
         ListComponent,
-        PicturesComponent
     ]
 })
 export class ItemsModule
