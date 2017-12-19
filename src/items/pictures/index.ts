@@ -26,8 +26,9 @@ export class PicturesComponent implements OnInit
 
     SelectedPicture(Picture: Types.IFile)
     {
-        console.log('selected: ' + Picture.Id);
+        console.log('selected: ' + Picture);
         this.SelectedFiles.set(Picture.Id, Picture);
+
     }
 
     OnSelectedEnd()
