@@ -2,7 +2,7 @@
     <ng-template [ngIf]="App.IsMinScreen">
         <div pull-right>
                 <div class="d-inline-block">
-                    <button class="btn btn-sm btn-outline-primary" type="button" (click)="OpenModal(template)">{{'button.add'|translate}}</button>
+                    <button class="btn btn-sm btn-outline-primary" type="button" (click)="OpenProductEditModal(template)">{{'button.add'|translate}}</button>
                 </div>
                 <div class="dropdown d-inline-block" ngbDropdown>
                     <button class="btn btn-sm btn-secondary dropdown-toggle" type="button" ngbDropdownToggle>
@@ -22,7 +22,7 @@
         <div class="col-md-6">
             <ng-template [ngIf]="!App.IsMinScreen">
                 <div class="d-inline-block">
-                    <button class="btn btn-sm btn-outline-primary" type="button" (click)="OpenModal(template)">{{'button.add'|translate}}</button>
+                    <button class="btn btn-sm btn-outline-primary" type="button" (click)="OpenProductEditModal(template)">{{'button.add'|translate}}</button>
                 </div>
                 <div class="d-inline-block">
                     <button class="btn btn-sm btn-primary" type="button" [disabled]="SelectId.length<2" (click)="Open(PublishModal)">{{'items.list.pack'|translate}}</button>
@@ -58,19 +58,19 @@
                       </tr>
                     </thead>
                     <tbody>
-                        <tr *ngFor="let item of List" (click)="OpenModal(template,item)" >
+                        <tr *ngFor="let ItemModel of ItemModels" (click)="OpenProductEditModal(template,ItemModel)" >
                             <td text-center (click)="$event.stopPropagation()">
-                                <input type="checkbox" [(ngModel)]="item.selected" (ngModelChange)="ToggleSelectId(item)">
+                                <input type="checkbox" [(ngModel)]="ItemModel.IsSelected" (ngModelChange)="ToggleSelectId(ItemModel)">
                             </td>
                             <td>
                                 <img width=60 src="assets/images/portfolio-1.jpg">
                             </td>
-                            <td>{{item.Name}}</td>
+                            <td>{{ItemModel.Source.Name}}</td>
                             <td text-center>100</td>
                             <td></td>
-                            <td text-center text-nowrap>item.Timestamp</td>
+                            <td text-center text-nowrap>ItemModel.Source.Timestamp</td>
                             <td>100</td>
-                            <td text-center><button (click)="Remove(item);$event.stopPropagation()">{{'button.del'|translate}}</button></td>
+                            <td text-center><button (click)="Remove(ItemModel);$event.stopPropagation()">{{'button.del'|translate}}</button></td>
                         </tr>
                     </tbody>
                   </table>
@@ -98,7 +98,7 @@
                             <div class="row justify-content-md-center" align-items-center m-t-15>
                                 <label text-gray-light text-nowrap text-right class="col-md-2" for="member-name">{{'produce.public.pro_img'|translate}}：</label>
                                 <div class="col-md-8">
-                                    <file-upload viewId="image_1" *ngIf="!CurrentIProduct.AvatarUrl" [num]="MaxAvatar" (ArrayImage)="getFileData($event)"></file-upload>
+                                    <file-upload viewId="image_1" *ngIf="!CurrEditProduct.AvatarUrl" [num]="MaxAvatar" (ArrayImage)="getFileData($event)"></file-upload>
                                     <!-- <span class="img-preview" id="image-1">
                                         <img [src]="CurProduct.AvatarUrl" *ngIf="CurProduct.AvatarUrl != null">
                                     </span>
