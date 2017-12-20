@@ -10,6 +10,7 @@ import {TensPage} from './tens';
 import {ListPage} from './list';
 import {DetailPage} from './detail';
 import {FooterComponent} from './share/footer';
+import {RelateComponent} from './components/relate';
 
 
 @Component({templateUrl: '../share/layout.domain.html'})
@@ -44,6 +45,7 @@ const routes: Routes = [
         TensPage,
         ListPage,
         DetailPage,
+        RelateComponent,
         FooterComponent
     ]
 })
