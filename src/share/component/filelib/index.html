@@ -1,0 +1,20 @@
+<div class="container-layer">
+    <div class="row">
+        <div class="col-md-6">
+            <button type="button" class="btn-file-upload" (click)="OnSelectedEnd()">
+                <label for="upload_file"><i icon f-50>&#xf100;</i></label>
+                <input type="file" id="upload_file" (change)="UploadImage($event.target.files)" accept=".jpg, .jpeg, .png" multiple>
+            </button>
+        </div>
+    </div>
+    <ul class="row row-thumbnail" margin-top>
+        <li class="col-2" *ngFor="let FileModel of FileModels" (click)="FileClicked(FileModel)">
+            <img [src]="FileModel.Source.Path">
+            <ng-template [ngIf]="FileModel.IsSelected">
+                <div class="flex-btn">
+                    <button class="btn-select"><i icon>&#xf3ff;</i></button>
+                </div>
+            </ng-template>
+        </li>
+    </ul>
+</div>
