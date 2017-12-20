@@ -24,9 +24,20 @@ export class PicturesComponent implements OnInit
             .catch(err => console.log(err));
     }
 
-    ToggleSelected(FileModel: TFileModel)
+    FileClicked(FileModel: TFileModel)
     {
         console.log('selected: ' + FileModel.Source.Id);
+        if (! this.Multiple)
+        {
+            for (let Model of this.FileModels)
+            {
+                if (Model.IsSelected && FileModel.Source.Id !== Model.Source.Id)
+                {
+                    Model.IsSelected = false;
+                    break;
+                }
+            }
+        }
         FileModel.IsSelected = ! FileModel.IsSelected;
     }
 
@@ -54,7 +65,7 @@ export class PicturesComponent implements OnInit
 
     FileModels: Array<TFileModel>;
 
-    @Input() IsTitle: boolean = true;
+    @Input() Multiple: boolean = true;
     @Output() OnPictureSelected = new EventEmitter<Array<Types.IFile>>();
 }
 
