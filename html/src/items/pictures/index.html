@@ -12,13 +12,13 @@
         </div>
     </div>
     <ul class="row row-thumbnail" margin-top>
-        <li class="col-2" *ngFor="let UploadedFile of UploadedFiles" (click)="SelectedPicture(UploadedFile)">
-            <img [src]="UploadedFile.Path">
-            <!-- <ng-template [ngIf]="UploadedFile.selected"> -->
+        <li class="col-2" *ngFor="let FileModel of FileModels" (click)="ToggleSelected(FileModel)">
+            <img [src]="FileModel.Source.Path">
+            <ng-template [ngIf]="FileModel.IsSelected">
                 <div class="flex-btn">
                     <button class="btn-select"><i icon>&#xf3ff;</i></button>
                 </div>
-            <!-- </ng-template> -->
+            </ng-template>
         </li>
     </ul>
 </div>

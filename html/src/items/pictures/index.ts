@@ -24,28 +24,45 @@ export class PicturesComponent implements OnInit
             .catch(err => console.log(err));
     }
 
-    SelectedPicture(Picture: Types.IFile)
+    ToggleSelected(FileModel: TFileModel)
     {
-        console.log('selected: ' + Picture.Id);
-        this.SelectedFiles.set(Picture.Id, Picture);
-
+        console.log('selected: ' + FileModel.Source.Id);
+        FileModel.IsSelected = ! FileModel.IsSelected;
     }
 
     OnSelectedEnd()
     {
-        this.OnPictureSelected.emit(Array.from(this.SelectedFiles.values()));
+        let SelectedFiles: Array<Types.IFile> = [];
+        this.FileModels.forEach((UploadedFile) =>
+        {
+            if (UploadedFile.IsSelected)
+                SelectedFiles.push(UploadedFile.Source);
+        });
+        this.OnPictureSelected.emit(SelectedFiles);
     }
 
     private UpdateFileList()
     {
         this.FileSvc.List()
-            .then((List) => this.UploadedFiles = List)
+            .then((List) =>
+            {
+                console.log('updated list: ' + List.length);
+                this.FileModels = List.map((UserFile) => new TFileModel(UserFile));
+            })
             .catch((err) => console.log(err));
     }
 
-    UploadedFiles: Array<Types.IFile>;
-    SelectedFiles: Map<string, Types.IFile> = new Map<string, Types.IFile>();
+    FileModels: Array<TFileModel>;
 
     @Input() IsTitle: boolean = true;
     @Output() OnPictureSelected = new EventEmitter<Array<Types.IFile>>();
+}
+
+export class TFileModel
+{
+    constructor(public Source: Types.IFile)
+    {
+    }
+
+    IsSelected: boolean = false;
 }
