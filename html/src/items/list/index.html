@@ -25,7 +25,7 @@
                     <button class="btn btn-sm btn-outline-primary" type="button" (click)="OpenProductEditModal(template)">{{'button.add'|translate}}</button>
                 </div>
                 <div class="d-inline-block">
-                    <button class="btn btn-sm btn-primary" type="button" [disabled]="SelectId.length<2" (click)="Open(PublishModal)">{{'items.list.pack'|translate}}</button>
+                    <button class="btn btn-sm btn-primary" type="button" [disabled]="SelectedItemNum < 2" (click)="Open(PublishModal)">{{'items.list.pack'|translate}}</button>
                 </div>
                 <div class="dropdown d-inline-block" ngbDropdown>
                     <button class="btn btn-sm btn-secondary dropdown-toggle" type="button" ngbDropdownToggle>
@@ -41,9 +41,9 @@
         </div>
         <div class="col-md-6" text-right>
             <div class="d-inline-block">
-                <button class="btn btn-sm btn-outline-primary" type="button" [disabled]="SelectId.length == 0">{{'button.up'|translate}}</button>
-                <button class="btn btn-sm btn-outline-primary" type="button" [disabled]="SelectId.length == 0">{{'button.down'|translate}}</button>
-                <button class="btn btn-sm btn-outline-danger" type="button" (click)="Remove()" [disabled]="SelectId.length == 0">{{'button.del'|translate}}</button>
+                <button class="btn btn-sm btn-outline-primary" type="button" [disabled]="NullItemSelected">{{'button.up'|translate}}</button>
+                <button class="btn btn-sm btn-outline-primary" type="button" [disabled]="NullItemSelected">{{'button.down'|translate}}</button>
+                <button class="btn btn-sm btn-outline-danger" type="button" (click)="Remove()" [disabled]="NullItemSelected">{{'button.del'|translate}}</button>
             </div>
         </div>
     </div>
@@ -51,16 +51,16 @@
             <table class="table table-bordered table-hover">
                     <thead>
                       <tr>
-                        <th width="2%"><input type="checkbox" [(ngModel)]="SelectAll" (ngModelChange)="ToggleSelectAll()"></th>
+                        <th width="2%"><input type="checkbox" [(ngModel)]="AllItemSelected" (ngModelChange)="ToggleSelectAll()"></th>
                         <th width="12%">{{'items.list.field.id'|translate}}</th>
                         <th width="15%">{{'items.list.field.name'|translate}}</th>
                         <th width="12%" text-center>{{'items.list.field.timestamp'|translate}}</th>
                       </tr>
                     </thead>
                     <tbody>
-                        <tr *ngFor="let ItemModel of ItemModels" (click)="OpenProductEditModal(template,ItemModel)" >
+                        <tr *ngFor="let ItemModel of ItemModels" (click)="OpenProductEditModal(template,ItemModel.Source)" >
                             <td text-center (click)="$event.stopPropagation()">
-                                <input type="checkbox" [(ngModel)]="ItemModel.IsSelected" (ngModelChange)="ToggleSelectId(ItemModel)">
+                                <input type="checkbox" [(ngModel)]="ItemModel.IsSelected" (ngModelChange)="ToggleSelect(ItemModel)">
                             </td>
                             <td>
                                 <img width=60 src="assets/images/portfolio-1.jpg">
@@ -91,7 +91,7 @@
                     <ng-template ngbTabContent>
                             <div class="row justify-content-md-center" align-items-center  m-t-30>
                                 <label text-gray-light text-nowrap text-right class="col-md-2">{{'items.list.field.name'|translate}}：</label>
-                                <div class="col-md-3"><input type="text" class="form-control" [(ngModel)]="CurrentIProduct.Name"></div>
+                                <div class="col-md-3"><input type="text" class="form-control" [(ngModel)]="CurrEditProduct.Name"></div>
                                 <label text-gray-light text-nowrap text-right class="col-md-2">{{'items.list.field.snap'|translate}}：</label>
                                 <div class="col-md-3"><input type="text" class="form-control"></div>
                             </div>
