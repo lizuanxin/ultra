@@ -13,11 +13,11 @@ const routes: Routes = [
         data: {LangId: 'items', Icon: '&#xe907;', Role: ''},
 
         children: [
-            // {path: 'list', component: ListComponent, data: {LangId: 'list', Role: ''}},
+            {path: 'list', component: ListComponent, data: {LangId: 'list', Role: ''}},
             {path: 'pictures', component: PicturesComponent, data: {LangId: 'pictures', Role: ''}},
 
             /// ...
-            {path: '', redirectTo: 'pictures'}
+            {path: '', redirectTo: 'list'}
         ]
     }
 ];
@@ -29,6 +29,7 @@ const routes: Routes = [
     ],
     declarations: [
         LayoutComponent,
+        ListComponent,
         PicturesComponent
     ]
 })

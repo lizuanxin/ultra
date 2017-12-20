@@ -13,23 +13,41 @@ export class ListComponent implements OnInit
 
     ngOnInit()
     {
+        this.ItemModels = [];
+        this.UpdateItemList();
     }
 
-    Remove(data: TItem): void
+    Remove(ItemModel: TItemModel): void
     {
-        this.ItemSvc.Remove(data);
+        this.ItemSvc.Remove(ItemModel.Source)
+            .then(() => this.UpdateItemList())
+            .catch((err) => console.log(err));
     }
 
     ToggleSelectAll()
     {
+        let Selected = ! this.AllItemSelected;
+        this.ItemModels.forEach((ItemModel) => ItemModel.IsSelected = Selected);
     }
 
-    ToggleSelectId(item)
+    ToggleSelect(ItemModel: TItemModel)
     {
+        ItemModel.IsSelected = ! ItemModel.IsSelected;
     }
 
-    OnPackage()
+    get AllItemSelected(): boolean
     {
+        return TItemModel.SelectedNum === this.ItemModels.length;
+    }
+
+    get NullItemSelected(): boolean
+    {
+        return TItemModel.SelectedNum === 0;
+    }
+
+    get SelectedItemNum(): number
+    {
+        return TItemModel.SelectedNum;
     }
 
     OpenProductEditModal(template: TemplateRef<any>, data?: TItem)
@@ -62,19 +80,6 @@ export class ListComponent implements OnInit
                 }
             })
             .catch(err => {});
-    }
-
-    UploadImage(file, type: number)
-    {
-        // this.FileSvc.Upload(file)
-        // .then(v =>
-        // {
-        //     if (type === 1) this.CurrentIProduct.AvatarUrl = v[0].Path;
-        //     if (type === 2) {
-        //         // v.forEach(item => this.CurrentIProduct.PictureList.Add(item.Path));
-        //     }
-        // })
-        // .catch(err => console.log(err));
     }
 
     SetModTitle(data?: TItem): string
@@ -135,6 +140,7 @@ export class ListComponent implements OnInit
             .then((ItemList) =>
             {
                 console.log('update item: ' + ItemList.length);
+                TItemModel.SelectedNum = 0;
                 this.ItemModels = ItemList.map((Item) => new TItemModel(Item));
             })
             .catch((err) => console.log(err));
@@ -157,9 +163,25 @@ export class ListComponent implements OnInit
 
 export class TItemModel
 {
+    static SelectedNum: number = 0;
     constructor(public Source: TItem)
     {
     }
 
-    IsSelected: boolean = false;
+    get IsSelected(): boolean
+    {
+        return this._IsSelected;
+    }
+
+    set IsSelected(Selected: boolean)
+    {
+        if (Selected)
+            TItemModel.SelectedNum ++;
+        else
+            TItemModel.SelectedNum --;
+
+        this._IsSelected = Selected;
+    }
+
+    _IsSelected: boolean = false;
 }
