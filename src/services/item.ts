@@ -148,11 +148,11 @@ export class TItem extends TAssignable implements Types.IItem
         return this.PictureList.Paths;
     }
 
-    Id: string;
+    Id: string = '';
     TypeId: Types.TItemTypeId;
-    Name: string;
-    Pictures: Array<Types.IPicture>;
-    AvatarUrl: string;
+    Name: string = '';
+    Pictures: Array<Types.IPicture> = [];
+    AvatarUrl: string = '';
     Timestamp: any;
 
     protected _PictureList: TFileList;

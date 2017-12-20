@@ -4,7 +4,7 @@ import {TranslateService} from '@ngx-translate/core';
 
 import {TypeInfo} from 'UltraCreation/Core';
 import {Platform} from 'UltraCreation/Core/Platform';
-import {NgbModal, NgbTooltipConfig} from '@ng-bootstrap/ng-bootstrap';
+import {NgbModal, NgbTooltipConfig, NgbModalOptions, NgbModalRef} from '@ng-bootstrap/ng-bootstrap';
 
 
 import {TShoppingCart} from './shopping_cart';
@@ -33,6 +33,7 @@ export class TApplication
         this.InitializeLanguage();
 
         this.Modal = Injector.get(NgbModal);
+        this.ModelRefList = [];
     }
 
 /* langulage support */
@@ -92,9 +93,32 @@ export class TApplication
         return this.Translation.instant(Key);
     }
 
-    ShowModal(temp: TemplateRef<any>)
+    async ShowModal(content: any, data?: any, opts?: NgbModalOptions)
     {
+        const ModelRef = this.Modal.open(content, opts);
+        ModelRef.componentInstance.data = data;
+        ModelRef.componentInstance.IsInModalMode = true;
+        this.ModelRefList.push(ModelRef);
 
+        return ModelRef.result;
+    }
+
+    CloseModal(Data: any)
+    {
+        if (this.ModelRefList.length > 0)
+        {
+            const ModelRef = this.ModelRefList.pop();
+            ModelRef.close(Data);
+        }
+    }
+
+    DismissModal(Reason: any)
+    {
+        if (this.ModelRefList.length > 0)
+        {
+            const ModelRef = this.ModelRefList.pop();
+            ModelRef.dismiss(Reason);
+        }
     }
 
     ShowAlert(Message: string)
@@ -115,5 +139,6 @@ export class TApplication
     Router: Router;
     Translation: TranslateService;
     Modal: NgbModal;
+    ModelRefList: Array<NgbModalRef>;
     ShoppingCart: TShoppingCart;
 }

@@ -1,19 +1,30 @@
-import {Component, OnInit, TemplateRef, Input, Output, EventEmitter} from '@angular/core';
-import {TypeInfo, THttpClient} from 'UltraCreation/Core';
+import {Component, Input, Output, EventEmitter} from '@angular/core';
+
+import {TBasicModalCompnent} from '../basicmodal';
 
 import {Types} from 'services';
 import {TFileService} from 'services/file';
 
 @Component({selector: 'file-lib', templateUrl: './index.html'})
-export class FileLibComponent implements OnInit
+export class TFileLibComponent extends TBasicModalCompnent
 {
     constructor(private FileSvc: TFileService)
     {
+        super();
     }
 
-    ngOnInit()
+    OnInit()
     {
         this.UpdateFileList();
+    }
+
+    OnClosed(Data: any)
+    {
+        this.OnPictureSelected.emit(Data);
+    }
+
+    OnDismiss(data: any)
+    {
     }
 
     UploadImage(file: any)
@@ -48,7 +59,8 @@ export class FileLibComponent implements OnInit
             if (UploadedFile.IsSelected)
                 SelectedFiles.push(UploadedFile.Source);
         });
-        this.OnPictureSelected.emit(SelectedFiles);
+
+        this.Close(SelectedFiles);
     }
 
     private UpdateFileList()
