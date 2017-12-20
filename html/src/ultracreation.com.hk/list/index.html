@@ -1,29 +1,19 @@
 <div class="container" style="height:620px;position:relative" margin-bottom>
-    <swiper BannerSwiper #BannerSwiper [Config]="{pagination:'.swiper-pagination',loop:true,paginationClickable: true}">
-            <div class="swiper-wrapper">
-                <div class="swiper-slide" style="background-image:url(assets/images/slider/healthcare.jpg)">
-
-                </div>
-                <div class="swiper-slide">
-                    <div class="container">
-                        <ul class="row" align-items-center justify-content-center>
-                            <li class="col-md-6">
-                                <h2 m-t-30 text-gray-light f-w-l>Compact and portable</h2>
-                                <h1 m-t-15 text-gray>Want to use that is used</h1>
-                                <p m-t-30 m-b-50 text-gray>Our development team is leaded by senior engineers has over 20years' experience in the industry, we are the expert of DFM(Design for manufacture). </p>
-                                <button r-20 class="btn gradient-primary" type="button">buy now</button>
-                            </li>
-                            <li class="col-md-4">
-                                <img src="assets/images/slider/pro-2.jpg" class="img-fluid">
-                            </li>
-                        </ul>
+    <swiper>
+        <div class="swiper-wrapper">
+            <div class="swiper-slide" style="background-image:url(assets/images/slider/healthcare.jpg)">
+                <div class="pocket">
+                    <div class="inner-content">
+                        <h2>pocket massager</h2>
+                        <p>Small porable use ready to use</p>
+                        <a class="btn-buy">buy now</a>
                     </div>
                 </div>
             </div>
-            <div class="swiper-pagination"></div>
+        </div>
     </swiper>
 </div>
-<div class="container list-horital">
+<div class="container list-staff">
     <h2>office staff</h2>
     <ul class="row">
         <li class="col-md-3">
@@ -57,45 +47,168 @@
     </ul>
 
 </div>
+
 <div class="massage-mode" style="background-image:url(assets/images/site/bg_massage.jpg)">
-    <div class="container" text-center>
-        <img src="assets/images/site/massage-mode.png">
-    </div>
-</div>
-<div class="container list-horital padding">
-    <h2>TENS & EMS</h2>
-    <img src="assets/images/site/tens_ems_1.jpg" class="img-fluid">
-    <img src="assets/images/site/tens_ems_2.jpg" class="img-fluid">
-    <h2>Features</h2>
-    <img src="assets/images/site/features.jpg" class="img-fluid">
-</div>
-<!-- <div class="container">
-    <div class="card">
-         <div class="card-body">
-            <ul class="row align-items-center" padding>
-                <li class="col-7">
-                    <h5 text-gray>Ipsum sed adipiscing</h5>
-                    <span state w-150></span>
-                    <p class="card-detail">Sed lorem ipsum dolor sit amet nullam consequat feugiat consequat magna adipiscing magna etiam amet veroeros. Lorem ipsum dolor tempus sit cursus. Tempus nisl et nullam lorem ipsum dolor sit amet aliquam.</p>
-                    <p><button type="button" class="button" [routerLink]="['/detail','12633']">Secondary</button></p>
-                    <button type="button" class="button">Buy now</button>
-                </li>
-                <li class="col-5 text-center">
-                    <img out-line src="assets/images/site/pro-1.jpg">
-                </li>
-            </ul>
-            <ul class="row align-items-center" padding>
-                <li class="col-5 text-center">
-                    <img out-line src="assets/images/site/pro-1.jpg">
-                </li>
-                <li class="col-7">
-                    <h5 text-gray>Ipsum sed adipiscing</h5>
-                    <span state w-150></span>
-                    <p class="card-detail">Sed lorem ipsum dolor sit amet nullam consequat feugiat consequat magna adipiscing magna etiam amet veroeros. Lorem ipsum dolor tempus sit cursus. Tempus nisl et nullam lorem ipsum dolor sit amet aliquam.</p>
-                    <p><button type="button" class="button">Secondary</button></p>
-                    <button type="button" class="button">Buy now</button>
-                </li>
-            </ul>
+    <div class="container">
+        <h2>a variety of parts massage mode</h2>
+        <div class="inner-content">
+            <img src="assets/images/site/massage-mode1.png">
+            <div class="in-item" text-right style="top: 106px;left: 175px;">
+                <div class="title">arm</div>
+                <div class="spit-line"></div>
+                <p>long-term face of the<br>computer, spinestiffness.</p>
+            </div>
+            <div class="in-item" text-right style="top: 410px;left: 22px;">
+                <div class="title">legs</div>
+                <div class="spit-line"></div>
+                <p>long-term face of the<br>small moxa unique current stimulation of deep leg muscle<br>contraction,effectively help the leg blood back to the<br>heart,promote calf vein blood circulation.</p>
+            </div>
+            <div class="in-item" text-left style="top: 34px; right: 175px;">
+                <div class="title">neck and shoulder</div>
+                <div class="spit-line"></div>
+                <p>long-term face of the<br>computer, spinestiffness.</p>
+            </div>
+            <div class="in-item" text-left style="top: 290px; right: 175px;">
+                <div class="title">abdomen</div>
+                <div class="spit-line"></div>
+                <p>long-term face of the<br>computer, spinestiffness.</p>
+            </div>
+            <div class="in-item" text-left style="top: 528px; right: 275px;">
+                <div class="title">feet</div>
+                <div class="spit-line"></div>
+                <p>long-term face of the<br>computer, spinestiffness.</p>
+            </div>
         </div>
     </div>
-</div> -->
+</div>
+<div class="list-view list-tens">
+    <div class="container padding">
+        <h2>TENS & EMS</h2>
+        <ul class="row justify-content-md-center" no-padding>
+            <li class="col-md-6">
+                <img src="assets/images/site/tens_1.jpg" class="img-fluid">
+                <div class="inset">
+                    <ul>
+                        <li>
+                            <img src="assets/images/site/ico-ems.jpg">
+                            <h5>EMS</h5>
+                            <p>smart microelectronics technology</p>
+                        </li>
+                        <li><img src="assets/images/site/ico-add.jpg" style="margin-top:15px"></li>
+                        <li>
+                            <img src="assets/images/site/ico-tens.jpg">
+                            <h5>TENS</h5>
+                            <p>nerve activated medicine</p>
+                        </li>
+                    </ul>
+                </div>
+            </li>
+            <li class="col-md-5">
+                <div class="inner-content">
+                    <i class="snap r-t"></i><i class="snap l-b"></i>
+                    <h3>Innovative technology makes the complexity easier</h3>
+                    <p>General pulse massageer only a single electrical sighnal,such as TENS or EMS;
+                        Small mosaics will combine the two to form symphonic-style special
+                        telecommunications signals.
+                        TENS stimulate the body to produce endorpphins, relieve pain;
+                        At the same tiem EMS to stimulate deep muscles, continuous
+                        massage,relieve tension muscles.
+                    </p>
+                </div>
+            </li>
+        </ul>
+        <ul class="row justify-content-md-center align-items-end" no-padding>
+            <li class="col-md-5">
+                <div class="inner-content">
+                    <i class="snap r-t"></i><i class="snap l-b"></i>
+                    <h3>20 minutes a day,anywhere to enjoy a different massage</h3>
+                    <ul>
+                        <li>relieve fatigue</li>
+                        <li>relieve pain</li>
+                        <li>relax muscles</li>
+                        <li>promote blood circulation </li>
+                    </ul>
+                </div>
+            </li>
+            <li class="col-md-5 offset-1">
+                <img src="assets/images/site/tens_2.jpg" class="img-fluid">
+            </li>
+        </ul>
+    </div>
+</div>
+<div class="list-view list-feature">
+    <div class="container padding">
+        <h2>Features</h2>
+        <div class="inner-content">
+            <img src="assets/images/site/features.jpg">
+            <div class="in-item" style="left:60px;top:36px">small and portable</div>
+            <div class="in-item" style="left:32px;top:315px">60 intensity levelse</div>
+            <div class="in-item" style="right:220px;top:162px">3 configuration modes</div>
+        </div>
+    </div>
+</div>
+<div class="list-view list-opeating">
+    <div class="container padding">
+        <h2>operating</h2>
+        <h5>simple operation and a press</h5>
+        <ul class="row justify-content-md-center">
+            <li class="col-md-2">
+                <img src="assets/images/site/operat_1.gif">
+                <p>sticky electrode stickers</p>
+            </li>
+            <li class="col-md-2">
+                <img src="assets/images/site/operat_2.gif">
+                <p>inset the phone</p>
+            </li>
+            <li class="col-md-2">
+                <img src="assets/images/site/operat_3.gif">
+                <p>connect to bluetooth</p>
+            </li>
+            <li class="col-md-2">
+                <img src="assets/images/site/operat_4.gif">
+                <p>choose a program</p>
+            </li>
+            <li class="col-md-2">
+                <img src="assets/images/site/operat_5.gif">
+                <p>start masssage</p>
+            </li>
+        </ul>
+    </div>
+</div>
+
+<div class="list-view list-relate">
+    <div class="container padding">
+        <h2>related suggestion</h2>
+        <relate></relate>
+        <!-- <ul class="row justify-content-md-center">
+            <li class="col-md-3">
+                <div class="item-box">
+                    <h3>cable magic</h3>
+                    <p>Cable magic USB Battery pack</p>
+                    <img src="assets/images/site/relate_1.jpg">
+                    <a class="btn-buy">buy now</a>
+                    <a class="btn-t-r" icon>&#xf102;</a>
+                </div>
+            </li>
+            <li class="col-md-3">
+                <div class="item-box">
+                    <h3>cable magic</h3>
+                    <p>Cable magic USB Battery pack</p>
+                    <img src="assets/images/site/relate_2.jpg">
+                    <a class="btn-buy">buy now</a>
+                    <a class="btn-t-r" icon>&#xf102;</a>
+                </div>
+            </li>
+            <li class="col-md-3">
+                <div class="item-box">
+                    <h3>cable magic</h3>
+                    <p>Cable magic USB Battery pack</p>
+                    <img src="assets/images/site/relate_3.jpg">
+                    <a class="btn-buy">buy now</a>
+                    <a class="btn-t-r" icon>&#xf102;</a>
+                </div>
+            </li>
+        </ul> -->
+    </div>
+</div>
+

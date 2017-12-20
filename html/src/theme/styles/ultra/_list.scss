@@ -1,4 +1,4 @@
-.list-horital{
+.list-staff{
     h2{
         margin: 60px auto 30px auto;
         text-transform: capitalize;
@@ -6,6 +6,7 @@
         font-size: 1.6rem;
         text-transform: uppercase;
     }
+
 
     .inner-item{
         @extend .animate;
@@ -27,7 +28,231 @@
             text-align: center;
             font-size: 1.4rem;
         }
+
+
     }
 
 
+}
+
+.pocket{
+    width: 42%;
+    position: absolute;
+    bottom:20%;
+    .inner-content{
+        text-align: center;
+        h2{
+            text-transform: capitalize;
+            font-size: 2.4rem;
+        }
+        p{
+            font-size: 1rem;
+            margin:30px auto;
+        }
+        a.btn-buy{
+            display: inline-block;
+            padding: .5rem 2.85rem;
+            background-color: #1aa0de;
+            color: $white;
+            text-transform: capitalize;
+            font-size: 1.3rem;
+            border-radius: 1.55rem;
+        }
+    }
+}
+
+.massage-mode
+{
+    margin-top:-30px;
+    background-repeat: no-repeat;
+    background-size: cover;
+    padding: 60px 0 30px 0;
+
+    h2 {
+        font-size: 1.6rem;
+        text-transform: capitalize;
+        text-align: center;
+        color: $white;
+    }
+    .inner-content {
+        position: relative;
+        text-align: center;
+        transform: scale(.9);
+    }
+    .in-item{
+        position: absolute;
+        color: $white;
+        .title, p {
+            text-transform: capitalize;
+        }
+        .title {
+            color: #d1d1d1;
+            font-size: 1.4rem;
+        }
+        .spit-line{
+            display: inline-block;
+            min-width: 80px;
+            height: 3px;
+            background-color: #d1d1d1;
+        }
+        p{
+            font-size: .8rem;
+        }
+    }
+}
+
+
+.list-view
+{
+    padding: 25px 0;
+    h2 {
+        text-transform: uppercase;
+        text-align: center;
+        font-size: 1.6rem;
+    }
+    h5 {
+        text-transform: capitalize;
+        text-align: center;
+        font-size: 1rem;
+        color: $gray-light;
+    }
+}
+
+.list-feature
+{
+    text-align: center;
+    .inner-content {
+        position: relative;
+        display: inline-block;
+    }
+    .in-item{
+        position: absolute;
+        color: $gray;
+        font-size:1.3rem;
+        text-transform: capitalize
+    }
+}
+
+.list-tens
+{
+    h2{
+        margin: 0 auto 30px auto;
+    }
+    .inset ul{
+        display: flex;
+        justify-content: center;
+        align-items: start;
+        li{
+            flex: 0 0 auto;
+            text-align:center;
+            h5{
+                min-width:150px;
+                margin: 10px auto;
+                color: #6599f7;
+            }
+            p{
+                max-width:180px;
+                text-transform: capitalize;
+            }
+        }
+    }
+    .inner-content {
+        position: relative;
+        padding:50px;
+        box-shadow: 0 0 15px rgba(0,0,0,.1);
+        .snap{
+            position:absolute;
+            width:30px;
+            height:30px;
+            &.r-t{
+                right: 15px;
+                top: 15px;
+                border-top: solid 2px #1aa0de;
+                border-right: solid 2px #1aa0de;
+            }
+            &.l-b{
+                left: 15px;
+                bottom: 15px;
+                border-left: solid 2px #1aa0de;
+                border-bottom: solid 2px #1aa0de;
+            }
+        }
+        h3 {
+            margin-bottom:16px;
+            font-size:1.6rem;
+        }
+        p{
+            font-size:.8rem;
+        }
+        li{
+            list-style: disc;
+            margin-left: 20px;
+            text-transform: capitalize;
+            font-size: 1rem;
+        }
+    }
+}
+
+.list-opeating
+{
+    background-color: #f4f7fb;
+
+    h2 {
+        margin: 0 auto 15px auto;
+    }
+    h5 {
+        margin: 10px auto 25px auto;
+    }
+    li {
+        text-align: center;
+        img {
+            transform: scale(.7);
+        }
+        p {
+            text-transform: capitalize;
+        }
+    }
+}
+
+.list-relate
+{
+    h2 {
+        margin: 0 auto 30px auto;
+    }
+    .item-box {
+        position: relative;
+        padding : 16px;
+        border: solid 1px $gray-lighter;
+        h3 {
+            margin-top:15px;
+            margin-bottom: 5px;
+            text-transform: uppercase;
+            font-size: 1.2rem;
+        }
+        img {
+            display: block;
+            margin: auto;
+        }
+
+        .btn-buy {
+            text-transform: capitalize;
+            font-size: 1.1rem;
+            color: #2ba8ff;
+        }
+
+        .btn-t-r{
+            position: absolute;
+            top: 0;
+            right: 0;
+            width: 24px;
+            height: 24px;
+            background-color: #2ba8ff;
+            color: $white;
+            font-size:1.6rem;
+            text-align: center;
+            &:hover{
+                color: $white;
+            }
+        }
+    }
 }
