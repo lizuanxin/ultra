@@ -11,8 +11,7 @@ import {SwiperComp} from 'UltraCreation/ng-ion/swiper';
 import {ScrollToModule} from '@nicky-lenaers/ngx-scroll-to';
 import {NgZorroAntdModule} from 'ng-zorro-antd';
 import {ReceivingComponent} from './component/receiving';
-import {FileUploadComponent} from './component/fileupload';
-import {FileLibComponent} from './component/filelib';
+import * as Comp from './component';
 
 @NgModule({
     imports: [
@@ -29,8 +28,8 @@ import {FileLibComponent} from './component/filelib';
         SidebarComponent,
         SwiperComp,
         ReceivingComponent,
-        FileLibComponent,
-        FileUploadComponent
+        Comp.TFileLibComponent,
+        Comp.TProductEditComponent
     ],
     exports: [
         CommonModule,
@@ -43,8 +42,8 @@ import {FileLibComponent} from './component/filelib';
         NavbarComponent,
         SidebarComponent,
         ReceivingComponent,
-        FileLibComponent,
-        FileUploadComponent
+        Comp.TFileLibComponent,
+        Comp.TProductEditComponent
     ]
 })
 export class SharedModule

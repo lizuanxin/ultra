@@ -3,6 +3,7 @@ import {TypeInfo, THttpClient} from 'UltraCreation/Core';
 
 import {Types} from 'services';
 import {TItemService, TItem, TProduct, TPackage} from 'services/item';
+import { TProductEditComponent } from 'share/component';
 
 @Component({selector: 'item-list', templateUrl: './index.html'})
 export class ListComponent implements OnInit
@@ -50,36 +51,47 @@ export class ListComponent implements OnInit
         return TItemModel.SelectedNum;
     }
 
-    OpenProductEditModal(template: TemplateRef<any>, data?: TItem)
+    OpenProductEditModal(data?: TItem)
     {
-        this.ModalTitle = this.SetModTitle(data);
+        // this.ModalTitle = this.SetModTitle(data);
+        // if (! TypeInfo.Assigned(data))
+        // {
+        //     this.CurrEditProduct = new Object() as any;
+        // }
+        // else
+        // {
+        //     if (TypeInfo.Assigned(data.AvatarUrl)) this.ArrAvatarFile.push(data.AvatarUrl);
+        //     if (TypeInfo.Assigned(data.Pictures)) data.Pictures.forEach(item => this.ArrPictureFile.push(item));
+
+        //     this.CurrEditProduct = data;
+        // }
+
+        // App.Modal.open(template, {size: 'lg'}).result
+        //     .then(ok =>
+        //     {
+        //         if (!TypeInfo.Assigned(data))
+        //         {
+        //             this.ItemSvc.Append(this.CurrEditProduct)
+        //                 .catch(err => console.log(err));
+        //         }
+        //         else
+        //         {
+        //             this.ItemSvc.Update(this.CurrEditProduct)
+        //                 .catch(err => console.log(err));
+        //         }
+        //     })
+        //     .catch(err => {});
+
         if (! TypeInfo.Assigned(data))
-        {
-            this.CurrEditProduct = new Object() as any;
-        }
-        else
-        {
-            if (TypeInfo.Assigned(data.AvatarUrl)) this.ArrAvatarFile.push(data.AvatarUrl);
-            if (TypeInfo.Assigned(data.Pictures)) data.Pictures.forEach(item => this.ArrPictureFile.push(item));
+            data = new TProduct();
 
-            this.CurrEditProduct = data;
-        }
+        console.log('product edit: ' + JSON.stringify(data));
 
-        App.Modal.open(template, {size: 'lg'}).result
-            .then(ok =>
+        App.ShowModal(TProductEditComponent, {Product: data}, {size: 'lg'})
+            .then((Data) =>
             {
-                if (!TypeInfo.Assigned(data))
-                {
-                    this.ItemSvc.Append(this.CurrEditProduct)
-                        .catch(err => console.log(err));
-                }
-                else
-                {
-                    this.ItemSvc.Update(this.CurrEditProduct)
-                        .catch(err => console.log(err));
-                }
-            })
-            .catch(err => {});
+                console.log('modal result: ' + JSON.stringify(Data));
+            });
     }
 
     SetModTitle(data?: TItem): string

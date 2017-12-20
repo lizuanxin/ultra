@@ -2,10 +2,15 @@ import {NgModule, Component} from '@angular/core';
 import {SharedModule, RouterModule, Routes} from 'share';
 import {ListComponent} from './list';
 import {PicturesComponent} from './pictures';
+import { TApplication } from 'services/application';
+import { TFileLibComponent, TProductEditComponent } from 'share/component';
 
 @Component({selector: 'items', templateUrl: '../share/layout.module.html'})
 export class LayoutComponent
 {
+    constructor(App: TApplication)
+    {
+    }
 }
 
 const routes: Routes = [
@@ -31,7 +36,12 @@ const routes: Routes = [
         LayoutComponent,
         ListComponent,
         PicturesComponent
-    ]
+    ],
+    entryComponents: [
+        TFileLibComponent,
+        TProductEditComponent
+    ],
+    providers: [TApplication]
 })
 export class ItemsModule
 {
