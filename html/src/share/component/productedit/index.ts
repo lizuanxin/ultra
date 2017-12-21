@@ -17,7 +17,7 @@ export class TProductEditComponent extends TBasicModalCompnent
 
     OnInit()
     {
-        console.log('picture: ' + JSON.stringify(this.Product));
+        console.log('picture: ' + JSON.stringify(this.Product.Pictures.length));
     }
 
     OnClosed(Data: any)
