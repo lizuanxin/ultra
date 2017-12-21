@@ -1,4 +1,3 @@
-
 *
 {
     @include FontGeneration();
@@ -69,7 +68,7 @@
     padding: 10px;
     -ms-overflow-x: hidden;
     overflow-x: hidden;
-    overflow-y: scroll;
+    overflow-y: auto;
     position: relative;
     overflow: hidden;
 }
