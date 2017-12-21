@@ -97,3 +97,51 @@
         padding:0 10px;
     }
 }
+
+.ultra-topnav{
+    >li{
+        >a{
+            color: $gray-lighter;
+            display: inline-block;
+            margin:3px auto;
+            padding: 5px 10px;
+            border-radius: 3px;
+        }
+
+        i{
+            display: inline-block;
+            &.rotate{
+                transform: rotate(180deg);
+            }
+        }
+
+        .item-hover{
+            min-width:100%;
+            position: absolute;
+            margin-top: -6px;
+            box-shadow: 0 3px 3px rgba(0,0,0,.2);
+            border-radius: 3px;
+            display: none;
+            flex-direction: column;
+            background-color: $white;
+            a{
+                color: $gray-lighter;
+                display: inline-block;
+                padding: 5px 10px;
+            }
+        }
+
+        &:hover{
+            >a{
+                color: $gray-dark;
+                background-color: $white;
+            }
+            .item-hover{
+                display: flex;
+                a{
+                    color: $gray-dark;
+                }
+            }
+        }
+    }
+}

@@ -47,32 +47,33 @@
                             </div>
                     </ng-template>
 
-                    <div class="navbar-right-top">
-                        <ul class="collapse navbar-collapse" [ngbCollapse]="isCollapsed">
-                            <li class="nav-item">
-                                <a class="btn btn-light" href="javascript:void(0)">{{App.Language|translate}} &nbsp;<i icon class="rotate">&#xf3d8;</i></a>
-
-                                <ul class="nav-hover-item">
-                                    <li *ngFor="let lang of App.Languages" (click)="ChangeLang(lang)">
-                                    {{lang|translate}}
+                    <div class="navbar-snap" top>
+                        <ul class="flex flex-start ultra-topnav">
+                            <li>
+                                <a href="javascript:void(0)">{{App.Language|translate}} &nbsp;<i icon class="rotate">&#xf3d8;</i></a>
+                                <ul class="item-hover">
+                                    <li *ngFor="let lang of App.Languages">
+                                        <a href="javascript:void(0)" (click)="ChangeLang(lang)">{{lang|translate}}</a>
                                     </li>
                                 </ul>
                             </li>
-                            <li class="nav-item">
-                                <a class="btn btn-light" href="javascript:void(0)">{{Auth.Me.FirstName}} &nbsp;<i icon class="rotate">&#xf3d8;</i></a>
-
-                                <ul class="nav-hover-item">
-                                    <li *ngIf="Auth.IsLogin" [routerLink]="['/admin']">
-                                        {{'site.ucenter.title'|translate}}
+                            <li>
+                                <a href="javascript:void(0)">{{Auth.Me.FirstName}} &nbsp;<i icon class="rotate">&#xf3d8;</i></a>
+                                <ul class="item-hover">
+                                    <li *ngIf="Auth.IsLogin">
+                                        <a href="javascript:void(0)" [routerLink]="['/admin']">{{'site.ucenter.title'|translate}}</a>
                                     </li>
-                                    <li *ngIf="!Auth.IsLogin" [routerLink]="['/login']">
-                                        {{'button.login'|translate}}
+                                    <li *ngIf="!Auth.IsLogin">
+                                        <a href="javascript:void(0)" [routerLink]="['/login']">{{'button.login'|translate}}</a>
                                     </li>
-                                    <li *ngIf="Auth.IsLogin" (click)="Logout()">
-                                        {{'button.logout'|translate}}
+                                    <li *ngIf="Auth.IsLogin">
+                                        <a href="javascript:void(0)" (click)="Logout()">{{'button.logout'|translate}}</a>
                                     </li>
                                 </ul>
                             </li>
+                            <ng-template [ngIf]="!IsAdmin">
+                                <li><a href="javascript:void(0)">购物车</a></li>
+                            </ng-template>
                         </ul>
                     </div>
             </nav>

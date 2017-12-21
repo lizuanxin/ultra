@@ -24,7 +24,8 @@
         "up": "Up",
         "down": "Down",
         "next": "Next",
-        "prior": "Piror"
+        "prior": "Piror",
+        "shopcart": "cart"
     },
 
     "auth":
