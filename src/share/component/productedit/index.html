@@ -1,7 +1,7 @@
 
     <div class="modal-header">
         <h4 class="modal-title pull-left">{{ModalTitle}}</h4>
-        <button type="button" class="close" aria-label="Close" (click)="ButtonClose()">
+        <button type="button" class="close" aria-label="Close" (click)="ButtonCancel()">
             <span aria-hidden="true">&times;</span>
         </button>
     </div>
@@ -53,7 +53,7 @@
             </ngb-tabset>
     </div>
     <div class="modal-footer">
-            <button type="button" class="btn btn-default" (click)="ButtonClose()" >{{'button.close'|translate}}</button>
+            <button type="button" class="btn btn-default" (click)="ButtonCancel()" >{{'button.close'|translate}}</button>
             <button type="button" class="btn btn-primary" (click)="ButtonOK()" >{{'button.ok'|translate}}</button>
     </div>
 

@@ -54,43 +54,30 @@ export class ListComponent implements OnInit
     OpenProductEditModal(data?: TItem)
     {
         // this.ModalTitle = this.SetModTitle(data);
-        // if (! TypeInfo.Assigned(data))
-        // {
-        //     this.CurrEditProduct = new Object() as any;
-        // }
-        // else
-        // {
-        //     if (TypeInfo.Assigned(data.AvatarUrl)) this.ArrAvatarFile.push(data.AvatarUrl);
-        //     if (TypeInfo.Assigned(data.Pictures)) data.Pictures.forEach(item => this.ArrPictureFile.push(item));
-
-        //     this.CurrEditProduct = data;
-        // }
-
-        // App.Modal.open(template, {size: 'lg'}).result
-        //     .then(ok =>
-        //     {
-        //         if (!TypeInfo.Assigned(data))
-        //         {
-        //             this.ItemSvc.Append(this.CurrEditProduct)
-        //                 .catch(err => console.log(err));
-        //         }
-        //         else
-        //         {
-        //             this.ItemSvc.Update(this.CurrEditProduct)
-        //                 .catch(err => console.log(err));
-        //         }
-        //     })
-        //     .catch(err => {});
-
+        let IsNewAdded: boolean = false;
         if (! TypeInfo.Assigned(data))
+        {
             data = new TProduct();
+            IsNewAdded = true;
+        }
 
         console.log('product edit: ' + JSON.stringify(data));
 
         App.ShowModal(TProductEditComponent, {Product: data}, {size: 'lg'})
-            .then((Data) =>
+            .then((EditedProduct) =>
             {
-                console.log('modal result: ' + JSON.stringify(Data));
+                console.log('modal result: ' + JSON.stringify(EditedProduct));
+                if (! TypeInfo.Assigned(EditedProduct))
+                    return;
+                let ItemPromise;
+                if (IsNewAdded)
+                    ItemPromise = this.ItemSvc.Append(EditedProduct);
+                else
+                    ItemPromise = this.ItemSvc.Update(EditedProduct);
+
+                ItemPromise
+                    .then(() => this.UpdateItemList())
+                    .catch((err) => console.log(err));
             });
     }
 
