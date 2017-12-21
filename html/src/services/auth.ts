@@ -2,11 +2,16 @@ import {Injectable} from '@angular/core';
 import {CanActivate} from '@angular/router';
 
 import {TypeInfo} from 'UltraCreation/Core';
-import {TAuthService as TBasicAuthService} from './cloud/auth'
+import {TBasicAuthService} from './cloud/basic_auth';
 
 @Injectable()
 export class TAuthService extends TBasicAuthService implements CanActivate
 {
+    constructor()
+    {
+        super();
+    }
+
     async canActivate(): Promise<boolean>
     {
         if (this.IsLogin)
@@ -30,5 +35,5 @@ export class TAuthService extends TBasicAuthService implements CanActivate
             App.Router.navigate(['/login']);
             return false;
         }
-    }   
+    }
 }
