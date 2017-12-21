@@ -9,7 +9,7 @@
         </div>
     </div>
     <div style="height:320px;overflow-x:hidden;overflow-y:auto">
-        <ul class="row row-thumbnail" margin-top >
+        <ul class="row row-thumbnail" margin-top>
             <li class="col-2" *ngFor="let FileModel of FileModels" (click)="FileClicked(FileModel)">
                 <div class="img-container">
                     <img [src]="FileModel.Source.Path">
