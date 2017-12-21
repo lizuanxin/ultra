@@ -13,9 +13,26 @@ img{
 }
 
 .img-preview{
+    display: inline-block;
+    span{
+        display: inline-block;
+        position: relative;
+    }
     img{
         width:80px;
         height:80px;
         margin-right:10px;
+    }
+    button{
+        width: 30px;
+        height:30px;
+        border-radius: 50%;
+        background-color: $white;;
+        position: absolute;
+        right:-5px;
+        top:-5px;
+        font-size:1.8rem;
+        display: flex;
+        color: $red;
     }
 }
