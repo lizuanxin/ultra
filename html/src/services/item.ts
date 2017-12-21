@@ -4,7 +4,7 @@ import {TRestClient} from 'UltraCreation/Core/Http';
 import {TAssignable} from 'UltraCreation/Core/Persistable';
 
 import * as Types from './cloud/types';
-import {TAuthService} from './auth';
+import {TAuthService} from './authorize';
 
 @Injectable()
 export class TItemService

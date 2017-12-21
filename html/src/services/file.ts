@@ -3,7 +3,7 @@ import {TypeInfo} from 'UltraCreation/Core/TypeInfo';
 import {THttpClient} from 'UltraCreation/Core/Http';
 
 import * as Types from './cloud/types';
-import {TAuthService} from './auth';
+import {TAuthService} from './authorize';
 
 const SERVER_HOST = 'http://localhost:4200';
 
