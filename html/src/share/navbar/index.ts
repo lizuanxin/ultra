@@ -17,6 +17,9 @@ export class NavbarComponent implements OnInit
 
     ngOnInit()
     {
+        let _body: any = document.querySelector('body');
+        _body.style.height = 'auto';
+
         if (!this.IsAdmin) return;
         this.App.Router.config.forEach(route =>
         {
