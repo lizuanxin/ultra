@@ -71,35 +71,35 @@
 
 <ng-template [ngIf]="!toggleTheme">
     <div text-right n-m-t-45>
-        <button type="button" class="btn btn-primary btn-sm" (click)="OpenModal(AddressModal)">{{'account.delivery.new'|translate}}</button>
+        <button type="button" class="btn btn-primary btn-sm" (click)="OpenModal(AddressModal)">{{'profile.delivery.new'|translate}}</button>
     </div>
     <div class="card" margin-top *ngFor="let addr of AddressList">
         <h6 class="card-header">
             {{addr.Recipient}}<span m-l-10>{{addr.Country}}{{addr.City}}</span>
-            <span class="default-tips m-l-10" [class.action-tips]="addr.IsDefault" (click)="SetDefault(addr)">{{'account.delivery.default'|translate}}</span>
+            <span class="default-tips m-l-10" [class.action-tips]="addr.IsDefault" (click)="SetDefault(addr)">{{'profile.delivery.default'|translate}}</span>
             <button type="button" class="btn btn-link btn-sm" (click)="OpenModal(AddressModal,addr)">{{'button.edit'|translate}}</button>
             <i icon pull-right f-24 text-gray-light cursor-pointer (click)="Remove(addr)">&#xf2c1;</i>
         </h6>
         <div class="card-block">
             <div class="form-group row align-items-center" no-margin>
-                <label class="col-4 col-md-2 col-form-label" text-right text-nowrap text-gray-light>{{'account.delivery.recipient'|translate}}：</label>
+                <label class="col-4 col-md-2 col-form-label" text-right text-nowrap text-gray-light>{{'profile.delivery.recipient'|translate}}：</label>
                 <div class="col-8 col-md-4">
                     {{addr.Recipient}}
                 </div>
-                <label class="col-4 col-md-2 col-form-label" text-right text-nowrap text-gray-light>{{'account.delivery.tel'|translate}}：</label>
+                <label class="col-4 col-md-2 col-form-label" text-right text-nowrap text-gray-light>{{'profile.delivery.tel'|translate}}：</label>
                 <div class="col-8 col-md-4">
                     {{addr.Tel}}
                 </div>
             </div>
 
             <div class="form-group row row align-items-center" no-margin>
-                <label class="col-4 col-md-2 col-form-label" text-right text-nowrap text-gray-light>{{'account.delivery.location'|translate}}：</label>
+                <label class="col-4 col-md-2 col-form-label" text-right text-nowrap text-gray-light>{{'profile.delivery.location'|translate}}：</label>
                 <div class="col-8 col-md-10">
                     {{addr.Country}}{{addr.City}}{{addr.Street}}
                 </div>
             </div>
             <div class="form-group row row align-items-center" no-margin>
-                <label class="col-4 col-md-2 col-form-label" text-right text-nowrap text-gray-light>{{'account.delivery.zip'|translate}}：</label>
+                <label class="col-4 col-md-2 col-form-label" text-right text-nowrap text-gray-light>{{'profile.delivery.zip'|translate}}：</label>
                 <div class="col-8 col-md-10">
                     {{addr.Zip}}
                 </div>
@@ -118,37 +118,37 @@
     <div class="modal-body" p-30>
         <form novalidate [formGroup]="Delivery" autocomplete="off">
             <div class="form-group row">
-                <label class="col-3 col-form-label" text-right text-nowrap text-gray-light>{{'account.delivery.recipient'|translate}}：</label>
+                <label class="col-3 col-form-label" text-right text-nowrap text-gray-light>{{'profile.delivery.recipient'|translate}}：</label>
                 <div class="col-9">
                     <input type="text" class="form-control" formControlName="Recipient" [(ngModel)]="ModalAddress.Recipient" required>
                 </div>
             </div>
             <div class="form-group row">
-                <label class="col-3 col-form-label" text-right text-nowrap text-gray-light>{{'account.delivery.tel'|translate}}：</label>
+                <label class="col-3 col-form-label" text-right text-nowrap text-gray-light>{{'profile.delivery.tel'|translate}}：</label>
                 <div class="col-9">
                     <input type="text" class="form-control" formControlName="Tel" [(ngModel)]="ModalAddress.Tel" required>
                 </div>
             </div>
             <div class="form-group row">
-                <label class="col-3 col-form-label" text-right text-nowrap text-gray-light>{{'account.delivery.country'|translate}}：</label>
+                <label class="col-3 col-form-label" text-right text-nowrap text-gray-light>{{'profile.delivery.country'|translate}}：</label>
                 <div class="col-9">
                     <input type="text" class="form-control" formControlName="Country" [ngbTypeahead]="SearchCountry" [(ngModel)]="ModalAddress.Country" (input)="OnCountryInput($event)" (selectItem)="SelectCountry($event)" required>
                 </div>
             </div>
             <div class="form-group row">
-                <label class="col-3 col-form-label" text-right text-nowrap text-gray-light>{{'account.delivery.city'|translate}}：</label>
+                <label class="col-3 col-form-label" text-right text-nowrap text-gray-light>{{'profile.delivery.city'|translate}}：</label>
                 <div class="col-9">
                     <input type="text" class="form-control" formControlName="City" [ngbTypeahead]="SearchCity" [(ngModel)]="ModalAddress.City" required>
                 </div>
             </div>
             <div class="form-group row">
-                <label class="col-3 col-form-label" text-right text-nowrap text-gray-light>{{'account.delivery.street'|translate}}：</label>
+                <label class="col-3 col-form-label" text-right text-nowrap text-gray-light>{{'profile.delivery.street'|translate}}：</label>
                 <div class="col-9">
                     <input type="text" class="form-control" formControlName="Street" [(ngModel)]="ModalAddress.Street" required>
                 </div>
             </div>
             <div class="form-group row">
-                <label class="col-3 col-form-label" text-right text-nowrap text-gray-light>{{'account.delivery.zip'|translate}}：</label>
+                <label class="col-3 col-form-label" text-right text-nowrap text-gray-light>{{'profile.delivery.zip'|translate}}：</label>
                 <div class="col-9">
                     <input type="text" class="form-control" formControlName="Zip" [(ngModel)]="ModalAddress.Zip" required>
                 </div>

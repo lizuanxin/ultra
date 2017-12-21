@@ -15,7 +15,6 @@ export class TItemService
 
     async List(): Promise<Array<TItem>>
     {
-        console.log(this.Snap);
         if (! TypeInfo.Assigned(this.Snap))
         {
             this.Auth.Grant(this.Http);
@@ -34,7 +33,6 @@ export class TItemService
             }
         }
 
-        console.log(this.Snap);
         return Array.from(this.Snap.values());
     }
 
@@ -219,4 +217,3 @@ export class TPackage extends TItem implements Types.IPackage
 
     ProductInfoList: Array<Types.IProductInfo>;
 }
-

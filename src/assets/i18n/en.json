@@ -62,7 +62,17 @@
 
         "delivery":
         {
-            "title": "Delivery"
+            "title": "Delivery",
+
+            "recipient": "Recipient",
+            "tel": "Tel.",
+            "country": "Country",
+            "city": "City",
+            "street": "Street",
+            "zip": "Zip",
+
+            "new": "New address",
+            "default": "Default"
         }
     },
 
