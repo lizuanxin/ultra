@@ -69,11 +69,11 @@ export class ReceivingComponent implements OnInit
 
         if (TypeInfo.Assigned(data))
         {
-            this.ModalTitle = App.Translate('account.delivery.edit');
+            this.ModalTitle = App.Translate('profile.delivery.edit');
             Object.assign(this.ModalAddress, data);
         }
         else
-            this.ModalTitle = App.Translate('account.delivery.new');
+            this.ModalTitle = App.Translate('profile.delivery.new');
 
         App.Modal.open(ModalContent).result
             .then(ok =>
