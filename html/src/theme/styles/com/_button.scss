@@ -48,13 +48,13 @@ button{
     &.btn-file-upload {
         border:none;
         background:transparent;
-        color: lighten($blue,25%);
-        input[type="file"]{
+        // color: lighten($blue,25%);
+        input[type="file"] {
             display: none;
         }
-        &:hover{
-            color: $blue;
-        }
+        // &:hover{
+        //     color: $blue;
+        // }
     }
 
 
