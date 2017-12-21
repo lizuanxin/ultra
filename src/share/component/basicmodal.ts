@@ -1,6 +1,7 @@
 import {Input, OnInit} from '@angular/core';
 import {NgbActiveModal} from '@ng-bootstrap/ng-bootstrap';
-import { TAssignable, TypeInfo } from 'UltraCreation/Core';
+import {TypeInfo} from 'UltraCreation/Core/TypeInfo';
+import {TAssignable} from 'UltraCreation/Core/Persistable';
 
 export abstract class TBasicModalCompnent implements OnInit
 {
