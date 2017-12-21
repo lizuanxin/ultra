@@ -15,6 +15,7 @@ export class TProductEditComponent extends TBasicModalCompnent
 
     OnInit()
     {
+        console.log(this.Product.AvatarUrl);
     }
 
     OnClosed(Data: any)
@@ -39,7 +40,7 @@ export class TProductEditComponent extends TBasicModalCompnent
 
     AddOtherPictures()
     {
-        this.App.ShowModal(TFileLibComponent, {Multiple: false}, {size: 'lg'})
+        this.App.ShowModal(TFileLibComponent, {Multiple: true}, {size: 'lg'})
             .then((Pictures) =>
             {
             });
@@ -47,10 +48,13 @@ export class TProductEditComponent extends TBasicModalCompnent
 
     ButtonClose()
     {
+        console.log('button close');
+        this.Close(null);
     }
 
     ButtonOK()
     {
+        console.log('button ok');
         this.Close(this.Product);
     }
 

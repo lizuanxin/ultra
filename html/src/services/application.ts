@@ -100,7 +100,7 @@ export class TApplication
         ModelRef.componentInstance.IsInModalMode = true;
         this.ModelRefList.push(ModelRef);
 
-        return ModelRef.result;
+        return ModelRef.result.catch((err) => this.CloseModal(null));
     }
 
     CloseModal(Data: any)

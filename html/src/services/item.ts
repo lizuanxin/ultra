@@ -152,7 +152,7 @@ export class TItem extends TAssignable implements Types.IItem
     TypeId: Types.TItemTypeId;
     Name: string = '';
     Pictures: Array<Types.IPicture> = [];
-    AvatarUrl: string = '';
+    AvatarUrl: string = null;
     Timestamp: any;
 
     protected _PictureList: TFileList;

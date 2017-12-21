@@ -22,6 +22,7 @@
                                         <img [src]="Product.AvatarUrl" *ngIf="Product.AvatarUrl != null">
                                     </span>
                                     <button type="button" class="btn btn-lg btn-link btn-file" *ngIf="Product.AvatarUrl == null" (click)="AddMainPicture()">
+                                        <label><i icon f-50>&#xf100;</i></label>
                                     </button>
                                 </div>
                             </div>
