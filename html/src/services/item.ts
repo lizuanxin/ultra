@@ -28,7 +28,7 @@ export class TItemService
                     Item = new TPackage();
                 else
                     Item = new TProduct();
-                Item.Assign(Item);
+                Item.Assign(iter);
                 this.Snap.set(iter.Id, Item);
             }
         }
@@ -43,10 +43,9 @@ export class TItemService
 
     async Append(item: TItem): Promise<void>
     {
-        console.log(JSON.stringify(item));
         this.Auth.Grant(this.Http);
 
-        const res = await this.Http.Post('/append', item).toPromise();
+        const res = await this.Http.Post('/append', item.toString()).toPromise();
         item.Id = res.Content.Id;
 
         this.Snap.set(item.Id, item);
@@ -56,22 +55,8 @@ export class TItemService
     {
         this.Auth.Grant(this.Http);
 
-        switch (item.TypeId)
-        {
-        case Types.TItemTypeId.Package:
-            const Package = item as Types.IPackage;
-            Package.ProductInfoList.forEach((ProductInfo) =>
-            {
-                if (! TypeInfo.IsPrimitive(ProductInfo.Product))
-                    ProductInfo.Product = ProductInfo.Product.Id;
-            });
-            await this.Http.Post('/update', item).toPromise();
-            break;
-
-        case Types.TItemTypeId.Product:
-            await this.Http.Post('/update', item).toPromise();
-            break;
-        }
+        const res = await this.Http.Post('/update', item.toString()).toPromise();
+        this.Snap.set(item.Id, item);
     }
 
     async Remove(item: TItem): Promise<void>
@@ -136,7 +121,7 @@ export class TItem extends TAssignable implements Types.IItem
     get PictureList(): TFileList
     {
         if (! TypeInfo.Assigned(this._PictureList))
-            this._PictureList = new TFileList(this.Pictures);
+            this._PictureList = new TFileList(this.Pictures as Array<Types.IPicture>);
 
         return this._PictureList;
     }
@@ -144,6 +129,26 @@ export class TItem extends TAssignable implements Types.IItem
     get PictureUrls()
     {
         return this.PictureList.Paths;
+    }
+
+    GetUploadProp(): Object
+    {
+        let Prop = {};
+        if (this.Id.length > 0)
+            Prop['Id'] = this.Id;
+        if (this.Name.length > 0)
+            Prop['Name'] = this.Name;
+        if (this.AvatarUrl.length > 0)
+            Prop['AvatarUrl'] = this.AvatarUrl;
+
+        Prop['TypeId'] = this.TypeId;
+        Prop['Pictures'] = this.Pictures.map((Picture) => Picture.Id);
+        return Prop;
+    }
+
+    toString()
+    {
+        return JSON.stringify(this.GetUploadProp());
     }
 
     Id: string = '';
@@ -163,19 +168,11 @@ export class TProduct extends TItem implements Types.IProduct
         super();
     }
 
-    get TypeId()
-    {
-        return Types.TItemTypeId.Product;
-    }
+    TypeId = Types.TItemTypeId.Product;
 }
 
 export class TPackage extends TItem implements Types.IPackage
 {
-    get TypeId()
-    {
-        return Types.TItemTypeId.Package;
-    }
-
     Add(ProductOrId: string | TProduct, Qty: number)
     {
         if (ProductOrId instanceof TProduct)
@@ -215,5 +212,6 @@ export class TPackage extends TItem implements Types.IPackage
         return -1;
     }
 
+    TypeId = Types.TItemTypeId.Package;
     ProductInfoList: Array<Types.IProductInfo>;
 }

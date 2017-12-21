@@ -51,7 +51,12 @@ export class TFileLibComponent extends TBasicModalCompnent
         FileModel.IsSelected = ! FileModel.IsSelected;
     }
 
-    OnSelectedEnd()
+    ButtonCancel()
+    {
+        this.Close(null);
+    }
+
+    ButtonOK()
     {
         let SelectedFiles: Array<Types.IFile> = [];
         this.FileModels.forEach((UploadedFile) =>
