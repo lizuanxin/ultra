@@ -38,6 +38,7 @@ img{
 }
 
 .img-container{
+    position: relative;
     display: flex;
     justify-content: center;
     align-items: center;
@@ -46,9 +47,28 @@ img{
     padding-bottom: 50%;
     height: 0;
     line-height: 0;
-    overflow: hidden;
+    // overflow: hidden;
     background-color: $gray-lighter;
     img{
         width: 95%;
     }
+    button.del{
+        width: 30px;
+        height:30px;
+        border-radius: 50%;
+        background-color: $white;;
+        position: absolute;
+        right:-15px;
+        top:-10px;
+        font-size:1.8rem;
+        display: flex;
+        color: $red;
+    }
+
+    button.add{
+        background-color: transparent;
+        font-size:3rem;
+        color: $blue;
+    }
+
 }
