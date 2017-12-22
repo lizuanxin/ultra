@@ -11,6 +11,7 @@ import {SwiperComp} from 'UltraCreation/ng-ion/swiper';
 import {ScrollToModule} from '@nicky-lenaers/ngx-scroll-to';
 import {NgZorroAntdModule} from 'ng-zorro-antd';
 import {ReceivingComponent} from './component/receiving';
+import {DndModule} from 'ng2-dnd';
 import * as Comp from './component';
 
 @NgModule({
@@ -21,6 +22,7 @@ import * as Comp from './component';
         TranslateModule,
         NgbModule,
         NgZorroAntdModule,
+        DndModule.forRoot(),
         ScrollToModule.forRoot()
     ],
     declarations: [
@@ -37,6 +39,7 @@ import * as Comp from './component';
         RouterModule,
         TranslateModule,
         NgbModule,
+        DndModule,
         SwiperComp,
         ScrollToModule,
         NavbarComponent,
