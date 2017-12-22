@@ -88,6 +88,10 @@ export class ListComponent implements OnInit
         return App.Translate('items.commodity.button.edit') + App.Translate('items.commodity.field.goods');
     }
 
+    PackToPackage()
+    {
+        console.log('pack to package...');
+    }
 
     /*UpdateImageDisplay(file: FileList, type: number)
     {
@@ -111,28 +115,6 @@ export class ListComponent implements OnInit
         }
     }*/
 
-    getFileData(obj: any)
-    {
-
-        if (obj.id === 'image_1') Object.assign(this.ArrAvatarFile, obj.filed);
-
-        if (obj.id === 'image_2' && this.ArrPictureFile.length < this.MaxPicture)
-        {
-            if (this.ArrPictureFile.length === 0)
-            {
-                Object.assign(this.ArrPictureFile, obj.filed);
-            }
-            else
-            {
-                for (let item of obj.filed)
-                {
-                    this.ArrPictureFile.push(item);
-                }
-            }
-        }
-        // file.forEach(item => this.CurProduct.Pictures.push(item.Path));
-    }
-
     private UpdateItemList()
     {
         this.ItemSvc.List()
@@ -151,13 +133,6 @@ export class ListComponent implements OnInit
     ItemModels: Array<TItemModel>;
     ModalTitle: string;
     CurrEditProduct: TProduct;
-
-    fileMax: number = 1048576 / 2;
-    fileMaxWarning: boolean;
-    MaxAvatar: number = 1;
-    MaxPicture: number = 5;
-    ArrAvatarFile = new Array<any>();
-    ArrPictureFile = new Array<any>();
 }
 
 export class TItemModel

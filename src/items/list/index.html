@@ -25,7 +25,7 @@
                     <button class="btn btn-sm btn-outline-primary" type="button" (click)="OpenProductEditModal()">{{'button.add'|translate}}</button>
                 </div>
                 <div class="d-inline-block">
-                    <button class="btn btn-sm btn-primary" type="button" [disabled]="SelectedItemNum < 2" (click)="Open(PublishModal)">{{'items.list.pack'|translate}}</button>
+                    <button class="btn btn-sm btn-primary" type="button" [disabled]="SelectedItemNum < 2" (click)="PackToPackage()">{{'items.list.pack'|translate}}</button>
                 </div>
                 <div class="dropdown d-inline-block" ngbDropdown>
                     <button class="btn btn-sm btn-secondary dropdown-toggle" type="button" ngbDropdownToggle>
