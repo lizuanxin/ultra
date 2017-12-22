@@ -1,0 +1,12 @@
+.flex
+{
+    display: flex;
+    align-items: center;
+    &.flex-start{
+        align-items: flex-start;
+    }
+    >li {
+        position: relative;
+        flex: 0 0 auto;
+    }
+}
