@@ -4,6 +4,7 @@ import {TBasicModalCompnent} from '../basicmodal';
 import { TProduct } from 'services/item';
 import { TFileLibComponent } from 'share/component/filelib';
 import { TypeInfo } from 'UltraCreation/Core/TypeInfo';
+import * as Types from 'services/cloud/types';
 
 const MAX_PICTURES: number = 5;
 
@@ -45,12 +46,21 @@ export class TProductEditComponent extends TBasicModalCompnent
         this.App.ShowModal(TFileLibComponent, {Multiple: true}, {size: 'lg'})
             .then((Pictures) =>
             {
-                let AddedNum = MAX_PICTURES - this.Product.Pictures.length;
-                AddedNum = AddedNum < Pictures.length ? AddedNum : Pictures.length;
+                let AddingNum = Pictures.length > this.RemainingNum ? this.RemainingNum : Pictures.length;
 
-                for (let i = 0; i < AddedNum; i++)
+                for (let i = 0; i < AddingNum; i++)
                     this.Product.PictureList.Add(Pictures[i]);
             });
+    }
+
+    RemovePicture(Picture: Types.IFile)
+    {
+        this.Product.PictureList.Remove(Picture);
+    }
+
+    get RemainingNum()
+    {
+        return MAX_PICTURES - this.Product.Pictures.length;
     }
 
     ButtonCancel()

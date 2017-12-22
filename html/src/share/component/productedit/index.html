@@ -30,14 +30,14 @@
                                 <label text-gray-light text-nowrap text-right class="col-md-2" for="member-name">{{'produce.public.pro_img'|translate}}：</label>
                                 <div class="col-md-8">
                                     <div class="img-preview" id="image-2">
-                                        <ng-container *ngFor="let PictureUrl of Product.PictureUrls">
+                                        <ng-container *ngFor="let Picture of Product.Pictures">
                                             <span>
-                                                <img [src]="PictureUrl">
-                                                <button><i icon>&#xf14e;</i></button>
+                                                <img [src]="Picture.Path">
+                                                <button (click)="RemovePicture(Picture)"><i icon>&#xf14e;</i></button>
                                             </span>
                                         </ng-container>
                                     </div>
-                                    <button type="button" class="btn btn-lg btn-link btn-file" *ngIf="Product.Pictures.length < 5"  (click)="AddOtherPictures()">
+                                    <button type="button" class="btn btn-lg btn-link btn-file" *ngIf="RemainingNum > 0"  (click)="AddOtherPictures()">
                                         <label for="fileupload-2"><i icon f-50>&#xf100;</i></label>
                                     </button>
                                 </div>
