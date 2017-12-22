@@ -22,22 +22,6 @@
             }
         }
 
-        .img-container{
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            width:100%;
-            padding-top: 50%;
-            padding-bottom: 50%;
-            height: 0;
-            line-height: 0;
-            overflow: hidden;
-            background-color: $gray-lighter;
-            img{
-                width: 100%;
-            }
-        }
-
         .flex-btn{
             display: flex;
             justify-content: center;

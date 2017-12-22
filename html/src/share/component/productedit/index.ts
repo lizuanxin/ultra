@@ -90,6 +90,8 @@ export class TProductEditComponent extends TBasicModalCompnent
         this.Product.Name = ProductName;
     }
 
+    listOne: Array<object> = [{title: 'aaaaaa', num: 5}, {title: 'bbbbbbbb', num: 10}, {title: 'cccccccccccccc', num: 10}];
+
     @Input() Product: TProduct = new TProduct();
     @Output() OnChange = new EventEmitter<TProduct>();
 }

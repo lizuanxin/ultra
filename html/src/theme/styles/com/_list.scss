@@ -20,3 +20,11 @@
     }
 
 }
+
+.associated{
+    .form-control{
+        &.justify-content-center{
+            justify-content: center;
+        }
+    }
+}

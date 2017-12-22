@@ -50,7 +50,32 @@
                 </ngb-tab>
                 <ngb-tab title="{{'produce.public.related_goods'|translate}}">
                     <ng-template ngbTabContent>
-
+                        <div class="associated" m-h-10 m-v-20>
+                            <ul class="row align-items-center" dnd-sortable-container [sortableData]="listOne">
+                                <li class="col-2" *ngFor="let item of listOne; let i = index" dnd-sortable [sortableIndex]="i">
+                                    <div class="img-container" placement="top" ngbTooltip="{{item.title}}">
+                                        <img src="assets/images/site/pro-1.jpg">
+                                    </div>
+                                    <div class="input-group input-group-sm" m-t-10>
+                                        <span class="input-group-addon" id="btnGroupAddon">-</span>
+                                        <span class="form-control justify-content-center">{{item.num}}</span>
+                                        <span class="input-group-addon" id="btnGroupAddon">+</span>
+                                    </div>
+                                    <!-- <div class="title">name</div> -->
+                                </li>
+                                <!-- <li><i icon f-50 text-gray-lighter>&#xf102;</i></li>
+                                <li class="col-2">
+                                    <div class="img-container" placement="bottom" ngbTooltip="vvvvvvvvvvvvvvvv">
+                                        <img src="assets/images/site/pro-1.jpg">
+                                    </div>
+                                    <div class="input-group input-group-sm" m-t-10>
+                                        <span class="input-group-addon" id="btnGroupAddon">-</span>
+                                        <span class="form-control justify-content-center">10</span>
+                                        <span class="input-group-addon" id="btnGroupAddon">+</span>
+                                    </div>
+                                </li> -->
+                            </ul>
+                        </div>
                     </ng-template>
                 </ngb-tab>
             </ngb-tabset>
@@ -59,5 +84,3 @@
             <button type="button" class="btn btn-default" (click)="ButtonCancel()" >{{'button.close'|translate}}</button>
             <button type="button" class="btn btn-primary" (click)="ButtonOK()" >{{'button.ok'|translate}}</button>
     </div>
-
-
