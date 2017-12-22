@@ -63,7 +63,7 @@
                                 <input type="checkbox" [(ngModel)]="ItemModel.IsSelected" (ngModelChange)="ToggleSelect(ItemModel)">
                             </td>
                             <td>
-                                <img width=60 src="assets/images/portfolio-1.jpg">
+                                <img width=60 src="{{ItemModel.Source.AvatarUrl}}">
                             </td>
                             <td>{{ItemModel.Source.Name}}</td>
                             <!-- <td text-center>100</td>
