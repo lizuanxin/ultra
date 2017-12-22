@@ -31,7 +31,8 @@ import * as Comp from './component';
         SwiperComp,
         ReceivingComponent,
         Comp.TFileLibComponent,
-        Comp.TProductEditComponent
+        Comp.TProductEditComponent,
+        Comp.TProductPackageComponent
     ],
     exports: [
         CommonModule,
@@ -46,7 +47,8 @@ import * as Comp from './component';
         SidebarComponent,
         ReceivingComponent,
         Comp.TFileLibComponent,
-        Comp.TProductEditComponent
+        Comp.TProductEditComponent,
+        Comp.TProductPackageComponent
     ]
 })
 export class SharedModule
