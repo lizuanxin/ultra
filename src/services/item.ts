@@ -96,7 +96,7 @@ export class TFileList
     {
         let index = this.Files.indexOf(UserFile);
         if (index !== -1)
-            this.Files.splice(index);
+            this.Files.splice(index, 1);
     }
 
     Add(UserFile: Types.IFile)
@@ -184,7 +184,7 @@ export class TPackage extends TItem implements Types.IPackage
     {
         let Idx = this.GetProductIndex(ProductOrId);
         if (Idx !== -1)
-            this.ProductInfoList.splice(Idx);
+            this.ProductInfoList.splice(Idx, 1);
     }
 
     Update(ProductOrId: string | TProduct, Qty: number)
