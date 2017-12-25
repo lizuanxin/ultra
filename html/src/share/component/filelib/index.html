@@ -1,19 +1,17 @@
 <div class="container-layer">
     <div class="row">
         <div class="col-md-6">
-            <button type="button" class="btn-file-upload">
-                <!-- <label for="upload_file"><i icon f-50>&#xf100;</i></label> -->
-                <label for="upload_file"><a class="btn btn-primary text-light">新增</a></label>
+            <button type="button" class="btn btn-primary btn-file-upload">
+                <label for="upload_file">{{'button.add'|translate}}</label>
                 <input type="file" id="upload_file" (change)="UploadImage($event.target.files)" accept=".jpg, .jpeg, .png" multiple>
             </button>
+            <button type="button" class="btn btn-primary">{{'button.del'|translate}}</button>
         </div>
     </div>
-    <div style="height:320px;overflow-x:hidden;overflow-y:auto">
+    <div #content>
         <ul class="row row-thumbnail" margin-top>
             <li class="col-2" *ngFor="let FileModel of FileModels" (click)="FileClicked(FileModel)">
-                <div class="img-container">
-                    <img [src]="FileModel.Source.Path">
-                </div>
+                <div class="img-container" [style.background-image]="'url(' + FileModel.Source.Path + ')'"></div>
                 <ng-template [ngIf]="FileModel.IsSelected">
                     <div class="flex-btn">
                         <button class="btn-select"><i icon>&#xf3ff;</i></button>
@@ -23,7 +21,7 @@
         </ul>
     </div>
 </div>
-<div class="modal-footer">
+<div class="modal-footer" *ngIf="ModalMode">
     <button type="button" class="btn btn-default" (click)="ButtonCancel()" >{{'button.cancle'|translate}}</button>
     <button type="button" class="btn btn-primary" (click)="ButtonOK()" >{{'button.confirm'|translate}}</button>
 </div>
