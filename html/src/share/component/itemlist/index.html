@@ -41,7 +41,7 @@
                 </tr>
                 </thead>
                 <tbody>
-                    <tr *ngFor="let ItemModel of ItemModels" (click)="OpenProductEditModal(ItemModel)" >
+                    <tr *ngFor="let ItemModel of ItemModels" (click)="IsInModalMode ? ToggleSelect(ItemModel) : OpenProductEditModal(ItemModel.Source)" >
                         <td text-center (click)="$event.stopPropagation()">
                             <input type="checkbox" [(ngModel)]="ItemModel.IsSelected" (ngModelChange)="ToggleSelect(ItemModel)">
                         </td>
