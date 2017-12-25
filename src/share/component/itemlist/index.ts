@@ -35,8 +35,7 @@ export class ItemListComponent extends TBasicModalCompnent
 
     ToggleSelect(ItemModel: TItemModel)
     {
-
-
+        if (ItemModel.IsSelected === undefined) ItemModel.IsSelected = false;
         ItemModel.IsSelected = ! ItemModel.IsSelected;
     }
 
@@ -46,21 +45,18 @@ export class ItemListComponent extends TBasicModalCompnent
         this.ItemModels.forEach((ItemModel) => ItemModel.IsSelected = Selected);
     }
 
-    OpenProductEditModal(data?: TItemModel)
+    OpenProductEditModal(data?: TItem)
     {
-        console.log(data);
-        if (!this.IsInModalMode)
+        let IsNewAdded: boolean = false;
+        if (! TypeInfo.Assigned(data))
         {
-            let IsNewAdded: boolean = false;
-            if (! TypeInfo.Assigned(data.Source))
-            {
-                data.Source = new TProduct();
-                IsNewAdded = true;
-            }
+            data = new TProduct();
+            IsNewAdded = true;
+        }
 
-            console.log('product edit: ' + JSON.stringify(data.Source));
+        console.log('product edit: ' + JSON.stringify(data));
 
-            App.ShowModal(TProductEditComponent, {Product: data.Source}, {size: 'lg'})
+        App.ShowModal(TProductEditComponent, {Product: data}, {size: 'lg'})
             .then((EditedProduct) =>
             {
                 console.log('modal result: ' + JSON.stringify(EditedProduct));
@@ -76,12 +72,6 @@ export class ItemListComponent extends TBasicModalCompnent
                     .then(() => this.UpdateItemList())
                     .catch((err) => console.log(err));
             });
-        }
-        else
-        {
-            this.ToggleSelect(data);
-        }
-
     }
 
     /*
@@ -128,8 +118,6 @@ export class ItemListComponent extends TBasicModalCompnent
     }
 
     ItemModels: Array<TItemModel>;
-    ModalTitle: string;
-
     @Input() NavOpeation: Boolean = true;
     @Input() ItemRemove: Boolean = true;
 
