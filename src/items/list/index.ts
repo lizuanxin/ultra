@@ -14,10 +14,10 @@ export class ListComponent implements OnInit
 
     ngOnInit()
     {
-        this.ItemModels = [];
-        this.UpdateItemList();
+        // this.ItemModels = [];
+        // this.UpdateItemList();
     }
-
+/*
     Remove(ItemModel: TItemModel): void
     {
         this.ItemSvc.Remove(ItemModel.Source)
@@ -92,7 +92,7 @@ export class ListComponent implements OnInit
     {
         console.log('pack to package...');
     }
-
+*/
     /*UpdateImageDisplay(file: FileList, type: number)
     {
         let imgView = document.querySelector('#image-' + type + '') as HTMLElement;
@@ -115,47 +115,47 @@ export class ListComponent implements OnInit
         }
     }*/
 
-    private UpdateItemList()
-    {
-        this.ItemSvc.List()
-            .then((ItemList) =>
-            {
-                console.log('update item: ' + ItemList);
-                TItemModel.SelectedNum = 0;
-                this.ItemModels = ItemList.map((Item) => new TItemModel(Item));
-            })
-            .catch((err) => console.log(err));
-    }
+    // private UpdateItemList()
+    // {
+    //     this.ItemSvc.List()
+    //         .then((ItemList) =>
+    //         {
+    //             console.log('update item: ' + ItemList);
+    //             TItemModel.SelectedNum = 0;
+    //             this.ItemModels = ItemList.map((Item) => new TItemModel(Item));
+    //         })
+    //         .catch((err) => console.log(err));
+    // }
 
     App = window.App;
     Modal: TemplateRef<any>;
 
-    ItemModels: Array<TItemModel>;
+    // ItemModels: Array<TItemModel>;
     ModalTitle: string;
     CurrEditProduct: TProduct;
 }
 
-export class TItemModel
-{
-    static SelectedNum: number = 0;
-    constructor(public Source: TItem)
-    {
-    }
+// export class TItemModel
+// {
+//     static SelectedNum: number = 0;
+//     constructor(public Source: TItem)
+//     {
+//     }
 
-    get IsSelected(): boolean
-    {
-        return this._IsSelected;
-    }
+//     get IsSelected(): boolean
+//     {
+//         return this._IsSelected;
+//     }
 
-    set IsSelected(Selected: boolean)
-    {
-        if (Selected)
-            TItemModel.SelectedNum ++;
-        else
-            TItemModel.SelectedNum --;
+//     set IsSelected(Selected: boolean)
+//     {
+//         if (Selected)
+//             TItemModel.SelectedNum ++;
+//         else
+//             TItemModel.SelectedNum --;
 
-        this._IsSelected = Selected;
-    }
+//         this._IsSelected = Selected;
+//     }
 
-    _IsSelected: boolean = false;
-}
+//     _IsSelected: boolean = false;
+// }

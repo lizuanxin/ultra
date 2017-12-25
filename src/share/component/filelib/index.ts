@@ -15,7 +15,7 @@ export class TFileLibComponent extends TBasicModalCompnent
 
     OnInit()
     {
-        if (this.ModalMode) this.contentRef.nativeElement.style = 'height:320px; overflow-x:hidden; overflow-y:auto';
+        if (this.IsInModalMode) this.contentRef.nativeElement.style = 'height:320px; overflow-x:hidden; overflow-y:auto';
         this.UpdateFileList();
     }
 
@@ -82,7 +82,6 @@ export class TFileLibComponent extends TBasicModalCompnent
 
     FileModels: Array<TFileModel>;
 
-    @Input() ModalMode: boolean = false;
     @Input() Multiple: boolean = true;
     @Output() OnPictureSelected = new EventEmitter<Array<Types.IFile>>();
     @ViewChild('content') contentRef: ElementRef;
