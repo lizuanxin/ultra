@@ -43,7 +43,7 @@ export class TProductEditComponent extends TBasicModalCompnent
 
     AddOtherPictures()
     {
-        this.App.ShowModal(TFileLibComponent, {Multiple: true}, {size: 'lg'})
+        this.App.ShowModal(TFileLibComponent, {Multiple: true, ModalMode: true}, {size: 'lg'})
             .then((Pictures) =>
             {
                 let AddingNum = Pictures.length > this.RemainingNum ? this.RemainingNum : Pictures.length;

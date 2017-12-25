@@ -46,15 +46,13 @@ button{
     }
 
     &.btn-file-upload {
-        border:none;
-        background:transparent;
-        // color: lighten($blue,25%);
+        label{
+            margin-bottom: 0;
+        }
         input[type="file"] {
             display: none;
         }
-        // &:hover{
-        //     color: $blue;
-        // }
+
     }
 
 
