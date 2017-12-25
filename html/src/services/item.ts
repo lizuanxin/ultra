@@ -151,12 +151,19 @@ export class TItem extends TAssignable implements Types.IItem
         return JSON.stringify(this.GetUploadProp());
     }
 
+    get DefaultPricing(): Types.IPricing
+    {
+        return null;
+    }
+
     Id: string = '';
     TypeId: Types.TItemTypeId;
     Name: string = '';
     Pictures: Array<Types.IPicture> = [];
     AvatarUrl: string = null;
     Timestamp: any;
+
+    PricingList: Array<Types.IPricing>;
 
     protected _PictureList: TFileList;
 }
