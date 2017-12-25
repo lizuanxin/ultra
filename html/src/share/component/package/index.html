@@ -1,8 +1,7 @@
 <div class="associated" m-h-10 m-v-20>
     <ul class="row" dnd-sortable-container [sortableData]="listOne">
         <li class="col-2" *ngFor="let item of listOne; let i = index" dnd-sortable [sortableIndex]="i">
-            <div class="img-container" placement="top" ngbTooltip="{{item.title}}">
-                <img src="assets/images/site/pro-1.jpg">
+            <div class="img-container" placement="top" ngbTooltip="{{item.title}}" style="background-image: url(assets/images/site/pro-1.jpg)">
                 <button class="del"><i icon>&#xf14e;</i></button>
             </div>
             <div class="input-group input-group-sm" m-t-10>
