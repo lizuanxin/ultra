@@ -1,9 +1,10 @@
 import {NgModule, Component} from '@angular/core';
 import {SharedModule, RouterModule, Routes} from 'share';
-import {ListComponent} from './list';
 import {PicturesComponent} from './pictures';
 import { TApplication } from 'services/application';
-import { TFileLibComponent, TProductEditComponent } from 'share/component';
+import { TFileLibComponent } from 'share/component';
+import { TItemEditComponent } from 'items/edit';
+import { TItemListComponent } from 'items/list';
 
 @Component({selector: 'items', templateUrl: '../share/layout.module.html'})
 export class LayoutComponent
@@ -18,7 +19,7 @@ const routes: Routes = [
         data: {LangId: 'items', Icon: '&#xe907;', Role: ''},
 
         children: [
-            {path: 'list', component: ListComponent, data: {LangId: 'list', Role: ''}},
+            {path: 'list', component: TItemListComponent, data: {LangId: 'list', Role: ''}},
             {path: 'pictures', component: PicturesComponent, data: {LangId: 'pictures', Role: ''}},
 
             /// ...
@@ -34,12 +35,14 @@ const routes: Routes = [
     ],
     declarations: [
         LayoutComponent,
-        ListComponent,
+        TItemEditComponent,
+        TItemListComponent,
         PicturesComponent
     ],
     entryComponents: [
         TFileLibComponent,
-        TProductEditComponent
+        TItemEditComponent,
+        TItemListComponent
     ],
     providers: [TApplication]
 })

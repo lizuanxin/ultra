@@ -5,7 +5,6 @@ import {TAssignable} from 'UltraCreation/Core/Persistable';
 
 export abstract class TBasicModalCompnent implements OnInit
 {
-    abstract OnInit(): void;
     abstract OnClosed(Data: any): void;
     abstract OnDismiss(Data: any): void;
 
@@ -13,6 +12,10 @@ export abstract class TBasicModalCompnent implements OnInit
     {
         this.AssignProp();
         this.OnInit();
+    }
+
+    OnInit()
+    {
     }
 
     AssignProp()

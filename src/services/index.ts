@@ -5,7 +5,7 @@ import {TranslateModule, TranslateLoader} from '@ngx-translate/core';
 import {TranslateHttpLoader} from '@ngx-translate/http-loader';
 import {TApplication} from './application';
 import {TAuthService} from './authorize';
-import {TItemService, TPackage} from 'services/item';
+import {TItemService} from 'services/item';
 import {TFileService} from './file';
 
 import {TShoppingCart} from './shopping_cart';
@@ -28,7 +28,7 @@ export function HttpLoaderFactory(http: HttpClient)
         NgbModule
     ],
     providers: [
-        TApplication, TAuthService, TItemService, TShoppingCart, TFileService, TPackage
+        TApplication, TAuthService, TItemService, TShoppingCart, TFileService
     ],
 })
 export class ServiceModule

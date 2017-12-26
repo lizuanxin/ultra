@@ -30,16 +30,10 @@ import * as Comp from './component';
         SidebarComponent,
         SwiperComp,
         ReceivingComponent,
-        Comp.ItemListComponent,
         Comp.TFileLibComponent,
-        Comp.TProductEditComponent,
-        Comp.TProductPackageComponent
     ],
     entryComponents: [
-        Comp.ItemListComponent,
         Comp.TFileLibComponent,
-        Comp.TProductEditComponent,
-        Comp.TProductPackageComponent
     ],
     exports: [
         CommonModule,
@@ -53,10 +47,7 @@ import * as Comp from './component';
         NavbarComponent,
         SidebarComponent,
         ReceivingComponent,
-        Comp.ItemListComponent,
-        Comp.TFileLibComponent,
-        Comp.TProductEditComponent,
-        Comp.TProductPackageComponent
+        Comp.TFileLibComponent
     ]
 })
 export class SharedModule

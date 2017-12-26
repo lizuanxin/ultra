@@ -1,28 +1,41 @@
-import {Component, OnInit, TemplateRef } from '@angular/core';
-import {TypeInfo, THttpClient} from 'UltraCreation/Core';
+import {Component, EventEmitter, Input, Output} from '@angular/core';
 
-import {Types} from 'services';
 import {TItemService, TItem, TProduct, TPackage} from 'services/item';
-import { TProductEditComponent } from 'share/component';
+import { TFileLibComponent } from 'share/component/filelib';
+import { TypeInfo } from 'UltraCreation/Core/TypeInfo';
+import * as Types from 'services/cloud/types';
+import { TBasicModalCompnent } from 'share/component/basicmodal';
+import { TItemEditComponent } from 'items/edit';
 
 @Component({selector: 'item-list', templateUrl: './index.html'})
-export class ListComponent implements OnInit
+export class TItemListComponent extends TBasicModalCompnent
 {
     constructor(private ItemSvc: TItemService)
     {
+        super();
+        this.ItemModels = [];
     }
 
-    ngOnInit()
+    OnInit()
     {
-        // this.ItemModels = [];
-        // this.UpdateItemList();
+        this.Refresh();
     }
-/*
-    Remove(ItemModel: TItemModel): void
+
+    OnClosed(Data: any)
     {
-        this.ItemSvc.Remove(ItemModel.Source)
-            .then(() => this.UpdateItemList())
-            .catch((err) => console.log(err));
+        this.Close(null);
+    }
+
+    OnDismiss(Data: any)
+    {
+
+    }
+
+    ToggleSelect(ItemModel: TItemModel)
+    {
+        if (ItemModel.IsSelected === undefined)
+            ItemModel.IsSelected = false;
+        ItemModel.IsSelected = ! ItemModel.IsSelected;
     }
 
     ToggleSelectAll()
@@ -31,9 +44,81 @@ export class ListComponent implements OnInit
         this.ItemModels.forEach((ItemModel) => ItemModel.IsSelected = Selected);
     }
 
-    ToggleSelect(ItemModel: TItemModel)
+    ButtonCancel()
     {
-        ItemModel.IsSelected = ! ItemModel.IsSelected;
+        console.log('button cancel');
+        this.Close(null);
+    }
+
+    ButtonOK()
+    {
+        console.log('button ok');
+        let SelectedItems = [];
+        this.ItemModels.forEach((ItemModel) =>
+        {
+            if (ItemModel.IsSelected)
+                SelectedItems.push(ItemModel.Source);
+        });
+        this.Close(SelectedItems);
+    }
+
+    CreateNewProduct()
+    {
+        let Product = TItem.CreateNew(Types.TItemTypeId.Product);
+        this.ShowItemEditModal(Product, true);
+    }
+
+    CreateNewPackage()
+    {
+        let Package = TItem.CreateNew(Types.TItemTypeId.Package) as TPackage;
+        this.ItemModels.forEach(item =>
+        {
+            if (item.IsSelected)
+                Package.Add(item.Source.Id, 1);
+        });
+
+        this.ShowItemEditModal(Package, true);
+    }
+
+    EditItem(Item: TItem)
+    {
+        this.ShowItemEditModal(Item, false);
+    }
+
+    ShowItemEditModal(Item: TItem, IsNewCreated: boolean)
+    {
+        App.ShowModal(TItemEditComponent, {Item: Item}, {size: 'lg'})
+            .then((EditedItem) =>
+            {
+                console.log('modal result: ' + JSON.stringify(EditedItem));
+                if (! TypeInfo.Assigned(EditedItem))
+                    return;
+                let ItemPromise;
+                if (IsNewCreated)
+                    ItemPromise = this.ItemSvc.Append(EditedItem);
+                else
+                    ItemPromise = this.ItemSvc.Update(EditedItem);
+
+                ItemPromise
+                    .then(() => this.Refresh())
+                    .catch((err) => console.log(err));
+            });
+    }
+
+    /*
+    SetModTitle(data?: TItem): string
+    {
+        if (!TypeInfo.Assigned(data)) return App.Translate('items.commodity.button.add') + App.Translate('items.commodity.field.goods');
+
+        return App.Translate('items.commodity.button.edit') + App.Translate('items.commodity.field.goods');
+    }
+    */
+
+    Remove(ItemModel: TItemModel): void
+    {
+        this.ItemSvc.Remove(ItemModel.Source)
+            .then(() => this.Refresh())
+            .catch((err) => console.log(err));
     }
 
     get AllItemSelected(): boolean
@@ -51,111 +136,47 @@ export class ListComponent implements OnInit
         return TItemModel.SelectedNum;
     }
 
-    OpenProductEditModal(data?: TItem)
+    private Refresh()
     {
-        // this.ModalTitle = this.SetModTitle(data);
-        let IsNewAdded: boolean = false;
-        if (! TypeInfo.Assigned(data))
-        {
-            data = new TProduct();
-            IsNewAdded = true;
-        }
-
-        console.log('product edit: ' + JSON.stringify(data));
-
-        App.ShowModal(TProductEditComponent, {Product: data}, {size: 'lg'})
-            .then((EditedProduct) =>
+        this.ItemSvc.List()
+            .then((ItemList) =>
             {
-                console.log('modal result: ' + JSON.stringify(EditedProduct));
-                if (! TypeInfo.Assigned(EditedProduct))
-                    return;
-                let ItemPromise;
-                if (IsNewAdded)
-                    ItemPromise = this.ItemSvc.Append(EditedProduct);
-                else
-                    ItemPromise = this.ItemSvc.Update(EditedProduct);
-
-                ItemPromise
-                    .then(() => this.UpdateItemList())
-                    .catch((err) => console.log(err));
-            });
+                console.log('update item: ' + ItemList);
+                TItemModel.SelectedNum = 0;
+                this.ItemModels = ItemList.map((Item) => new TItemModel(Item));
+            })
+            .catch((err) => console.log(err));
     }
 
-    SetModTitle(data?: TItem): string
-    {
-        if (!TypeInfo.Assigned(data)) return App.Translate('items.commodity.button.add') + App.Translate('items.commodity.field.goods');
-
-        return App.Translate('items.commodity.button.edit') + App.Translate('items.commodity.field.goods');
-    }
-
-    PackToPackage()
-    {
-        console.log('pack to package...');
-    }
-*/
-    /*UpdateImageDisplay(file: FileList, type: number)
-    {
-        let imgView = document.querySelector('#image-' + type + '') as HTMLElement;
-        if (TypeInfo.Assigned(file.length))
-        {
-            for (let i = 0; i < file.length; i++)
-            {
-                if (file[i].size > this.fileMax)
-                {
-                    return this.fileMaxWarning = true;
-                }
-                else
-                {
-                    let image = document.createElement('img');
-                    image.src = window.URL.createObjectURL(file[i]);
-                    imgView.appendChild(image);
-                }
-            }
-            type === 1 ? Object.assign(this.ArrAvatarFile, file) : Object.assign(this.ArrPictureFile, file);
-        }
-    }*/
-
-    // private UpdateItemList()
-    // {
-    //     this.ItemSvc.List()
-    //         .then((ItemList) =>
-    //         {
-    //             console.log('update item: ' + ItemList);
-    //             TItemModel.SelectedNum = 0;
-    //             this.ItemModels = ItemList.map((Item) => new TItemModel(Item));
-    //         })
-    //         .catch((err) => console.log(err));
-    // }
-
-    App = window.App;
-    Modal: TemplateRef<any>;
-
-    // ItemModels: Array<TItemModel>;
-    ModalTitle: string;
-    CurrEditProduct: TProduct;
+    ItemModels: Array<TItemModel>;
+    @Input() NavOpeation: Boolean = true;
+    @Input() ItemRemove: Boolean = true;
 }
 
-// export class TItemModel
-// {
-//     static SelectedNum: number = 0;
-//     constructor(public Source: TItem)
-//     {
-//     }
+export class TItemModel
+{
+    static SelectedNum: number = 0;
+    constructor(public Source: TItem)
+    {
+    }
 
-//     get IsSelected(): boolean
-//     {
-//         return this._IsSelected;
-//     }
+    get IsSelected(): boolean
+    {
+        return this._IsSelected;
+    }
 
-//     set IsSelected(Selected: boolean)
-//     {
-//         if (Selected)
-//             TItemModel.SelectedNum ++;
-//         else
-//             TItemModel.SelectedNum --;
+    set IsSelected(Selected: boolean)
+    {
+        console.log('selected: ' + Selected);
+        if (Selected)
+            TItemModel.SelectedNum ++;
+        else
+            TItemModel.SelectedNum --;
 
-//         this._IsSelected = Selected;
-//     }
+        this._IsSelected = Selected;
+    }
 
-//     _IsSelected: boolean = false;
-// }
+    _IsSelected: boolean = false;
+}
+
+
