@@ -30,7 +30,7 @@
                                 <label text-gray-light text-nowrap text-right class="col-md-2" for="member-name">{{'produce.public.pro_img'|translate}}：</label>
                                 <div class="col-md-8">
                                     <div class="img-preview" id="image-2">
-                                        <ng-container *ngFor="let Picture of Product.Pictures">
+                                        <ng-container *ngFor="let Picture of Item.Pictures">
                                             <span>
                                                 <img [src]="Picture.Path">
                                                 <button (click)="RemovePicture(Picture)"><i icon>&#xf14e;</i></button>
@@ -48,9 +48,26 @@
                     <ng-template ngbTabContent>
                     </ng-template>
                 </ngb-tab>
-                <ngb-tab title="{{'produce.public.related_goods'|translate}}">
+                <ngb-tab title="{{'produce.public.related_goods'|translate}}" *ngIf="IsPackage">
                     <ng-template ngbTabContent>
-                        <package></package>
+                        <div class="associated" m-h-10 m-v-20>
+                            <ul class="row" dnd-sortable-container [sortableData]="Item.ProductInfoList">
+                                <li class="col-2" *ngFor="let ProductInfo of Item.ProductInfoList; let i = index" dnd-sortable [sortableIndex]="i">
+                                    <div class="img-container" placement="top" ngbTooltip="{{item.title}}" style="background-image: url(assets/images/site/pro-1.jpg)">
+                                        <button class="del"><i icon>&#xf14e;</i></button>
+                                    </div>
+                                    <div class="input-group input-group-sm" m-t-10>
+                                        <span class="input-group-addon" id="btnGroupAddon">-</span>
+                                        <span class="form-control justify-content-center">{{ProductInfo.Qty}}</span>
+                                        <span class="input-group-addon" id="btnGroupAddon">+</span>
+                                    </div>
+                                </li>
+                                <li class="col-2">
+                                    <div class="img-container"><button class="add" (click)="OpenItemList()"><i icon>&#xf100;</i></button></div>
+                                </li>
+                                <!-- <li><i icon f-50 text-gray-lighter>&#xf102;</i></li> -->
+                            </ul>
+                        </div>
                     </ng-template>
                 </ngb-tab>
             </ngb-tabset>

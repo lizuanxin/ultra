@@ -118,6 +118,17 @@ export class TFileList
 
 export class TItem extends TAssignable implements Types.IItem
 {
+    static CreateNew(TypeId: Types.TItemTypeId): TItem
+    {
+        switch (TypeId)
+        {
+            case Types.TItemTypeId.Package:
+                return new TPackage();
+            case Types.TItemTypeId.Product:
+                return new TProduct();
+        }
+    }
+
     get PictureList(): TFileList
     {
         if (! TypeInfo.Assigned(this._PictureList))
@@ -157,13 +168,13 @@ export class TItem extends TAssignable implements Types.IItem
     }
 
     Id: string = '';
-    TypeId: Types.TItemTypeId;
+    TypeId: Types.TItemTypeId = 0;
     Name: string = '';
     Pictures: Array<Types.IPicture> = [];
     AvatarUrl: string = null;
     Timestamp: any;
 
-    PricingList: Array<Types.IPricing>;
+    PricingList: Array<Types.IPricing> = [];
 
     protected _PictureList: TFileList;
 }
@@ -180,28 +191,37 @@ export class TProduct extends TItem implements Types.IProduct
 
 export class TPackage extends TItem implements Types.IPackage
 {
-    Add(ProductOrId: string | TProduct, Qty: number)
+    Add(ProductOrId: string | TItem, Qty: number)
     {
         if (ProductOrId instanceof TProduct)
             ProductOrId = ProductOrId.Id;
         this.ProductInfoList.push({Product: ProductOrId, Qty: Qty});
     }
 
-    Remove(ProductOrId: string | TProduct)
+    Remove(ProductOrId: string | TItem)
     {
         let Idx = this.GetProductIndex(ProductOrId);
         if (Idx !== -1)
             this.ProductInfoList.splice(Idx, 1);
     }
 
-    Update(ProductOrId: string | TProduct, Qty: number)
+    Update(ProductOrId: string | TItem, Qty: number)
     {
         let Idx = this.GetProductIndex(ProductOrId);
         if (Idx !== -1)
             this.ProductInfoList[Idx].Qty = Qty;
     }
 
-    private GetProductIndex(ProductOrId: string | TProduct)
+    // override
+    GetUploadProp(): Object
+    {
+        let Prop = super.GetUploadProp();
+        Prop['ProductInfoList'] = this.ProductInfoList;
+
+        return Prop;
+    }
+
+    private GetProductIndex(ProductOrId: string | TItem)
     {
         if (ProductOrId instanceof TProduct)
             ProductOrId = ProductOrId.Id;
@@ -220,5 +240,5 @@ export class TPackage extends TItem implements Types.IPackage
     }
 
     TypeId = Types.TItemTypeId.Package;
-    ProductInfoList: Array<Types.IProductInfo>;
+    ProductInfoList: Array<Types.IProductInfo> = [];
 }

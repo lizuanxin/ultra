@@ -15,8 +15,9 @@ export class TFileLibComponent extends TBasicModalCompnent
 
     OnInit()
     {
-        if (this.IsInModalMode) this.contentRef.nativeElement.style = 'height:320px; overflow-x:hidden; overflow-y:auto';
-        this.UpdateFileList();
+        if (this.IsInModalMode)
+            this.contentRef.nativeElement.style = 'height:320px; overflow-x:hidden; overflow-y:auto';
+        this.Refresh();
     }
 
     OnClosed(Data: any)
@@ -31,7 +32,7 @@ export class TFileLibComponent extends TBasicModalCompnent
     UploadImage(file: any)
     {
         this.FileSvc.Upload(file)
-            .then(() => this.UpdateFileList())
+            .then(() => this.Refresh())
             .catch(err => console.log(err));
     }
 
@@ -69,7 +70,7 @@ export class TFileLibComponent extends TBasicModalCompnent
         this.Close(SelectedFiles);
     }
 
-    private UpdateFileList()
+    private Refresh()
     {
         this.FileSvc.List()
             .then((List) =>
