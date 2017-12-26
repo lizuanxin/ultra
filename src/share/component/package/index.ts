@@ -21,6 +21,7 @@ export class TProductPackageComponent extends TBasicModalCompnent
     OnInit()
     {
 
+
     }
 
     OnClosed()
