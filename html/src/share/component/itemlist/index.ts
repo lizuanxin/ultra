@@ -10,7 +10,7 @@ import { TProductEditComponent } from 'share/component/productedit';
 @Component({selector: 'items-list', templateUrl: './index.html'})
 export class ItemListComponent extends TBasicModalCompnent
 {
-    constructor(private ItemSvc: TItemService)
+    constructor(private ItemSvc: TItemService, private ItemPackageSvc: TPackage)
     {
         super();
         this.ItemModels = [];
@@ -43,6 +43,11 @@ export class ItemListComponent extends TBasicModalCompnent
     {
         let Selected = ! this.AllItemSelected;
         this.ItemModels.forEach((ItemModel) => ItemModel.IsSelected = Selected);
+    }
+
+    SelectedItem()
+    {
+
     }
 
     OpenProductEditModal(data?: TItem)
@@ -88,6 +93,25 @@ export class ItemListComponent extends TBasicModalCompnent
         this.ItemSvc.Remove(ItemModel.Source)
             .then(() => this.UpdateItemList())
             .catch((err) => console.log(err));
+    }
+
+    PackToPackage()
+    {
+        let _selectedItems = [], IsNewPackage: Boolean = false;
+        this.ItemModels.forEach(item =>
+        {
+            if (item.IsSelected) _selectedItems.push(item), this.ItemPackageSvc.Add(item.Source, 1);
+        });
+
+        App.ShowModal(TProductEditComponent, {Package: _selectedItems}, {size: 'lg'})
+            .then((PackageProduct) =>
+            {
+                let ItemPromise = this.ItemSvc.Append(PackageProduct);
+                ItemPromise
+                    .then(() => this.UpdateItemList())
+                    .catch((err) => console.log(err));
+
+            });
     }
 
     get AllItemSelected(): boolean
