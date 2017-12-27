@@ -11,7 +11,28 @@ img{
         padding:10px;
     }
 }
-
+.img-preview,.img-container{
+    div.del{
+        z-index: 1;
+        position: absolute;
+        width: 24px;
+        height:24px;
+        border-radius: 50%;
+        background-color: $red;;
+        right:-10px;
+        top:-10px;
+        font-size:1.6rem;
+        display: inline-flex;
+        justify-content: center;
+        align-items: center;
+        transform: rotate(45deg);
+        color: $white;
+        &:before{
+            font-family: 'iconfont';
+            content: "\f102"
+        }
+    }
+}
 .img-preview{
     display: inline-block;
     span{
@@ -23,19 +44,7 @@ img{
         height:80px;
         margin-right:10px;
     }
-    button{
-        overflow: hidden;
-        width: 26px;
-        height:26px;
-        border-radius: 50%;
-        background-color: $white;;
-        position: absolute;
-        right:0;
-        top:-10px;
-        font-size:1.8rem;
-        display: flex;
-        color: $red;
-    }
+
 }
 
 .img-container{
@@ -52,18 +61,6 @@ img{
     background-repeat: no-repeat;
     background-size: contain;
     background-position: center center;
-    button.del{
-        width: 30px;
-        height:30px;
-        border-radius: 50%;
-        background-color: $white;;
-        position: absolute;
-        right:-15px;
-        top:-10px;
-        font-size:1.8rem;
-        display: flex;
-        color: $red;
-    }
 
     button.add{
         background-color: transparent;
