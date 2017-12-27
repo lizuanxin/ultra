@@ -63,7 +63,7 @@ export class TItemService
     {
         this.Auth.Grant(this.Http);
 
-        await this.Http.Post('/remove', {Id: item.Id}).toPromise();
+        await this.Http.Post('/remove', {Id: item.Id, TypeId: item.TypeId}).toPromise();
         this.Snap.delete(item.Id);
     }
 
