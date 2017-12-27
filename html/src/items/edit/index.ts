@@ -121,12 +121,19 @@ export class TItemEditComponent extends TBasicModalCompnent
             RetFilterItems.push(this.Item.Id);
 
         RetFilterItems.concat((this.Item as TPackage).ProductInfoList.map((ProductInfo) => ProductInfo.Product));
+        console.log(RetFilterItems);
+
         return RetFilterItems;
     }
 
     GetAvatarUrl(ProductId: string): string
     {
         return this.ItemSvc.GetItem(ProductId).AvatarUrl;
+    }
+
+    GetItemName(ProductId: string): string
+    {
+        return this.ItemSvc.GetItem(ProductId).Name;
     }
 
     SubQty(ProductInfo: any)
