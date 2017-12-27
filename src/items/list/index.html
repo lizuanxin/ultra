@@ -30,7 +30,9 @@
     <table class="table table-bordered table-hover">
             <thead>
             <tr>
-                <th width="2%" text-center><input type="checkbox" [(ngModel)]="AllItemSelected" (ngModelChange)="ToggleSelectAll()"></th>
+                <th width="2%" text-center>
+                    <label nz-checkbox [(ngModel)]="AllItemSelected" (ngModelChange)="ToggleSelectAll()"></label>
+                </th>
                 <th width="12%">{{'items.list.field.id'|translate}}</th>
                 <th width="15%">{{'items.list.field.name'|translate}}</th>
                 <th width="12%" text-center>{{'items.list.field.timestamp'|translate}}</th>
@@ -39,7 +41,7 @@
             <tbody>
                 <tr *ngFor="let ItemModel of ItemModels" (click)="EditItem(ItemModel.Source)" >
                     <td text-center (click)="$event.stopPropagation()">
-                        <input type="checkbox" [(ngModel)]="ItemModel.IsSelected">
+                        <label nz-checkbox [(ngModel)]="ItemModel.IsSelected"></label>
                     </td>
                     <td>
                         <img width=60 src="{{ItemModel.Source.AvatarUrl}}">

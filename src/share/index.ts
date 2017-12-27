@@ -41,6 +41,7 @@ import * as Comp from './component';
         RouterModule,
         TranslateModule,
         NgbModule,
+        NgZorroAntdModule,
         DndModule,
         SwiperComp,
         ScrollToModule,
