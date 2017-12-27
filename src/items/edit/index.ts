@@ -136,6 +136,11 @@ export class TItemEditComponent extends TBasicModalCompnent
         return this.ItemSvc.GetItem(ProductId).Name;
     }
 
+    DeleteProduct(ProductId: string)
+    {
+        (this.Item as TPackage).Remove(ProductId);
+    }
+
     SubQty(ProductInfo: any)
     {
         if (ProductInfo.Qty === 1)

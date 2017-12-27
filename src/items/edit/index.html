@@ -54,7 +54,7 @@
                             <ul class="row" dnd-sortable-container [sortableData]="Item.ProductInfoList">
                                 <li class="col-2" *ngFor="let ProductInfo of Item.ProductInfoList; let i = index" dnd-sortable [sortableIndex]="i">
                                     <div class="img-container" placement="top" ngbTooltip="{{GetItemName(ProductInfo.Product)}}" [style.background-image]="'url(' + GetAvatarUrl(ProductInfo.Product) + ')'">
-                                        <button class="del"><i icon>&#xf14e;</i></button>
+                                        <button class="del" (click)="DeleteProduct(ProductInfo.Product)"><i icon>&#xf14e;</i></button>
                                     </div>
                                     <div class="input-group input-group-sm" m-t-10>
                                         <span class="input-group-addon" id="btnGroupAddon" (click)="SubQty(ProductInfo)">-</span>
