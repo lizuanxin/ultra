@@ -1,6 +1,6 @@
 import {Component, EventEmitter, Input, Output} from '@angular/core';
 
-import { TProduct, TItem, TPackage } from 'services/item';
+import { TProduct, TItem, TPackage, TItemService } from 'services/item';
 import { TFileLibComponent } from 'share/component/filelib';
 import { TypeInfo } from 'UltraCreation/Core/TypeInfo';
 import * as Types from 'services/cloud/types';
@@ -12,7 +12,7 @@ const MAX_PICTURES: number = 5;
 @Component({selector: 'item-edit', templateUrl: './index.html'})
 export class TItemEditComponent extends TBasicModalCompnent
 {
-    constructor()
+    constructor(private ItemSvc: TItemService)
     {
         super();
     }
@@ -122,6 +122,11 @@ export class TItemEditComponent extends TBasicModalCompnent
 
         RetFilterItems.concat((this.Item as TPackage).ProductInfoList.map((ProductInfo) => ProductInfo.Product));
         return RetFilterItems;
+    }
+
+    GetAvatarUrl(ProductId: string): string
+    {
+        return this.ItemSvc.GetItem(ProductId).AvatarUrl;
     }
 
     SubQty(ProductInfo: any)
