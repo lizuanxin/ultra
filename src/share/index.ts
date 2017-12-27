@@ -30,11 +30,9 @@ import * as Comp from './component';
         SidebarComponent,
         SwiperComp,
         ReceivingComponent,
-        Comp.TItemListComponent,
         Comp.TFileLibComponent,
     ],
     entryComponents: [
-        Comp.TItemListComponent,
         Comp.TFileLibComponent,
     ],
     exports: [
@@ -49,7 +47,6 @@ import * as Comp from './component';
         NavbarComponent,
         SidebarComponent,
         ReceivingComponent,
-        Comp.TItemListComponent,
         Comp.TFileLibComponent
     ]
 })

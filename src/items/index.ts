@@ -31,8 +31,7 @@ const routes: Routes = [
 
 @NgModule({
     imports: [
-        RouterModule.forChild(routes),
-        SharedModule,
+        SharedModule
     ],
     declarations: [
         LayoutComponent,
@@ -47,7 +46,27 @@ const routes: Routes = [
         TItemEditComponent,
         TItemListComponent
     ],
+    exports: [
+        TItemEditComponent,
+        TItemListComponent
+    ],
     providers: [TApplication]
+})
+export class ItemShareModule
+{
+}
+
+@NgModule({
+    imports: [
+        RouterModule.forChild(routes),
+        SharedModule,
+        ItemShareModule
+    ],
+    entryComponents: [
+        TFileLibComponent,
+        TItemEditComponent,
+        TItemListComponent
+    ]
 })
 export class ItemsModule
 {
