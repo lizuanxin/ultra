@@ -3,7 +3,7 @@ import {TypeInfo, THttpClient} from 'UltraCreation/Core';
 
 import {Types} from 'services';
 import {TItemService, TItem, TProduct, TPackage} from 'services/item';
-import {TItemListComponent} from 'items/list';
+import {TItemSelectorComponent} from 'items/list/selector';
 
 
 @Component({selector: 'doll-room', templateUrl: './index.html'})
@@ -28,7 +28,7 @@ export class DollRoomComponent implements OnInit
 
     OpenItemList()
     {
-        App.ShowModal(TItemListComponent, { NavOpeation: false }, {size: 'lg'})
+        App.ShowModal(TItemSelectorComponent, { NavOpeation: false }, {size: 'lg'})
         .then();
 
     }
