@@ -13,6 +13,11 @@ export class TItemService
     {
     }
 
+    GetItem(ItemId: string): TItem
+    {
+        return this.Snap.get(ItemId);
+    }
+
     async List(): Promise<Array<TItem>>
     {
         if (! TypeInfo.Assigned(this.Snap))
