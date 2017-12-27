@@ -1,34 +1,22 @@
-import {Component, EventEmitter, Input, Output} from '@angular/core';
+import {Component, EventEmitter, Input, Output, OnInit} from '@angular/core';
 
 import {TItemService, TItem, TProduct, TPackage} from 'services/item';
 import { TFileLibComponent } from 'share/component/filelib';
 import { TypeInfo } from 'UltraCreation/Core/TypeInfo';
 import * as Types from 'services/cloud/types';
-import { TBasicModalCompnent } from 'share/component/basicmodal';
 import { TItemEditComponent } from 'items/edit';
 
 @Component({selector: 'item-list', templateUrl: './index.html'})
-export class TItemListComponent extends TBasicModalCompnent
+export class TItemListComponent implements OnInit
 {
     constructor(private ItemSvc: TItemService)
     {
-        super();
         this.ItemModels = [];
     }
 
-    OnInit()
+    ngOnInit()
     {
         this.Refresh();
-    }
-
-    OnClosed(Data: any)
-    {
-        this.Close(null);
-    }
-
-    OnDismiss(Data: any)
-    {
-
     }
 
     ToggleSelect(ItemModel: TItemModel)
@@ -42,24 +30,6 @@ export class TItemListComponent extends TBasicModalCompnent
     {
         let Selected = ! this.AllItemSelected;
         this.ItemModels.forEach((ItemModel) => ItemModel.IsSelected = Selected);
-    }
-
-    ButtonCancel()
-    {
-        console.log('button cancel');
-        this.Close(null);
-    }
-
-    ButtonOK()
-    {
-        console.log('button ok');
-        let SelectedItems = [];
-        this.ItemModels.forEach((ItemModel) =>
-        {
-            if (ItemModel.IsSelected)
-                SelectedItems.push(ItemModel.Source);
-        });
-        this.Close(SelectedItems);
     }
 
     CreateNewProduct()
@@ -149,8 +119,6 @@ export class TItemListComponent extends TBasicModalCompnent
     }
 
     ItemModels: Array<TItemModel>;
-    @Input() NavOpeation: Boolean = true;
-    @Input() ItemRemove: Boolean = true;
 }
 
 export class TItemModel

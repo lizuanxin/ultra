@@ -1,11 +1,11 @@
 import {Component, EventEmitter, Input, Output} from '@angular/core';
 
-import { TProduct, TItem } from 'services/item';
+import { TProduct, TItem, TPackage } from 'services/item';
 import { TFileLibComponent } from 'share/component/filelib';
 import { TypeInfo } from 'UltraCreation/Core/TypeInfo';
 import * as Types from 'services/cloud/types';
 import { TBasicModalCompnent } from 'share/component/basicmodal';
-import { TItemListComponent } from 'items/list';
+import { TItemSelectorComponent } from 'items/list/selector';
 
 const MAX_PICTURES: number = 5;
 
@@ -103,10 +103,25 @@ export class TItemEditComponent extends TBasicModalCompnent
 
     OpenItemList()
     {
-        App.ShowModal(TItemListComponent, {IsInModalMode: true, NavOpeation: false, ItemRemove: false}, {size: 'lg'})
+        App.ShowModal(TItemSelectorComponent, {FilterItems: this.FilterItems}, {size: 'lg'})
             .then((SelectedItems) =>
             {
+                if (! TypeInfo.Assigned(SelectedItems))
+                    return;
+
+                for (let SelectedItem of SelectedItems)
+                    (this.Item as TPackage).Add(SelectedItem, 1);
             });
+    }
+
+    get FilterItems()
+    {
+        let RetFilterItems = [];
+        if (TypeInfo.Assigned(this.Item.Id) && this.Item.Id.length > 0)
+            RetFilterItems.push(this.Item.Id);
+
+        RetFilterItems.concat((this.Item as TPackage).ProductInfoList.map((ProductInfo) => ProductInfo.Product));
+        return RetFilterItems;
     }
 
     @Input() Item: TItem;
