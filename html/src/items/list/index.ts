@@ -21,8 +21,6 @@ export class TItemListComponent implements OnInit
 
     ToggleSelect(ItemModel: TItemModel)
     {
-        if (ItemModel.IsSelected === undefined)
-            ItemModel.IsSelected = false;
         ItemModel.IsSelected = ! ItemModel.IsSelected;
     }
 
@@ -135,7 +133,9 @@ export class TItemModel
 
     set IsSelected(Selected: boolean)
     {
-        console.log('selected: ' + Selected);
+        if (this._IsSelected === Selected)
+            return;
+
         if (Selected)
             TItemModel.SelectedNum ++;
         else
