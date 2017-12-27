@@ -5,6 +5,7 @@ import { TApplication } from 'services/application';
 import { TFileLibComponent } from 'share/component';
 import { TItemEditComponent } from 'items/edit';
 import { TItemListComponent } from 'items/list';
+import { TItemSelectorComponent } from 'items/list/selector';
 
 @Component({selector: 'items', templateUrl: '../share/layout.module.html'})
 export class LayoutComponent
@@ -35,12 +36,14 @@ const routes: Routes = [
     ],
     declarations: [
         LayoutComponent,
+        TItemSelectorComponent,
         TItemEditComponent,
         TItemListComponent,
         PicturesComponent
     ],
     entryComponents: [
         TFileLibComponent,
+        TItemSelectorComponent,
         TItemEditComponent,
         TItemListComponent
     ],
