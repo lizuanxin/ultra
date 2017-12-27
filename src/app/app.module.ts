@@ -22,6 +22,7 @@ const routes: Routes =
         children: [
             {path: 'account', loadChildren: '../profile/#ProfileModule', data: {LangId: 'profile', Icon: '&#xe909;', Role: ''}},
             {path: 'items', loadChildren: '../items/#ItemsModule', data: {LangId: 'items', Role: ''}},
+            {path: 'doll', loadChildren: '../doll/#DollModule', data: {LangId: 'doll', Role: ''}},
             // {path: 'orders', data: {LangId: 'order', Role: ''}},
             {path: '', redirectTo: 'account', pathMatch: 'full'}
         ]
