@@ -28,7 +28,7 @@ export class DollRoomComponent implements OnInit
 
     OpenItemList()
     {
-        App.ShowModal(TItemSelectorComponent, { NavOpeation: false }, {size: 'lg'})
+        App.ShowModal(TItemSelectorComponent, {}, {size: 'lg'})
         .then();
 
     }
