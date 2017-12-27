@@ -124,6 +124,18 @@ export class TItemEditComponent extends TBasicModalCompnent
         return RetFilterItems;
     }
 
+    SubQty(ProductInfo: any)
+    {
+        if (ProductInfo.Qty === 1)
+            return;
+        ProductInfo.Qty --;
+    }
+
+    AddQty(ProductInfo: any)
+    {
+        ProductInfo.Qty ++;
+    }
+
     @Input() Item: TItem;
     @Output() OnChange = new EventEmitter<TProduct>();
 }

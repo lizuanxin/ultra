@@ -53,13 +53,13 @@
                         <div class="associated" m-h-10 m-v-20>
                             <ul class="row" dnd-sortable-container [sortableData]="Item.ProductInfoList">
                                 <li class="col-2" *ngFor="let ProductInfo of Item.ProductInfoList; let i = index" dnd-sortable [sortableIndex]="i">
-                                    <div class="img-container" placement="top" ngbTooltip="{{item.title}}" style="background-image: url(assets/images/site/pro-1.jpg)">
+                                    <div class="img-container" placement="top" ngbTooltip="{{Item.Name}}" style="background-image: url(assets/images/site/pro-1.jpg)">
                                         <button class="del"><i icon>&#xf14e;</i></button>
                                     </div>
                                     <div class="input-group input-group-sm" m-t-10>
-                                        <span class="input-group-addon" id="btnGroupAddon">-</span>
+                                        <span class="input-group-addon" id="btnGroupAddon" (click)="SubQty(ProductInfo)">-</span>
                                         <span class="form-control justify-content-center">{{ProductInfo.Qty}}</span>
-                                        <span class="input-group-addon" id="btnGroupAddon">+</span>
+                                        <span class="input-group-addon" id="btnGroupAddon" (click)="AddQty(ProductInfo)">+</span>
                                     </div>
                                 </li>
                                 <li class="col-2">
