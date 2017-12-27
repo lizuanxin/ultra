@@ -23,7 +23,7 @@ const routes: Routes = [
             {path: 'room', component: DollRoomComponent, data: {LangId: 'room', Role: ''}},
 
             /// ...
-            {path: '', redirectTo: 'list'}
+            {path: '', redirectTo: 'room'}
         ]
     }
 ];
