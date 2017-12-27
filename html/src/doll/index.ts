@@ -35,12 +35,10 @@ const routes: Routes = [
     ],
     declarations: [
         LayoutComponent,
-        TItemListComponent,
         DollRoomComponent,
 
     ],
     entryComponents: [
-        TItemListComponent,
         TFileLibComponent,
         DollRoomComponent
 
