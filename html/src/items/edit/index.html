@@ -33,7 +33,7 @@
                                         <ng-container *ngFor="let Picture of Item.Pictures">
                                             <span>
                                                 <img [src]="Picture.Path">
-                                                <button (click)="RemovePicture(Picture)"><i icon>&#xf14e;</i></button>
+                                                <div class="del" (click)="RemovePicture(Picture)"></div>
                                             </span>
                                         </ng-container>
                                     </div>
@@ -54,7 +54,7 @@
                             <ul class="row" dnd-sortable-container [sortableData]="Item.ProductInfoList">
                                 <li class="col-2" *ngFor="let ProductInfo of Item.ProductInfoList; let i = index" dnd-sortable [sortableIndex]="i">
                                     <div class="img-container" placement="top" ngbTooltip="{{GetItemName(ProductInfo.Product)}}" [style.background-image]="'url(' + GetAvatarUrl(ProductInfo.Product) + ')'">
-                                        <button class="del" (click)="DeleteProduct(ProductInfo.Product)"><i icon>&#xf14e;</i></button>
+                                        <div class="del" (click)="DeleteProduct(ProductInfo.Product)"></div>
                                     </div>
                                     <div class="input-group input-group-sm" m-t-10>
                                         <span class="input-group-addon" id="btnGroupAddon" (click)="SubQty(ProductInfo)">-</span>
