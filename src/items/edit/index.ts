@@ -152,7 +152,7 @@ export class TItemEditComponent extends TBasicModalCompnent
     {
         ProductInfo.Qty ++;
     }
-
+    quillEditorTxt = 'test';
     @Input() Item: TItem;
     @Output() OnChange = new EventEmitter<TProduct>();
 }

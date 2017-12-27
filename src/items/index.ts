@@ -1,11 +1,13 @@
 import {NgModule, Component} from '@angular/core';
 import {SharedModule, RouterModule, Routes} from 'share';
 import {PicturesComponent} from './pictures';
+import { QuillEditorModule } from 'ngx-quill-editor';
 import { TApplication } from 'services/application';
 import { TFileLibComponent } from 'share/component';
 import { TItemEditComponent } from 'items/edit';
 import { TItemListComponent } from 'items/list';
 import { TItemSelectorComponent } from 'items/list/selector';
+
 
 @Component({selector: 'items', templateUrl: '../share/layout.module.html'})
 export class LayoutComponent
@@ -31,7 +33,8 @@ const routes: Routes = [
 
 @NgModule({
     imports: [
-        SharedModule
+        QuillEditorModule,
+        SharedModule,
     ],
     declarations: [
         LayoutComponent,
@@ -44,7 +47,7 @@ const routes: Routes = [
         TFileLibComponent,
         TItemSelectorComponent,
         TItemEditComponent,
-        TItemListComponent
+        TItemListComponent,
     ],
     exports: [
         TItemEditComponent,
@@ -60,12 +63,12 @@ export class ItemShareModule
     imports: [
         RouterModule.forChild(routes),
         SharedModule,
-        ItemShareModule
+        ItemShareModule,
     ],
     entryComponents: [
         TFileLibComponent,
         TItemEditComponent,
-        TItemListComponent
+        TItemListComponent,
     ]
 })
 export class ItemsModule
