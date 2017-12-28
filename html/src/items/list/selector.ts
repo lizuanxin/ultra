@@ -4,7 +4,6 @@ import {TItem, TItemService} from 'services/item';
 import { TypeInfo } from 'UltraCreation/Core/TypeInfo';
 import * as Types from 'services/cloud/types';
 import { TBasicModalCompnent } from 'share/component/basicmodal';
-import { TItemModel } from 'items/list/index';
 
 @Component({selector: 'item-selector', templateUrl: './selector.html'})
 export class TItemSelectorComponent extends TBasicModalCompnent
@@ -98,4 +97,30 @@ export class TItemSelectorComponent extends TBasicModalCompnent
     @Input() FilterItems: Array<Types.TIdentify> = [];
 }
 
+export class TItemModel
+{
+    static SelectedNum: number = 0;
+    constructor(public Source: TItem)
+    {
+    }
 
+    get IsSelected(): boolean
+    {
+        return this._IsSelected;
+    }
+
+    set IsSelected(Selected: boolean)
+    {
+        if (this._IsSelected === Selected)
+            return;
+
+        if (Selected)
+            TItemModel.SelectedNum ++;
+        else
+            TItemModel.SelectedNum --;
+
+        this._IsSelected = Selected;
+    }
+
+    _IsSelected: boolean = false;
+}
