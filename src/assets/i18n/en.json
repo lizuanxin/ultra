@@ -92,7 +92,9 @@
             {
                 "id": "Id",
                 "name": "Name",
-                "timestamp": "Creation Time"
+                "timestamp": "Creation Time",
+                "region": "Region",
+                "retail": "Retail"
             }
         },
 

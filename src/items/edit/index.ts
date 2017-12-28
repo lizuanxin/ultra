@@ -20,7 +20,7 @@ export class TItemEditComponent extends TBasicModalCompnent
     // override
     OnInit()
     {
-        console.log('picture: ' + JSON.stringify(this.Item.Pictures.length));
+        console.log('picture: ' + JSON.stringify(this.Item));
     }
 
     // override
@@ -152,7 +152,57 @@ export class TItemEditComponent extends TBasicModalCompnent
     {
         ProductInfo.Qty ++;
     }
-    quillEditorTxt = 'test';
+
+    get Html(): string
+    {
+        if (TypeInfo.Assigned(this.Item) && TypeInfo.Assigned(this.Item.Html))
+            return this.Item.Html;
+        else
+            return '';
+    }
+
+    set Html(ItemDetail: string)
+    {
+        this.Item.Html = ItemDetail;
+    }
+
+
+    onContentChanged({ html, text })
+    {
+        console.log('html:' + html, 'text:' + text);
+    }
+
+    onEditorCreated(quill)
+    {
+        const toolbar = quill.getModule('toolbar');
+        toolbar.addHandler('image', this.imageHandler.bind(this));
+    }
+
+    imageHandler()
+    {
+        const Imageinput = document.createElement('input');
+        Imageinput.setAttribute('type', 'file');
+        Imageinput.setAttribute('accept', 'image/png, image/gif, image/jpeg, image/bmp, image/x-icon');
+        Imageinput.classList.add('ql-image');
+
+        Imageinput.addEventListener('change', () =>
+        {
+          const file = Imageinput.files[0];
+          if (Imageinput.files != null && Imageinput.files[0] != null)
+          {
+              console.log(file);
+
+            //   this._service.sendFileToServer(file).subscribe(res => {
+            //      this._returnedURL = res;
+            //      this.pushImageToEditor();
+            //   });
+          }
+        });
+
+        Imageinput.click();
+    }
+
+    PricingList: Array<Types.IPricing>;
     @Input() Item: TItem;
     @Output() OnChange = new EventEmitter<TProduct>();
 }
