@@ -156,6 +156,8 @@ export class TItem extends TAssignable implements Types.IItem
             Prop['Name'] = this.Name;
         if (this.AvatarUrl.length > 0)
             Prop['AvatarUrl'] = this.AvatarUrl;
+        if (TypeInfo.Assigned(this.Html) && this.Html.length > 0)
+            Prop['Html'] = this.Html;
 
         Prop['TypeId'] = this.TypeId;
         Prop['Pictures'] = this.Pictures.map((Picture) => Picture.Id);
@@ -172,14 +174,19 @@ export class TItem extends TAssignable implements Types.IItem
         return null;
     }
 
-    Id: string = '';
+    Id: Types.TIdentify = '';
     TypeId: Types.TItemTypeId = 0;
-    Name: string = '';
-    Pictures: Array<Types.IPicture> = [];
-    AvatarUrl: string = null;
-    Timestamp: any;
 
+    Category_Id: string = null;
+
+    Name: string = '';
+    AvatarUrl: string = null;
+    Pictures: Array<Types.IPicture> = [];
+    Html: string = null;
+    ExtraProp: any = null;
     PricingList: Array<Types.IPricing> = [];
+
+    readonly Timestamp: Date;
 
     protected _PictureList: TFileList;
 }
