@@ -8,6 +8,7 @@ import {NgbModal, NgbTooltipConfig, NgbModalOptions, NgbModalRef} from '@ng-boot
 
 
 import {TShoppingCart} from './shopping_cart';
+import * as Types from './cloud/types';
 
 declare global
 {
@@ -141,4 +142,6 @@ export class TApplication
     Modal: NgbModal;
     ModelRefList: Array<NgbModalRef>;
     ShoppingCart: TShoppingCart;
+    Regions: Array<Types.IRegion>;
+    Domains: Array<Types.IDomain>;
 }
