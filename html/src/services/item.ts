@@ -192,15 +192,6 @@ export class TItem extends TAssignable implements Types.IItem
         return this.PictureList.Paths;
     }
 
-    get DefaultPricing(): Types.IPricing
-    {
-        return null;
-    }
-
-    GetPricing(Region: Types.IRegion | Types.TRegionName)
-    {
-    }
-
     GetUploadProp(): Object
     {
         let Prop = {};
@@ -215,6 +206,7 @@ export class TItem extends TAssignable implements Types.IItem
 
         Prop['TypeId'] = this.TypeId;
         Prop['Pictures'] = this.Pictures.map((Picture) => Picture.Id);
+        Prop['PricingList'] = this.PricingList;
         return Prop;
     }
 

@@ -20,7 +20,13 @@ export class TItemEditComponent extends TBasicModalCompnent
     // override
     OnInit()
     {
-        console.log('picture: ' + JSON.stringify(this.Item));
+        if (TypeInfo.Assigned(App.Regions.length) && App.Regions.length > 0)
+            this.SelectedRegion = App.Regions[0];
+
+        for (let Region of App.Regions)
+            this.PricingListMap.set(Region.Name, {Region: Region.Name, Retail: 0, BulkCount: 0, Bulk: 0});
+        for (let Pricing of this.Item.PricingList)
+            this.PricingListMap.set(Pricing.Region, Pricing);
     }
 
     // override
@@ -80,6 +86,12 @@ export class TItemEditComponent extends TBasicModalCompnent
         console.log('button ok');
         if (this.Item.Pictures.length > 0)
             this.Item.AvatarUrl = this.Item.Pictures[0].Path;
+        this.Item.PricingList = [];
+        this.PricingListMap.forEach((Pricing) =>
+        {
+            if (Pricing.Retail > 0)
+                this.Item.PricingList.push(Pricing);
+        });
         this.Close(this.Item);
     }
 
@@ -202,9 +214,16 @@ export class TItemEditComponent extends TBasicModalCompnent
         Imageinput.click();
     }
 
-    PricingList: Array<Types.IPricing>;
+    get CurrPricing()
+    {
+        return this.PricingListMap.get(this.SelectedRegion.Name);
+    }
+
     @Input() Item: TItem;
     @Output() OnChange = new EventEmitter<TProduct>();
+
+    private SelectedRegion: Types.IRegion;
+    private PricingListMap = new Map<string, Types.IPricing>();
 }
 
 
