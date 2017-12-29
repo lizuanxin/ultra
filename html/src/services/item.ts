@@ -11,21 +11,38 @@ export class TItemService
 {
     constructor(private Auth: TAuthService)
     {
+        setTimeout(() => this.InitRegionsAndDomains());
     }
 
     GetItem(ItemId: string): TItem
     {
-        return this.Snap.get(ItemId);
+        return this.ItemsSnap.get(ItemId);
+    }
+
+    async Regions()
+    {
+        if (! TypeInfo.Assigned(this.RegionsSnap))
+            this.RegionsSnap = await this.Http.Get('/publish/regions').toPromise().then((res) => res.Content);
+
+        return this.RegionsSnap;
+    }
+
+    async Domains()
+    {
+        if (! TypeInfo.Assigned(this.DomainsSnap))
+            this.DomainsSnap = await this.Http.Get('/publish/domains').toPromise().then((res) => res.Content);
+
+        return this.DomainsSnap;
     }
 
     async List(): Promise<Array<TItem>>
     {
-        if (! TypeInfo.Assigned(this.Snap))
+        if (! TypeInfo.Assigned(this.ItemsSnap))
         {
             this.Auth.Grant(this.Http);
-            const ary: Array<Types.IItem> = await this.Http.Get('/').toPromise().then(res => res.Content);
+            const ary: Array<Types.IItem> = await this.Http.Get('/item').toPromise().then(res => res.Content);
 
-            this.Snap = new Map<string, TItem>();
+            this.ItemsSnap = new Map<string, TItem>();
             for (const iter of ary)
             {
                 let Item: TItem;
@@ -34,11 +51,11 @@ export class TItemService
                 else
                     Item = new TProduct();
                 Item.Assign(iter);
-                this.Snap.set(iter.Id, Item);
+                this.ItemsSnap.set(iter.Id, Item);
             }
         }
 
-        return Array.from(this.Snap.values());
+        return Array.from(this.ItemsSnap.values());
     }
 
     async Open(Id: number): Promise<Types.IItem>
@@ -50,30 +67,58 @@ export class TItemService
     {
         this.Auth.Grant(this.Http);
 
-        const res = await this.Http.Post('/append', item.toString()).toPromise();
+        const res = await this.Http.Post('/item/append', item.toString()).toPromise();
         item.Id = res.Content.Id;
 
-        this.Snap.set(item.Id, item);
+        this.ItemsSnap.set(item.Id, item);
     }
 
     async Update(item: TItem): Promise<void>
     {
         this.Auth.Grant(this.Http);
 
-        const res = await this.Http.Post('/update', item.toString()).toPromise();
-        this.Snap.set(item.Id, item);
+        const res = await this.Http.Post('/item/update', item.toString()).toPromise();
+        this.ItemsSnap.set(item.Id, item);
     }
 
     async Remove(item: TItem): Promise<void>
     {
         this.Auth.Grant(this.Http);
 
-        await this.Http.Post('/remove', {Id: item.Id, TypeId: item.TypeId}).toPromise();
-        this.Snap.delete(item.Id);
+        await this.Http.Post('/item/remove', {Id: item.Id, TypeId: item.TypeId}).toPromise();
+        this.ItemsSnap.delete(item.Id);
     }
 
-    private Http = new TRestClient('/api/item');
-    private Snap: Map<string, TItem>;
+    async Publish(DomainId: Types.TIdentify, Items: Array<TItem | Types.TIdentify>)
+    {
+        let ItemsId = Items.map((Item) =>
+        {
+            if (TypeInfo.IsPrimitive(Item))
+                return Item;
+            else
+                return Item.Id;
+        });
+
+        this.Auth.Grant(this.Http);
+        await this.Http.Post('/publish/up', {Domain_Id: DomainId, Items: ItemsId}).toPromise();
+    }
+
+    async Unpublish(Param: Types.IUnpublishing)
+    {
+        this.Auth.Grant(this.Http);
+        await this.Http.Post('/publish/up', Param).toPromise();
+    }
+
+    private async InitRegionsAndDomains()
+    {
+        App.Regions = await this.Regions();
+        App.Domains = await this.Domains();
+    }
+
+    private Http = new TRestClient('/api');
+    private ItemsSnap: Map<string, TItem>;
+    private RegionsSnap: Array<Types.IRegion>;
+    private DomainsSnap: Array<Types.IDomain>;
 }
 
 export class TFileList
@@ -147,6 +192,15 @@ export class TItem extends TAssignable implements Types.IItem
         return this.PictureList.Paths;
     }
 
+    get DefaultPricing(): Types.IPricing
+    {
+        return null;
+    }
+
+    GetPricing(Region: Types.IRegion | Types.TRegionName)
+    {
+    }
+
     GetUploadProp(): Object
     {
         let Prop = {};
@@ -167,11 +221,6 @@ export class TItem extends TAssignable implements Types.IItem
     toString()
     {
         return JSON.stringify(this.GetUploadProp());
-    }
-
-    get DefaultPricing(): Types.IPricing
-    {
-        return null;
     }
 
     Id: Types.TIdentify = '';
