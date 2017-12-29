@@ -109,7 +109,7 @@ export class TItemListComponent implements OnInit
         this.ItemSvc.List()
             .then((ItemList) =>
             {
-                console.log('update item: ' + ItemList);
+                console.log('update item: ' + ItemList.length);
                 TItemModel.SelectedNum = 0;
                 this.ItemModels = ItemList.map((Item) => new TItemModel(Item));
             })
