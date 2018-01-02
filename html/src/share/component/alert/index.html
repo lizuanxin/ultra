@@ -1,0 +1,19 @@
+<div>
+    <div>
+        <h2>{{Opts.Title}}</h2>
+        <h3>{{Opts.Message}}</h3>
+    </div>
+    <div *ngIf="Opts.Inputs.length > 0">
+        <div *ngFor="let OptInput of Opts.Inputs">
+            <input
+                [type] ="OptInput.Type"
+                [placeholder]="OptInput.Placeholder"
+                [(ngModel)]="OptInput.Value">
+        </div>
+    </div>
+    <div>
+        <button *ngFor="let OptButton of Opts.Buttons" (click)="BtnClicked(OptButton)">
+            {{OptButton.Text}}
+        </button>
+    </div>
+</div>
