@@ -66,7 +66,6 @@ export class ItemShareModule
         ItemShareModule,
     ],
     entryComponents: [
-        TFileLibComponent,
         TItemEditComponent,
         TItemListComponent,
     ]
