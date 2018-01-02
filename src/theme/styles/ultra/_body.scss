@@ -6,6 +6,16 @@
     background-image: url(/assets/images/overlay.png), linear-gradient(45deg, #8f96d2 15%, #97b9e6 85%);
 }
 
+.content-container{
+    // margin-top: 20px;
+    padding: 0;
+    -ms-overflow-x: hidden;
+    overflow-x: hidden;
+    overflow-y: scroll;
+    position: relative;
+    overflow: hidden;
+}
+
 .container-block-home{
     padding: 30px 0;
 

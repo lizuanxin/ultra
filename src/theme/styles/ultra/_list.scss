@@ -4,7 +4,7 @@
         text-transform: capitalize;
         text-align: center;
         font-size: 1.6rem;
-        text-transform: uppercase;
+        text-transform: capitalize;
     }
 
 
@@ -64,6 +64,7 @@
 .massage-mode
 {
     margin-top:-30px;
+    background-color: #fafafa;
     background-repeat: no-repeat;
     background-size: cover;
     padding: 60px 0 30px 0;
@@ -72,7 +73,7 @@
         font-size: 1.6rem;
         text-transform: capitalize;
         text-align: center;
-        color: $white;
+        color: #000000;
     }
     .inner-content {
         position: relative;
@@ -86,14 +87,17 @@
             text-transform: capitalize;
         }
         .title {
-            color: #d1d1d1;
+            color: #000000;
             font-size: 1.4rem;
+        }
+        p{
+            color:#222222
         }
         .spit-line{
             display: inline-block;
             min-width: 80px;
             height: 3px;
-            background-color: #d1d1d1;
+            background-color: #f5a623;
         }
         p{
             font-size: .8rem;
@@ -106,7 +110,7 @@
 {
     padding: 25px 0;
     h2 {
-        text-transform: uppercase;
+        text-transform: capitalize;
         text-align: center;
         font-size: 1.6rem;
     }
@@ -133,6 +137,56 @@
     }
 }
 
+.list-steps
+{
+    h2{
+        margin: 0 auto 30px auto;
+    }
+    h3{
+        display: flex;
+        align-items:center;
+        justify-content: space-between;
+        label{
+            flex: 0 0 12%;
+            i{
+                display: inline-flex;
+                align-items: center;
+                width:100%;
+                padding-top:50%;
+                padding-bottom:50%;
+                height:0;
+                line-height: 0;
+                border-radius: 50%;
+                text-align: center;
+                color:$white;
+                background-image: -webkit-linear-gradient(left, #f9a541, #fac655);
+                display: inline-block;
+                font-style: normal;
+                font-weight: 500;
+            }
+
+        }
+        span{
+            flex: 0 0 85%;
+            font-size: .9rem;
+
+        }
+
+    }
+}
+
+.app-preview{
+    h3{
+        padding: 35px 0 15px 0;
+    }
+    p{
+        font-size: .8rem;
+    }
+    .app-model{
+
+    }
+}
+
 .list-tens
 {
     h2{
@@ -148,7 +202,7 @@
             h5{
                 min-width:150px;
                 margin: 10px auto;
-                color: #6599f7;
+                color: $gray;
             }
             p{
                 max-width:180px;
@@ -167,14 +221,14 @@
             &.r-t{
                 right: 15px;
                 top: 15px;
-                border-top: solid 2px #1aa0de;
-                border-right: solid 2px #1aa0de;
+                border-top: solid 2px $gray;
+                border-right: solid 2px $gray;
             }
             &.l-b{
                 left: 15px;
                 bottom: 15px;
-                border-left: solid 2px #1aa0de;
-                border-bottom: solid 2px #1aa0de;
+                border-left: solid 2px $gray;
+                border-bottom: solid 2px $gray;
             }
         }
         h3 {
