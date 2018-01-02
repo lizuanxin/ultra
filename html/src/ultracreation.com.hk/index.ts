@@ -11,6 +11,7 @@ import {ListPage} from './list';
 import {DetailPage} from './detail';
 import {FooterComponent} from './share/footer';
 import {RelateComponent} from './components/relate';
+import {SiteNavbarComponent} from './share/navbar';
 
 
 @Component({templateUrl: '../share/layout.domain.html'})
@@ -46,6 +47,7 @@ const routes: Routes = [
         ListPage,
         DetailPage,
         RelateComponent,
+        SiteNavbarComponent,
         FooterComponent
     ]
 })

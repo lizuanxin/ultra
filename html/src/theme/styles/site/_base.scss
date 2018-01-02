@@ -36,15 +36,6 @@ span[state]{
     }
 }
 
-.content-container{
-    margin-top: 90px;
-    padding: 0;
-    -ms-overflow-x: hidden;
-    overflow-x: hidden;
-    overflow-y: scroll;
-    position: relative;
-    overflow: hidden;
-}
 @media screen and (max-width: 992px) {
     .main-container {
         margin-left: 0px !important;

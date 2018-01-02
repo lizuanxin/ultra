@@ -87,10 +87,10 @@
     @extend .animate;
     @include flex-item-center(column);
     cursor: pointer;
-    color: $white;
+    // color: $white;
     min-height:70px;
     font-size:2rem;
-    background-color:#829dd0;
+    // background-color:#829dd0;
     span{
         font-size:.8rem;
         display: block;
@@ -98,10 +98,16 @@
     }
 }
 
+
+.bg-gray-default
+{
+    background-color: #e7e7e7;
+}
+
 .ultra-topnav{
     >li{
         >a{
-            color: $gray-lighter;
+            color: $gray;
             display: inline-block;
             margin:3px auto;
             padding: 5px 10px;
@@ -141,6 +147,36 @@
                 a{
                     color: $gray-dark;
                 }
+            }
+        }
+    }
+}
+
+.ultra-header{
+    padding: 15px 0;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+
+    .nav-items{
+        flex: 1 1 auto;
+        display: flex;
+        justify-content: flex-end;
+        li{
+            flex: 0 0 auto;
+            text-transform: uppercase;
+            padding: 0 20px;
+            font-size: .8rem;
+            font-family: Arial, Helvetica, sans-serif;
+            font-weight: 600;
+        }
+        a{
+            border-bottom: solid 2px transparent;
+            padding:10px 15px;
+            color: $gray;
+            text-decoration: none;
+            &.active{
+                border-bottom-color: #101010
             }
         }
     }
