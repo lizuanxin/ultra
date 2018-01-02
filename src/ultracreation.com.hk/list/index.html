@@ -13,6 +13,19 @@
         </div>
     </swiper>
 </div> -->
+<style>
+    .swiper-container {
+      width: 100%;
+      height: 100%;
+    }
+    .swiper-slide {
+      font-size: 18px;
+      height: auto;
+      -webkit-box-sizing: border-box;
+      box-sizing: border-box;
+      padding: 30px;
+    }
+</style>
 <div class="ultra-topic" style="background-image:url(assets/images/site/34234523453.jpg)"></div>
 <div class="container list-staff">
     <h2>office staff</h2>
@@ -176,7 +189,22 @@
             <li class="col-md-4 app-model">
 
             </li>
-            <li class="col-md-8">2</li>
+            <li class="col-md-8" style="height:100px">
+                <swiper swiper-piker #FileSwiper [Config]="{pagination: '.swiper-pagination', paginationType: 'progress', slidesPerView: 2}">
+                    <div class="swiper-wrapper">
+                        <div class="swiper-slide">
+                            1
+                        </div>
+                        <div class="swiper-slide">
+                            2
+                        </div>
+                        <div class="swiper-slide">
+                            3
+                        </div>
+                    </div>
+                    <div class="swiper-pagination"></div>
+                </swiper>
+            </li>
         </ul>
     </div>
 </div>
