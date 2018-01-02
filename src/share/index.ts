@@ -31,9 +31,11 @@ import * as Comp from './component';
         SwiperComp,
         ReceivingComponent,
         Comp.TFileLibComponent,
+        Comp.TAlertComponent
     ],
     entryComponents: [
         Comp.TFileLibComponent,
+        Comp.TAlertComponent
     ],
     exports: [
         CommonModule,
@@ -48,7 +50,8 @@ import * as Comp from './component';
         NavbarComponent,
         SidebarComponent,
         ReceivingComponent,
-        Comp.TFileLibComponent
+        Comp.TFileLibComponent,
+        Comp.TAlertComponent
     ]
 })
 export class SharedModule

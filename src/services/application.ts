@@ -10,6 +10,7 @@ import {NgbModal, NgbTooltipConfig, NgbModalOptions, NgbModalRef} from '@ng-boot
 import {TShoppingCart} from './shopping_cart';
 import {TItemService} from './item';
 import * as Types from './cloud/types';
+import { TAlertComponent, IAlertOptions } from 'share/component/alert';
 
 declare global
 {
@@ -127,9 +128,19 @@ export class TApplication
         }
     }
 
-    ShowAlert(Message: string)
+    ShowAlert(Opts: IAlertOptions | string)
     {
+        if (TypeInfo.IsPrimitive(Opts))
+            Opts = {Message: Opts};
 
+        if (! TypeInfo.Assigned(Opts.Buttons))
+            Opts.Buttons = [{Text: 'OK'}];
+
+        const ModelRef = this.Modal.open(TAlertComponent, {backdrop: false});
+        ModelRef.componentInstance.Opts = Opts;
+        this.ModelRefList.push(ModelRef);
+
+        return ModelRef.result.catch((err) => this.CloseModal(null));
     }
 
     ShowError(err: any)
