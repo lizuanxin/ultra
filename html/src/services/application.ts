@@ -11,6 +11,7 @@ import {TShoppingCart} from './shopping_cart';
 import {TItemService} from './item';
 import * as Types from './cloud/types';
 import { TAlertComponent, IAlertOptions } from 'share/component/alert';
+import { TToastComponent, IToastOptions } from 'share/component';
 
 declare global
 {
@@ -145,11 +146,21 @@ export class TApplication
 
     ShowError(err: any)
     {
+        this.ShowToast('error', err.message);
     }
 
     ShowToast(type: 'success' | 'info' | 'warning' | 'error',
-        message: string, title?: string): void
+        message: string, duration: number = 2000): void
     {
+        let ToastOpts: IToastOptions =
+        {
+            Type: type,
+            Message: message,
+            Position: 'bottom'
+        };
+        const ModelRef = this.Modal.open(TToastComponent, {backdrop: false});
+        ModelRef.componentInstance.Opts = ToastOpts;
+        setTimeout(() => ModelRef.dismiss(), duration);
     }
 
     Platform = new Platform();
