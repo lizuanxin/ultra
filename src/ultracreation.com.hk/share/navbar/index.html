@@ -1,0 +1,45 @@
+<nav class="navbar navbar-expand-lg bg-gray-default p-0">
+    <button class="navbar-toggler navbar-toggler-right">
+        <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="container">
+        <div class="collapse navbar-collapse align-items-center justify-content-end">
+            <div class="navbar-nav ultra-topnav">
+                <li class="nav-item">
+                    <a href="javascript:void(0)">{{App.Language|translate}} &nbsp;<i icon class="rotate">&#xf3d8;</i></a>
+                    <ul class="item-hover">
+                        <li *ngFor="let lang of App.Languages">
+                            <a href="javascript:void(0)" (click)="ChangeLang(lang)">{{lang|translate}}</a>
+                        </li>
+                    </ul>
+                </li>
+                <li class="nav-item">
+                    <a href="javascript:void(0)">{{Auth.Me.FirstName}} &nbsp;<i icon class="rotate">&#xf3d8;</i></a>
+                    <ul class="item-hover">
+                        <li *ngIf="Auth.IsLogin">
+                            <a href="javascript:void(0)" [routerLink]="['/admin']">{{'site.ucenter.title'|translate}}</a>
+                        </li>
+                        <li *ngIf="!Auth.IsLogin">
+                            <a href="javascript:void(0)" [routerLink]="['/login']">{{'button.login'|translate}}</a>
+                        </li>
+                        <li *ngIf="Auth.IsLogin">
+                            <a href="javascript:void(0)" (click)="Logout()">{{'button.logout'|translate}}</a>
+                        </li>
+                    </ul>
+                </li>
+                <ng-template [ngIf]="!IsAdmin">
+                    <li class="nav-item"><a href="javascript:void(0)">购物车</a></li>
+                </ng-template>
+            </div>
+        </div>
+    </div>
+</nav>
+<div class="container ultra-header">
+    <div class="logo"><img src="assets/images/site/logo.png"></div>
+    <ul class="nav-items">
+        <li><a [routerLink]="['/home']" [routerLinkActive]="['active']">Home</a></li>
+        <li><a [routerLink]="['/list']" [routerLinkActive]="['active']">Healthcare</a></li>
+        <li><a>av product</a></li>
+        <li><a>gadqet</a></li>
+    </ul>
+</div>
