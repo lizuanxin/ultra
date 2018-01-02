@@ -11,7 +11,6 @@ export class TItemService
 {
     constructor(private Auth: TAuthService)
     {
-        setTimeout(() => this.InitRegionsAndDomains());
     }
 
     GetItem(ItemId: string): TItem
@@ -107,12 +106,6 @@ export class TItemService
     {
         this.Auth.Grant(this.Http);
         await this.Http.Post('/publish/up', Param).toPromise();
-    }
-
-    private async InitRegionsAndDomains()
-    {
-        App.Regions = await this.Regions();
-        App.Domains = await this.Domains();
     }
 
     private Http = new TRestClient('/api');

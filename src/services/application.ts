@@ -8,6 +8,7 @@ import {NgbModal, NgbTooltipConfig, NgbModalOptions, NgbModalRef} from '@ng-boot
 
 
 import {TShoppingCart} from './shopping_cart';
+import {TItemService} from './item';
 import * as Types from './cloud/types';
 
 declare global
@@ -35,6 +36,10 @@ export class TApplication
 
         this.Modal = Injector.get(NgbModal);
         this.ModelRefList = [];
+
+        const ItemSvc = Injector.get(TItemService);
+        ItemSvc.Regions().then((Regions) => this.Regions = Regions);
+        ItemSvc.Domains().then((Domains) => this.Domains = Domains);
     }
 
 /* langulage support */
