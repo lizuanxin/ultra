@@ -192,26 +192,28 @@ export class TItemEditComponent extends TBasicModalCompnent
 
     imageHandler()
     {
-        const Imageinput = document.createElement('input');
-        Imageinput.setAttribute('type', 'file');
-        Imageinput.setAttribute('accept', 'image/png, image/gif, image/jpeg, image/bmp, image/x-icon');
-        Imageinput.classList.add('ql-image');
+        /**
+            const Imageinput = document.createElement('input');
+            Imageinput.setAttribute('type', 'file');
+            Imageinput.setAttribute('accept', 'image/png, image/gif, image/jpeg, image/bmp, image/x-icon');
+            Imageinput.classList.add('ql-image');
 
-        Imageinput.addEventListener('change', () =>
-        {
-          const file = Imageinput.files[0];
-          if (Imageinput.files != null && Imageinput.files[0] != null)
-          {
-              console.log(file);
+            Imageinput.addEventListener('change', () =>
+            {
+            const file = Imageinput.files[0];
+            if (Imageinput.files != null && Imageinput.files[0] != null)
+            {
+                console.log(file);
 
-            //   this._service.sendFileToServer(file).subscribe(res => {
-            //      this._returnedURL = res;
-            //      this.pushImageToEditor();
-            //   });
-          }
-        });
+                //   this._service.sendFileToServer(file).subscribe(res => {
+                //      this._returnedURL = res;
+                //      this.pushImageToEditor();
+                //   });
+            }
+            });
 
-        Imageinput.click();
+            Imageinput.click();
+        */
     }
 
     get CurrPricing()
