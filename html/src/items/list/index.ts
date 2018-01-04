@@ -9,6 +9,7 @@ import { TItemEditComponent } from 'items/edit';
 @Component({selector: 'item-list', templateUrl: './index.html'})
 export class TItemListComponent implements OnInit
 {
+    App = window.App;
     constructor(private ItemSvc: TItemService)
     {
         this.ItemModels = [];
@@ -32,23 +33,25 @@ export class TItemListComponent implements OnInit
 
     CreateNewProduct()
     {
-        let Product = TItem.CreateNew(Types.TItemTypeId.Product);
-        this.ShowItemEditModal(Product, true);
-        // App.ShowAlert({Title: 'Alert', Message: 'Test alert',
-        //     Inputs: [
-        //         { Name: 'brand', Placeholder: 'input brand name' },
-        //         { Name: 'model', Placeholder: 'model brand name' }
-        //     ],
-        //     Buttons: [
-        //         {
-        //             Text: 'Cancel',
-        //             Handler: (data) => { console.log('cancel clicked'); }
-        //         },
-        //         {
-        //             Text: 'OK',
-        //             Handler: (data) => { console.log('ok clicked' + JSON.stringify(data)); }
-        //         }
-        //     ]});
+        // let Product = TItem.CreateNew(Types.TItemTypeId.Product);
+        // this.ShowItemEditModal(Product, true);
+        App.ShowAlert({Title: 'Alert', Message: 'Test alert',
+            Inputs: [
+                { Type:'text', Name: 'brand', Placeholder: 'input brand name' },
+                { Type:'text', Name: 'model', Placeholder: 'model brand name' }
+            ],
+            Buttons: [
+                {
+                    Text: 'Cancel',
+                    Class: 'btn-outline-secondary',
+                    Handler: (data) => { console.log('cancel clicked'); }
+                },
+                {
+                    Text: 'OK',
+                    Class: 'btn-primary',
+                    Handler: (data) => { console.log('ok clicked' + JSON.stringify(data)); }
+                }
+            ]});
         // App.ShowToast('info', 'woerjoewr');
     }
 

@@ -7,7 +7,7 @@
             <button class="btn btn-sm btn-primary" type="button" [disabled]="SelectedItemNum < 2" (click)="CreateNewPackage()">{{'items.list.pack'|translate}}</button>
         </div>
         <div class="dropdown d-inline-block" ngbDropdown>
-            <button class="btn btn-sm btn-secondary dropdown-toggle" type="button" ngbDropdownToggle>
+            <button class="btn btn-sm btn-secondary dropdown-toggle" type="button"  (click)="App.ShowToast('success','wwwwwwww',1000)" ngbDropdownToggle>
                 {{'items.list.categories'|translate}}
             </button>
             <div class="dropdown-menu">

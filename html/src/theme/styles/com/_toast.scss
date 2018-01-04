@@ -1,3 +1,39 @@
+.toast-default{
+    .modal-dialog{
+        top: 45%;
+    }
+}
+
+.toast-content {
+    background-color: #030303;
+    pointer-events: auto;
+    border-radius: 5px;
+    padding: 5px;
+    color: white;
+    text-align:center;
+    font-size: 1.6rem;
+}
+
+.toast-content-success {
+    background-color: #51A351;
+}
+
+.toast-content-error {
+    background-color: #BD362F;
+}
+
+.toast-content-info {
+    background-color: #2F96B4;
+}
+
+.toast-content-warning {
+    background-color: #F89406;
+}
+
+
+
+
+
 .toast-title {
     font-weight: bold;
 }
