@@ -1,6 +1,6 @@
 import {Component, Input, OnInit} from '@angular/core';
-import { TypeInfo } from 'UltraCreation/Core';
-import {Types, TAuthService} from 'services';
+import * as Types from 'services/cloud/types';
+
 
 @Component({selector: 'domain-comp', templateUrl: './index.html'})
 export class DomainComponent implements OnInit

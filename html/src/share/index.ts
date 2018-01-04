@@ -56,8 +56,7 @@ import * as Comp from './component';
         ReceivingComponent,
         Comp.TFileLibComponent,
         Comp.TAlertComponent,
-        Comp.TToastComponent,
-        Comp.DomainComponent
+        Comp.TToastComponent
     ]
 })
 export class SharedModule
