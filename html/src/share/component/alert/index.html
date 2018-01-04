@@ -3,7 +3,7 @@
     <div class="frame-content">
         {{Opts.Message}}
         <ng-template [ngIf]="Opts.Inputs.length > 0">
-            <ul>
+            <ul class="alert-control">
                 <li *ngFor="let OptInput of Opts.Inputs">
                     <input [type] ="OptInput.Type" [placeholder]="OptInput.Placeholder" [(ngModel)]="OptInput.Value">
                 </li>
