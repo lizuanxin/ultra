@@ -133,7 +133,6 @@ export class TItemEditComponent extends TBasicModalCompnent
             RetFilterItems.push(this.Item.Id);
 
         RetFilterItems.concat((this.Item as TPackage).ProductInfoList.map((ProductInfo) => ProductInfo.Product));
-        console.log(RetFilterItems);
 
         return RetFilterItems;
     }
@@ -192,6 +191,12 @@ export class TItemEditComponent extends TBasicModalCompnent
 
     imageHandler()
     {
+        this.App.ShowModal(TFileLibComponent, {Multiple: false, ModalMode: true}, {size: 'lg'})
+            .then((Pictures) =>
+            {
+                console.log(Pictures);
+
+            });
         /**
             const Imageinput = document.createElement('input');
             Imageinput.setAttribute('type', 'file');
