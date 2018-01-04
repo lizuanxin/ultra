@@ -115,7 +115,8 @@ export class TItemEditComponent extends TBasicModalCompnent
 
     OpenItemList()
     {
-        App.ShowModal(TItemSelectorComponent, {FilterItems: this.FilterItems}, {size: 'lg'})
+        App.ShowModal(TItemSelectorComponent,
+            {FilterItems: this.FilterProducts, FilterType: Types.TItemTypeId.Package}, {size: 'lg'})
             .then((SelectedItems) =>
             {
                 if (! TypeInfo.Assigned(SelectedItems))
@@ -126,15 +127,9 @@ export class TItemEditComponent extends TBasicModalCompnent
             });
     }
 
-    get FilterItems()
+    get FilterProducts()
     {
-        let RetFilterItems = [];
-        if (TypeInfo.Assigned(this.Item.Id) && this.Item.Id.length > 0)
-            RetFilterItems.push(this.Item.Id);
-
-        RetFilterItems.concat((this.Item as TPackage).ProductInfoList.map((ProductInfo) => ProductInfo.Product));
-
-        return RetFilterItems;
+        return (this.Item as TPackage).ProductInfoList.map((ProductInfo) => ProductInfo.Product);
     }
 
     GetAvatarUrl(ProductId: string): string

@@ -5,7 +5,7 @@
                 <label for="upload_file">{{'button.add'|translate}}</label>
                 <input type="file" id="upload_file" (change)="UploadImage($event.target.files)" accept=".jpg, .jpeg, .png" multiple>
             </button>
-            <button type="button" class="btn btn-primary">{{'button.del'|translate}}</button>
+            <button type="button" class="btn btn-primary" (click)="RemoveFiles()">{{'button.del'|translate}}</button>
         </div>
     </div>
     <div #content>

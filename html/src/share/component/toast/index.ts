@@ -15,7 +15,6 @@ export interface IToastOptions
 {
     Type?: string;
     Message?: string;
-    Duration?: number;
     Position?: string;
 }
 
