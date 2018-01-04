@@ -183,6 +183,11 @@ export class TItem extends TAssignable implements Types.IItem
         }
     }
 
+    get IsPackage(): boolean
+    {
+        return this.TypeId === Types.TItemTypeId.Package;
+    }
+
     get PictureList(): TFileList
     {
         if (! TypeInfo.Assigned(this._PictureList))
