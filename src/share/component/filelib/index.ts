@@ -53,6 +53,19 @@ export class TFileLibComponent extends TBasicModalCompnent
         FileModel.IsSelected = ! FileModel.IsSelected;
     }
 
+    async RemoveFiles()
+    {
+        for (let FileModel of this.FileModels)
+        {
+            if (FileModel.IsSelected)
+            {
+                await this.FileSvc.Remove(FileModel.Source);
+            }
+        }
+
+        this.Refresh();
+    }
+
     ButtonCancel()
     {
         this.Close(null);

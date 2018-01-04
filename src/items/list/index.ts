@@ -34,6 +34,22 @@ export class TItemListComponent implements OnInit
     {
         let Product = TItem.CreateNew(Types.TItemTypeId.Product);
         this.ShowItemEditModal(Product, true);
+        // App.ShowAlert({Title: 'Alert', Message: 'Test alert',
+        //     Inputs: [
+        //         { Name: 'brand', Placeholder: 'input brand name' },
+        //         { Name: 'model', Placeholder: 'model brand name' }
+        //     ],
+        //     Buttons: [
+        //         {
+        //             Text: 'Cancel',
+        //             Handler: (data) => { console.log('cancel clicked'); }
+        //         },
+        //         {
+        //             Text: 'OK',
+        //             Handler: (data) => { console.log('ok clicked' + JSON.stringify(data)); }
+        //         }
+        //     ]});
+        // App.ShowToast('info', 'woerjoewr');
     }
 
     CreateNewPackage()
@@ -41,7 +57,7 @@ export class TItemListComponent implements OnInit
         let Package = TItem.CreateNew(Types.TItemTypeId.Package) as TPackage;
         this.ItemModels.forEach(item =>
         {
-            if (item.IsSelected)
+            if (item.IsSelected && item.Source.TypeId !== Types.TItemTypeId.Package)
                 Package.Add(item.Source.Id, 1);
         });
 

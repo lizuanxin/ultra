@@ -66,6 +66,7 @@ export class TItemService
     {
         this.Auth.Grant(this.Http);
 
+        console.log('append: ' + item);
         const res = await this.Http.Post('/item/append', item.toString()).toPromise();
         item.Id = res.Content.Id;
 
@@ -105,7 +106,7 @@ export class TItemService
     async Unpublish(Param: Types.IUnpublishing)
     {
         this.Auth.Grant(this.Http);
-        await this.Http.Post('/publish/up', Param).toPromise();
+        await this.Http.Post('/publish/down', Param).toPromise();
     }
 
     private Http = new TRestClient('/api');

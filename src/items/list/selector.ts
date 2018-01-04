@@ -17,11 +17,12 @@ export class TItemSelectorComponent extends TBasicModalCompnent
     OnInit()
     {
         TItemModel.SelectedNum = 0;
+        console.log(JSON.stringify(this.FilterItems) + ' ' + this.FilterType);
         this.ItemSvc.List().then((ItemList) =>
         {
             for (let Item of ItemList)
             {
-                if (! this.IsNeedToFiltered(Item.Id))
+                if (! this.IsNeedToFiltered(Item))
                     this.ItemModels.push(new TItemModel(Item));
             }
         });
@@ -82,11 +83,12 @@ export class TItemSelectorComponent extends TBasicModalCompnent
         return TItemModel.SelectedNum;
     }
 
-    private IsNeedToFiltered(ItemId: Types.TIdentify)
+    private IsNeedToFiltered(Item: Types.IItem)
     {
         for (let FilterItemId of this.FilterItems)
         {
-            if (FilterItemId === ItemId)
+            if (FilterItemId === Item.Id ||
+                this.FilterType === Item.TypeId)
                 return true;
         }
         return false;
@@ -95,6 +97,7 @@ export class TItemSelectorComponent extends TBasicModalCompnent
     ItemModels: Array<TItemModel>;
 
     @Input() FilterItems: Array<Types.TIdentify> = [];
+    @Input() FilterType: Types.TItemTypeId = Types.TItemTypeId.Package;
 }
 
 export class TItemModel
