@@ -34,22 +34,22 @@ export class TItemListComponent implements OnInit
 
     CreateNewProduct()
     {
-        // let Product = TItem.CreateNew(Types.TItemTypeId.Product);
-        // this.ShowItemEditModal(Product, true);
-        App.ShowAlert({ Message: 'Test alert',
+        let Product = TItem.CreateNew(Types.TItemTypeId.Product);
+        this.ShowItemEditModal(Product, true);
+        // App.ShowAlert({ Message: 'Test alert',
 
-            Buttons: [
-                {
-                    Text: 'Cancel',
-                    Class: 'btn-outline-secondary',
-                    Handler: (data) => { console.log('cancel clicked'); }
-                },
-                {
-                    Text: 'OK',
-                    Class: 'btn-primary',
-                    Handler: (data) => { console.log('ok clicked' + JSON.stringify(data)); }
-                }
-            ]});
+        //     Buttons: [
+        //         {
+        //             Text: 'Cancel',
+        //             Class: 'btn-outline-secondary',
+        //             Handler: (data) => { console.log('cancel clicked'); }
+        //         },
+        //         {
+        //             Text: 'OK',
+        //             Class: 'btn-primary',
+        //             Handler: (data) => { console.log('ok clicked' + JSON.stringify(data)); }
+        //         }
+        //     ]});
         // App.ShowToast('info', 'woerjoewr');
     }
 
