@@ -32,12 +32,14 @@ import * as Comp from './component';
         ReceivingComponent,
         Comp.TFileLibComponent,
         Comp.TAlertComponent,
-        Comp.TToastComponent
+        Comp.TToastComponent,
+        Comp.DomainComponent
     ],
     entryComponents: [
         Comp.TFileLibComponent,
         Comp.TAlertComponent,
-        Comp.TToastComponent
+        Comp.TToastComponent,
+        Comp.DomainComponent
     ],
     exports: [
         CommonModule,
@@ -54,7 +56,8 @@ import * as Comp from './component';
         ReceivingComponent,
         Comp.TFileLibComponent,
         Comp.TAlertComponent,
-        Comp.TToastComponent
+        Comp.TToastComponent,
+        Comp.DomainComponent
     ]
 })
 export class SharedModule

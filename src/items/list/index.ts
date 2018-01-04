@@ -5,6 +5,7 @@ import { TFileLibComponent } from 'share/component/filelib';
 import { TypeInfo } from 'UltraCreation/Core/TypeInfo';
 import * as Types from 'services/cloud/types';
 import { TItemEditComponent } from 'items/edit';
+import { DomainComponent } from 'share/component';
 
 @Component({selector: 'item-list', templateUrl: './index.html'})
 export class TItemListComponent implements OnInit
@@ -86,6 +87,15 @@ export class TItemListComponent implements OnInit
                 ItemPromise
                     .then(() => this.Refresh())
                     .catch((err) => console.log(err));
+            });
+    }
+
+    OnPublic()
+    {
+        App.ShowModal(DomainComponent, {}, {size: 'lg'})
+            .then(() =>
+            {
+
             });
     }
 
