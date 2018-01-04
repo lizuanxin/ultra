@@ -52,5 +52,6 @@ export interface IAlertInputOptions
 export interface IAlertButton
 {
     Text?: string;
+    Class?: string;
     Handler?: (Value: any) => boolean | void;
 }

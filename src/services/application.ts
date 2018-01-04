@@ -150,15 +150,14 @@ export class TApplication
     }
 
     ShowToast(type: 'success' | 'info' | 'warning' | 'error',
-        message: string, duration: number = 2000): void
+        message: string, duration: number = 1500): void
     {
         let ToastOpts: IToastOptions =
         {
             Type: type,
-            Message: message,
-            Position: 'bottom'
+            Message: message
         };
-        const ModelRef = this.Modal.open(TToastComponent, {backdrop: false});
+        const ModelRef = this.Modal.open(TToastComponent, {backdrop: false, windowClass: 'toast-default'});
         ModelRef.componentInstance.Opts = ToastOpts;
         setTimeout(() => ModelRef.dismiss(), duration);
     }

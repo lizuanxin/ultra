@@ -1,19 +1,16 @@
-<div>
-    <div>
-        <h2>{{Opts.Title}}</h2>
-        <h3>{{Opts.Message}}</h3>
+<div class="frame-dialog">
+    <h2 *ngIf="Opts.Title">{{Opts.Title}}</h2>
+    <div class="frame-content">
+        {{Opts.Message}}
+        <ng-template [ngIf]="Opts.Inputs.length > 0">
+            <ul>
+                <li *ngFor="let OptInput of Opts.Inputs">
+                    <input [type] ="OptInput.Type" [placeholder]="OptInput.Placeholder" [(ngModel)]="OptInput.Value">
+                </li>
+            </ul>
+        </ng-template>
     </div>
-    <div *ngIf="Opts.Inputs.length > 0">
-        <div *ngFor="let OptInput of Opts.Inputs">
-            <input
-                [type] ="OptInput.Type"
-                [placeholder]="OptInput.Placeholder"
-                [(ngModel)]="OptInput.Value">
-        </div>
-    </div>
-    <div>
-        <button *ngFor="let OptButton of Opts.Buttons" (click)="BtnClicked(OptButton)">
-            {{OptButton.Text}}
-        </button>
+    <div class="frame-footer">
+        <button class="btn btn-sm btn-primary" [ngClass]="OptButton.Class" *ngFor="let OptButton of Opts.Buttons" (click)="BtnClicked(OptButton)">{{OptButton.Text}}</button>
     </div>
 </div>
