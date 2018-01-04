@@ -16,7 +16,7 @@ export class TFileLibComponent extends TBasicModalCompnent
     OnInit()
     {
         if (this.IsInModalMode)
-            this.contentRef.nativeElement.style = 'height:320px; overflow-x:hidden; overflow-y:auto';
+            this.contentRef.nativeElement.style = 'height:420px; overflow-x:hidden; overflow-y:auto';
         this.Refresh();
     }
 
