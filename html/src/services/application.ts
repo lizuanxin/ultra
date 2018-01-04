@@ -137,7 +137,7 @@ export class TApplication
         if (! TypeInfo.Assigned(Opts.Buttons))
             Opts.Buttons = [{Text: 'OK'}];
 
-        const ModelRef = this.Modal.open(TAlertComponent, {backdrop: false});
+        const ModelRef = this.Modal.open(TAlertComponent, {backdrop: false, windowClass: 'modal-alert'});
         ModelRef.componentInstance.Opts = Opts;
         this.ModelRefList.push(ModelRef);
 

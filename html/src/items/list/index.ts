@@ -35,11 +35,8 @@ export class TItemListComponent implements OnInit
     {
         // let Product = TItem.CreateNew(Types.TItemTypeId.Product);
         // this.ShowItemEditModal(Product, true);
-        App.ShowAlert({Title: 'Alert', Message: 'Test alert',
-            Inputs: [
-                { Type:'text', Name: 'brand', Placeholder: 'input brand name' },
-                { Type:'text', Name: 'model', Placeholder: 'model brand name' }
-            ],
+        App.ShowAlert({ Message: 'Test alert',
+
             Buttons: [
                 {
                     Text: 'Cancel',
