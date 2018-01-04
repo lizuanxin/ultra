@@ -138,25 +138,35 @@ export class TFileList
 
     Remove(UserFile: Types.IFile)
     {
-        let index = this.Files.indexOf(UserFile);
-        if (index !== -1)
-            this.Files.splice(index, 1);
+        let Idx = this.Index(UserFile);
+        if (Idx !== -1)
+            this.Files.splice(Idx, 1);
     }
 
     Add(UserFile: Types.IFile)
     {
         if (TypeInfo.Assigned(UserFile.Id)
             && UserFile.Id.length > 0
-            && this.Files.indexOf(UserFile) === -1)
+            && this.Index(UserFile) === -1)
             this.Files.push(UserFile);
     }
 
-    Update(Index: number, UserFile: Types.IFile)
+    Update(Idx: number, UserFile: Types.IFile)
     {
-        if (Index > this.Size || Index < 0)
+        if (Idx > this.Size || Idx < 0)
             return;
 
-        this.Files[Index] = UserFile;
+        this.Files[Idx] = UserFile;
+    }
+
+    private Index(UserFile: Types.IFile)
+    {
+        for (let i = 0; i < this.Files.length; i++)
+        {
+            if (this.Files[i].Id === UserFile.Id)
+                return i;
+        }
+        return -1;
     }
 }
 
