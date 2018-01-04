@@ -100,7 +100,7 @@ export class TItemService
         });
 
         this.Auth.Grant(this.Http);
-        await this.Http.Post('/publish/up', {Domain_Id: DomainId, Items: ItemsId}).toPromise();
+        await this.Http.Post('/publish/up', {Domain_Id: DomainId, ItemIds: ItemsId}).toPromise();
     }
 
     async Unpublish(Param: Types.IUnpublishing)
