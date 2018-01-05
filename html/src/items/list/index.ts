@@ -138,6 +138,8 @@ export class TItemListComponent implements OnInit
                 console.log('update item: ' + ItemList.length);
                 TItemModel.SelectedNum = 0;
                 this.ItemModels = ItemList.map((Item) => new TItemModel(Item));
+                console.log(this.ItemModels);
+
             })
             .catch((err) => console.log(err));
     }

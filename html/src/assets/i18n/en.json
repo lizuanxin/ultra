@@ -91,6 +91,7 @@
             "field":
             {
                 "id": "Id",
+                "thumbnail": "Thumbnail",
                 "name": "Name",
                 "timestamp": "Creation Time",
                 "region": "Region",

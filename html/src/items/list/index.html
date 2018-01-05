@@ -34,18 +34,19 @@
                 <th width="2%" text-center>
                     <label nz-checkbox [(ngModel)]="AllItemSelected" (ngModelChange)="ToggleSelectAll()"></label>
                 </th>
-                <th width="12%">{{'items.list.field.id'|translate}}</th>
+                <th width="5%">{{'items.list.field.thumbnail'|translate}}</th>
                 <th width="15%">{{'items.list.field.name'|translate}}</th>
                 <th width="12%" text-center>{{'items.list.field.timestamp'|translate}}</th>
             </tr>
             </thead>
             <tbody>
                 <tr *ngFor="let ItemModel of ItemModels" (click)="EditItem(ItemModel.Source)" >
-                    <td text-center (click)="$event.stopPropagation()">
+                    <td text-center (click)="$event.stopPropagation()" style="vertical-align:middle">
                         <label nz-checkbox [(ngModel)]="ItemModel.IsSelected"></label>
                     </td>
-                    <td>
+                    <td class="position-relative">
                         <img width="60" height="60" src="{{ItemModel.Source.AvatarUrl}}">
+                        <div class="package" *ngIf="ItemModel.Source.IsPackage"></div>
                     </td>
                     <td>{{ItemModel.Source.Name}}</td>
                     <td text-center>
