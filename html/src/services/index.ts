@@ -7,6 +7,7 @@ import {TApplication} from './application';
 import {TAuthService} from './authorize';
 import {TItemService} from 'services/item';
 import {TFileService} from './file';
+import {TReceiptService} from 'services/receipt';
 
 import {TShoppingCart} from './shopping_cart';
 
@@ -28,15 +29,14 @@ export function HttpLoaderFactory(http: HttpClient)
         NgbModule
     ],
     providers: [
-        TApplication, TAuthService, TItemService, TShoppingCart, TFileService
+        TApplication, TAuthService, TItemService, TShoppingCart, TFileService, TReceiptService
     ],
 })
 export class ServiceModule
 {
 }
 
-export {TApplication, TAuthService, TShoppingCart, TFileService};
-export {TItemService} from './item';
+export {TApplication, TAuthService, TItemService, TShoppingCart, TFileService, TReceiptService};
 
 import * as Types from './cloud/types';
 export {Types};
