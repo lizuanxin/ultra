@@ -130,6 +130,16 @@ export class TItemListComponent implements OnInit
         return TItemModel.SelectedNum;
     }
 
+    get ItemHaspackage(): boolean
+    {
+        for (let item of TItemModel.SelectedItem)
+        {
+            if (item.IsPackage) return true;
+
+        }
+        return false;
+    }
+
     private Refresh()
     {
         this.ItemSvc.List()
@@ -138,7 +148,6 @@ export class TItemListComponent implements OnInit
                 console.log('update item: ' + ItemList.length);
                 TItemModel.SelectedNum = 0;
                 this.ItemModels = ItemList.map((Item) => new TItemModel(Item));
-                console.log(this.ItemModels);
 
             })
             .catch((err) => console.log(err));
@@ -150,8 +159,10 @@ export class TItemListComponent implements OnInit
 export class TItemModel
 {
     static SelectedNum: number = 0;
+    static SelectedItem: Array<any> = [];
     constructor(public Source: TItem)
     {
+
     }
 
     get IsSelected(): boolean
@@ -159,17 +170,25 @@ export class TItemModel
         return this._IsSelected;
     }
 
+
     set IsSelected(Selected: boolean)
     {
         if (this._IsSelected === Selected)
             return;
 
-        if (Selected)
+        if (Selected && TItemModel.SelectedItem.indexOf(this.Source) === -1)
+        {
             TItemModel.SelectedNum ++;
+            TItemModel.SelectedItem.push(this.Source);
+        }
         else
+        {
             TItemModel.SelectedNum --;
+            TItemModel.SelectedItem.splice(TItemModel.SelectedItem.indexOf(this.Source), 1);
+        }
 
         this._IsSelected = Selected;
+
     }
 
     _IsSelected: boolean = false;
