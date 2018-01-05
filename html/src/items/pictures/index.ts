@@ -14,4 +14,3 @@ export class PicturesComponent implements OnInit
     {
     }
 }
-
