@@ -155,7 +155,6 @@ $iconfontPath:'/assets/fonts/';
     content: "\f4a5";
 }
 
-
 .icon-login-out:before {
     content: "\e917";
 }
@@ -168,19 +167,18 @@ $iconfontPath:'/assets/fonts/';
     content: "\e919";
 }
 
-
 .icon-arrow-up-thin:before {
     content: "\e91a";
 }
 
-
 .icon-ion-ios-checkmark:before {
     content: "\f3ff";
-  }
+}
 
-  .icon-ion-ios-close-circle:before {
+.icon-ion-ios-close-circle:before {
     content: "\f14e";
-  }
+}
 
-
-
+.icon-packages:before {
+    content: "\e91b";
+}
