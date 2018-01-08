@@ -80,7 +80,8 @@ img{
     border-left: 30px solid transparent;
     &:before{
         position:absolute;
-        top: -34px;
+        transform: rotate(45deg);
+        top: -33px;
         right: 0;
         font-family: 'iconfont' !important;
         font-size: 1rem;
