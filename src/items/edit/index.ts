@@ -181,39 +181,18 @@ export class TItemEditComponent extends TBasicModalCompnent
     onEditorCreated(quill)
     {
         const toolbar = quill.getModule('toolbar');
-        toolbar.addHandler('image', this.imageHandler.bind(this));
+        toolbar.addHandler('image', this.imageHandler.bind(this, quill));
     }
 
-    imageHandler()
+    imageHandler(quill)
     {
         this.App.ShowModal(TFileLibComponent, {Multiple: false, ModalMode: true}, {size: 'lg'})
             .then((Pictures) =>
             {
-                console.log(Pictures);
-
+                const range = quill.getSelection(true);
+                const index = range.index + range.length;
+                quill.editor.insertEmbed(range.index, 'image', Pictures[0].Path);
             });
-        /**
-            const Imageinput = document.createElement('input');
-            Imageinput.setAttribute('type', 'file');
-            Imageinput.setAttribute('accept', 'image/png, image/gif, image/jpeg, image/bmp, image/x-icon');
-            Imageinput.classList.add('ql-image');
-
-            Imageinput.addEventListener('change', () =>
-            {
-            const file = Imageinput.files[0];
-            if (Imageinput.files != null && Imageinput.files[0] != null)
-            {
-                console.log(file);
-
-                //   this._service.sendFileToServer(file).subscribe(res => {
-                //      this._returnedURL = res;
-                //      this.pushImageToEditor();
-                //   });
-            }
-            });
-
-            Imageinput.click();
-        */
     }
 
     get CurrPricing()
