@@ -1,0 +1,121 @@
+<div class="container" m-t-30>
+    <div class="cart">
+        <h6 m-b-15>全部商品</h6>
+        <ng-template [ngIf]="!App.IsMinScreen">
+            <table class="table table-bordered table-condensed table-middled table-header-normal">
+                <thead>
+                    <tr>
+                        <th width="3%"><input type="checkbox"></th>
+                        <th width="7%">全选</th>
+                        <th width="40%">商品</th>
+                        <th width="10%">单价</th>
+                        <th width="15%">数量</th>
+                        <th width="15%">小计</th>
+                        <th width="10%">操作</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td><input type="checkbox"></td>
+                        <td colspan="2">
+                            <div class="row" align-items-center>
+                                <div class="col-md-2" text-left>
+                                    <img src="https://img10.360buyimg.com/N6/s60x60_jfs/t4342/155/3609233741/276893/9e00f98f/58e4add8Nd2e50d3f.jpg" title=""  width="60" height="60">
+                                </div>
+                                <div class="col-md-8" text-left>
+                                    <h6>Cablemagic</h6>
+                                </div>
+                            </div>
+                        </td>
+                        <td>¥318.00</td>
+                        <td>
+                            <div class="input-group" padding-horizontal>
+                                <span class="input-group-addon" id="btnGroupAddon">-</span>
+                                <span class="form-control" text-center>1</span>
+                                <span class="input-group-addon" id="btnGroupAddon">+</span>
+                            </div>
+                        </td>
+                        <td>¥318.00</td>
+                        <td>删除</td>
+                    </tr>
+                </tbody>
+                <tfoot class="no-border">
+                    <tr>
+                        <td><input type="checkbox"></td>
+                        <td>全选</td>
+                        <td><a>删除选中的商品</a></td>
+                        <td colspan="3" text-right>
+                            <span class="m-r-15">已选择 <b text-danger>10</b> 件商品</span>
+                            总价：<span text-danger f-16>¥318.00</span>
+                        </td>
+                        <td>
+                            <button class="btn btn-danger" pull-right [routerLink]="['/order']">去结算</button>
+                        </td>
+                    </tr>
+                </tfoot>
+            </table>
+        </ng-template>
+        <ng-template [ngIf]="App.IsMinScreen">
+            <div class="cart-list-device">
+                <ul class="row" align-items-center justify-content-between>
+                    <li class="col-1"><i f-28 text-gray-light class="ico-select selected"></i></li>
+                    <li class="col-2">
+                        <img src="https://img10.360buyimg.com/N6/s60x60_jfs/t4342/155/3609233741/276893/9e00f98f/58e4add8Nd2e50d3f.jpg" title=""  width="60" height="60" n-m-l-5>
+                        <div text-red text-nowrap f-14 n-m-l-10 m-t-5>【8折】</div>
+                    </li>
+                    <li class="col-5">
+                        <h6 f-14>Cablemagic</h6>
+                        <p text-gray-light>xxxxxxxx</p>
+                        <div class="input-group input-group-sm" style="width:100px">
+                            <span class="input-group-addon" id="btnGroupAddon">-</span>
+                            <span class="form-control" text-center>10</span>
+                            <span class="input-group-addon" id="btnGroupAddon">+</span>
+                        </div>
+                    </li>
+                    <li class="col-3" align-self-start text-right>
+                        <p>¥318.00</p>
+                        <p no-margin m-t-40>
+                            <a icon f-25>&#xf2c1;</a>
+                        </p>
+                    </li>
+                </ul>
+                <ul class="row" align-items-center justify-content-between>
+                        <li class="col-1"><i icon f-28 text-gray-light>&#xf1f6;</i></li>
+                        <li class="col-2">
+                            <img src="https://img10.360buyimg.com/N6/s60x60_jfs/t4342/155/3609233741/276893/9e00f98f/58e4add8Nd2e50d3f.jpg" title=""  width="60" height="60" n-m-l-5>
+                            <div text-red text-nowrap f-14 n-m-l-10 m-t-5>【8.5折】</div>
+                        </li>
+                        <li class="col-5">
+                            <h6 f-14>Cablemagic</h6>
+                            <p text-gray-light>xxxxxxxx</p>
+                            <div class="input-group input-group-sm" style="width:100px">
+                                <span class="input-group-addon" id="btnGroupAddon">-</span>
+                                <span class="form-control" text-center>10</span>
+                                <span class="input-group-addon" id="btnGroupAddon">+</span>
+                            </div>
+                        </li>
+                        <li class="col-3" align-self-start text-right>
+                            <p>¥318.00</p>
+                            <p no-margin m-t-40>
+                                <a icon f-25>&#xf2c1;</a>
+                            </p>
+                        </li>
+                </ul>
+                <ul class="row" align-items-center justify-content-between>
+                    <li class="col-3">
+                        <div flex-box align-items-center>
+                            <i icon f-28 text-gray-light>&#xf1f6;</i>&nbsp;&nbsp;<span f-12>全选</span>
+                        </div>
+                    </li>
+                    <li class="col-6" text-right>
+                        <span text-red f-14>总额：¥318.00</span><br>
+                        <span f-12>10 件商品</span>
+                    </li>
+                    <li class="col-3" text-right>
+                        <button class="btn btn-danger no-radius" [routerLink]="['/order']">去结算</button>
+                    </li>
+                </ul>
+            </div>
+        </ng-template>
+    </div>
+</div>
