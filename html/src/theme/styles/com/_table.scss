@@ -74,6 +74,9 @@ table.table{
         thead{
             th{
                 text-align: center;
+                &[text-left]{
+                    text-align: left;
+                }
             }
         }
     }
@@ -104,3 +107,4 @@ table.table{
         }
     }
 }
+
