@@ -12,6 +12,8 @@ import {DetailPage} from './detail';
 import {FooterComponent} from './share/footer';
 import {RelateComponent} from './components/relate';
 import {SiteNavbarComponent} from './share/navbar';
+import {CartPage} from './cart';
+import {OrderInfoPage} from './order';
 
 
 @Component({templateUrl: '../share/layout.domain.html'})
@@ -25,7 +27,9 @@ const routes: Routes = [
             {path: 'home', component: HomePage},
             {path: 'list', component: ListPage},
             {path: 'detail/:id', component: DetailPage},
+            {path: 'cart', component: CartPage},
             {path: 'tens', component: TensPage},
+            {path: 'order', component: OrderInfoPage},
             /// ...
             {path: '', redirectTo: 'home'}
         ]
@@ -47,6 +51,8 @@ const routes: Routes = [
         ListPage,
         DetailPage,
         RelateComponent,
+        CartPage,
+        OrderInfoPage,
         SiteNavbarComponent,
         FooterComponent
     ]

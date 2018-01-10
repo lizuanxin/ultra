@@ -28,7 +28,7 @@
                     </ul>
                 </li>
                 <ng-template [ngIf]="!IsAdmin">
-                    <li class="nav-item"><a href="javascript:void(0)">购物车</a></li>
+                    <li class="nav-item"><a href="javascript:void(0)" [routerLink]="['/cart']">购物车</a></li>
                 </ng-template>
             </div>
         </div>
