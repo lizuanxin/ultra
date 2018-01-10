@@ -136,8 +136,9 @@ export class TReceipt extends TAssignable implements Types.IReceipt
     ToAddress: string = null;      // of JSON address redundancy storage
     Memo: string = null;
     Status: Types.TReceiptStatus = null;
-    Manifests: Types.IManifest[] = null;
+    Timestamp: Date = null;
 
+    Manifests: Types.IManifest[] = null;
     SellerChildReceiptMap: Map<string, TReceipt>;
 }
 
