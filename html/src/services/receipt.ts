@@ -21,11 +21,7 @@ export class TReceiptService
             this.ReceiptSnap = new Map<string, TReceipt>();
             for (let Iter of Ary)
             {
-                let Receipt: TReceipt;
-                if (Iter.TypeId === Types.TReceiptTypeId.Purchase)
-                    Receipt = new TPurchase();
-                else
-                    Receipt = new TOrder();
+                let Receipt = new TReceipt();
                 Receipt.Assign(Iter);
                 this.ReceiptSnap.set(Iter.Id, Receipt);
             }
@@ -36,8 +32,10 @@ export class TReceiptService
     async Append(Receipt: TReceipt)
     {
         this.Auth.Grant(this.Http);
-        await this.Http.Post('/append', Receipt).toPromise();
-        this.ReceiptSnap.set(Receipt.Id, Receipt);
+        const RetVal = await this.Http.Post('/append', Receipt).toPromise().then((res) => res.Content);
+        const RetReceipt = new TReceipt();
+        RetReceipt.Assign(RetVal);
+        this.ReceiptSnap.set(RetVal.Id, RetReceipt);
     }
 
     async Update(Receipt: TReceipt)
@@ -50,7 +48,8 @@ export class TReceiptService
     async Remove(Receipt: TReceipt)
     {
         this.Auth.Grant(this.Http);
-        await this.Http.Post('/remove', {Id: Receipt.Id, TypeId: Receipt.TypeId}).toPromise();
+        await this.Http.Post('/remove',
+            {Id: Receipt.Id, ChildReceipts: Receipt.ChildReceipts.map((Receipt) => Receipt.Id)}).toPromise();
         this.ReceiptSnap.delete(Receipt.Id);
     }
 
@@ -60,26 +59,62 @@ export class TReceiptService
 
 export class TReceipt extends TAssignable implements Types.IReceipt
 {
-    get IsPurchase(): boolean
+    IsParentReceipt()
     {
-        return this.TypeId === Types.TReceiptTypeId.Purchase;
+        return TypeInfo.Assigned(this.SellerChildReceiptMap);
     }
 
-    Add(Manifest: Types.IManifest)
+    AddManifest(Manifest: Types.IManifest)
     {
-        let Idx = this.Index(Manifest);
+        let Idx = this.IndexOfManifest(Manifest);
         if (Idx === -1)
             this.Manifests.push(Manifest);
     }
 
-    Remove(Manifest: Types.IManifest | Types.TIdentify)
+    RemoveManifest(ManifestOrId: Types.IManifest | Types.TIdentify)
     {
-        let Idx = this.Index(Manifest);
+        let Idx = this.IndexOfManifest(ManifestOrId);
         if (Idx !== -1)
             this.Manifests.splice(Idx, 1);
     }
 
-    private Index(ManifestOrId: Types.IManifest | Types.TIdentify)
+    AddChildReceipt(Receipt: TReceipt)
+    {
+        if (! TypeInfo.Assigned(this.SellerChildReceiptMap))
+            this.SellerChildReceiptMap = new Map<string, TReceipt>();
+
+        this.SellerChildReceiptMap.set(Receipt.Seller_Id, Receipt);
+    }
+
+    RemoveChildReceipt(Receipt: TReceipt)
+    {
+        if (! TypeInfo.Assigned(this.SellerChildReceiptMap))
+            return;
+
+        this.SellerChildReceiptMap.delete(Receipt.Seller_Id);
+    }
+
+    get ChildReceipts(): Array<Types.IReceipt>
+    {
+        if (! TypeInfo.Assigned(this.SellerChildReceiptMap))
+            return [];
+
+        let _ChildReceipts = [];
+        return Array.from(this.SellerChildReceiptMap.values());
+    }
+
+    set ChildReceipts(Values: Array<Types.IReceipt>)
+    {
+        this.SellerChildReceiptMap = new Map<string, TReceipt>();
+        for (let iter of Values)
+        {
+            const Receipt = new TReceipt();
+            Receipt.Assign(iter);
+            this.AddChildReceipt(Receipt);
+        }
+    }
+
+    private IndexOfManifest(ManifestOrId: Types.IManifest | Types.TIdentify)
     {
         let ManifestId;
         if (TypeInfo.IsPrimitive(ManifestOrId))
@@ -96,21 +131,13 @@ export class TReceipt extends TAssignable implements Types.IReceipt
     }
 
     Id: Types.TIdentify = null;
-    TypeId: Types.TReceiptTypeId = null;
     RefId?: Types.TIdentify = null;
-
+    Seller_Id?: Types.TIdentify = null;
     ToAddress: string = null;      // of JSON address redundancy storage
-
     Memo: string = null;
+    Status: Types.TReceiptStatus = null;
     Manifests: Types.IManifest[] = null;
-}
 
-export class TPurchase extends TReceipt implements Types.IPurchase
-{
-
-}
-
-export class TOrder extends TReceipt implements Types.IOrder
-{
+    SellerChildReceiptMap: Map<string, TReceipt>;
 }
 
