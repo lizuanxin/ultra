@@ -172,7 +172,6 @@ export class TItemEditComponent extends TBasicModalCompnent
         this.Item.Html = ItemDetail;
     }
 
-
     onContentChanged({ html, text })
     {
         console.log('html:' + html, 'text:' + text);

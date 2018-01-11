@@ -4,7 +4,7 @@
             <button class="btn btn-sm btn-outline-primary" type="button" (click)="CreateNewProduct()">{{'button.add'|translate}}</button>
         </div>
         <div class="d-inline-block">
-            <button class="btn btn-sm btn-primary" type="button" [disabled]="SelectedItemNum < 2 || ItemHaspackage" (click)="CreateNewPackage()">{{'items.list.pack'|translate}}</button>
+            <button class="btn btn-sm btn-primary" type="button" [disabled]="SelectedItemNum < 2" (click)="CreateNewPackage()">{{'items.list.pack'|translate}}</button>
         </div>
         <div class="dropdown d-inline-block" ngbDropdown>
             <button class="btn btn-sm btn-secondary dropdown-toggle" type="button"  (click)="App.ShowToast('success','wwwwwwww',1000)" ngbDropdownToggle>
@@ -19,7 +19,7 @@
     </div>
     <div class="col-md-6" text-right>
         <div class="d-inline-block">
-            <button class="btn btn-sm btn-outline-primary" type="button" (click)="OnPublic()">{{'button.publish'|translate}}</button>
+            <button class="btn btn-sm btn-outline-primary" type="button" (click)="PublishItems()">{{'button.publish'|translate}}</button>
             <button class="btn btn-sm btn-outline-primary" type="button" [disabled]="NullItemSelected">{{'button.up'|translate}}</button>
             <button class="btn btn-sm btn-outline-primary" type="button" [disabled]="NullItemSelected">{{'button.down'|translate}}</button>
             <button class="btn btn-sm btn-outline-danger" type="button" (click)="Remove()" [disabled]="NullItemSelected">{{'button.del'|translate}}</button>

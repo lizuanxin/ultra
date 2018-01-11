@@ -3,15 +3,17 @@
         <table class="table table-bordered table-hover">
             <thead>
                 <th width="5%"></th>
-                <th></th>
+                <th>Domain</th>
             </thead>
-            <tr>
-                <td><label nz-checkbox></label></td>
-                <td>domain</td>
+            <tr *ngFor="let DomainModel of DomainModels">
+                <td (click)="$event.stopPropagation()">
+                    <label nz-checkbox [(ngModel)]="DomainModel.IsSelected"></label>
+                </td>
+                <td>{{DomainModel.Source.Name}}</td>
             </tr>
         </table>
     </div>
     <div class="frame-footer">
-        <button class="btn btn-sm btn-primary">{{'button.publish'|translate}}</button>
+        <button class="btn btn-sm btn-primary" (click)="BtnClicked()">{{'button.publish'|translate}}</button>
     </div>
 </div>
