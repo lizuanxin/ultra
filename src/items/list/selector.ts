@@ -70,6 +70,9 @@ export class TItemSelectorComponent extends TBasicModalCompnent
 
     get AllItemSelected(): boolean
     {
+        if (this.ItemModels.length === 0)
+            return false;
+
         return TItemModel.SelectedNum === this.ItemModels.length;
     }
 

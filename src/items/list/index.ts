@@ -90,13 +90,16 @@ export class TItemListComponent implements OnInit
             });
     }
 
-    OnPublic()
+    async PublishItems()
     {
-        App.ShowModal(DomainComponent, {}, {size: 'lg'})
-            .then(() =>
+        let Domains = await App.ShowModal(DomainComponent, {}, {size: 'lg'});
+        if (TypeInfo.Assigned(Domains))
+        {
+            for (let Domain of Domains)
             {
-
-            });
+                await this.ItemSvc.Publish(Domain.Id, this.SelectedItemModels.map((ItemModel) => ItemModel.Source));
+            }
+        }
     }
 
     /*
@@ -117,6 +120,9 @@ export class TItemListComponent implements OnInit
 
     get AllItemSelected(): boolean
     {
+        if (this.ItemModels.length === 0)
+            return false;
+
         return TItemModel.SelectedNum === this.ItemModels.length;
     }
 
@@ -130,14 +136,9 @@ export class TItemListComponent implements OnInit
         return TItemModel.SelectedNum;
     }
 
-    get ItemHaspackage(): boolean
+    get SelectedItemModels(): Array<TItemModel>
     {
-        for (let item of TItemModel.SelectedItem)
-        {
-            if (item.IsPackage) return true;
-
-        }
-        return false;
+        return this.ItemModels.filter((ItemModel) => ItemModel.IsSelected);
     }
 
     private Refresh()
@@ -159,7 +160,6 @@ export class TItemListComponent implements OnInit
 export class TItemModel
 {
     static SelectedNum: number = 0;
-    static SelectedItem: Array<any> = [];
     constructor(public Source: TItem)
     {
 
@@ -170,25 +170,17 @@ export class TItemModel
         return this._IsSelected;
     }
 
-
     set IsSelected(Selected: boolean)
     {
         if (this._IsSelected === Selected)
             return;
 
-        if (Selected && TItemModel.SelectedItem.indexOf(this.Source) === -1)
-        {
+        if (Selected)
             TItemModel.SelectedNum ++;
-            TItemModel.SelectedItem.push(this.Source);
-        }
         else
-        {
             TItemModel.SelectedNum --;
-            TItemModel.SelectedItem.splice(TItemModel.SelectedItem.indexOf(this.Source), 1);
-        }
 
         this._IsSelected = Selected;
-
     }
 
     _IsSelected: boolean = false;
