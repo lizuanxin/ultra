@@ -7,13 +7,13 @@ import {SharedModule} from 'share';
 // import {TAuthService} from 'services';
 import {HomePage} from './home';
 import {TensPage} from './tens';
-import {ListPage} from './list';
 import {DetailPage} from './detail';
 import {FooterComponent} from './share/footer';
 import {RelateComponent} from './components/relate';
 import {SiteNavbarComponent} from './share/navbar';
 import {CartPage} from './cart';
 import {OrderInfoPage} from './order';
+import { CableMagicPage } from './pro/cablemagic';
 import { HealthPage } from './pro/health';
 
 
@@ -26,12 +26,13 @@ const routes: Routes = [
     {path: '', component: LayoutComponent,
         children: [
             {path: 'home', component: HomePage},
-            {path: 'list', component: ListPage},
+            {path: 'cable', component: CableMagicPage},
+            {path: 'health', component: HealthPage},
             {path: 'detail/:id', component: DetailPage},
             {path: 'cart', component: CartPage},
             {path: 'tens', component: TensPage},
             {path: 'order', component: OrderInfoPage},
-            {path: 'health', component: HealthPage},
+
             /// ...
             {path: '', redirectTo: 'home'}
         ]
@@ -50,7 +51,7 @@ const routes: Routes = [
         LayoutComponent,
         HomePage,
         TensPage,
-        ListPage,
+        CableMagicPage,
         HealthPage,
         DetailPage,
         RelateComponent,
