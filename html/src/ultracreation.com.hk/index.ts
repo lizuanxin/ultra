@@ -14,6 +14,7 @@ import {RelateComponent} from './components/relate';
 import {SiteNavbarComponent} from './share/navbar';
 import {CartPage} from './cart';
 import {OrderInfoPage} from './order';
+import { HealthPage } from './pro/health';
 
 
 @Component({templateUrl: '../share/layout.domain.html'})
@@ -30,6 +31,7 @@ const routes: Routes = [
             {path: 'cart', component: CartPage},
             {path: 'tens', component: TensPage},
             {path: 'order', component: OrderInfoPage},
+            {path: 'health', component: HealthPage},
             /// ...
             {path: '', redirectTo: 'home'}
         ]
@@ -49,6 +51,7 @@ const routes: Routes = [
         HomePage,
         TensPage,
         ListPage,
+        HealthPage,
         DetailPage,
         RelateComponent,
         CartPage,
