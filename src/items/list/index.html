@@ -32,7 +32,7 @@
             <thead>
             <tr>
                 <th width="2%" text-center>
-                    <label nz-checkbox [(ngModel)]="AllItemSelected" (ngModelChange)="ToggleSelectAll()"></label>
+                    <input type="checkbox" [(ngModel)]="AllItemSelected" (ngModelChange)="ToggleSelectAll()">
                 </th>
                 <th width="5%">{{'items.list.field.thumbnail'|translate}}</th>
                 <th width="15%">{{'items.list.field.name'|translate}}</th>
@@ -42,7 +42,7 @@
             <tbody>
                 <tr *ngFor="let ItemModel of ItemModels" (click)="EditItem(ItemModel.Source)" >
                     <td text-center (click)="$event.stopPropagation()" style="vertical-align:middle">
-                        <label nz-checkbox [(ngModel)]="ItemModel.IsSelected"></label>
+                        <input type="checkbox" [(ngModel)]="ItemModel.IsSelected">
                     </td>
                     <td class="position-relative">
                         <img width="60" height="60" src="{{ItemModel.Source.AvatarUrl}}">
