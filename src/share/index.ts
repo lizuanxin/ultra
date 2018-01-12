@@ -9,7 +9,6 @@ import {NavbarComponent} from 'share/navbar';
 import {SidebarComponent} from 'share/sidebar';
 import {SwiperComp} from 'UltraCreation/ng-ion/swiper';
 import {ScrollToModule} from '@nicky-lenaers/ngx-scroll-to';
-import {NgZorroAntdModule} from 'ng-zorro-antd';
 import {ReceivingComponent} from './component/receiving';
 import {DndModule} from 'ng2-dnd';
 import * as Comp from './component';
@@ -21,7 +20,6 @@ import * as Comp from './component';
         RouterModule,
         TranslateModule,
         NgbModule,
-        NgZorroAntdModule,
         DndModule.forRoot(),
         ScrollToModule.forRoot()
     ],
@@ -47,7 +45,6 @@ import * as Comp from './component';
         RouterModule,
         TranslateModule,
         NgbModule,
-        NgZorroAntdModule,
         DndModule,
         SwiperComp,
         ScrollToModule,
