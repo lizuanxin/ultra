@@ -15,28 +15,28 @@
                     </tr>
                 </thead>
                 <tbody>
-                    <tr>
-                        <td><input type="checkbox"></td>
+                    <tr *ngFor="let ItemModel of ItemModels">
+                        <td><input type="checkbox" [(ngModel)]="ItemModel.IsSelected"></td>
                         <td colspan="2">
                             <div class="row" align-items-center>
                                 <div class="col-md-2" text-left>
-                                    <img src="https://img10.360buyimg.com/N6/s60x60_jfs/t4342/155/3609233741/276893/9e00f98f/58e4add8Nd2e50d3f.jpg" title=""  width="60" height="60">
+                                    <img src="{{ItemModel.Source.Item.AvatarUrl}}" title=""  width="60" height="60">
                                 </div>
                                 <div class="col-md-8" text-left>
-                                    <h6>Cablemagic</h6>
+                                    <h6>{{ItemModel.Source.Item.Name}}</h6>
                                 </div>
                             </div>
                         </td>
-                        <td>¥318.00</td>
+                        <td>{{ItemModel.Source.Pricing.Retail}}</td>
                         <td>
                             <div class="input-group" padding-horizontal>
-                                <span class="input-group-addon" id="btnGroupAddon">-</span>
-                                <span class="form-control" text-center>1</span>
-                                <span class="input-group-addon" id="btnGroupAddon">+</span>
+                                <span class="input-group-addon" id="btnGroupAddon" (click)="AddQty(ItemModel)">-</span>
+                                <span class="form-control" text-center>{{ItemModel.Source.Qty}}</span>
+                                <span class="input-group-addon" id="btnGroupAddon" (click)="SubQty(ItemModel)">+</span>
                             </div>
                         </td>
-                        <td>¥318.00</td>
-                        <td>删除</td>
+                        <td>{{ItemModel.Source.Price}}</td>
+                        <td (click)="Delete(ItemModel)">删除</td>
                     </tr>
                 </tbody>
                 <tfoot class="no-border">
@@ -45,11 +45,11 @@
                         <td>全选</td>
                         <td><a>删除选中的商品</a></td>
                         <td colspan="3" text-right>
-                            <span class="m-r-15">已选择 <b text-danger>10</b> 件商品</span>
-                            总价：<span text-danger f-16>¥318.00</span>
+                            <span class="m-r-15">已选择 <b text-danger>{{SelectedItemNum}}</b> 件商品</span>
+                            总价：<span text-danger f-16>{{TotalPrice}}</span>
                         </td>
                         <td>
-                            <button class="btn btn-danger" pull-right [routerLink]="['/order']">去结算</button>
+                            <button class="btn btn-danger" pull-right (click)="CommitReceipt()">去结算</button>
                         </td>
                     </tr>
                 </tfoot>

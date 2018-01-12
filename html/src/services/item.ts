@@ -89,6 +89,20 @@ export class TItemService
         this.ItemsSnap.delete(item.Id);
     }
 
+    async PublishedList(): Promise<Array<Types.IPublished>>
+    {
+        if (! TypeInfo.Assigned(this.PublishedSnap))
+        {
+            const Ary: Types.IPublished[] =
+                await this.Http.Get('/publish/', {Domain_Id: 'kktYWb9kklZYlL8k'}).toPromise().then((res) => res.Content);
+            this.PublishedSnap = new Map<string, Types.IPublished>();
+            console.log(Ary);
+            for (let iter of Ary)
+                this.PublishedSnap.set(iter.Id, iter);
+        }
+        return Array.from(this.PublishedSnap.values());
+    }
+
     async Publish(DomainId: Types.TIdentify, Items: Array<TItem | Types.TIdentify>)
     {
         let ItemsId = Items.map((Item) =>
@@ -113,6 +127,7 @@ export class TItemService
     private ItemsSnap: Map<string, TItem>;
     private RegionsSnap: Array<Types.IRegion>;
     private DomainsSnap: Array<Types.IDomain>;
+    private PublishedSnap: Map<string, Types.IPublished>;
 }
 
 export class TFileList
