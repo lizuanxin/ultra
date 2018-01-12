@@ -31,6 +31,11 @@ export class TReceiptService
 
     async Append(Receipt: TReceipt)
     {
+        if (Receipt.Manifests.length === 0)
+            return;
+        if (! TypeInfo.Assigned(this.ReceiptSnap))
+            await this.List();
+
         this.Auth.Grant(this.Http);
         const RetVal = await this.Http.Post('/append', Receipt).toPromise().then((res) => res.Content);
         const RetReceipt = new TReceipt();
@@ -68,7 +73,7 @@ export class TReceipt extends TAssignable implements Types.IReceipt
     {
         let Idx = this.IndexOfManifest(Manifest);
         if (Idx === -1)
-            this.Manifests.push(Manifest);
+            this.Manifests.push({Id: Manifest.Id, Qty: Manifest.Qty, Price: Manifest.Price, Memo: Manifest.Memo} as Types.IManifest);
     }
 
     RemoveManifest(ManifestOrId: Types.IManifest | Types.TIdentify)
@@ -138,7 +143,7 @@ export class TReceipt extends TAssignable implements Types.IReceipt
     Status: Types.TReceiptStatus = null;
     Timestamp: Date = null;
 
-    Manifests: Types.IManifest[] = null;
+    Manifests: Types.IManifest[] = [];
     SellerChildReceiptMap: Map<string, TReceipt>;
 }
 
