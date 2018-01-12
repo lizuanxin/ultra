@@ -1,8 +1,7 @@
 import {Component, OnInit, ViewChild, ElementRef} from '@angular/core';
-import {FormBuilder, FormGroup, Validators} from '@angular/forms';
 
 @Component({templateUrl: './index.html'})
-export class HealthPage implements OnInit
+export class CableMagicPage implements OnInit
 {
     constructor()
     {
@@ -11,6 +10,7 @@ export class HealthPage implements OnInit
     ngOnInit()
     {
         const dom: any = document.querySelector('body');
-        // dom.className = 'violet';
+        dom.className = '';
     }
+
 }
