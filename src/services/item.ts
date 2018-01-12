@@ -234,7 +234,7 @@ export class TItem extends TAssignable implements Types.IItem
     Pictures: Array<Types.IPicture> = [];
     Html: string = null;
     ExtraProp: any = null;
-    PricingList: Array<Types.IPricing> = [];
+    PricingList: Array<Types.ILocalizedPricing> = [];
 
     readonly Timestamp: Date;
 

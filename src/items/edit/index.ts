@@ -203,7 +203,7 @@ export class TItemEditComponent extends TBasicModalCompnent
     @Output() OnChange = new EventEmitter<TProduct>();
 
     private SelectedRegion: Types.IRegion;
-    private PricingListMap = new Map<string, Types.IPricing>();
+    private PricingListMap = new Map<string, Types.ILocalizedPricing>();
 }
 
 
