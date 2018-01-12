@@ -7,7 +7,7 @@
             </thead>
             <tr *ngFor="let DomainModel of DomainModels">
                 <td (click)="$event.stopPropagation()">
-                    <label nz-checkbox [(ngModel)]="DomainModel.IsSelected"></label>
+                    <input type="checkbox" [(ngModel)]="DomainModel.IsSelected">
                 </td>
                 <td>{{DomainModel.Source.Name}}</td>
             </tr>
