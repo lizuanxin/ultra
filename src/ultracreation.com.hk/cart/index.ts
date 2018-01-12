@@ -1,4 +1,5 @@
 import {Component, OnInit, ViewChild} from '@angular/core';
+import { RouterLink, Router } from '@angular/router';
 import {TShoppingCart, TItemService} from 'services';
 import { TReceiptService, TReceipt } from 'services/receipt';
 import * as Types from 'services/cloud/types';
@@ -7,8 +8,9 @@ import * as Types from 'services/cloud/types';
 @Component({selector: 'app-shopcart-page', templateUrl: './index.html'})
 export class CartPage implements OnInit
 {
+
     constructor(private CartSvc: TShoppingCart, private ReceiptSvc: TReceiptService,
-        private ItemSvc: TItemService)
+        private ItemSvc: TItemService, private router: Router)
     {
         this.ItemModels = [];
     }
@@ -79,15 +81,16 @@ export class CartPage implements OnInit
 
     CommitReceipt()
     {
-        let Receipt = new TReceipt();
-        this.ItemModels.forEach((ItemModel) =>
-        {
-            if (ItemModel.IsSelected)
-                Receipt.AddManifest(ItemModel.Source);
-        });
-        Receipt.Status = Types.TReceiptStatus.WaitForPayment;
-        Receipt.ToAddress = 'awerwer';
-        this.ReceiptSvc.Append(Receipt);
+        this.router.navigate(['order'], { queryParams: { page: 1 } });
+        // let Receipt = new TReceipt();
+        // this.ItemModels.forEach((ItemModel) =>
+        // {
+        //     if (ItemModel.IsSelected)
+        //         Receipt.AddManifest(ItemModel.Source);
+        // });
+        // Receipt.Status = Types.TReceiptStatus.WaitForPayment;
+        // Receipt.ToAddress = 'awerwer';
+        // this.ReceiptSvc.Append(Receipt);
     }
 
     App = window.App;
