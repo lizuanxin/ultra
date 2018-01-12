@@ -16,6 +16,7 @@ import {OrderInfoPage} from './order';
 import { CableMagicPage } from './pro/cablemagic';
 import { HealthPage } from './pro/health';
 import { AboutPage } from './about';
+import { ContactPage } from './contact';
 
 
 @Component({templateUrl: '../share/layout.domain.html'})
@@ -34,6 +35,7 @@ const routes: Routes = [
             {path: 'tens', component: TensPage},
             {path: 'order', component: OrderInfoPage},
             {path: 'about', component: AboutPage},
+            {path: 'contact', component: ContactPage},
             /// ...
             {path: '', redirectTo: 'home'}
         ]
@@ -58,6 +60,7 @@ const routes: Routes = [
         RelateComponent,
         CartPage,
         AboutPage,
+        ContactPage,
         OrderInfoPage,
         SiteNavbarComponent,
         FooterComponent
