@@ -1,68 +1,55 @@
-*
-{
+* {
     @include FontGeneration();
     @include textStyle();
     @include textAlign();
     @include InOutSide();
     @include cursor();
-
-    &:focus{
+    &:focus {
         outline: none;
     }
-
-    &[pull-right]
-    {
-        float:right;
+    &[pull-right] {
+        float: right;
     }
-
-    &.inline-block
-    {
+    &.inline-block {
         display: inline-block
     }
-
-    &.border-none{
-        border:none;
+    &.border-none {
+        border: none;
     }
-
-    &.relative
-    {
-        position:relative;
+    &.relative {
+        position: relative;
     }
-
-    &.absolute
-    {
-        position:absolute;
+    &.absolute {
+        position: absolute;
     }
-
-    &[flex-box],&.flex-box{
+    &[flex-box],
+    &.flex-box {
         display: -webkit-box;
         display: -webkit-flex;
         display: -ms-flexbox;
         display: flex;
     }
-
-    &.visible-icon,&.unvisible-icon{
+    &.visible-icon,
+    &.unvisible-icon {
         font-family: Ionicons;
         font-style: normal;
     }
-
-    &.visible-icon{
-        color:$green;
-        &:before{
-            content:"\f2bc";
+    &.visible-icon {
+        color: $green;
+        &:before {
+            content: "\f2bc";
         }
     }
-
-    &.unvisible-icon{
-        color:$red;
-        &:before{
-            content:"\f2c0";
+    &.unvisible-icon {
+        color: $red;
+        &:before {
+            content: "\f2c0";
         }
     }
-
     @include flex();
 }
-.main-container{
+
+.main-container {
     margin-top: 70px;
     margin-left: 235px;
     padding: 10px;
@@ -73,19 +60,23 @@
     overflow: hidden;
 }
 
-.bread-layer{
-    padding:0.75rem 1.25rem;
-    font-size:1.2rem;
-    margin-bottom:10px;
-    border-bottom:solid 1px #f3f3f3;
+.bread-layer {
+    padding: 0.75rem 1.25rem;
+    font-size: 1.2rem;
+    margin-bottom: 10px;
+    border-bottom: solid 1px #f3f3f3;
 }
 
-.container-layer{
-    padding:0.75rem 1.25rem;
+.container-layer {
+    padding: 0.75rem 1.25rem;
 }
 
-.quill-editor.ql-container{
-    height:500px
+.quill-editor.ql-container {
+    height: 500px
+}
+
+.overflow-scroll {
+    overflow-y: auto;
 }
 
 @media screen and (max-width: 992px) {

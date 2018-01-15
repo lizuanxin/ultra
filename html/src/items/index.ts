@@ -51,7 +51,8 @@ const routes: Routes = [
     exports: [
         SharedModule,
         TItemEditorComponent,
-        TItemListComponent
+        TItemListComponent,
+        TItemSelectorComponent
     ],
     providers: [TApplication]
 })
