@@ -1,5 +1,4 @@
 import {Component, Input, Output, ElementRef, ViewChild, EventEmitter} from '@angular/core';
-
 import {TBasicModalCompnent} from '../basicmodal';
 
 import {Types} from 'services';

@@ -38,7 +38,6 @@ const routes: Routes = [
         OrderListComponent
     ],
     exports: [
-
     ],
     providers: [TApplication]
 })
