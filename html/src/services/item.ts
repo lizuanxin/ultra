@@ -223,7 +223,7 @@ export class TItem extends TAssignable implements Types.IItem
             Prop['Id'] = this.Id;
         if (this.Name.length > 0)
             Prop['Name'] = this.Name;
-        if (this.AvatarUrl.length > 0)
+        if (TypeInfo.Assigned(this.AvatarUrl) && this.AvatarUrl.length > 0)
             Prop['AvatarUrl'] = this.AvatarUrl;
         if (TypeInfo.Assigned(this.Html) && this.Html.length > 0)
             Prop['Html'] = this.Html;
