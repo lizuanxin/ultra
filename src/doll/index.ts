@@ -7,6 +7,7 @@ import {TFileLibComponent} from 'share/component';
 import {DollRoomComponent} from 'doll/room';
 import {TItemSelectorComponent} from 'items/list/selector';
 import {ItemsModule, ItemShareModule} from 'items';
+import {DollStreamServerComponent} from './streamserver';
 
 @Component({selector: 'doll', templateUrl: '../share/layout.module.html'})
 export class LayoutComponent
@@ -22,7 +23,7 @@ const routes: Routes = [
 
         children: [
             {path: 'room', component: DollRoomComponent, data: {LangId: 'room', Role: ''}},
-
+            {path: 'stream', component: DollStreamServerComponent, data: {LangId: 'stream', Role: ''}},
             /// ...
             {path: '', redirectTo: 'room'}
         ]
@@ -38,11 +39,13 @@ const routes: Routes = [
     declarations: [
         LayoutComponent,
         DollRoomComponent,
+        DollStreamServerComponent
     ],
     entryComponents: [
         TFileLibComponent,
         TItemSelectorComponent,
-        DollRoomComponent
+        DollRoomComponent,
+        DollStreamServerComponent
     ],
     providers: [TApplication]
 })

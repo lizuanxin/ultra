@@ -1,7 +1,15 @@
-.ultra-topic{
+.ultra-topic {
     overflow: hidden;
     height: 40vw;
     background-repeat: no-repeat;
     background-position: center top;
-    background-size:contain;
+    background-size: contain;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    h1,
+    p {
+        text-align: center;
+        color: white;
+    }
 }

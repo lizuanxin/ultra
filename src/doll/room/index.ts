@@ -32,11 +32,15 @@ export class DollRoomComponent implements OnInit
         });
     }
 
-    OpenModal(content: HTMLTemplateElement)
+    OpenModal(content: HTMLTemplateElement, data?: Types.Doll.IRoom)
     {
-        let IsNewAdded: boolean = false;
+        // let IsNewAdded: boolean = false;
+        if (TypeInfo.Assigned(data))
+            this.RoomItem = data;
+        else
+            this.RoomItem = new Object() as Types.Doll.IRoom;
 
-        App.ShowModal(content, {}, {size: 'lg'})
+        App.ShowModal(content, this.RoomItem, {size: 'lg'})
             .then()
             .catch((err) => console.log(err));
     }
@@ -44,9 +48,19 @@ export class DollRoomComponent implements OnInit
     OpenItemList()
     {
         App.ShowModal(TItemSelectorComponent, {}, {size: 'lg'})
-        .then();
+        .then((SelectedItems) =>
+        {
+            this.RoomItem.Doll = SelectedItems[0].AvatarUrl;
+
+        });
+    }
+
+    RemovePicture(Picture)
+    {
+        this.RoomItem.Doll = null;
     }
 
     RoomList = new Array<Types.Doll.IRoom>();
     DollList = new Array<Types.IPublished>();
+    RoomItem: Types.Doll.IRoom;
 }
