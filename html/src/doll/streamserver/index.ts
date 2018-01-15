@@ -7,29 +7,16 @@ import {TDollService} from 'services/app/doll';
 
 import {TItemSelectorComponent} from 'items/list/selector';
 
-@Component({selector: 'doll-room', templateUrl: './index.html', providers: [TDollService]})
-export class DollRoomComponent implements OnInit
+@Component({selector: 'doll-streamserver', templateUrl: './index.html', providers: [TDollService]})
+export class DollStreamServerComponent implements OnInit
 {
-    constructor(private ItemSvc: TItemService, private DollSvc: TDollService)
+    constructor(private DollSvc: TDollService)
     {
     }
 
     ngOnInit()
     {
-        this.DollSvc.RoomList().then(list =>
-        {
-            this.RoomList = list;
-
-            if (list.length === 0)
-            {
-            }
-        });
-
-        this.ItemSvc.Published().then(list =>
-        {
-            this.DollList = list;
-            console.log(list);
-        });
+        this.ListServer();
     }
 
     OpenModal(content: HTMLTemplateElement)
@@ -39,14 +26,22 @@ export class DollRoomComponent implements OnInit
         App.ShowModal(content, {}, {size: 'lg'})
             .then()
             .catch((err) => console.log(err));
+
+
+        // this.DollSvc.AddServer(StreamServer).then(() => this.ListServer());
     }
 
     OpenItemList()
     {
         App.ShowModal(TItemSelectorComponent, {}, {size: 'lg'})
-        .then();
+            .then();
     }
 
-    RoomList = new Array<Types.Doll.IRoom>();
-    DollList = new Array<Types.IPublished>();
+    private ListServer()
+    {
+        this.DollSvc.ServerList().then(list =>
+            this.ServerList = list);
+    }
+
+    ServerList = new Array<Types.Doll.IStreamServer>();
 }
