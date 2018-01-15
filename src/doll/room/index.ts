@@ -32,6 +32,7 @@ export class DollRoomComponent implements OnInit
         });
     }
 
+
     OpenModal(content: HTMLTemplateElement, data?: Types.Doll.IRoom)
     {
         // let IsNewAdded: boolean = false;
@@ -58,6 +59,11 @@ export class DollRoomComponent implements OnInit
     RemovePicture(Picture)
     {
         this.RoomItem.Doll = null;
+    }
+
+    ButtonOK()
+    {
+
     }
 
     RoomList = new Array<Types.Doll.IRoom>();
