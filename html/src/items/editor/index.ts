@@ -10,8 +10,8 @@ import {TItemSelectorComponent} from 'items/list/selector';
 
 const MAX_PICTURES: number = 5;
 
-@Component({selector: 'item-edit', templateUrl: './index.html'})
-export class TItemEditComponent extends TBasicModalCompnent
+@Component({selector: 'item-editor', templateUrl: './index.html'})
+export class TItemEditorComponent extends TBasicModalCompnent
 {
     constructor(private ItemSvc: TItemService)
     {
@@ -135,12 +135,12 @@ export class TItemEditComponent extends TBasicModalCompnent
 
     GetAvatarUrl(ProductId: string): string
     {
-        return this.ItemSvc.GetItem(ProductId).AvatarUrl;
+        return this.ItemSvc.GetCached(ProductId).AvatarUrl;
     }
 
     GetItemName(ProductId: string): string
     {
-        return this.ItemSvc.GetItem(ProductId).Name;
+        return this.ItemSvc.GetCached(ProductId).Name;
     }
 
     DeleteProduct(ProductId: string)
@@ -206,5 +206,3 @@ export class TItemEditComponent extends TBasicModalCompnent
     private SelectedRegion: Types.IRegion;
     private PricingListMap = new Map<string, Types.ILocalizedPricing>();
 }
-
-

@@ -1,10 +1,11 @@
 import {Component, EventEmitter, Input, Output, OnInit} from '@angular/core';
 
+import {TypeInfo} from 'UltraCreation/Core/TypeInfo';
 import {TItemService, TItem, TProduct, TPackage} from 'services/item';
-import { TFileLibComponent } from 'share/component/filelib';
-import { TypeInfo } from 'UltraCreation/Core/TypeInfo';
+import {TFileLibComponent} from 'share/component/filelib';
+
 import * as Types from 'services/cloud/types';
-import { TItemEditComponent } from 'items/edit';
+import {TItemEditorComponent} from '../editor';
 import { DomainComponent } from 'share/component';
 
 @Component({selector: 'item-list', templateUrl: './index.html'})
@@ -72,7 +73,7 @@ export class TItemListComponent implements OnInit
 
     ShowItemEditModal(Item: TItem, IsNewCreated: boolean)
     {
-        App.ShowModal(TItemEditComponent, {Item: Item}, {size: 'lg'})
+        App.ShowModal(TItemEditorComponent, {Item: Item}, {size: 'lg'})
             .then((EditedItem) =>
             {
                 console.log('modal result: ' + JSON.stringify(EditedItem));
