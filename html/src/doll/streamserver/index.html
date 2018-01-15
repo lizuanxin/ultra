@@ -1,0 +1,17 @@
+<div class="bread-layer">
+    streamserver
+</div>
+<div class="container-layer">
+    <table class="table table-bordered table-hover">
+        <thead>
+            <th>地址</th>
+            <th>参数</th>
+        </thead>
+        <tbody>
+            <tr *ngFor="let item of ServerList">
+                <td>{{item.URL}}</td>
+                <td>{{item.params}}</td>
+            </tr>
+        </tbody>
+    </table>
+</div>
