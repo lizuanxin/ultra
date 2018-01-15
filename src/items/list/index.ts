@@ -66,7 +66,7 @@ export class TItemListComponent implements OnInit
         this.ShowItemEditModal(Package, true);
     }
 
-    EditItem(Item: TItem)
+    Edit(Item: TItem)
     {
         this.ShowItemEditModal(Item, false);
     }
@@ -91,15 +91,14 @@ export class TItemListComponent implements OnInit
             });
     }
 
-    async PublishItems()
+    async Publish()
     {
         let Domains = await App.ShowModal(DomainComponent, {}, {size: 'lg'});
+
         if (TypeInfo.Assigned(Domains))
         {
             for (let Domain of Domains)
-            {
                 await this.ItemSvc.Publish(Domain.Id, this.SelectedItemModels.map((ItemModel) => ItemModel.Source));
-            }
         }
     }
 

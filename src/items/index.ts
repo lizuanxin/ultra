@@ -33,8 +33,8 @@ const routes: Routes = [
 
 @NgModule({
     imports: [
-        QuillEditorModule,
         SharedModule,
+        QuillEditorModule,
     ],
     declarations: [
         LayoutComponent,
@@ -44,9 +44,9 @@ const routes: Routes = [
         PicturesComponent
     ],
     entryComponents: [
-        TItemSelectorComponent,
-        TItemEditorComponent,
         TItemListComponent,
+        TItemEditorComponent,
+        TItemSelectorComponent,
     ],
     exports: [
         SharedModule,
