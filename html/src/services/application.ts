@@ -1,4 +1,4 @@
-import {Injectable, Injector, TemplateRef, Inject } from '@angular/core';
+import {Injectable, Injector, TemplateRef, ReflectiveInjector} from '@angular/core';
 import {Router} from '@angular/router';
 import {TranslateService} from '@ngx-translate/core';
 
@@ -6,12 +6,11 @@ import {TypeInfo} from 'UltraCreation/Core';
 import {Platform} from 'UltraCreation/Core/Platform';
 import {NgbModal, NgbTooltipConfig, NgbModalOptions, NgbModalRef} from '@ng-bootstrap/ng-bootstrap';
 
-
 import {TShoppingCart} from './shopping_cart';
 import {TItemService} from './item';
 import * as Types from './cloud/types';
-import { TAlertComponent, IAlertOptions } from 'share/component/alert';
-import { TToastComponent, IToastOptions } from 'share/component';
+import {TAlertComponent, IAlertOptions} from 'share/component/alert';
+import {TToastComponent, IToastOptions} from 'share/component';
 
 declare global
 {

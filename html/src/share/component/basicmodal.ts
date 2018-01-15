@@ -1,10 +1,15 @@
-import {Input, OnInit} from '@angular/core';
-import {NgbActiveModal} from '@ng-bootstrap/ng-bootstrap';
+import {Input, OnInit, Injector} from '@angular/core';
+import {NgbActiveModal, NgbModal} from '@ng-bootstrap/ng-bootstrap';
 import {TypeInfo} from 'UltraCreation/Core/TypeInfo';
 import {TAssignable} from 'UltraCreation/Core/Persistable';
 
 export abstract class TBasicModalCompnent implements OnInit
 {
+    // constructor(protected Injector: Injector)
+    constructor ()
+    {
+    }
+
     abstract OnClosed(Data: any): void;
     abstract OnDismiss(Data: any): void;
 

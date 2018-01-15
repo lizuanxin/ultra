@@ -1,11 +1,12 @@
 import {NgModule, Component} from '@angular/core';
 import {SharedModule, RouterModule, Routes} from 'share';
 
-import { TApplication } from 'services/application';
-import { TFileLibComponent } from 'share/component';
-import { DollRoomComponent } from 'doll/room';
-import { TItemSelectorComponent } from 'items/list/selector';
-import { ItemsModule, ItemShareModule } from 'items';
+import {TApplication} from 'services/application';
+
+import {TFileLibComponent} from 'share/component';
+import {DollRoomComponent} from 'doll/room';
+import {TItemSelectorComponent} from 'items/list/selector';
+import {ItemsModule, ItemShareModule} from 'items';
 
 @Component({selector: 'doll', templateUrl: '../share/layout.module.html'})
 export class LayoutComponent

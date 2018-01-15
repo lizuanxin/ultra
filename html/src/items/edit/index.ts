@@ -1,11 +1,12 @@
 import {Component, EventEmitter, Input, Output} from '@angular/core';
 
-import { TProduct, TItem, TPackage, TItemService } from 'services/item';
-import { TFileLibComponent } from 'share/component/filelib';
-import { TypeInfo } from 'UltraCreation/Core/TypeInfo';
+import {TProduct, TItem, TPackage, TItemService} from 'services/item';
+import {TFileLibComponent} from 'share/component/filelib';
+import {TypeInfo} from 'UltraCreation/Core/TypeInfo';
+
 import * as Types from 'services/cloud/types';
-import { TBasicModalCompnent } from 'share/component/basicmodal';
-import { TItemSelectorComponent } from 'items/list/selector';
+import {TBasicModalCompnent} from 'share/component/basicmodal';
+import {TItemSelectorComponent} from 'items/list/selector';
 
 const MAX_PICTURES: number = 5;
 

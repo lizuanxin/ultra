@@ -11,6 +11,12 @@ export class TDollService
     {
     }
 
+    ServerList(): Promise<Array<Types.Doll.IStreamServer>>
+    {
+        this.Auth.Grant(this.Http);
+        return this.Http.Get('/streamserver').toPromise().then(res => res.Content);
+    }
+
     RoomList(): Promise<Array<Types.Doll.IRoom>>
     {
         this.Auth.Grant(this.Http);
