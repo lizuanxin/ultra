@@ -5,10 +5,9 @@ import {QuillEditorModule} from 'ngx-quill-editor';
 import {TApplication} from 'services/application';
 
 import {PicturesComponent} from './pictures';
-import {TItemEditComponent} from 'items/edit';
-import {TItemListComponent} from 'items/list';
+import {TItemListComponent} from './list';
+import {TItemEditorComponent} from './editor';
 import {TItemSelectorComponent} from 'items/list/selector';
-
 
 @Component({selector: 'items', templateUrl: '../share/layout.module.html'})
 export class LayoutComponent
@@ -40,18 +39,18 @@ const routes: Routes = [
     declarations: [
         LayoutComponent,
         TItemSelectorComponent,
-        TItemEditComponent,
+        TItemEditorComponent,
         TItemListComponent,
         PicturesComponent
     ],
     entryComponents: [
         TItemSelectorComponent,
-        TItemEditComponent,
+        TItemEditorComponent,
         TItemListComponent,
     ],
     exports: [
         SharedModule,
-        TItemEditComponent,
+        TItemEditorComponent,
         TItemListComponent
     ],
     providers: [TApplication]
@@ -67,7 +66,7 @@ export class ItemShareModule
         ItemShareModule,
     ],
     entryComponents: [
-        TItemEditComponent,
+        TItemEditorComponent,
         TItemListComponent,
     ]
 })

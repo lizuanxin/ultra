@@ -8,7 +8,6 @@ import * as Types from 'services/cloud/types';
 @Component({selector: 'app-shopcart-page', templateUrl: './index.html'})
 export class CartPage implements OnInit
 {
-
     constructor(private CartSvc: TShoppingCart, private ReceiptSvc: TReceiptService,
         private ItemSvc: TItemService, private router: Router)
     {
@@ -17,7 +16,7 @@ export class CartPage implements OnInit
 
     ngOnInit()
     {
-        this.ItemSvc.PublishedList()
+        this.ItemSvc.Published()
             .then((PublishedList) =>
             {
                 console.log('published list len: ' + PublishedList.length);

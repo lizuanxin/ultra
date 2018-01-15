@@ -14,7 +14,13 @@ export class TDollService
     ServerList(): Promise<Array<Types.Doll.IStreamServer>>
     {
         this.Auth.Grant(this.Http);
-        return this.Http.Get('/streamserver').toPromise().then(res => res.Content);
+        return this.Http.Get('/streamsrv').toPromise().then(res => res.Content);
+    }
+
+    AddServer(Content: Types.Doll.IStreamServer): Promise<Types.Doll.IStreamServer>
+    {
+        this.Auth.Grant(this.Http);
+        return this.Http.Post('/streamsrv/append', Content).toPromise().then(res => res.Content);
     }
 
     RoomList(): Promise<Array<Types.Doll.IRoom>>
@@ -42,5 +48,5 @@ export class TDollService
         return this.Http.Post('/room/post', JSON.stringify(Room)).toPromise().then(res => res.Content);
     }
     */
-    private Http = new TRestClient('/api');
+    private Http = new TRestClient('/api/app/doll');
 }
