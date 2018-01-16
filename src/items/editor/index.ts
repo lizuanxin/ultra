@@ -3,7 +3,7 @@ import {Component, ChangeDetectorRef, EventEmitter, Input, Output} from '@angula
 import {TypeInfo} from 'UltraCreation/Core/TypeInfo';
 import {TFileLibComponent} from 'share/component/filelib';
 
-import {TItemService, TItem, TProduct, TPackage} from 'services/item';
+import {TItemService, TItem} from 'services/item';
 import * as Types from 'services/cloud/types';
 
 import {TBasicModalView} from 'share/component/basicmodal';
