@@ -3,8 +3,10 @@ import {BrowserModule} from '@angular/platform-browser';
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 import {Routes, RouterModule} from '@angular/router';
 
-import {AppComponent} from './app.component';
+import {NgxModule} from './ngx.module';
 import {ServiceModule, TAuthService} from 'services';
+
+import {AppComponent} from './app.component';
 
 const routes: Routes =
 [
@@ -40,6 +42,7 @@ const routes: Routes =
         BrowserModule,
         BrowserAnimationsModule,
         RouterModule.forRoot(routes),
+        NgxModule,
         ServiceModule,
     ],
     providers: [],
