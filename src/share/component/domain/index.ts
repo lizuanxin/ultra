@@ -1,34 +1,39 @@
 import {Component, Input, OnInit} from '@angular/core';
+
 import * as Types from 'services/cloud/types';
+import {TItemService} from 'services/item';
 
 
 @Component({selector: 'domain-comp', templateUrl: './index.html'})
 export class DomainComponent implements OnInit
 {
-    constructor()
+    constructor(private ItemSvc: TItemService)
     {
-        this.DomainModels = [];
     }
 
     ngOnInit()
     {
-        this.DomainModels = App.Domains.map((Domain) => new TDomainModel(Domain));
+        this.ItemSvc.Domains().then(list => this.Domains = list);
     }
 
     BtnClicked()
     {
         let SelectedDomains: Array<Types.IDomain> = [];
-        this.DomainModels.forEach((DomainModel) =>
+
+        this.Domains.forEach(domain =>
         {
-            if (DomainModel.IsSelected)
+            /*
+            if (domain.IsSelected)
                 SelectedDomains.push(DomainModel.Source);
+            */
         });
-        this.App.CloseModal(SelectedDomains);
+        // this.App.CloseModal(SelectedDomains);
     }
 
     App = window.App;
 
-    DomainModels: Array<any>;
+    Domains: Array<Types.IDomain>;
+    Selected = new Set<Types.IDomain>();
 }
 
 export class TDomainModel

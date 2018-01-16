@@ -5,11 +5,9 @@ import {TranslateService} from '@ngx-translate/core';
 import {TypeInfo} from 'UltraCreation/Core';
 import {Platform} from 'UltraCreation/Core/Platform';
 import {NgbModal, NgbTooltipConfig, NgbModalOptions, NgbModalRef} from '@ng-bootstrap/ng-bootstrap';
-import { ModalDirective, ModalOptions, ModalBackdropOptions, ModalBackdropComponent, ModalModule, BsModalRef, BsModalService } from 'ngx-bootstrap';
 
 import {TShoppingCart} from './shopping_cart';
-import {TItemService} from './item';
-import * as Types from './cloud/types';
+
 import {TAlertComponent, IAlertOptions} from 'share/component/alert';
 import {TToastComponent, IToastOptions} from 'share/component';
 
@@ -36,12 +34,7 @@ export class TApplication
         this.Translation = Injector.get(TranslateService);
         this.InitializeLanguage();
 
-        this.Modal = Injector.get(BsModalService);
-        this.ModelRefList = [];
-
-        const ItemSvc = Injector.get(TItemService);
-        ItemSvc.Regions().then((Regions) => this.Regions = Regions);
-        ItemSvc.Domains().then((Domains) => this.Domains = Domains);
+        this.Modal = Injector.get(NgbModal);
     }
 
 /* langulage support */
@@ -101,34 +94,13 @@ export class TApplication
         return this.Translation.instant(Key);
     }
 
-    async ShowModal(content: any, data?: any, opts?: ModalOptions)
+    async ShowModal(content: string | any, data?: any, opts?: NgbModalOptions)
     {
-        const ModelRef = this.Modal.show(content, opts);
-        ModelRef.content.data = data;
-        ModelRef.content.IsInModalMode = true;
-        this.ModelRefList.push(ModelRef);
+        const ModalRef = this.Modal.open(content, opts);
+        ModalRef.componentInstance.ModalRef = ModalRef;
+        ModalRef.componentInstance.SetModalParams(data);
 
-        // return ModelRef.result.catch((err) => this.CloseModal(null));
-    }
-
-    CloseModal(Data: any)
-    {
-        if (this.ModelRefList.length > 0)
-        {
-            const ModelRef = this.ModelRefList.pop();
-            ModelRef.hide();
-            // ModelRef.close(Data);
-        }
-    }
-
-    DismissModal(Reason: any)
-    {
-        if (this.ModelRefList.length > 0)
-        {
-            const ModelRef = this.ModelRefList.pop();
-            ModelRef.hide();
-            // ModelRef.dismiss(Reason);
-        }
+        return ModalRef.result.catch((err) => ModalRef.close(null));
     }
 
     ShowAlert(Opts: IAlertOptions | string)
@@ -139,11 +111,10 @@ export class TApplication
         if (! TypeInfo.Assigned(Opts.Buttons))
             Opts.Buttons = [{Text: 'OK'}];
 
-        const ModelRef = this.Modal.show(TAlertComponent, {backdrop: false, windowClass: 'modal-alert'});
-        ModelRef.content.Opts = Opts;
-        this.ModelRefList.push(ModelRef);
+        const ModalRef = this.Modal.open(TAlertComponent, {backdrop: false, windowClass: 'modal-alert'});
+        ModalRef.componentInstance.Opts = Opts;
 
-        // return ModelRef.result.catch((err) => this.CloseModal(null));
+        return ModalRef.result.catch((err) => ModalRef.close(null));
     }
 
     ShowError(err: any)
@@ -159,17 +130,14 @@ export class TApplication
             Type: type,
             Message: message
         };
-        const ModelRef = this.Modal.show(TToastComponent, {backdrop: false, windowClass: 'toast-default'});
-        ModelRef.content.Opts = ToastOpts;
-        setTimeout(() => ModelRef.hide(), duration);
+        const ModalRef = this.Modal.open(TToastComponent, {backdrop: false, windowClass: 'toast-default'});
+        ModalRef.componentInstance.Opts = ToastOpts;
+        setTimeout(() => ModalRef.dismiss(), duration);
     }
 
     Platform = new Platform();
     Router: Router;
     Translation: TranslateService;
-    Modal: BsModalService;
-    ModelRefList: Array<BsModalRef>;
+    Modal: NgbModal;
     ShoppingCart: TShoppingCart;
-    Regions: Array<Types.IRegion>;
-    Domains: Array<Types.IDomain>;
 }

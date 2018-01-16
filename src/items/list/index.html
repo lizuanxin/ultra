@@ -16,11 +16,10 @@
     </div>
     <div class="col-md-6" text-right>
         <div class="d-inline-block">
-            <button class="btn btn-sm btn-primary" type="button" [disabled]="SelectedItemNum < 2" (click)="CreateNewPackage()">{{'items.list.pack'|translate}}</button>
+            <button class="btn btn-sm btn-primary" type="button" [disabled]="Selected.size<2" (click)="CreateNewPackage()">{{'items.list.pack'|translate}}</button>
         </div>
         <div class="d-inline-block">
             <button class="btn btn-sm btn-outline-primary" type="button" (click)="Publish()">{{'button.publish'|translate}}</button>
-            <!-- <button class="btn btn-sm btn-outline-danger" type="button" (click)="Remove()" [disabled]="NullItemSelected">{{'button.del'|translate}}</button> -->
         </div>
     </div>
 </div>
@@ -30,28 +29,27 @@
             <thead>
             <tr>
                 <th width="2%" text-center>
-                    <input type="checkbox" [(ngModel)]="AllItemSelected" (ngModelChange)="ToggleSelectAll()">
+                    <input type="checkbox" [(ngModel)]="IsSelectedAll" (ngModelChange)="ToggleSelectAll()">
                 </th>
-                <th width="5%">{{'items.list.field.thumbnail'|translate}}</th>
-                <th width="15%">{{'items.list.field.name'|translate}}</th>
-                <th width="12%" text-center>{{'items.list.field.timestamp'|translate}}</th>
+                <th width="5%">{{'item.avatar'|translate}}</th>
+                <th width="15%">{{'item.name'|translate}}</th>
+                <th width="12%" text-center>{{'item.timestamp'|translate}}</th>
             </tr>
             </thead>
             <tbody>
-                <tr *ngFor="let ItemModel of ItemModels" (click)="Edit(ItemModel.Source)" >
+                <tr *ngFor="let item of Items" (click)="Edit(item)" >
                     <td text-center (click)="$event.stopPropagation()" style="vertical-align:middle">
-                        <input type="checkbox" [(ngModel)]="ItemModel.IsSelected">
+                        <input type="checkbox" [ngModel]="Selected.has(item)" (ngModelChange)="SelectionChanged($event, item)">
                     </td>
                     <td class="position-relative">
-                        <img width="60" height="60" src="{{ItemModel.Source.AvatarUrl}}">
-                        <div class="package" *ngIf="ItemModel.Source.IsPackage"></div>
+                        <img width="60" height="60" src="{{item.AvatarUrl}}">
+                        <div class="package" *ngIf="item.IsPackage"></div>
                     </td>
-                    <td>{{ItemModel.Source.Name}}</td>
+                    <td>{{item.Name}}</td>
                     <td text-center>
-                        <button class="btn btn-sm" (click)="Remove(ItemModel);$event.stopPropagation()">{{'button.del'|translate}}</button>
+                        <button class="btn btn-sm" (click)="Remove(item);$event.stopPropagation()">{{'button.del'|translate}}</button>
                     </td>
                 </tr>
             </tbody>
     </table>
 </div>
-

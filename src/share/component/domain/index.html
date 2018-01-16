@@ -5,11 +5,11 @@
                 <th width="5%"></th>
                 <th>Domain</th>
             </thead>
-            <tr *ngFor="let DomainModel of DomainModels">
+            <tr *ngFor="let domain of Domains | async">
                 <td (click)="$event.stopPropagation()">
-                    <input type="checkbox" [(ngModel)]="DomainModel.IsSelected">
+                    <input type="checkbox" [(ngModel)]="domain.IsSelected">
                 </td>
-                <td>{{DomainModel.Source.Name}}</td>
+                <td>{{domain.Source.Name}}</td>
             </tr>
         </table>
     </div>

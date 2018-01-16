@@ -1,8 +1,9 @@
 import {Component, EventEmitter, Input, Output, OnInit} from '@angular/core';
 
 import {TypeInfo} from 'UltraCreation/Core/TypeInfo';
-import {TItemService, TItem, TProduct, TPackage} from 'services/item';
+import {TItemService} from 'services/item';
 import {TFileLibComponent} from 'share/component/filelib';
+import {NgbModal} from '@ng-bootstrap/ng-bootstrap';
 
 import * as Types from 'services/cloud/types';
 import {TItemEditorComponent} from '../editor';
@@ -11,10 +12,9 @@ import { DomainComponent } from 'share/component';
 @Component({selector: 'item-list', templateUrl: './index.html'})
 export class TItemListComponent implements OnInit
 {
-    App = window.App;
-    constructor(private ItemSvc: TItemService)
+    constructor(private ItemSvc: TItemService, Modal: NgbModal)
     {
-        this.ItemModels = [];
+        this.Items = [];
     }
 
     ngOnInit()
@@ -22,168 +22,86 @@ export class TItemListComponent implements OnInit
         this.Refresh();
     }
 
-    ToggleSelect(ItemModel: TItemModel)
-    {
-        ItemModel.IsSelected = ! ItemModel.IsSelected;
-    }
-
-    ToggleSelectAll()
-    {
-        let Selected = ! this.AllItemSelected;
-        this.ItemModels.forEach((ItemModel) => ItemModel.IsSelected = Selected);
-    }
-
     CreateNewProduct()
     {
-        let Product = TItem.CreateNew(Types.TItemTypeId.Product);
-        this.ShowItemEditModal(Product, true);
-        // App.ShowAlert({ Message: 'Test alert',
-
-        //     Buttons: [
-        //         {
-        //             Text: 'Cancel',
-        //             Class: 'btn-outline-secondary',
-        //             Handler: (data) => { console.log('cancel clicked'); }
-        //         },
-        //         {
-        //             Text: 'OK',
-        //             Class: 'btn-primary',
-        //             Handler: (data) => { console.log('ok clicked' + JSON.stringify(data)); }
-        //         }
-        //     ]});
-        // App.ShowToast('info', 'woerjoewr');
+        this.ItemSvc.CreateProduct()
+            .then(product => this.OpenModal(product));
     }
 
     CreateNewPackage()
     {
-        let Package = TItem.CreateNew(Types.TItemTypeId.Package) as TPackage;
-        this.ItemModels.forEach(item =>
-        {
-            if (item.IsSelected && item.Source.TypeId !== Types.TItemTypeId.Package)
-                Package.Add(item.Source.Id, 1);
-        });
-
-        this.ShowItemEditModal(Package, true);
+        this.ItemSvc.CreatePackage(Array.from(this.Selected.values()))
+            .then(pkg => this.OpenModal(pkg));
     }
 
-    Edit(Item: TItem)
+    Edit(Item: Types.IItem)
     {
-        this.ShowItemEditModal(Item, false);
+        this.OpenModal(Item);
     }
 
-    ShowItemEditModal(Item: TItem, IsNewCreated: boolean)
+    Remove(item: Types.IItem): void
     {
-        App.ShowModal(TItemEditorComponent, {Item: Item}, {size: 'lg'})
-            .then((EditedItem) =>
-            {
-                console.log('modal result: ' + JSON.stringify(EditedItem));
-                if (! TypeInfo.Assigned(EditedItem))
-                    return;
-                let ItemPromise;
-                if (IsNewCreated)
-                    ItemPromise = this.ItemSvc.Append(EditedItem);
-                else
-                    ItemPromise = this.ItemSvc.Update(EditedItem);
-
-                ItemPromise
-                    .then(() => this.Refresh())
-                    .catch((err) => console.log(err));
-            });
-    }
-
-    async Publish()
-    {
-        let Domains = await App.ShowModal(DomainComponent, {}, {size: 'lg'});
-
-        if (TypeInfo.Assigned(Domains))
-        {
-            for (let Domain of Domains)
-                await this.ItemSvc.Publish(Domain.Id, this.SelectedItemModels.map((ItemModel) => ItemModel.Source));
-        }
-    }
-
-    /*
-    SetModTitle(data?: TItem): string
-    {
-        if (!TypeInfo.Assigned(data)) return App.Translate('items.commodity.button.add') + App.Translate('items.commodity.field.goods');
-
-        return App.Translate('items.commodity.button.edit') + App.Translate('items.commodity.field.goods');
-    }
-    */
-
-    Remove(ItemModel: TItemModel): void
-    {
-        this.ItemSvc.Remove(ItemModel.Source)
+        this.ItemSvc.Remove(item)
             .then(() => this.Refresh())
             .catch((err) => console.log(err));
     }
 
-    get AllItemSelected(): boolean
+    async Publish()
     {
-        if (this.ItemModels.length === 0)
-            return false;
+        const Domains = await App.ShowModal(DomainComponent, {}, {size: 'lg'});
 
-        return TItemModel.SelectedNum === this.ItemModels.length;
+        if (TypeInfo.Assigned(Domains))
+        {
+            for (const Domain of Domains)
+                await this.ItemSvc.Publish(Domain.Id, Array.from(this.Selected.values()));
+        }
     }
 
-    get NullItemSelected(): boolean
+    ToggleSelectAll()
     {
-        return TItemModel.SelectedNum === 0;
+        if (this.Selected.size < this.Items.length)
+            this.Items.forEach(iter => this.Selected.add(iter));
+        else
+            this.Selected.clear();
     }
 
-    get SelectedItemNum(): number
+    get IsSelectedAll(): boolean
     {
-        return TItemModel.SelectedNum;
+        return this.Items.length > 0 && this.Selected.size === this.Items.length;
     }
 
-    get SelectedItemModels(): Array<TItemModel>
+    SelectionChanged(Selected: boolean, Item: Types.IItem)
     {
-        return this.ItemModels.filter((ItemModel) => ItemModel.IsSelected);
+        if (Selected)
+            this.Selected.add(Item);
+        else
+            this.Selected.delete(Item);
     }
 
     private Refresh()
     {
         this.ItemSvc.List()
-            .then((ItemList) =>
+            .then(list => this.Items = list)
+            .catch(err => console.log(err));
+    }
+
+    private OpenModal(Item: Types.IItem): Promise<any>
+    {
+        return App.ShowModal(TItemEditorComponent, {Item: Item}, {size: 'lg'})
+            .then((EditedItem) =>
             {
-                console.log('update item: ' + ItemList.length);
-                TItemModel.SelectedNum = 0;
-                this.ItemModels = ItemList.map((Item) => new TItemModel(Item));
+                console.log('modal result: ' + JSON.stringify(EditedItem));
+                if (! TypeInfo.Assigned(EditedItem))
+                    return;
 
-            })
-            .catch((err) => console.log(err));
+                this.ItemSvc.Save(Item)
+                    .then(() => this.Refresh())
+                    .catch((err) => console.log(err));
+            });
     }
 
-    ItemModels: Array<TItemModel>;
+    App = window.App;
+
+    Items: Array<Types.IItem>;
+    Selected = new Set<Types.IItem>();
 }
-
-export class TItemModel
-{
-    static SelectedNum: number = 0;
-    constructor(public Source: TItem)
-    {
-
-    }
-
-    get IsSelected(): boolean
-    {
-        return this._IsSelected;
-    }
-
-    set IsSelected(Selected: boolean)
-    {
-        if (this._IsSelected === Selected)
-            return;
-
-        if (Selected)
-            TItemModel.SelectedNum ++;
-        else
-            TItemModel.SelectedNum --;
-
-        this._IsSelected = Selected;
-    }
-
-    _IsSelected: boolean = false;
-}
-
-

@@ -10,9 +10,9 @@
     </div>
     <div #content>
         <ul class="row row-thumbnail" margin-top>
-            <li class="col-2" *ngFor="let FileModel of FileModels" (click)="FileClicked(FileModel)">
-                <div class="img-container" [style.background-image]="'url(' + FileModel.Source.Path + ')'"></div>
-                <ng-template [ngIf]="FileModel.IsSelected">
+            <li class="col-2" *ngFor="let f of Items" (click)="FileClicked(f)">
+                <div class="img-container" [style.background-image]="'url('+ f.Path +')'"></div>
+                <ng-template [ngIf]="Selected.has(f)">
                     <div class="flex-btn">
                         <button class="btn-select"><i icon>&#xf3ff;</i></button>
                     </div>
@@ -21,7 +21,7 @@
         </ul>
     </div>
 </div>
-<div class="modal-footer" *ngIf="IsInModalMode">
-    <button type="button" class="btn btn-default" (click)="ButtonCancel()" >{{'button.cancle'|translate}}</button>
-    <button type="button" class="btn btn-primary" (click)="ButtonOK()" >{{'button.confirm'|translate}}</button>
+<div class="modal-footer" *ngIf="IsModal">
+    <button type="button" class="btn btn-default" (click)="ButtonCancel()" >{{'button.cancel'|translate}}</button>
+    <button type="button" class="btn btn-primary" (click)="ButtonOK()" >{{'button.ok'|translate}}</button>
 </div>

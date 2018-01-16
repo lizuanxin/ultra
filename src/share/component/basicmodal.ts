@@ -1,11 +1,11 @@
-import {Input, OnInit, Injector} from '@angular/core';
-import {NgbActiveModal, NgbModal} from '@ng-bootstrap/ng-bootstrap';
+import {Input} from '@angular/core';
+import {NgbActiveModal, NgbModal, NgbModalRef} from '@ng-bootstrap/ng-bootstrap';
+
 import {TypeInfo} from 'UltraCreation/Core/TypeInfo';
 import {TAssignable} from 'UltraCreation/Core/Persistable';
 
-export abstract class TBasicModalCompnent implements OnInit
+export abstract class TBasicModalView
 {
-    // constructor(protected Injector: Injector)
     constructor ()
     {
     }
@@ -13,40 +13,33 @@ export abstract class TBasicModalCompnent implements OnInit
     abstract OnClosed(Data: any): void;
     abstract OnDismiss(Data: any): void;
 
-    ngOnInit()
+    SetModalParams(params: any)
     {
-        this.AssignProp();
-        this.OnInit();
-    }
-
-    OnInit()
-    {
-    }
-
-    AssignProp()
-    {
-        if (this.IsInModalMode && TypeInfo.Assigned(this.data))
-            TAssignable.AssignProperties(this, JSON.parse(JSON.stringify(this.data))); // in order to depth copy
     }
 
     Close(Result: any)
     {
-        if (this.IsInModalMode)
-            App.CloseModal(Result);
+        if (this.ModalRef)
+            this.ModalRef.close(Result);
         else
             this.OnClosed(Result);
     }
 
     Dismiss(Reason: any)
     {
-        if (this.IsInModalMode)
-            App.DismissModal(Reason);
+        if (this.ModalRef)
+            this.ModalRef.close(Reason);
         else
             this.OnDismiss(Reason);
     }
 
-    @Input() data: any;
-    @Input() IsInModalMode: boolean = false;
+    get IsModal(): boolean
+    {
+        return TypeInfo.Assigned(this.ModalRef);
+    }
 
     App = window.App;
+
+    data: any;
+    ModalRef: NgbModalRef = null;
 }

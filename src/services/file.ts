@@ -26,7 +26,6 @@ export class TFileService
                 UploadedFile.Path = UploadedFile.Path;
                 this.FilesCache.set(UploadedFile.Id, UploadedFile);
             }
-            console.log(this.FilesCache);
         }
 
         return Array.from(this.FilesCache.values());
@@ -56,30 +55,30 @@ export class TFileService
 
         let UploadHttp = new THttpClient('json', '/api/file');
         this.AuthSvc.Grant(UploadHttp);
-        return UploadHttp.Post('/upload', form).toPromise().then((res) =>
+
+        return UploadHttp.Put('/upload', form).toPromise().then(res =>
         {
-            console.log(res.Content);
             let Files = res.Content;
+
             if (TypeInfo.Assigned(Files))
             {
                 for (let DownloadFile of Files)
-                {
                     this.FilesCache.set(DownloadFile.Id, DownloadFile);
-                }
+
                 return Files;
             }
-            return [];
+            else
+                return [];
         });
     }
 
-    async Remove(RemoveFile: Types.IFile)
+    async Remove(File: Types.IFile): Promise<void>
     {
         this.AuthSvc.Grant(this.Http);
-        return this.Http.Post('/remove', RemoveFile).toPromise().then((res) =>
-        {
-            console.log(JSON.stringify(this.Http.Headers));
-            this.FilesCache.delete(RemoveFile.Id);
-        });
+        const FileType = File.Path.substring(File.Path.lastIndexOf('.') + 1, 100);
+
+        await this.Http.Delete('/remove', {Id: File.Id, Type: FileType}).toPromise();
+        await this.FilesCache.delete(File.Id);
     }
 
     private Http = new THttpClient('json', '/api/file');

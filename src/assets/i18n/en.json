@@ -86,24 +86,28 @@
             "title": "List",
 
             "categories": "Categories",
-            "pack": "Pack",
-
-            "field":
-            {
-                "id": "Id",
-                "thumbnail": "Thumbnail",
-                "name": "Name",
-                "timestamp": "Creation Time",
-                "region": "Region",
-                "retail": "Retail"
-            }
-        },
-
+            "pack": "Pack"
+        }
+    },
+    "item":
+    {
         "editor":
         {
             "basic": "Basic",
-            "extra": "Extra Properties",
+            "pricing": "Pricing",
+            "property": "Properties",
+            "detail": "Detail",
             "related": "Related"
-        }
+        },
+
+        "name": "Name",
+        "avatar": "Avatar",
+        "pictures": "Thumbnail",
+        "timestamp": "Updated",
+        "region": "Region",
+        "retail": "Retail",
+        "bulk": "Buck",
+        "bulkcount": "Count",
+        "distribute": "Distrubute"
     }
 }
