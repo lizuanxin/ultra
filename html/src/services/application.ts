@@ -125,7 +125,7 @@ export class TApplication
     ShowToast(type: 'success' | 'info' | 'warning' | 'error',
         message: string, duration: number = 1500): void
     {
-        let ToastOpts: IToastOptions =
+        const ToastOpts: IToastOptions =
         {
             Type: type,
             Message: message

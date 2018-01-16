@@ -39,7 +39,5 @@ export abstract class TBasicModalView
     }
 
     App = window.App;
-
-    data: any;
     ModalRef: NgbModalRef = null;
 }
