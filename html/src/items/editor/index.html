@@ -39,13 +39,16 @@
                     <div class="row align-items-center">
                         <label text-gray-light text-nowrap text-right class="col-md-2">{{'item.region'|translate}}: </label>
                         <div class="col-md-3">
-                            <div class="btn-group" ngbDropdown>
-                                <button class="form-control" ngbDropdownToggle>{{CurrPricing.Region}}</button>
-                                <div class="dropdown-menu" ngbDropdownMenu>
-                                    <button class="dropdown-item" *ngFor="let pricing of Item.PricingList" (click)="CurrPricing=pricing">
-                                        {{pricing.Region}}
-                                    </button>
-                                </div>
+                            <div class="btn-group" dropdown>
+                                <button dropdownToggle type="button" class="form-control dropdown-toggle">
+                                    {{CurrPricing.Region}}
+                                    <span class="caret"></span>
+                                </button>
+                                <ul *dropdownMenu class="dropdown-menu" role="menu">
+                                    <li role="menuitem" *ngFor="let pricing of Item.PricingList">
+                                        <a class="dropdown-item" href="javascript:void(0)" (click)="CurrPricing=pricing">{{pricing.Region}}</a>
+                                    </li>
+                                </ul>
                             </div>
                         </div>
                         <label text-gray-light text-nowrap text-right class="col-md-2">{{'item.retail'|translate}}: </label>
@@ -96,10 +99,10 @@
                 </div>
             </div>
             <div class="row align-items-center" m-t-10>
-                    <label text-gray-light text-nowrap text-right class="col-md-2">{{'item.depth'|translate}}: </label>
-                    <div class="col-md-3">
-                        <input type="text" class="form-control" min="1" [(ngModel)]="Item.Depth">
-                    </div>
+                <label text-gray-light text-nowrap text-right class="col-md-2">{{'item.depth'|translate}}: </label>
+                <div class="col-md-3">
+                    <input type="text" class="form-control" min="1" [(ngModel)]="Item.Depth">
+                </div>
                 <label text-gray-light text-nowrap text-right class="col-md-2">{{'item.weight'|translate}}: </label>
                 <div class="col-md-3">
                     <input type="text" class="form-control" min="1" [(ngModel)]="Item.Weight">
