@@ -24,11 +24,11 @@ export class TItemEditorComponent extends TBasicModalView implements OnInit
     SetModalParams(data: any) /**@override */
     {
         this.Item = data.Item;
-        this.CurrPricing = this.Item.PricingList[0];
     }
 
     ngOnInit()
     {
+        this.CurrPricing = this.Item.PricingList[0];
     }
 
     OnClosed(Data: any)
