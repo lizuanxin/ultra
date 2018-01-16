@@ -1,4 +1,4 @@
-import {NgModule} from '@angular/core';
+import {NgModule, ModuleWithProviders} from '@angular/core';
 
 import {AccordionModule} from 'ngx-bootstrap/accordion';
 import {AlertModule} from 'ngx-bootstrap/alert';
@@ -18,6 +18,27 @@ import {TabsModule} from 'ngx-bootstrap/tabs';
 // import {TimepickerModule} from 'ngx-bootstrap/timepicker';
 import {TooltipModule} from 'ngx-bootstrap/tooltip';
 import {TypeaheadModule} from 'ngx-bootstrap/typeahead';
+
+const MODULE =
+[
+    AccordionModule,
+    AlertModule,
+    ButtonsModule,
+    // CarouselModule,
+    CollapseModule,
+    BsDatepickerModule,
+    BsDropdownModule,
+    ModalModule,
+    PaginationModule,
+    PopoverModule,
+    ProgressbarModule,
+    RatingModule,
+    // SortableModule,
+    TabsModule,
+    // TimepickerModule,
+    TooltipModule,
+    TypeaheadModule,
+];
 
 @NgModule({
     imports: [
@@ -39,26 +60,14 @@ import {TypeaheadModule} from 'ngx-bootstrap/typeahead';
         TooltipModule.forRoot(),
         TypeaheadModule.forRoot(),
     ],
-    exports: [
-        AccordionModule,
-        AlertModule,
-        ButtonsModule,
-        // CarouselModule,
-        CollapseModule,
-        BsDatepickerModule,
-        BsDropdownModule,
-        ModalModule,
-        PaginationModule,
-        PopoverModule,
-        ProgressbarModule,
-        RatingModule,
-        // SortableModule,
-        TabsModule,
-        // TimepickerModule,
-        TooltipModule,
-        TypeaheadModule,
-    ]
+    exports: MODULE
 })
+export class NgxRootModule
+{
+}
+
+@NgModule({imports: MODULE, exports: MODULE})
 export class NgxModule
 {
+    static forRoot(): ModuleWithProviders { return {ngModule: NgxRootModule}; }
 }
