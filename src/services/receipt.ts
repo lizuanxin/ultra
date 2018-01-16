@@ -19,9 +19,9 @@ export class TReceiptService
             const Ary: Array<Types.IReceipt> = await this.Http.Get('/').toPromise().then((res) => res.Content);
 
             this.ReceiptSnap = new Map<string, TReceipt>();
-            for (let Iter of Ary)
+            for (const Iter of Ary)
             {
-                let Receipt = new TReceipt();
+                const Receipt = new TReceipt();
                 Receipt.Assign(Iter);
                 this.ReceiptSnap.set(Iter.Id, Receipt);
             }
@@ -71,14 +71,14 @@ export class TReceipt extends TAssignable implements Types.IReceipt
 
     AddManifest(Manifest: Types.IManifest)
     {
-        let Idx = this.IndexOfManifest(Manifest);
+        const Idx = this.IndexOfManifest(Manifest);
         if (Idx === -1)
             this.Manifests.push({Id: Manifest.Id, Qty: Manifest.Qty, Price: Manifest.Price, Memo: Manifest.Memo} as Types.IManifest);
     }
 
     RemoveManifest(ManifestOrId: Types.IManifest | Types.TIdentify)
     {
-        let Idx = this.IndexOfManifest(ManifestOrId);
+        const Idx = this.IndexOfManifest(ManifestOrId);
         if (Idx !== -1)
             this.Manifests.splice(Idx, 1);
     }
@@ -104,14 +104,14 @@ export class TReceipt extends TAssignable implements Types.IReceipt
         if (! TypeInfo.Assigned(this.SellerChildReceiptMap))
             return [];
 
-        let _ChildReceipts = [];
+        const _ChildReceipts = [];
         return Array.from(this.SellerChildReceiptMap.values());
     }
 
     set ChildReceipts(Values: Array<Types.IReceipt>)
     {
         this.SellerChildReceiptMap = new Map<string, TReceipt>();
-        for (let iter of Values)
+        for (const iter of Values)
         {
             const Receipt = new TReceipt();
             Receipt.Assign(iter);
