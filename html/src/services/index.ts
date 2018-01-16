@@ -7,7 +7,7 @@ import {NgbModule} from '@ng-bootstrap/ng-bootstrap';
 
 import {TApplication} from './application';
 import {TAuthService} from './authorize';
-import {TItemService} from 'services/item';
+import {TItemService} from './item';
 import {TFileService} from './file';
 import {TReceiptService} from 'services/receipt';
 

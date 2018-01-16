@@ -1,12 +1,12 @@
 import {Component, EventEmitter, Input, Output} from '@angular/core';
 
-import {TItem, TItemService} from 'services/item';
-import { TypeInfo } from 'UltraCreation/Core/TypeInfo';
+import {TypeInfo} from 'UltraCreation/Core/TypeInfo';
+import {TItemService, TItem} from 'services/item';
 import * as Types from 'services/cloud/types';
-import { TBasicModalCompnent } from 'share/component/basicmodal';
+import {TBasicModalView} from 'share/component/basicmodal';
 
 @Component({selector: 'item-selector', templateUrl: './selector.html'})
-export class TItemSelectorComponent extends TBasicModalCompnent
+export class TItemSelectorComponent extends TBasicModalView
 {
     constructor(private ItemSvc: TItemService)
     {

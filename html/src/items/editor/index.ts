@@ -1,43 +1,34 @@
-import {Component, EventEmitter, Input, Output} from '@angular/core';
+import {Component, ChangeDetectorRef, EventEmitter, Input, Output} from '@angular/core';
 
-import {TProduct, TItem, TPackage, TItemService} from 'services/item';
-import {TFileLibComponent} from 'share/component/filelib';
 import {TypeInfo} from 'UltraCreation/Core/TypeInfo';
+import {TFileLibComponent} from 'share/component/filelib';
 
+import {TItemService, TItem, TProduct, TPackage} from 'services/item';
 import * as Types from 'services/cloud/types';
-import {TBasicModalCompnent} from 'share/component/basicmodal';
+
+import {TBasicModalView} from 'share/component/basicmodal';
 import {TItemSelectorComponent} from 'items/list/selector';
+import {OnInit} from '@angular/core/src/metadata/lifecycle_hooks';
+import {} from '@angular/core/src/change_detection/change_detector_ref';
 
 const MAX_PICTURES: number = 5;
 
 @Component({selector: 'item-editor', templateUrl: './index.html'})
-export class TItemEditorComponent extends TBasicModalCompnent
+export class TItemEditorComponent extends TBasicModalView implements OnInit
 {
-    constructor(private ItemSvc: TItemService)
+    constructor()
     {
         super();
     }
 
-    // override
-    OnInit()
+    SetModalParams(data: any) /**@override */
     {
-        if (TypeInfo.Assigned(App.Regions.length) && App.Regions.length > 0)
-            this.SelectedRegion = App.Regions[0];
-
-        for (let Region of App.Regions)
-            this.PricingListMap.set(Region.Name, {Region: Region.Name, Retail: 0, BulkCount: 0, Bulk: 0});
-        for (let Pricing of this.Item.PricingList)
-            this.PricingListMap.set(Pricing.Region, Pricing);
+        this.Item = data.Item;
+        this.CurrPricing = this.Item.PricingList[0];
     }
 
-    // override
-    AssignProp()
+    ngOnInit()
     {
-        // console.log(JSON.stringify(this.data));
-        if (TypeInfo.Assigned(this.data) && TypeInfo.Assigned(this.data.Item))
-            this.Item = TItem.CreateNew(this.data.Item.TypeId);
-
-        super.AssignProp();
     }
 
     OnClosed(Data: any)
@@ -52,30 +43,6 @@ export class TItemEditorComponent extends TBasicModalCompnent
         this.OnChange.emit(Data);
     }
 
-    AddOtherPictures()
-    {
-        this.App.ShowModal(TFileLibComponent, {Multiple: true, ModalMode: true}, {size: 'lg'})
-            .then((Pictures) =>
-            {
-                if (! TypeInfo.Assigned(Pictures))
-                    return;
-                let AddingNum = Pictures.length > this.RemainingNum ? this.RemainingNum : Pictures.length;
-
-                for (let i = 0; i < AddingNum; i++)
-                    this.Item.PictureList.Add(Pictures[i]);
-            });
-    }
-
-    RemovePicture(Picture: Types.IFile)
-    {
-        this.Item.PictureList.Remove(Picture);
-    }
-
-    get RemainingNum()
-    {
-        return MAX_PICTURES - this.Item.Pictures.length;
-    }
-
     ButtonCancel()
     {
         console.log('button cancel');
@@ -84,107 +51,28 @@ export class TItemEditorComponent extends TBasicModalCompnent
 
     ButtonOK()
     {
-        console.log('button ok');
-        if (this.Item.Pictures.length > 0)
-            this.Item.AvatarUrl = this.Item.Pictures[0].Path;
-        this.Item.PricingList = [];
-        this.PricingListMap.forEach((Pricing) =>
-        {
-            if (Pricing.Retail > 0)
-                this.Item.PricingList.push(Pricing);
-        });
         this.Close(this.Item);
     }
 
-    get Name(): string
+    AddPicture()
     {
-        if (TypeInfo.Assigned(this.Item) && TypeInfo.Assigned(this.Item.Name))
-            return this.Item.Name;
-        else
-            return '';
+        this.App.ShowModal(TFileLibComponent, {Multiple: true, ModalMode: true}, {size: 'lg'})
+            .then(Pictures => this.Item.AddPictures(Pictures));
     }
 
-    set Name(ItemName: string)
+    RemovePicture(Picture: Types.IFile)
     {
-        this.Item.Name = ItemName;
+        const Idx = this.Item.Pictures.indexOf(Picture);
+        this.Item.Pictures.splice(Idx, 1);
     }
 
-    get IsPackage(): boolean
-    {
-        return this.Item.TypeId === Types.TItemTypeId.Package;
-    }
-
-    OpenItemList()
-    {
-        App.ShowModal(TItemSelectorComponent,
-            {FilterItems: this.FilterProducts, FilterType: Types.TItemTypeId.Package}, {size: 'lg'})
-            .then((SelectedItems) =>
-            {
-                if (! TypeInfo.Assigned(SelectedItems))
-                    return;
-
-                for (let SelectedItem of SelectedItems)
-                    (this.Item as TPackage).Add(SelectedItem, 1);
-            });
-    }
-
-    get FilterProducts()
-    {
-        return (this.Item as TPackage).ProductInfoList.map((ProductInfo) => ProductInfo.Product);
-    }
-
-    GetAvatarUrl(ProductId: string): string
-    {
-        return this.ItemSvc.GetCached(ProductId).AvatarUrl;
-    }
-
-    GetItemName(ProductId: string): string
-    {
-        return this.ItemSvc.GetCached(ProductId).Name;
-    }
-
-    DeleteProduct(ProductId: string)
-    {
-        (this.Item as TPackage).Remove(ProductId);
-    }
-
-    SubQty(ProductInfo: any)
-    {
-        if (ProductInfo.Qty === 1)
-            return;
-        ProductInfo.Qty --;
-    }
-
-    AddQty(ProductInfo: any)
-    {
-        ProductInfo.Qty ++;
-    }
-
-    get Html(): string
-    {
-        if (TypeInfo.Assigned(this.Item) && TypeInfo.Assigned(this.Item.Html))
-            return this.Item.Html;
-        else
-            return '';
-    }
-
-    set Html(ItemDetail: string)
-    {
-        this.Item.Html = ItemDetail;
-    }
-
-    onContentChanged({ html, text })
-    {
-        console.log('html:' + html, 'text:' + text);
-    }
-
-    onEditorCreated(quill)
+    OnQuillCreated(quill)
     {
         const toolbar = quill.getModule('toolbar');
-        toolbar.addHandler('image', this.imageHandler.bind(this, quill));
+        toolbar.addHandler('image', this.QuillImageHandler.bind(this, quill));
     }
 
-    imageHandler(quill)
+    QuillImageHandler(quill)
     {
         this.App.ShowModal(TFileLibComponent, {Multiple: false, ModalMode: true}, {size: 'lg'})
             .then((Pictures) =>
@@ -195,14 +83,44 @@ export class TItemEditorComponent extends TBasicModalCompnent
             });
     }
 
-    get CurrPricing()
+    AddProduct()
     {
-        return this.PricingListMap.get(this.SelectedRegion.Name);
+        /*
+        App.ShowModal(TItemSelectorComponent,
+            {FilterItems: this.FilterProducts, FilterType: Types.TItemTypeId.Package}, {size: 'lg'})
+            .then((SelectedItems) =>
+            {
+                if (! TypeInfo.Assigned(SelectedItems))
+                    return;
+
+                for (let SelectedItem of SelectedItems)
+                    (this.Item as TPackage).Add(SelectedItem, 1);
+            });
+        */
     }
 
-    @Input() Item: TItem;
-    @Output() OnChange = new EventEmitter<TProduct>();
+    RemoveProduct(ProductInfo: Types.IProductInfo)
+    {
+        const Package = this.Item as Types.IPackage;
 
-    private SelectedRegion: Types.IRegion;
-    private PricingListMap = new Map<string, Types.ILocalizedPricing>();
+        const Idx = Package.ProductInfoList.indexOf(ProductInfo);
+        Package.ProductInfoList.splice(Idx, 1);
+        // (this.Item as TPackage).Remove(ProductId);
+    }
+
+    SubQty(ProductInfo: Types.IProductInfo)
+    {
+        if (ProductInfo.Qty > 1)
+            ProductInfo.Qty --;
+    }
+
+    AddQty(ProductInfo: Types.IProductInfo)
+    {
+        ProductInfo.Qty ++;
+    }
+
+    CurrPricing: Types.ILocalizedPricing;
+
+    @Input() Item: TItem;
+    @Output() OnChange = new EventEmitter<TItem>();
 }

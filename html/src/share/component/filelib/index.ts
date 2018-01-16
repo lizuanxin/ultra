@@ -1,21 +1,22 @@
-import {Component, Input, Output, ElementRef, ViewChild, EventEmitter} from '@angular/core';
-import {TBasicModalCompnent} from '../basicmodal';
+import {Component, OnInit, Input, Output, ElementRef, ViewChild, EventEmitter} from '@angular/core';
 
 import {Types} from 'services';
 import {TFileService} from 'services/file';
+import {TBasicModalView} from '../basicmodal';
 
 @Component({selector: 'file-lib', templateUrl: './index.html'})
-export class TFileLibComponent extends TBasicModalCompnent
+export class TFileLibComponent extends TBasicModalView implements OnInit
 {
-    constructor(private FileSvc: TFileService)
+    constructor(private FileService: TFileService)
     {
         super();
     }
 
-    OnInit()
+    ngOnInit()
     {
-        if (this.IsInModalMode)
+        if (this.IsModal)
             this.contentRef.nativeElement.style = 'height:420px; overflow-x:hidden; overflow-y:auto';
+
         this.Refresh();
     }
 
@@ -28,39 +29,31 @@ export class TFileLibComponent extends TBasicModalCompnent
     {
     }
 
-    UploadImage(file: any)
+    UploadImage(list: FileList)
     {
-        this.FileSvc.Upload(file)
+        this.FileService.Upload(list)
             .then(() => this.Refresh())
             .catch(err => console.log(err));
     }
 
-    FileClicked(FileModel: TFileModel)
+    FileClicked(f: Types.IFile)
     {
-        console.log('selected: ' + FileModel.Source.Id);
-        if (! this.Multiple)
+        if (! this.Selected.has(f))
         {
-            for (let Model of this.FileModels)
-            {
-                if (Model.IsSelected && FileModel.Source.Id !== Model.Source.Id)
-                {
-                    Model.IsSelected = false;
-                    break;
-                }
-            }
+            if (! this.MultiSelection)
+                this.Selected.clear();
+
+            this.Selected.add(f);
         }
-        FileModel.IsSelected = ! FileModel.IsSelected;
+        else
+            this.Selected.delete(f);
     }
 
     async RemoveFiles()
     {
-        for (let FileModel of this.FileModels)
-        {
-            if (FileModel.IsSelected)
-            {
-                await this.FileSvc.Remove(FileModel.Source);
-            }
-        }
+        const Selected = this.Selected.values();
+        for (let iter = Selected.next(); ! iter.done; iter = Selected.next())
+            await this.FileService.Remove(iter.value);
 
         this.Refresh();
     }
@@ -72,39 +65,21 @@ export class TFileLibComponent extends TBasicModalCompnent
 
     ButtonOK()
     {
-        let SelectedFiles: Array<Types.IFile> = [];
-        this.FileModels.forEach((UploadedFile) =>
-        {
-            if (UploadedFile.IsSelected)
-                SelectedFiles.push(UploadedFile.Source);
-        });
-
-        this.Close(SelectedFiles);
+        this.Close(Array.from(this.Selected.values()));
     }
 
     private Refresh()
     {
-        this.FileSvc.List()
-            .then((List) =>
-            {
-                console.log('updated list: ' + List.length);
-                this.FileModels = List.map((UserFile) => new TFileModel(UserFile));
-            })
+        this.FileService.List()
+            .then(list => this.Items = list)
             .catch((err) => console.log(err));
     }
 
-    FileModels: Array<TFileModel>;
+    Items: Array<Types.IFile>;
+    Selected = new Set<Types.IFile>();
 
-    @Input() Multiple: boolean = true;
+    @Input() MultiSelection: boolean = true;
     @Output() OnPictureSelected = new EventEmitter<Array<Types.IFile>>();
     @ViewChild('content') contentRef: ElementRef;
 }
 
-export class TFileModel
-{
-    constructor(public Source: Types.IFile)
-    {
-    }
-
-    IsSelected: boolean = false;
-}

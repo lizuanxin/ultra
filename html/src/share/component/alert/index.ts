@@ -24,7 +24,7 @@ export class TAlertComponent implements OnInit
             Button.Handler(RetVal);
         }
 
-        this.App.CloseModal(null);
+        // this.App.CloseModal(null);
     }
 
     App = window.App;
