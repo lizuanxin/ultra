@@ -1,14 +1,21 @@
 <div class="row">
     <div class="col-md-6">
-        <div class="dropdown d-inline-block" ngbDropdown>
-            <button class="btn btn-sm btn-secondary dropdown-toggle" type="button"  (click)="App.ShowToast('success','wwwwwwww',1000)" ngbDropdownToggle>
+        <div class="btn-group" dropdown>
+            <button dropdownToggle type="button" class="form-control dropdown-toggle" (click)="App.ShowToast('success','wwwwwwww',1000)">
                 {{'items.list.categories'|translate}}
+                <span class="caret"></span>
             </button>
-            <div class="dropdown-menu">
-                <a class="dropdown-item">....</a>
-                <a class="dropdown-item">....</a>
-                <a class="dropdown-item">....</a>
-            </div>
+            <ul *dropdownMenu class="dropdown-menu" role="menu">
+                <li role="menuitem">
+                    <a class="dropdown-item" href="javascript:void(0)">......</a>
+                </li>
+                <li role="menuitem">
+                    <a class="dropdown-item" href="javascript:void(0)">......</a>
+                </li>
+                <li role="menuitem">
+                    <a class="dropdown-item" href="javascript:void(0)">......</a>
+                </li>
+            </ul>
         </div>
         <div class="d-inline-block">
             <button class="btn btn-sm btn-outline-primary" type="button" (click)="CreateNewProduct()">{{'button.add'|translate}}</button>
@@ -26,7 +33,7 @@
 
 <div class="table-responsive" margin-vertical>
     <table class="table table-bordered table-hover">
-            <thead>
+        <thead>
             <tr>
                 <th width="2%" text-center>
                     <input type="checkbox" [(ngModel)]="IsSelectedAll" (ngModelChange)="ToggleSelectAll()">
@@ -35,21 +42,21 @@
                 <th width="15%">{{'item.name'|translate}}</th>
                 <th width="12%" text-center>{{'item.timestamp'|translate}}</th>
             </tr>
-            </thead>
-            <tbody>
-                <tr *ngFor="let item of Items" (click)="Edit(item)" >
-                    <td text-center (click)="$event.stopPropagation()" style="vertical-align:middle">
-                        <input type="checkbox" [ngModel]="Selected.has(item)" (ngModelChange)="SelectionChanged($event, item)">
-                    </td>
-                    <td class="position-relative">
-                        <img width="60" height="60" src="{{item.AvatarUrl}}">
-                        <div class="package" *ngIf="item.IsPackage"></div>
-                    </td>
-                    <td>{{item.Name}}</td>
-                    <td text-center>
-                        <button class="btn btn-sm" (click)="Remove(item);$event.stopPropagation()">{{'button.del'|translate}}</button>
-                    </td>
-                </tr>
-            </tbody>
+        </thead>
+        <tbody>
+            <tr *ngFor="let item of Items" (click)="Edit(item)">
+                <td text-center (click)="$event.stopPropagation()" style="vertical-align:middle">
+                    <input type="checkbox" [ngModel]="Selected.has(item)" (ngModelChange)="SelectionChanged($event, item)">
+                </td>
+                <td class="position-relative">
+                    <img width="60" height="60" src="{{item.AvatarUrl}}">
+                    <div class="package" *ngIf="item.IsPackage"></div>
+                </td>
+                <td>{{item.Name}}</td>
+                <td text-center>
+                    <button class="btn btn-sm" (click)="Remove(item);$event.stopPropagation()">{{'button.del'|translate}}</button>
+                </td>
+            </tr>
+        </tbody>
     </table>
 </div>
