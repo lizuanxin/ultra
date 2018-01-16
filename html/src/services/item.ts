@@ -172,6 +172,8 @@ export class TItemService
     private PublishedSnap: Map<Types.TIdentify, Types.IPublished>;
 }
 
+/** TItem */
+
 export class TItem extends TAssignable implements Types.IItem
 {
     protected constructor(TypeId: Types.TItemTypeId)
@@ -247,7 +249,9 @@ export class TItem extends TAssignable implements Types.IItem
     readonly Timestamp: Date;
 }
 
-export class TProduct extends TItem implements Types.IProduct
+/* TProduct */
+
+class TProduct extends TItem implements Types.IProduct
 {
     constructor()
     {
@@ -262,7 +266,9 @@ export class TProduct extends TItem implements Types.IProduct
     Weight?: number;
 }
 
-export class TPackage extends TItem implements Types.IPackage
+/* TPackage */
+
+class TPackage extends TItem implements Types.IPackage
 {
     constructor()
     {
