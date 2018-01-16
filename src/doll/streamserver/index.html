@@ -2,6 +2,13 @@
     streamserver
 </div>
 <div class="container-layer">
+    <div class="row" margin-bottom>
+        <div class="col-md-6">
+            <div class="d-inline-block">
+                <button class="btn btn-sm btn-primary" type="button" (click)="OpenModal(content)">添加</button>
+            </div>
+        </div>
+    </div>
     <table class="table table-bordered table-hover">
         <thead>
             <th>地址</th>
@@ -15,3 +22,26 @@
         </tbody>
     </table>
 </div>
+
+<ng-template #content let-c="close" let-d="dismiss">
+        <div class="modal-header">
+            <h4 class="modal-title pull-left"></h4>
+            <button type="button" class="close" aria-label="Close" (click)="d('Cross click')">
+                <span aria-hidden="true">&times;</span>
+            </button>
+        </div>
+        <div class="modal-body">
+            <div class="row" align-items-center justify-content-center m-t-30>
+                <label text-gray-light text-nowrap text-right class="col-md-2">{{'doll.stream.field.url'|translate}}：</label>
+                <div class="col-md-8"><input type="text" [(ngModel)]="IStream.URL" class="form-control"></div>
+            </div>
+            <div class="row" align-items-center justify-content-center m-t-15>
+                <label text-gray-light text-nowrap text-right class="col-md-2">{{'doll.stream.field.params'|translate}}：</label>
+                <div class="col-md-8"><input type="text" [(ngModel)]="IStream.params" class="form-control"></div>
+            </div>
+        </div>
+        <div class="modal-footer">
+            <button type="button" class="btn btn-default" (click)="c('Close click')" >{{'button.close'|translate}}</button>
+            <button type="button" class="btn btn-primary" (click)="ButtonOK()" >{{'button.ok'|translate}}</button>
+        </div>
+</ng-template>

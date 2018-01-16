@@ -19,11 +19,18 @@ export class DollStreamServerComponent implements OnInit
         this.ListServer();
     }
 
-    OpenModal(content: HTMLTemplateElement)
+    OpenModal(content: HTMLTemplateElement, data?: Types.Doll.IStreamServer)
     {
         let IsNewAdded: boolean = false;
-
-        App.ShowModal(content, {}, {size: 'lg'})
+        if (data)
+        {
+            this.IStream = data;
+        }
+        else
+        {
+            this.IStream = new Object() as Types.Doll.IStreamServer;
+        }
+        App.ShowModal(content, this.IStream)
             .then()
             .catch((err) => console.log(err));
 
@@ -44,4 +51,5 @@ export class DollStreamServerComponent implements OnInit
     }
 
     ServerList = new Array<Types.Doll.IStreamServer>();
+    IStream: Types.Doll.IStreamServer;
 }
