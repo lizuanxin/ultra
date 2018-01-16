@@ -23,13 +23,10 @@ export class DollStreamServerComponent implements OnInit
     {
         let IsNewAdded: boolean = false;
         if (data)
-        {
             this.IStream = data;
-        }
         else
-        {
             this.IStream = new Object() as Types.Doll.IStreamServer;
-        }
+
         App.ShowModal(content, this.IStream)
             .then()
             .catch((err) => console.log(err));
