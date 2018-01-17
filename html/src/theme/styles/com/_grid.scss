@@ -6,6 +6,12 @@
         }
     }
 
+    &.row-all{
+        [class*="col-"]{
+            margin-bottom:16px;
+        }
+    }
+
     [class*="col-"]{
         &[align-self-center] {
             align-self: center;
