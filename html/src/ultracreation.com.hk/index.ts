@@ -17,6 +17,8 @@ import { CableMagicPage } from './pro/cablemagic';
 import { HealthPage } from './pro/health';
 import { AboutPage } from './about';
 import { ContactPage } from './contact';
+import { TeamsPage } from './teams';
+import { PrivacyPage } from './privacy';
 
 
 @Component({templateUrl: '../share/layout.domain.html'})
@@ -36,6 +38,8 @@ const routes: Routes = [
             {path: 'order', component: OrderInfoPage},
             {path: 'about', component: AboutPage},
             {path: 'contact', component: ContactPage},
+            {path: 'teams', component: TeamsPage},
+            {path: 'privacy', component: PrivacyPage},
             /// ...
             {path: '', redirectTo: 'home'}
         ]
@@ -61,6 +65,8 @@ const routes: Routes = [
         CartPage,
         AboutPage,
         ContactPage,
+        TeamsPage,
+        PrivacyPage,
         OrderInfoPage,
         SiteNavbarComponent,
         FooterComponent
