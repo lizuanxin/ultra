@@ -71,6 +71,18 @@
 
 }
 
+.arrow-down{
+    margin: 15px auto;
+    text-align: center;
+    font-size: 1.5rem;
+    transform: rotate(180deg);
+    color: #acacac;
+    &:before{
+        font-family: "iconfont";
+        content: "\e91a"
+    }
+}
+
 .container-block-header{
 
     h2,.block-header-detail,.block-header-items

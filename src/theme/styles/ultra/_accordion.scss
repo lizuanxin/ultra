@@ -1,0 +1,39 @@
+.ultra-panel-group {
+    .panel {
+        margin-bottom: 10px;
+        &.panel-open .panel-title{
+            &:before{
+                content:'\f1fc';
+            }
+        }
+    }
+    .panel-heading {
+        padding: 0.55rem 1.25rem;
+        background-color: white;
+        border-bottom-color: transparent;
+    }
+    .panel-title{
+        &:before{
+            @extend .animate;
+            position: absolute;
+            margin-top:4px;
+            width:18px;
+            height:18px;
+            line-height: 18px;
+            text-align: center;
+            font-family: "iconfont";
+            background-color:#f5a623;
+            color: white;
+            content:'\f102'
+        }
+    }
+    .panel-body{
+        font-size: 13px;
+        P{
+            line-height:22px;
+        }
+    }
+    .accordion-toggle{
+        padding-left:30px;
+    }
+}
