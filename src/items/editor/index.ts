@@ -15,6 +15,8 @@ export class TItemEditorComponent extends TBasicModalView implements OnInit
     constructor()
     {
         super();
+
+        this.ModalTitle = this.App.Translate('item.editor.title');
     }
 
     SetModalParams(data: any) /**@override */
@@ -120,6 +122,7 @@ export class TItemEditorComponent extends TBasicModalView implements OnInit
         ProductInfo.Qty ++;
     }
 
+    ModalTitle: string;
     CurrPricing: Types.ILocalizedPricing;
 
     @Input() Regions: Array<Types.IRegion>;
