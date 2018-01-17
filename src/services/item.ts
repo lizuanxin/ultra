@@ -4,10 +4,8 @@ import {TRestClient} from 'UltraCreation/Core/Http';
 import {TAssignable} from 'UltraCreation/Core/Persistable';
 
 import * as Types from './cloud/types';
-import {IItem, IProduct, IPackage, IProductInfo} from './cloud/types/item';
-
 import {TAuthService} from './authorize';
-import {TItemTypeId} from './cloud/types';
+import {IItem, TItemTypeId, IProduct, IPackage, IProductInfo} from './cloud/types/item';
 
 @Injectable()
 export class TItemService
@@ -44,6 +42,7 @@ export class TItemService
             const ary: Array<IItem> = await this.Http.Get('/item').toPromise().then(res => res.Content);
 
             this.ItemsSnap = new Map<Types.TIdentify, TItem>();
+
             for (const iter of ary)
             {
                 let Item: TItem;
@@ -80,8 +79,13 @@ export class TItemService
 
     async Save(item: IItem): Promise<void>
     {
-        /*
         this.Auth.Grant(this.Http);
+
+        if (item.Pictures.length > 0)
+            item.AvatarUrl = (item.Pictures[0] as Types.IPicture).Path;
+        else
+            item.AvatarUrl = '';
+
         if (! TypeInfo.Assigned(item.Id))
         {
             const res = await this.Http.Post('/item/append', item.toString()).toPromise();
@@ -90,9 +94,6 @@ export class TItemService
         }
         else
             await this.Http.Put('/item/update', item.toString()).toPromise();
-        */
-
-        console.log(JSON.stringify(item));
     }
 
     async Remove(item: IItem): Promise<void>
@@ -166,6 +167,8 @@ export class TItemService
     private PublishedSnap: Map<Types.TIdentify, Types.IPublished>;
 }
 
+/** extends module */
+
 declare module './cloud/types/item'
 {
     interface IItem
@@ -181,7 +184,6 @@ declare module './cloud/types/item'
 
     interface IProduct
     {
-
     }
 
     interface IPackage
@@ -240,7 +242,7 @@ class TItem extends TAssignable implements IItem
     {
         for (let I = 0; I < this.Pictures.length; I ++)
         {
-            if (this.Pictures[I].Id === f.Id)
+            if ((this.Pictures[I] as Types.IPicture).Id === f.Id)
                 return I;
         }
         return -1;
@@ -256,41 +258,52 @@ class TItem extends TAssignable implements IItem
         return -1;
     }
 
-    GetUploadProp(): Object
-    {
-        const Prop = {};
-        if (this.Id.length > 0)
-            Prop['Id'] = this.Id;
-        if (this.Name.length > 0)
-            Prop['Name'] = this.Name;
-        if (TypeInfo.Assigned(this.AvatarUrl) && this.AvatarUrl.length > 0)
-            Prop['AvatarUrl'] = this.AvatarUrl;
-        if (TypeInfo.Assigned(this.Html) && this.Html.length > 0)
-            Prop['Html'] = this.Html;
-
-        Prop['TypeId'] = this.TypeId;
-        Prop['Pictures'] = this.Pictures.map(Picture => Picture.Id);
-        Prop['PricingList'] = this.PricingList;
-        return Prop;
-    }
-
-    toString()
-    {
-        return JSON.stringify(this.GetUploadProp());
-    }
-
     Id: Types.TIdentify = null;
     Category_Id: string = null;
 
     Name: string = '';
     AvatarUrl: string = null;
     Html: string = null;
-    ExtraProp: any = null;
+    ExtraProp: any | TypeInfo.TKeyValueHash<string> = {};
 
-    Pictures: Array<Types.IPicture> = [];
+    Pictures: Array<Types.IPicture | Types.TIdentify> = [];
     PricingList: Array<Types.ILocalizedPricing> = [];
 
     readonly Timestamp: Date;
+
+/* Object */
+
+    valueOf(): this /** @override */
+    {
+        for (let I = this.PricingList.length - 1; I >= 0; I --)
+        {
+            const Pricing = this.PricingList[I];
+
+            if (! TypeInfo.Assigned(Pricing.Retail) &&
+                ! TypeInfo.Assigned(Pricing.Distribute) &&
+                ! TypeInfo.Assigned(Pricing.Bulk))
+            {
+                this.PricingList.splice(I, 1);
+                continue;
+            }
+
+            if (TypeInfo.Assigned(Pricing.Bulk) && ! TypeInfo.Assigned(Pricing.BulkCount))
+                Pricing.BulkCount = 1000;
+        }
+
+        const RetVal = Object.assign({}, this);
+
+        if (! TypeInfo.IsString(this.ExtraProp))
+            RetVal.ExtraProp = JSON.stringify(RetVal.ExtraProp);
+
+        RetVal.Pictures = RetVal.Pictures.map(iter => (iter as Types.IPicture).Id);
+        return RetVal;
+    }
+
+    toString() /** @override */
+    {
+        return JSON.stringify(this.valueOf());
+    }
 }
 
 /* TProduct */
@@ -327,14 +340,17 @@ class TPackage extends TItem implements IPackage
             this.ProductInfoList = this.ProductInfoList.concat(ProductOrPackage.ProductInfoList);
     }
 
-    // override
-    GetUploadProp(): Object
-    {
-        const Prop = super.GetUploadProp();
-        Prop['ProductInfoList'] = this.ProductInfoList;
-
-        return Prop;
-    }
-
     ProductInfoList: Array<IProductInfo> = [];
+
+/* object */
+
+    valueOf(): this /** @override */
+    {
+        const RetVal = super.valueOf();
+        RetVal.ProductInfoList = RetVal.ProductInfoList.map(iter =>
+        {
+            return {Product: (iter.Product as IProduct).Id, Qty: iter.Qty};
+        });
+        return RetVal;
+    }
 }

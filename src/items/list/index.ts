@@ -94,7 +94,6 @@ export class TItemListComponent implements OnInit
         return App.ShowModal(TItemEditorComponent, {Regions: this.Regions, Item: Item}, {size: 'lg'})
             .then((EditedItem) =>
             {
-                console.log('modal result: ' + JSON.stringify(EditedItem));
                 if (! TypeInfo.Assigned(EditedItem))
                     return;
 

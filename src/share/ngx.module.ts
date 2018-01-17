@@ -69,5 +69,8 @@ export class NgxRootModule
 @NgModule({imports: MODULE, exports: MODULE})
 export class NgxModule
 {
-    static forRoot(): ModuleWithProviders { return {ngModule: NgxRootModule}; }
+    static forRoot(): ModuleWithProviders
+    {
+        return {ngModule: NgxRootModule};
+    }
 }
