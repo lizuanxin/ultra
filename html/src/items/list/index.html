@@ -36,7 +36,7 @@
         <thead>
             <tr>
                 <th width="2%" text-center>
-                    <input type="checkbox" [(ngModel)]="IsSelectedAll" (ngModelChange)="ToggleSelectAll()">
+                    <input type="checkbox" [ngModel]="IsSelectedAll" (ngModelChange)="ToggleSelectAll()">
                 </th>
                 <th width="5%">{{'item.avatar'|translate}}</th>
                 <th width="15%">{{'item.name'|translate}}</th>

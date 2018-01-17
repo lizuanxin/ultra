@@ -28,10 +28,9 @@ export class TItemEditorComponent extends TBasicModalView implements OnInit
     ngOnInit()
     {
         if (this.Item.PricingList.length === 0)
-        {
             this.Item.AddPricing({Region: this.Regions[0].Name});
-            this.CurrPricing = this.Item.PricingList[0];
-        }
+
+        this.CurrPricing = this.Item.PricingList[0];
     }
 
     OnClosed(Data: any)
