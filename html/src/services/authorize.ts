@@ -19,7 +19,7 @@ export class TAuthService extends TBasicAuthService implements CanActivate
 
         if (TypeInfo.Assigned(this.UpdatingToken))
         {
-            let succ = await this.UpdatingToken;
+            const succ = await this.UpdatingToken;
 
             if (! succ)
             {
