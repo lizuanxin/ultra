@@ -36,9 +36,9 @@
             <div class="card" margin-top>
                 <h5 class="card-header">{{'item.editor.pricing'|translate}}</h5>
                 <div class="card-body">
-                    <div class="row align-items-center">
+                    <div class="row row-all align-items-center">
                         <label text-gray-light text-nowrap text-right class="col-md-2">{{'item.region'|translate}}: </label>
-                        <div class="col-md-3">
+                        <div class="col-md-4">
                             <div class="btn-group" dropdown>
                                 <button dropdownToggle type="button" class="form-control dropdown-toggle">
                                     {{CurrPricing.Region}}
@@ -52,24 +52,19 @@
                             </div>
                         </div>
                         <label text-gray-light text-nowrap text-right class="col-md-2">{{'item.retail'|translate}}: </label>
-                        <div class="col-md-3">
+                        <div class="col-md-4">
                             <input type="text" class="form-control" min="1" [(ngModel)]="CurrPricing.Retail">
                         </div>
-                    </div>
-
-                    <div class="row align-items-center" m-t-10>
                         <label text-gray-light text-nowrap text-right class="col-md-2">{{'item.bulk'|translate}}: </label>
-                        <div class="col-md-3">
+                        <div class="col-md-4">
                             <input type="text" class="form-control" min="0" [(ngModel)]="CurrPricing.Bulk">
                         </div>
                         <label text-gray-light text-nowrap text-right class="col-md-2">{{'item.bulkcount'|translate}}: </label>
-                        <div class="col-md-3">
+                        <div class="col-md-4">
                             <input type="text" class="form-control" min="0" [(ngModel)]="CurrPricing.BulkCount">
                         </div>
-                    </div>
-                    <div class="row align-items-center" m-t-10>
                         <label text-gray-light text-nowrap text-right class="col-md-2">{{'item.distribute'|translate}}: </label>
-                        <div class="col-md-3">
+                        <div class="col-md-4">
                             <input type="text" min="0" class="form-control" [(ngModel)]="CurrPricing.Distribute">
                         </div>
                     </div>
