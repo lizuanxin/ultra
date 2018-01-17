@@ -5,7 +5,7 @@ import {AlertModule} from 'ngx-bootstrap/alert';
 import {ButtonsModule} from 'ngx-bootstrap/buttons';
 import {CarouselModule} from 'ngx-bootstrap/carousel';
 import {CollapseModule} from 'ngx-bootstrap/collapse';
-import {BsDatepickerModule} from 'ngx-bootstrap/datepicker';
+// import {BsDatepickerModule} from 'ngx-bootstrap/datepicker';
 import {BsDropdownModule} from 'ngx-bootstrap/dropdown';
 import {ModalModule} from 'ngx-bootstrap/modal';
 
@@ -26,7 +26,7 @@ const MODULE =
     ButtonsModule,
     // CarouselModule,
     CollapseModule,
-    BsDatepickerModule,
+    // BsDatepickerModule,
     BsDropdownModule,
     ModalModule,
     PaginationModule,
@@ -47,7 +47,7 @@ const MODULE =
         ButtonsModule.forRoot(),
         // CarouselModule.forRoot(),
         CollapseModule.forRoot(),
-        BsDatepickerModule.forRoot(),
+        // BsDatepickerModule.forRoot(),
         BsDropdownModule.forRoot(),
         ModalModule.forRoot(),
         PaginationModule.forRoot(),

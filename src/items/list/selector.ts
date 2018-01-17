@@ -1,9 +1,10 @@
 import {Component, EventEmitter, Input, Output} from '@angular/core';
 
 import {TypeInfo} from 'UltraCreation/Core/TypeInfo';
-import {TItemService, TItem} from 'services/item';
-import * as Types from 'services/cloud/types';
 import {TBasicModalView} from 'share/component/basicmodal';
+
+import * as Types from 'services/cloud/types';
+import {TItemService} from 'services/item';
 
 @Component({selector: 'item-selector', templateUrl: './selector.html'})
 export class TItemSelectorComponent extends TBasicModalView
@@ -20,7 +21,7 @@ export class TItemSelectorComponent extends TBasicModalView
         console.log(JSON.stringify(this.FilterItems) + ' ' + this.FilterType);
         this.ItemSvc.List().then((ItemList) =>
         {
-            for (let Item of ItemList)
+            for (const Item of ItemList)
             {
                 if (! this.IsNeedToFiltered(Item))
                     this.ItemModels.push(new TItemModel(Item));
@@ -46,7 +47,7 @@ export class TItemSelectorComponent extends TBasicModalView
 
     ToggleSelectAll()
     {
-        let Selected = ! this.AllItemSelected;
+        const Selected = ! this.AllItemSelected;
         this.ItemModels.forEach((ItemModel) => ItemModel.IsSelected = Selected);
     }
 
@@ -59,7 +60,7 @@ export class TItemSelectorComponent extends TBasicModalView
     ButtonOK()
     {
         console.log('button ok');
-        let SelectedItems = [];
+        const SelectedItems = [];
         this.ItemModels.forEach((ItemModel) =>
         {
             if (ItemModel.IsSelected)
@@ -88,7 +89,7 @@ export class TItemSelectorComponent extends TBasicModalView
 
     private IsNeedToFiltered(Item: Types.IItem)
     {
-        for (let FilterItemId of this.FilterItems)
+        for (const FilterItemId of this.FilterItems)
         {
             if (FilterItemId === Item.Id ||
                 this.FilterType === Item.TypeId)
@@ -106,7 +107,7 @@ export class TItemSelectorComponent extends TBasicModalView
 export class TItemModel
 {
     static SelectedNum: number = 0;
-    constructor(public Source: TItem)
+    constructor(public Source: Types.IItem)
     {
     }
 

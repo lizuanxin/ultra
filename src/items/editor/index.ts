@@ -1,17 +1,13 @@
-import {Component, ChangeDetectorRef, EventEmitter, Input, Output} from '@angular/core';
+import {Component, OnInit, ChangeDetectorRef, EventEmitter, Input, Output} from '@angular/core';
 
 import {TypeInfo} from 'UltraCreation/Core/TypeInfo';
 import {TFileLibComponent} from 'share/component/filelib';
 
-import {TItemService, TItem} from 'services/item';
 import * as Types from 'services/cloud/types';
+import {TItemService} from 'services/item';
 
 import {TBasicModalView} from 'share/component/basicmodal';
 import {TItemSelectorComponent} from 'items/list/selector';
-import {OnInit} from '@angular/core/src/metadata/lifecycle_hooks';
-import {} from '@angular/core/src/change_detection/change_detector_ref';
-
-const MAX_PICTURES: number = 5;
 
 @Component({selector: 'item-editor', templateUrl: './index.html'})
 export class TItemEditorComponent extends TBasicModalView implements OnInit
@@ -23,12 +19,17 @@ export class TItemEditorComponent extends TBasicModalView implements OnInit
 
     SetModalParams(data: any) /**@override */
     {
+        this.Regions = data.Regions;
         this.Item = data.Item;
     }
 
     ngOnInit()
     {
-        this.CurrPricing = this.Item.PricingList[0];
+        if (this.Item.PricingList.length === 0)
+        {
+            this.Item.AddPricing({Region: this.Regions[0].Name});
+            this.CurrPricing = this.Item.PricingList[0];
+        }
     }
 
     OnClosed(Data: any)
@@ -121,6 +122,7 @@ export class TItemEditorComponent extends TBasicModalView implements OnInit
 
     CurrPricing: Types.ILocalizedPricing;
 
-    @Input() Item: TItem;
-    @Output() OnChange = new EventEmitter<TItem>();
+    @Input() Regions: Array<Types.IRegion>;
+    @Input() Item: Types.IItem;
+    @Output() OnChange = new EventEmitter<Types.IItem>();
 }

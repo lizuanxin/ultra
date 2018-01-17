@@ -4,6 +4,8 @@ import {TRestClient} from 'UltraCreation/Core/Http';
 import {TAssignable} from 'UltraCreation/Core/Persistable';
 
 import * as Types from './cloud/types';
+import {IItem, IProduct, IPackage, IProductInfo} from './cloud/types/item';
+
 import {TAuthService} from './authorize';
 import {TItemTypeId} from './cloud/types';
 
@@ -39,7 +41,7 @@ export class TItemService
         if (! TypeInfo.Assigned(this.ItemsSnap))
         {
             this.Auth.Grant(this.Http);
-            const ary: Array<Types.IItem> = await this.Http.Get('/item').toPromise().then(res => res.Content);
+            const ary: Array<IItem> = await this.Http.Get('/item').toPromise().then(res => res.Content);
 
             this.ItemsSnap = new Map<Types.TIdentify, TItem>();
             for (const iter of ary)
@@ -63,33 +65,22 @@ export class TItemService
         return this.ItemsSnap.get(Id);
     }
 
-    async CreateProduct(): Promise<TItem>
+    async CreateProduct(): Promise<Types.IProduct>
     {
-        const RetVal = new TProduct();
-
-        const Regions = await this.Regions();
-        for (const iter of Regions)
-            RetVal.PricingList.push({Region: iter.Name});
-
-        return RetVal;
+        return new TProduct();
     }
 
-    async CreatePackage(Products: Array<Types.IItem>): Promise<TItem>
+    async CreatePackage(Products: Array<IProduct>): Promise<Types.IPackage>
     {
-        await this.Domains();
-
         const RetVal = new TPackage();
-
-        const Regions = await this.Regions();
-        for (const iter of Regions)
-            RetVal.PricingList.push({Region: iter.Name});
 
         Products.forEach(iter => RetVal.AddProduct(iter, 1));
         return RetVal;
     }
 
-    async Save(item: Types.IItem): Promise<void>
+    async Save(item: IItem): Promise<void>
     {
+        /*
         this.Auth.Grant(this.Http);
         if (! TypeInfo.Assigned(item.Id))
         {
@@ -99,9 +90,12 @@ export class TItemService
         }
         else
             await this.Http.Put('/item/update', item.toString()).toPromise();
+        */
+
+        console.log(JSON.stringify(item));
     }
 
-    async Remove(item: Types.IItem): Promise<void>
+    async Remove(item: IItem): Promise<void>
     {
         this.Auth.Grant(this.Http);
 
@@ -109,7 +103,7 @@ export class TItemService
         this.ItemsSnap.delete(item.Id);
     }
 
-    async Publish(DomainId: Types.TIdentify, Items: Array<Types.IItem>)
+    async Publish(DomainId: Types.TIdentify, Items: Array<IItem>)
     {
         const ItemsId = Items.map((Item) =>
         {
@@ -172,14 +166,37 @@ export class TItemService
     private PublishedSnap: Map<Types.TIdentify, Types.IPublished>;
 }
 
+declare module './cloud/types/item'
+{
+    interface IItem
+    {
+        readonly IsProduct: boolean;
+        readonly IsPackage: boolean;
+
+        AddPictures(Picture: Array<Types.IPicture>): void;
+        AddPricing(Pricing: Types.ILocalizedPricing): void;
+
+        RemovePricing(RegionName: Types.TRegionName): void;
+    }
+
+    interface IProduct
+    {
+
+    }
+
+    interface IPackage
+    {
+        AddProduct(ProductOrPackage: IProduct | IPackage, Qty: number): void;
+    }
+}
+
 /** TItem */
 
-export class TItem extends TAssignable implements Types.IItem
+class TItem extends TAssignable implements IItem
 {
-    protected constructor(TypeId: Types.TItemTypeId)
+    protected constructor(public TypeId: Types.TItemTypeId)
     {
         super();
-        this.TypeId = TypeId;
     }
 
     get IsProduct(): boolean
@@ -192,7 +209,7 @@ export class TItem extends TAssignable implements Types.IItem
         return this.TypeId === Types.TItemTypeId.Package;
     }
 
-    AddPictures(Picture: Array<Types.IPicture>)
+    AddPictures(Picture: Array<Types.IPicture>): void
     {
         Picture.forEach(iter =>
         {
@@ -201,11 +218,39 @@ export class TItem extends TAssignable implements Types.IItem
         });
     }
 
-    IndexOfPicture(f: Types.IPicture): number
+    AddPricing(Pricing: Types.ILocalizedPricing): void
+    {
+        this.RemovePricing(Pricing.Region);
+        this.PricingList.push(Pricing);
+    }
+
+    RemovePricing(RegionName: Types.TRegionName): void
+    {
+        const Idx = this.IndexOfPricing(RegionName);
+        if (Idx !== -1)
+            this.PricingList.splice(Idx, 1);
+    }
+
+    protected AfterAssignProperties(): void /**@override */
+    {
+        super.AfterAssignProperties();
+    }
+
+    private IndexOfPicture(f: Types.IPicture): number
     {
         for (let I = 0; I < this.Pictures.length; I ++)
         {
             if (this.Pictures[I].Id === f.Id)
+                return I;
+        }
+        return -1;
+    }
+
+    private IndexOfPricing(RegionName: Types.TRegionName): number
+    {
+        for (let I = 0; I < this.PricingList.length; I ++)
+        {
+            if (this.PricingList[I].Region === RegionName)
                 return I;
         }
         return -1;
@@ -235,7 +280,6 @@ export class TItem extends TAssignable implements Types.IItem
     }
 
     Id: Types.TIdentify = null;
-    TypeId: Types.TItemTypeId = null;
     Category_Id: string = null;
 
     Name: string = '';
@@ -251,7 +295,7 @@ export class TItem extends TAssignable implements Types.IItem
 
 /* TProduct */
 
-class TProduct extends TItem implements Types.IProduct
+class TProduct extends TItem implements IProduct
 {
     constructor()
     {
@@ -268,14 +312,14 @@ class TProduct extends TItem implements Types.IProduct
 
 /* TPackage */
 
-class TPackage extends TItem implements Types.IPackage
+class TPackage extends TItem implements IPackage
 {
     constructor()
     {
         super(TItemTypeId.Package);
     }
 
-    AddProduct(ProductOrPackage: Types.IProduct | Types.IPackage, Qty: number)
+    AddProduct(ProductOrPackage: IProduct | IPackage, Qty: number)
     {
         if (ProductOrPackage instanceof TProduct)
             this.ProductInfoList.push({Product: ProductOrPackage, Qty: Qty});
@@ -292,5 +336,5 @@ class TPackage extends TItem implements Types.IPackage
         return Prop;
     }
 
-    ProductInfoList: Array<Types.IProductInfo> = [];
+    ProductInfoList: Array<IProductInfo> = [];
 }

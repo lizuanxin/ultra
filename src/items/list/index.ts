@@ -7,7 +7,7 @@ import {NgbModal} from '@ng-bootstrap/ng-bootstrap';
 
 import * as Types from 'services/cloud/types';
 import {TItemEditorComponent} from '../editor';
-import { DomainComponent } from 'share/component';
+import {DomainComponent} from 'share/component';
 
 @Component({selector: 'item-list', templateUrl: './index.html'})
 export class TItemListComponent implements OnInit
@@ -19,6 +19,10 @@ export class TItemListComponent implements OnInit
 
     ngOnInit()
     {
+        this.ItemSvc.Regions()
+            .then(list => this.Regions = list)
+            .catch(err => console.log(err));
+
         this.Refresh();
     }
 
@@ -87,7 +91,7 @@ export class TItemListComponent implements OnInit
 
     private OpenModal(Item: Types.IItem): Promise<any>
     {
-        return App.ShowModal(TItemEditorComponent, {Item: Item}, {size: 'lg'})
+        return App.ShowModal(TItemEditorComponent, {Regions: this.Regions, Item: Item}, {size: 'lg'})
             .then((EditedItem) =>
             {
                 console.log('modal result: ' + JSON.stringify(EditedItem));
@@ -102,6 +106,7 @@ export class TItemListComponent implements OnInit
 
     App = window.App;
 
+    Regions: Array<Types.IRegion>;
     Items: Array<Types.IItem>;
     Selected = new Set<Types.IItem>();
 }
