@@ -11,8 +11,6 @@ export class CableMagicPage implements OnInit
     ngOnInit()
     {
         this.document.documentElement.scrollTo({top: 0});
-        const dom: any = document.querySelector('body');
-        dom.className = '';
     }
 
 }
