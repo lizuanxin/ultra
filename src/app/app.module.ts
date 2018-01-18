@@ -2,7 +2,6 @@ import {NgModule} from '@angular/core';
 import {BrowserModule} from '@angular/platform-browser';
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 import {Routes, RouterModule} from '@angular/router';
-
 import {NgxModule} from '../share/ngx.module';
 import {ServiceModule, TAuthService} from 'services';
 

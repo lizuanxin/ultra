@@ -1,76 +1,75 @@
-
-.nav-fixed-top{
-    ul.navbar-nav{
-        max-height:600px;
-        >li{
-            &.state{
-                color:$gray-dark;
-                background-color:#e7e7e7;
-                a{
-                    color:$gray-dark;
+.nav-fixed-top {
+    ul.navbar-nav {
+        max-height: 600px;
+        >li {
+            &.state {
+                color: $gray-dark;
+                background-color: #e7e7e7;
+                a {
+                    color: $gray-dark;
                 }
             }
         }
     }
 }
 
-.navbar-tabs{
-    margin-left:1rem;
-    margin-bottom:-0.5rem;
+.navbar-tabs {
+    margin-left: 1rem;
+    margin-bottom: -0.5rem;
     align-self: flex-end;
-    li{
+    li {
         cursor: pointer;
-        background-color:lighten($gray-light,15%);
-        color:white;
-        display:inline-block;
-        padding:0.3rem 1rem;
-        margin-right:0.5rem;
-        &.active{
-            background-color:darken($gray-light,10%);
+        background-color: lighten($gray-light, 15%);
+        color: white;
+        display: inline-block;
+        padding: 0.3rem 1rem;
+        margin-right: 0.5rem;
+        &.active {
+            background-color: darken($gray-light, 10%);
         }
     }
 }
 
-.navbar .navbar-snap{
-    width:auto;
+.navbar .navbar-snap {
+    width: auto;
 }
 
-.navbar-snap{
-    position:absolute;
-    right:0;
-    &[top]{
+.navbar-snap {
+    position: absolute;
+    right: 0;
+    &[top] {
         top: 0;
     }
-    li{
-        font-size:0.785rem;
+    li {
+        font-size: 0.785rem;
     }
 }
 
-.nav-item{
-    position:relative;
+.nav-item {
+    position: relative;
     white-space: nowrap;
-    .nav-link{
-        font-size:.8rem;
+    .nav-link {
+        font-size: .8rem;
         color: $gray-dark;
     }
-
-    .dropdown-menu{
-        min-width:5rem;
-        font-size:.8rem;
+    .dropdown-menu {
+        min-width: 5rem;
+        font-size: .8rem;
     }
-    i{
+    i {
         display: inline-block;
-        &.rotate{
+        &.rotate {
             transform: rotate(180deg);
         }
     }
 }
+
 .navbar {
     @extend .animate;
 }
 
-
-.navbar-fixed-bottom, .navbar-fixed-top {
+.navbar-fixed-bottom,
+.navbar-fixed-top {
     position: fixed;
     right: 0;
     left: 0;
