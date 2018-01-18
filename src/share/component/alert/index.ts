@@ -1,5 +1,5 @@
 import {Component, Input, OnInit} from '@angular/core';
-import { TypeInfo } from 'UltraCreation/Core';
+import {TypeInfo} from 'UltraCreation/Core/TypeInfo';
 
 @Component({selector: 'alert-comp', templateUrl: './index.html'})
 export class TAlertComponent implements OnInit

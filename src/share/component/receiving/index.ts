@@ -1,12 +1,14 @@
-import {Component, OnInit, Input, ViewChild} from '@angular/core';
-import {TypeInfo, THttpClient} from 'UltraCreation/Core';
-import {Types, TAuthService} from 'services';
+import {FormGroup, FormControl, Validators} from '@angular/forms';
 import {Observable} from 'rxjs/Observable';
 import 'rxjs/add/operator/map';
 import 'rxjs/add/operator/debounceTime';
 import 'rxjs/add/operator/distinctUntilChanged';
-import { NgbTypeaheadSelectItemEvent } from '@ng-bootstrap/ng-bootstrap';
-import { FormGroup, FormControl, Validators } from '@angular/forms';
+import {NgbTypeaheadSelectItemEvent} from '@ng-bootstrap/ng-bootstrap';
+
+import {Component, OnInit, Input, ViewChild} from '@angular/core';
+import {TypeInfo} from 'UltraCreation/Core/TypeInfo';
+import {THttpClient} from 'UltraCreation/Core/Http';
+import {Types, TAuthService} from 'services';
 
 @Component({ selector: 'receiv', templateUrl: './index.html' })
 
@@ -133,7 +135,7 @@ export class ReceivingComponent implements OnInit
     RefreshCityList(Country: string): void
     {
         this.CityList = [];
-        for (let key in this.JSONObject)
+        for (const key in this.JSONObject)
             if (Country.toLowerCase() === key.toLowerCase())
             {
                 this.CityList = this.JSONObject[key].sort();

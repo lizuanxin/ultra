@@ -1,6 +1,5 @@
-import { Component, OnInit, Input, ViewChild } from '@angular/core';
-import { TypeInfo, THttpClient } from 'UltraCreation/Core';
-import { Types, TAuthService } from 'services';
+import {Component, OnInit} from '@angular/core';
+import {Types, TAuthService} from 'services';
 
 @Component({templateUrl: './index.html'})
 export class DeliveryComponent implements OnInit

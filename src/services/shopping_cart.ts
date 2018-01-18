@@ -1,6 +1,7 @@
 import {Injectable} from '@angular/core';
+import {TypeInfo} from 'UltraCreation/Core/TypeInfo';
+
 import * as Types from './cloud/types';
-import { TypeInfo } from 'UltraCreation/Core';
 
 @Injectable()
 export class TShoppingCart
@@ -51,8 +52,8 @@ export class TShoppingCart
     {
         if (Item.Pricing.BulkCount > 0)
         {
-            let Remainder = Item.Qty % Item.Pricing.BulkCount;
-            let Multiple = (Item.Qty - Remainder) / Item.Pricing.BulkCount;
+            const Remainder = Item.Qty % Item.Pricing.BulkCount;
+            const Multiple = (Item.Qty - Remainder) / Item.Pricing.BulkCount;
             return Multiple * Item.Pricing.Bulk + Remainder * Item.Pricing.Retail;
         }
         else

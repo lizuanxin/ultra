@@ -13,10 +13,11 @@
         "cancel": "Cancel",
         "close": "Close",
 
-        "add": "Add",
-        "del": "Del",
+        "refresh": "refresh",
         "search": "Search",
 
+        "add": "Add",
+        "del": "Del",
         "modify": "Modify",
         "edit": "Edit",
         "save": "Save",
@@ -109,5 +110,21 @@
         "bulk": "Buck",
         "bulkcount": "Count",
         "distribute": "Distrubute"
+    },
+
+    "doll":
+    {
+        "streamsrv":
+        {
+            "title": "Live Stream Server",
+            "url": "URL",
+            "params": "Parameters",
+            "room_count": "Room Count"
+        },
+
+        "room":
+        {
+
+        }
     }
 }

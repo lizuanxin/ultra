@@ -2,7 +2,9 @@ import {Injectable} from '@angular/core';
 import { TAuthService } from 'services/authorize';
 
 import * as Types from './cloud/types';
-import { TAssignable, TRestClient, TypeInfo } from 'UltraCreation/Core';
+import {TypeInfo} from 'UltraCreation/Core/TypeInfo';
+import {TAssignable} from 'UltraCreation/Core/Persistable';
+import {TRestClient} from 'UltraCreation/Core/Http';
 
 @Injectable()
 export class TReceiptService

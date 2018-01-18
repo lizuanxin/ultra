@@ -2,7 +2,7 @@ import {Injectable, Injector, TemplateRef, ReflectiveInjector} from '@angular/co
 import {Router} from '@angular/router';
 import {TranslateService} from '@ngx-translate/core';
 
-import {TypeInfo} from 'UltraCreation/Core';
+import {TypeInfo} from 'UltraCreation/Core/TypeInfo';
 import {Platform} from 'UltraCreation/Core/Platform';
 import {NgbModal, NgbTooltipConfig, NgbModalOptions, NgbModalRef} from '@ng-bootstrap/ng-bootstrap';
 
@@ -94,12 +94,15 @@ export class TApplication
         return this.Translation.instant(Key);
     }
 
-    async ShowModal(content: string | any, data?: any, opts?: NgbModalOptions)
+    async ShowModal(content: any, data?: any, opts?: NgbModalOptions)
     {
         const ModalRef = this.Modal.open(content, opts);
-        ModalRef.componentInstance.ModalRef = ModalRef;
-        ModalRef.componentInstance.SetModalParams(data);
 
+        if (TypeInfo.Assigned(ModalRef.componentInstance))
+        {
+            ModalRef.componentInstance.ModalRef = ModalRef;
+            ModalRef.componentInstance.SetModalParams(data);
+        }
         return ModalRef.result.catch((err) => ModalRef.close(null));
     }
 

@@ -1,5 +1,6 @@
 import {Injectable} from '@angular/core';
-import {TRestClient} from 'UltraCreation/Core';
+import {TypeInfo} from 'UltraCreation/Core/TypeInfo';
+import {TRestClient} from 'UltraCreation/Core/Http';
 
 import * as Types from '../cloud/types';
 import {TAuthService} from '../authorize';
@@ -17,10 +18,17 @@ export class TDollService
         return this.Http.Get('/streamsrv').toPromise().then(res => res.Content);
     }
 
-    AddServer(Content: Types.Doll.IStreamServer): Promise<Types.Doll.IStreamServer>
+    CreateServer(): Types.Doll.IStreamServer
+    {
+        return Object.create({});
+    }
+
+    SaveServer(Srv: Types.Doll.IStreamServer): Promise<Types.Doll.IStreamServer>
     {
         this.Auth.Grant(this.Http);
-        return this.Http.Post('/streamsrv/append', Content).toPromise().then(res => res.Content);
+
+        if (TypeInfo.Assigned(Srv.Id))
+        return this.Http.Post('/streamsrv/append', Srv).toPromise().then(res => res.Content);
     }
 
     RoomList(): Promise<Array<Types.Doll.IRoom>>
