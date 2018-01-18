@@ -19,7 +19,7 @@ export class TAlertComponent implements OnInit
     {
         if (TypeInfo.Assigned(Button.Handler))
         {
-            let RetVal: {[k: string]: any} = {};
+            const RetVal: {[k: string]: any} = {};
             this.Opts.Inputs.forEach((InputOpt) => RetVal[InputOpt.Name] = InputOpt.Value);
             Button.Handler(RetVal);
         }
