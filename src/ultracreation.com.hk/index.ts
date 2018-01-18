@@ -13,8 +13,8 @@ import {RelateComponent} from './components/relate';
 import {SiteNavbarComponent} from './share/navbar';
 import {CartPage} from './cart';
 import {OrderInfoPage} from './order';
-import { CableMagicPage } from './pro/cablemagic';
-import { HealthPage } from './pro/health';
+import { HealthPage } from './health';
+import { CableMagicPage } from './health/cablemagic';
 import { AboutPage } from './about';
 import { ContactPage } from './contact';
 import { TeamsPage } from './teams';
@@ -30,8 +30,9 @@ const routes: Routes = [
     {path: '', component: LayoutComponent,
         children: [
             {path: 'home', component: HomePage},
-            {path: 'cable', component: CableMagicPage},
             {path: 'health', component: HealthPage},
+            {path: 'health/cable', component: CableMagicPage},
+
             {path: 'detail/:id', component: DetailPage},
             {path: 'cart', component: CartPage},
             {path: 'tens', component: TensPage},
