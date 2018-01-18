@@ -29,12 +29,12 @@ export class TStreamServerComponent implements OnInit
         if (TypeInfo.Assigned(Srv))
             this.Editing = Object.assign({}, Srv);
         else
-            this.Editing = this.DollService.CreateServer();
+            this.Editing = this.DollService.ServerCreate();
 
         this.Modal.open(content).result
             .then(async RetVal =>
             {
-                RetVal = await this.DollService.SaveServer(this.Editing);
+                RetVal = await this.DollService.ServerStore(this.Editing);
                 this.Editing = null;
 
                 for (let I = 0; I < this.ServerList.length; I ++)
