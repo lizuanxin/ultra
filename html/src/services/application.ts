@@ -96,7 +96,7 @@ export class TApplication
         return this.Translation.instant(Key);
     }
 
-    async ShowModal(content: any, data?: any, opts?: NgbModalOptions)
+    async ShowModal(content: any, data?: any, opts?: NgbModalOptions): Promise<any>
     {
         const ModalRef = this.Modal.open(content, opts);
 
@@ -105,10 +105,10 @@ export class TApplication
             ModalRef.componentInstance.ModalRef = ModalRef;
             ModalRef.componentInstance.SetModalParams(data);
         }
-        return ModalRef.result.catch((err) => ModalRef.close(null));
+        return ModalRef.result;
     }
 
-    ShowAlert(Opts: IAlertOptions | string)
+    ShowAlert(Opts: IAlertOptions | string): Promise<any>
     {
         if (TypeInfo.IsPrimitive(Opts))
             Opts = {Message: Opts};

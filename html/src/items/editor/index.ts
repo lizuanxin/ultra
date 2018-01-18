@@ -15,43 +15,17 @@ export class TItemEditorComponent extends TBasicModalView implements OnInit
     SetModalParams(data: any) /**@override */
     {
         this.Regions = data.Regions;
-        this.Item = data.Item;
+        this.Item = data.Item.Clone();
     }
 
     ngOnInit()
     {
-        if (this.Item.PricingList.length === 0)
-            this.Item.AddPricing({Region: this.Regions[0].Name});
-
-        this.CurrPricing = this.Item.PricingList[0];
-    }
-
-    OnClosed(Data: any)
-    {
-        console.log('closed...');
-        this.OnChange.emit(Data);
-    }
-
-    OnDismiss(Data: any)
-    {
-        console.log('dismissed...');
-        this.OnChange.emit(Data);
-    }
-
-    ButtonCancel()
-    {
-        console.log('button cancel');
-        this.Close(null);
-    }
-
-    ButtonOK()
-    {
-        this.Close(this.Item);
+        this.CurrPricing = this.Item.GetPricing(this.Regions[0].Name, 0);
     }
 
     AddPicture()
     {
-        this.App.ShowModal(TFileLibComponent, {Multiple: true, ModalMode: true}, {size: 'lg'})
+        App.ShowModal(TFileLibComponent, {Multiple: true, ModalMode: true}, {size: 'lg'})
             .then(Pictures => this.Item.AddPictures(Pictures));
     }
 
@@ -69,7 +43,7 @@ export class TItemEditorComponent extends TBasicModalView implements OnInit
 
     QuillImageHandler(quill)
     {
-        this.App.ShowModal(TFileLibComponent, {Multiple: false, ModalMode: true}, {size: 'lg'})
+        App.ShowModal(TFileLibComponent, {Multiple: false, ModalMode: true}, {size: 'lg'})
             .then((Pictures) =>
             {
                 const range = quill.getSelection(true);
@@ -118,5 +92,4 @@ export class TItemEditorComponent extends TBasicModalView implements OnInit
 
     @Input() Regions: Array<Types.IRegion>;
     @Input() Item: Types.IItem;
-    @Output() OnChange = new EventEmitter<Types.IItem>();
 }

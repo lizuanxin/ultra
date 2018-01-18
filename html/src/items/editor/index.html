@@ -1,6 +1,6 @@
 <div class="modal-header">
     <h4 class="modal-title pull-left">{{'item.editor.title'|translate}}</h4>
-    <button type="button" class="close" aria-label="Close" (click)="ButtonCancel()">
+    <button type="button" class="close" aria-label="Close" (click)="Dismiss('Cross Clicked')">
         <span aria-hidden="true">&times;</span>
     </button>
 </div>
@@ -44,8 +44,8 @@
                                     <span class="caret"></span>
                                 </button>
                                 <ul *dropdownMenu class="dropdown-menu" role="menu">
-                                    <li role="menuitem" *ngFor="let pricing of Item.PricingList">
-                                        <a class="dropdown-item" href="javascript:void(0)" (click)="CurrPricing=pricing">{{pricing.Region}}</a>
+                                    <li role="menuitem" *ngFor="let region of Regions">
+                                        <a class="dropdown-item" href="javascript:void(0)" (click)="CurrPricing=Item.GetPricing(region.Name)">{{region.Name}}</a>
                                     </li>
                                 </ul>
                             </div>
@@ -161,6 +161,6 @@
 
 </div>
 <div class="modal-footer">
-    <button type="button" class="btn btn-default" (click)="ButtonCancel()">{{'button.close'|translate}}</button>
-    <button type="button" class="btn btn-primary" (click)="ButtonOK()">{{'button.ok'|translate}}</button>
+    <button type="button" class="btn btn-default" (click)="Dismiss('close button')">{{'button.close'|translate}}</button>
+    <button type="button" class="btn btn-primary" (click)="Close(Item)">{{'button.ok'|translate}}</button>
 </div>

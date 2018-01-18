@@ -38,22 +38,13 @@ export class TItemService
     {
         if (! TypeInfo.Assigned(this.ItemsSnap))
         {
+            this.ItemsSnap = new Map<Types.TIdentify, TItem>();
+
             this.Auth.Grant(this.Http);
             const ary: Array<IItem> = await this.Http.Get('/item').toPromise().then(res => res.Content);
 
-            this.ItemsSnap = new Map<Types.TIdentify, TItem>();
-
             for (const iter of ary)
-            {
-                let Item: TItem;
-                if (iter.TypeId === Types.TItemTypeId.Package)
-                    Item = new TPackage();
-                else
-                    Item = new TProduct();
-
-                Item.Assign(iter);
-                this.ItemsSnap.set(iter.Id, Item);
-            }
+                this.HashItem(iter);
         }
 
         return Array.from(this.ItemsSnap.values());
@@ -81,19 +72,10 @@ export class TItemService
     {
         this.Auth.Grant(this.Http);
 
-        if (item.Pictures.length > 0)
-            item.AvatarUrl = (item.Pictures[0] as Types.IPicture).Path;
-        else
-            item.AvatarUrl = '';
-
         if (! TypeInfo.Assigned(item.Id))
-        {
-            const res = await this.Http.Post('/item/append', item.toString()).toPromise();
-            item.Id = res.Content.Id;
-            this.ItemsSnap.set(item.Id, item as TItem);
-        }
+            this.HashItem(await this.Http.Post('/item/store', item.ToJSON()).toPromise().then(res => res.Content));
         else
-            await this.Http.Put('/item/update', item.toString()).toPromise();
+            this.HashItem(await this.Http.Put('/item/store', item.ToJSON()).toPromise().then(res => res.Content));
     }
 
     async Remove(item: IItem): Promise<void>
@@ -159,6 +141,19 @@ export class TItemService
         }
     }
 
+    private HashItem(item: Types.IItem)
+    {
+        let NewItem: TItem;
+
+        if (item.TypeId === Types.TItemTypeId.Package)
+            NewItem = new TPackage();
+        else
+            NewItem = new TProduct();
+
+        NewItem.Assign(item, true);
+        this.ItemsSnap.set(NewItem.Id, NewItem);
+    }
+
     private Http = new TRestClient('/api');
 
     private RegionsSnap: Array<Types.IRegion>;
@@ -173,13 +168,15 @@ declare module './cloud/types/item'
 {
     interface IItem
     {
+        ToJSON(): string;
+
         readonly IsProduct: boolean;
         readonly IsPackage: boolean;
 
         AddPictures(Picture: Array<Types.IPicture>): void;
-        AddPricing(Pricing: Types.ILocalizedPricing): void;
 
-        RemovePricing(RegionName: Types.TRegionName): void;
+        GetPricing(RegionName: Types.TIdentify, Idx?: number): Types.ILocalizedPricing;
+        RemovePricing(RegionName: Types.TIdentify): void;
     }
 
     interface IProduct
@@ -201,6 +198,11 @@ class TItem extends TAssignable implements IItem
         super();
     }
 
+    ToJSON(): string
+    {
+        return JSON.stringify(this.PersistValueOf());
+    }
+
     get IsProduct(): boolean
     {
         return this.TypeId === Types.TItemTypeId.Product;
@@ -220,10 +222,20 @@ class TItem extends TAssignable implements IItem
         });
     }
 
-    AddPricing(Pricing: Types.ILocalizedPricing): void
+    GetPricing(RegionName: Types.TIdentify, Idx?: number): Types.ILocalizedPricing
     {
-        this.RemovePricing(Pricing.Region);
-        this.PricingList.push(Pricing);
+        if (TypeInfo.Assigned(Idx) && Idx < this.PricingList.length)
+            return this.PricingList[Idx];
+
+        Idx = this.IndexOfPricing(RegionName);
+        if (Idx === -1)
+        {
+            const NewPricing = {Region: RegionName};
+            this.PricingList.push(NewPricing);
+            return NewPricing;
+        }
+        else
+            return this.PricingList[Idx];
     }
 
     RemovePricing(RegionName: Types.TRegionName): void
@@ -258,23 +270,13 @@ class TItem extends TAssignable implements IItem
         return -1;
     }
 
-    Id: Types.TIdentify = null;
-    Category_Id: string = null;
-
-    Name: string = '';
-    AvatarUrl: string = null;
-    Html: string = null;
-    ExtraProp: any | TypeInfo.TKeyValueHash<string> = {};
-
-    Pictures: Array<Types.IPicture | Types.TIdentify> = [];
-    PricingList: Array<Types.ILocalizedPricing> = [];
-
-    readonly Timestamp: Date;
-
-/* Object */
-
-    valueOf(): this /** @override */
+    protected PersistValueOf(): this /** @override */
     {
+        if (this.Pictures.length > 0)
+            this.AvatarUrl = (this.Pictures[0] as Types.IPicture).Path;
+        else
+            this.AvatarUrl = null;
+
         for (let I = this.PricingList.length - 1; I >= 0; I --)
         {
             const Pricing = this.PricingList[I];
@@ -300,10 +302,18 @@ class TItem extends TAssignable implements IItem
         return RetVal;
     }
 
-    toString() /** @override */
-    {
-        return JSON.stringify(this.valueOf());
-    }
+    Id: Types.TIdentify = null;
+    Category_Id: string = null;
+
+    Name: string = '';
+    AvatarUrl: string = null;
+    Html: string = null;
+    ExtraProp: any | TypeInfo.TKeyValueHash<string> = {};
+
+    Pictures: Array<Types.IPicture | Types.TIdentify> = [];
+    PricingList: Array<Types.ILocalizedPricing> = [];
+
+    readonly Timestamp: Date;
 }
 
 /* TProduct */
@@ -340,17 +350,15 @@ class TPackage extends TItem implements IPackage
             this.ProductInfoList = this.ProductInfoList.concat(ProductOrPackage.ProductInfoList);
     }
 
-    ProductInfoList: Array<IProductInfo> = [];
-
-/* object */
-
-    valueOf(): this /** @override */
+    protected PersistValueOf(): this /** @override */
     {
-        const RetVal = super.valueOf();
+        const RetVal = super.PersistValueOf() as this;
         RetVal.ProductInfoList = RetVal.ProductInfoList.map(iter =>
         {
             return {Product: (iter.Product as IProduct).Id, Qty: iter.Qty};
         });
         return RetVal;
     }
+
+    ProductInfoList: Array<IProductInfo> = [];
 }

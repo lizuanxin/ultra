@@ -11,7 +11,7 @@ export class SidebarComponent implements OnInit
 
     ngOnInit(): void
     {
-        let Config = this.Route.snapshot.routeConfig as any;
+        const Config = this.Route.snapshot.routeConfig as any;
 
         if (TypeInfo.Assigned(Config.data))
         {
@@ -21,7 +21,6 @@ export class SidebarComponent implements OnInit
                 Role: Config.data.Role,
                 Children: new Array<IMenuItem>()
             };
-            console.log(Menu);
 
             Config.children.forEach(SubConfig => {
                 if (TypeInfo.Assigned(SubConfig.data))

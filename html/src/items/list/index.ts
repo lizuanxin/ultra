@@ -91,14 +91,21 @@ export class TItemListComponent implements OnInit
     private OpenModal(Item: Types.IItem): Promise<any>
     {
         return App.ShowModal(TItemEditorComponent, {Regions: this.Regions, Item: Item}, {size: 'lg'})
-            .then((EditedItem) =>
+            .then(RetVal =>
             {
-                if (! TypeInfo.Assigned(EditedItem))
+                if (! TypeInfo.Assigned(RetVal))
                     return;
 
-                this.ItemSvc.Save(Item)
+                this.ItemSvc.Save(RetVal)
                     .then(() => this.Refresh())
                     .catch((err) => console.log(err));
+            })
+            .catch(err =>
+            {
+                if (err instanceof Error)
+                    App.ShowError(err);
+                else
+                    console.log(err);
             });
     }
 
