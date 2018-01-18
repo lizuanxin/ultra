@@ -3,7 +3,7 @@ import {ComponentRef} from '@angular/core';
 import {NgbModalBackdrop} from './modal-backdrop';
 import {NgbModalWindow} from './modal-window';
 
-import {ContentRef} from '../util/popup';
+import {ContentRef} from './util';
 
 /**
  * A reference to an active (currently opened) modal. Instances of this class

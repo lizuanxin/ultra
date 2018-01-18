@@ -6,13 +6,13 @@ import {
   ComponentFactory,
   ComponentFactoryResolver,
   ComponentRef,
-  TemplateRef,
-  ViewRef
+  TemplateRef
 } from '@angular/core';
 
 import {NgbModalBackdrop} from './modal-backdrop';
 import {NgbModalWindow} from './modal-window';
 import {NgbActiveModal, NgbModalRef} from './modal-ref';
+import {ContentRef, isString, isDefined} from './util';
 
 @Injectable()
 export class NgbModalStack {
@@ -89,16 +89,4 @@ export class NgbModalStack {
       return new ContentRef([[componentRef.location.nativeElement]], componentRef.hostView, componentRef);
     }
   }
-}
-
-export class ContentRef {
-    constructor(public nodes: any[], public viewRef?: ViewRef, public componentRef?: ComponentRef<any>) {}
-}
-
-export function isString(value: any): value is string {
-    return typeof value === 'string';
-}
-
-export function isDefined(value: any): boolean {
-    return value !== undefined && value !== null;
 }
