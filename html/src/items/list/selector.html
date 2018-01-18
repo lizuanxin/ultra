@@ -3,7 +3,7 @@
             <thead>
             <tr>
                 <th width="2%" text-center>
-                    <input type="checkbox" [(ngModel)]="AllItemSelected" (ngModelChange)="ToggleSelectAll()">
+                    <input type="checkbox" [ngModel]="AllItemSelected" (ngModelChange)="ToggleSelectAll()">
                 <th width="12%">{{'items.list.field.id'|translate}}</th>
                 <th width="15%">{{'items.list.field.name'|translate}}</th>
             </tr>
@@ -22,7 +22,7 @@
     </table>
 </div>
 
-<div class="modal-footer" *ngIf="IsInModalMode">
+<div class="modal-footer" *ngIf="IsModal">
     <button type="button" class="btn btn-sm btn-default" (click)="OnClosed()" >{{'button.cancle'|translate}}</button>
     <button type="button" class="btn btn-sm btn-primary" (click)="ButtonOK()" >{{'button.confirm'|translate}}</button>
 </div>

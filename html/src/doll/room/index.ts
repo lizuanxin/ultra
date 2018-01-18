@@ -33,6 +33,9 @@ export class DollRoomComponent implements OnInit
         });
     }
 
+    Refresh()
+    {
+    }
 
     OpenModal(content: HTMLTemplateElement, data?: Types.Doll.IRoom)
     {
