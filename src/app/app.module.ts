@@ -42,7 +42,6 @@ const routes: Routes =
         BrowserModule,
         BrowserAnimationsModule,
         RouterModule.forRoot(routes),
-        NgxModule.forRoot(),
         ServiceModule,
     ],
     providers: [],
