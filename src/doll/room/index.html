@@ -1,12 +1,15 @@
 <div class="bread-layer">
-    房间管理
+    {{'doll.room.title'|translate}}
 </div>
 
 <div class="container-layer">
     <div class="row" margin-bottom>
         <div class="col-md-6">
             <div class="d-inline-block">
-                <button class="btn btn-sm btn-primary" type="button" (click)="OpenModal(contentroom)">创建房间</button>
+                <button class="btn btn-sm btn-primary" type="button" (click)="OpenModal(contentroom)">{{'button.add'|translate}}</button>
+            </div>
+            <div class="d-inline-block">
+                <button class="btn btn-sm btn-primary" type="button" (click)="Refresh()">{{'button.refresh'|translate}}</button>
             </div>
         </div>
     </div>
@@ -27,50 +30,46 @@
 </div>
 
 <ng-template #contentroom let-c="close" let-d="dismiss">
-        <div class="modal-header">
-            <h4 class="modal-title pull-left">{{ModalTitle}}</h4>
-            <button type="button" class="close" aria-label="Close" (click)="d('Cross click')">
-                <span aria-hidden="true">&times;</span>
-            </button>
+    <div class="modal-header">
+        <h4 class="modal-title pull-left">{{ModalTitle}}</h4>
+        <button type="button" class="close" aria-label="Close" (click)="d('Cross click')">
+            <span aria-hidden="true">&times;</span>
+        </button>
+    </div>
+    <div class="modal-body">
+        <div class="row" align-items-center  m-t-30>
+            <label text-gray-light text-nowrap text-right class="col-md-2">{{'doll.room.name'|translate}}：</label>
+            <div class="col-md-3"><input type="text" [(ngModel)]="RoomItem.Name" class="form-control"></div>
+            <label text-gray-light text-nowrap text-right class="col-md-2">{{'doll.room.coin'|translate}}：</label>
+            <div class="col-md-3"><input type="text" [(ngModel)]="RoomItem.Coin" class="form-control"></div>
         </div>
-        <div class="modal-body">
-                <ngb-tabset>
-                    <ngb-tab title="{{'items.list.field.info'|translate}}">
-                        <ng-template ngbTabContent>
-                                <div class="row" align-items-center  m-t-30>
-                                    <label text-gray-light text-nowrap text-right class="col-md-2">{{'items.list.field.name'|translate}}：</label>
-                                    <div class="col-md-3"><input type="text" [(ngModel)]="RoomItem.Name" class="form-control"></div>
-                                    <label text-gray-light text-nowrap text-right class="col-md-2">{{'items.list.field.DeviceId'|translate}}：</label>
-                                    <div class="col-md-3"><input type="text" [(ngModel)]="RoomItem.DeviceId" class="form-control"></div>
-                                </div>
-                                <div class="overflow-scroll" style="height:200px" m-t-15>
-                                    <item-selector TableHeader = "false"></item-selector>
-                                </div>
-                                <div class="row" align-items-center  m-t-30>
-                                    <label text-gray-light text-nowrap text-right class="col-md-2">{{'items.list.field.Coin'|translate}}：</label>
-                                    <div class="col-md-3"><input type="text" [(ngModel)]="RoomItem.Coin" class="form-control"></div>
+        <div class="row" align-items-center  m-t-30>
+            <label text-gray-light text-nowrap text-right class="col-md-2">{{'doll.room.device_id'|translate}}：</label>
+            <div class="col-md-3"><input type="text" [(ngModel)]="RoomItem.DeviceId" class="form-control"></div>
+        </div>
+        <div class="row" align-items-center  m-t-30>
+        </div>
+        <div class="overflow-scroll" style="height:200px" m-t-15>
+            <item-selector TableHeader = "false"></item-selector>
+        </div>
 
-                                </div>
-                                <!-- <div class="row justify-content-md-center" align-items-center m-t-15>
-                                    <label text-gray-light text-nowrap text-right class="col-md-2" for="member-name">{{'produce.public.pro_img'|translate}}：</label>
-                                    <div class="col-md-8">
-                                        <div class="img-preview" id="image-2" *ngIf="RoomItem.Doll">
-                                            <span>
-                                                <img [src]="RoomItem.Doll">
-                                                <button (click)="RemovePicture(Picture)"><i icon>&#xf14e;</i></button>
-                                            </span>
-                                        </div>
-                                        <button type="button" class="btn btn-lg btn-link btn-file"   (click)="OpenItemList()">
-                                            <label for="fileupload-2"><i icon f-50>&#xf100;</i></label>
-                                        </button>
-                                    </div>
-                                </div> -->
-                        </ng-template>
-                    </ngb-tab>
-                </ngb-tabset>
-        </div>
-        <div class="modal-footer">
-                <button type="button" class="btn btn-default" (click)="c('Close click')" >{{'button.close'|translate}}</button>
-                <button type="button" class="btn btn-primary" (click)="ButtonOK()" >{{'button.ok'|translate}}</button>
-        </div>
+        <!-- <div class="row justify-content-md-center" align-items-center m-t-15>
+            <label text-gray-light text-nowrap text-right class="col-md-2" for="member-name">{{'produce.public.pro_img'|translate}}：</label>
+            <div class="col-md-8">
+                <div class="img-preview" id="image-2" *ngIf="RoomItem.Doll">
+                    <span>
+                        <img [src]="RoomItem.Doll">
+                        <button (click)="RemovePicture(Picture)"><i icon>&#xf14e;</i></button>
+                    </span>
+                </div>
+                <button type="button" class="btn btn-lg btn-link btn-file"   (click)="OpenItemList()">
+                    <label for="fileupload-2"><i icon f-50>&#xf100;</i></label>
+                </button>
+            </div>
+        </div> -->
+    </div>
+    <div class="modal-footer">
+            <button type="button" class="btn btn-default" (click)="c('Close click')" >{{'button.close'|translate}}</button>
+            <button type="button" class="btn btn-primary" (click)="ButtonOK()" >{{'button.ok'|translate}}</button>
+    </div>
 </ng-template>

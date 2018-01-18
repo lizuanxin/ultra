@@ -18,12 +18,12 @@ export class TDollService
         return this.Http.Get('/streamsrv').toPromise().then(res => res.Content);
     }
 
-    CreateServer(): Types.Doll.IStreamServer
+    ServerCreate(): Types.Doll.IStreamServer
     {
         return Object.create({});
     }
 
-    SaveServer(Srv: Types.Doll.IStreamServer): Promise<Types.Doll.IStreamServer>
+    ServerStore(Srv: Types.Doll.IStreamServer): Promise<Types.Doll.IStreamServer>
     {
         this.Auth.Grant(this.Http);
         return this.Http.Put('/streamsrv/store', Srv).toPromise().then(res => res.Content);
@@ -35,16 +35,15 @@ export class TDollService
         return this.Http.Get('/room').toPromise().then(res => res.Content);
     }
 
-    Append(Room: Types.Doll.IRoom): Promise<Types.Doll.IRoom>
+    RoomCreate(): Types.Doll.IRoom
     {
-        this.Auth.Grant(this.Http);
-        return this.Http.Post('/room/append', JSON.stringify(Room)).toPromise().then(res => res.Content);
+        return Object.create({});
     }
 
-    Update(Room: Types.Doll.IRoom): Promise<Types.Doll.IRoom>
+    RoomSave(Room: Types.Doll.IRoom): Promise<Types.Doll.IRoom>
     {
         this.Auth.Grant(this.Http);
-        return this.Http.Post('/room/update', JSON.stringify(Room)).toPromise().then(res => res.Content);
+        return this.Http.Put('/room/store', JSON.stringify(Room)).toPromise().then(res => res.Content);
     }
 
     /*

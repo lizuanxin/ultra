@@ -121,7 +121,6 @@ export class TItemEditorComponent extends TBasicModalView implements OnInit
         ProductInfo.Qty ++;
     }
 
-    ModalTitle: string;
     CurrPricing: Types.ILocalizedPricing;
 
     @Input() Regions: Array<Types.IRegion>;

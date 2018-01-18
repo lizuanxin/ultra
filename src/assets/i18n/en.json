@@ -94,6 +94,7 @@
     {
         "editor":
         {
+            "title": "Item Editor",
             "basic": "Basic",
             "pricing": "Pricing",
             "property": "Properties",
@@ -109,7 +110,14 @@
         "retail": "Retail",
         "bulk": "Buck",
         "bulkcount": "Count",
-        "distribute": "Distrubute"
+        "distribute": "Distrubute",
+
+        "model": "Model",
+        "unit": "Unit",
+        "width": "Width",
+        "height": "Height",
+        "depth": "Depth",
+        "weight": "Weight"
     },
 
     "doll":
@@ -126,7 +134,10 @@
 
         "room":
         {
-            "title": "Room Administration"
+            "title": "Room Administration",
+            "name": "Name",
+            "device_id": "Device Id",
+            "coin": "Coins"
         }
     }
 }
