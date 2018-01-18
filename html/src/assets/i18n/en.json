@@ -13,7 +13,7 @@
         "cancel": "Cancel",
         "close": "Close",
 
-        "refresh": "refresh",
+        "refresh": "Refresh",
         "search": "Search",
 
         "add": "Add",
@@ -114,6 +114,8 @@
 
     "doll":
     {
+        "title": "Crane Machine",
+
         "streamsrv":
         {
             "title": "Live Stream Server",
@@ -124,7 +126,7 @@
 
         "room":
         {
-
+            "title": "Room Administration"
         }
     }
 }

@@ -1,11 +1,10 @@
 import {Component, OnInit, TemplateRef} from '@angular/core';
 import {TypeInfo} from 'UltraCreation/Core/TypeInfo';
 import {THttpClient} from 'UltraCreation/Core/Http';
-import {NgbModal} from '@ng-bootstrap/ng-bootstrap/modal/modal';
 
-import {Types} from 'services';
-import {TItemService} from 'services';
+import {Types, TItemService} from 'services';
 import {TDollService} from 'services/app/doll';
+import {NgbModal} from 'modal/modal';
 
 @Component({selector: 'doll-streamserver', templateUrl: './index.html', providers: [TDollService]})
 export class TStreamServerComponent implements OnInit
@@ -19,10 +18,16 @@ export class TStreamServerComponent implements OnInit
         this.Refresh();
     }
 
+    Refresh()
+    {
+        this.DollService.ServerList().then(list =>
+            this.ServerList = list);
+    }
+
     NewServer(content: HTMLTemplateElement, Srv?: Types.Doll.IStreamServer)
     {
         if (TypeInfo.Assigned(Srv))
-            this.Editing = Srv;
+            this.Editing = Object.assign({}, Srv);
         else
             this.Editing = this.DollService.CreateServer();
 
@@ -30,9 +35,18 @@ export class TStreamServerComponent implements OnInit
             .then(async RetVal =>
             {
                 RetVal = await this.DollService.SaveServer(this.Editing);
-
-                this.ServerList.push(RetVal);
                 this.Editing = null;
+
+                for (let I = 0; I < this.ServerList.length; I ++)
+                {
+                    const Srv = this.ServerList[I];
+                    if (Srv.Id === RetVal.Id)
+                    {
+                        this.ServerList[I] = RetVal;
+                        return;
+                    }
+                }
+                this.ServerList.push(RetVal);
             })
             .catch(err =>
             {
@@ -43,12 +57,6 @@ export class TStreamServerComponent implements OnInit
                 else
                     console.log(err);
             });
-    }
-
-    Refresh()
-    {
-        this.DollService.ServerList().then(list =>
-            this.ServerList = list);
     }
 
     ServerList = new Array<Types.Doll.IStreamServer>();

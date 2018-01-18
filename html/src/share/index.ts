@@ -15,6 +15,7 @@ import {SidebarComponent} from 'share/sidebar';
 import {SwiperComp} from 'UltraCreation/ng-ion/swiper';
 import {ReceivingComponent} from './component/receiving';
 import * as Comp from './component';
+import {TApplication} from 'services';
 
 @NgModule({
     imports: [
@@ -61,6 +62,7 @@ import * as Comp from './component';
         Comp.TAlertComponent,
         Comp.TToastComponent,
     ],
+    providers: [TApplication]
 })
 export class SharedModule
 {
