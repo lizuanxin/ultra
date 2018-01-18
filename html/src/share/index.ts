@@ -6,7 +6,6 @@ import {Routes, RouterModule} from '@angular/router';
 
 import {TranslateModule} from '@ngx-translate/core';
 import {NgxModule} from 'share/ngx.module';
-import {NgbModule} from '@ng-bootstrap/ng-bootstrap';
 import {DndModule} from 'ng2-dnd';
 import {ScrollToModule} from '@nicky-lenaers/ngx-scroll-to';
 
@@ -23,7 +22,6 @@ import {TApplication} from 'services';
         FormsModule, ReactiveFormsModule,
         RouterModule,
         TranslateModule,
-        NgbModule,
         NgxModule,
         DndModule.forRoot(),
         ScrollToModule.forRoot()
@@ -49,7 +47,6 @@ import {TApplication} from 'services';
         FormsModule, ReactiveFormsModule,
         RouterModule,
         TranslateModule,
-        NgbModule,
         NgxModule,
         DndModule,
         ScrollToModule,

@@ -1,6 +1,4 @@
 import {Input} from '@angular/core';
-import {NgbActiveModal, NgbModal, NgbModalRef} from '@ng-bootstrap/ng-bootstrap';
-
 import {TypeInfo} from 'UltraCreation/Core/TypeInfo';
 import {TAssignable} from 'UltraCreation/Core/Persistable';
 
@@ -46,5 +44,5 @@ export abstract class TBasicModalView
     }
 
     App = window.App;
-    ModalRef: NgbModalRef = null;
+    ModalRef: any = null;
 }
