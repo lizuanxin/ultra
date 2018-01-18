@@ -10,8 +10,15 @@ export abstract class TBasicModalView
     {
     }
 
-    abstract OnClosed(Data: any): void;
-    abstract OnDismiss(Data: any): void;
+    OnClosed(Data: any): void
+    {
+
+    }
+
+    OnDismiss(Data: any): void
+    {
+
+    }
 
     SetModalParams(params: any)
     {

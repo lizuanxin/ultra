@@ -1,52 +1,56 @@
-import {Component, OnInit, TemplateRef } from '@angular/core';
-import {TypeInfo, THttpClient} from 'UltraCreation/Core';
+import {Component, OnInit, TemplateRef} from '@angular/core';
+import {TypeInfo} from 'UltraCreation/Core/TypeInfo';
+import {THttpClient} from 'UltraCreation/Core/Http';
+import {NgbModal} from '@ng-bootstrap/ng-bootstrap/modal/modal';
 
 import {Types} from 'services';
 import {TItemService} from 'services';
 import {TDollService} from 'services/app/doll';
 
-import {TItemSelectorComponent} from 'items/list/selector';
-
 @Component({selector: 'doll-streamserver', templateUrl: './index.html', providers: [TDollService]})
-export class DollStreamServerComponent implements OnInit
+export class TStreamServerComponent implements OnInit
 {
-    constructor(private DollSvc: TDollService)
+    constructor(private DollService: TDollService, private Modal: NgbModal)
     {
     }
 
     ngOnInit()
     {
-        this.ListServer();
+        this.Refresh();
     }
 
-    OpenModal(content: HTMLTemplateElement, data?: Types.Doll.IStreamServer)
+    NewServer(content: HTMLTemplateElement, Srv?: Types.Doll.IStreamServer)
     {
-        let IsNewAdded: boolean = false;
-        if (data)
-            this.IStream = data;
+        if (TypeInfo.Assigned(Srv))
+            this.Editing = Srv;
         else
-            this.IStream = new Object() as Types.Doll.IStreamServer;
+            this.Editing = this.DollService.CreateServer();
 
-        App.ShowModal(content, this.IStream)
-            .then()
-            .catch((err) => console.log(err));
+        this.Modal.open(content).result
+            .then(async RetVal =>
+            {
+                RetVal = await this.DollService.SaveServer(this.Editing);
 
+                this.ServerList.push(RetVal);
+                this.Editing = null;
+            })
+            .catch(err =>
+            {
+                this.Editing = null;
 
-        // this.DollSvc.AddServer(StreamServer).then(() => this.ListServer());
+                if (err instanceof Error)
+                    App.ShowError(err);
+                else
+                    console.log(err);
+            });
     }
 
-    OpenItemList()
+    Refresh()
     {
-        App.ShowModal(TItemSelectorComponent, {}, {size: 'lg'})
-            .then();
-    }
-
-    private ListServer()
-    {
-        this.DollSvc.ServerList().then(list =>
+        this.DollService.ServerList().then(list =>
             this.ServerList = list);
     }
 
     ServerList = new Array<Types.Doll.IStreamServer>();
-    IStream: Types.Doll.IStreamServer;
+    Editing: Types.Doll.IStreamServer;
 }

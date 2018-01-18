@@ -18,7 +18,7 @@ export class DomainComponent implements OnInit
 
     BtnClicked()
     {
-        let SelectedDomains: Array<Types.IDomain> = [];
+        const SelectedDomains: Array<Types.IDomain> = [];
 
         this.Domains.forEach(domain =>
         {

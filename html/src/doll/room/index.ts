@@ -1,5 +1,6 @@
 import {Component, OnInit, TemplateRef } from '@angular/core';
-import {TypeInfo, THttpClient} from 'UltraCreation/Core';
+import {TypeInfo} from 'UltraCreation/Core/TypeInfo';
+import {THttpClient} from 'UltraCreation/Core/Http';
 
 import {Types} from 'services';
 import {TItemService} from 'services';

@@ -12,9 +12,6 @@ import {TItemSelectorComponent} from 'items/list/selector';
 @Component({selector: 'items', templateUrl: '../share/layout.module.html'})
 export class LayoutComponent
 {
-    constructor(App: TApplication)
-    {
-    }
 }
 
 const routes: Routes = [

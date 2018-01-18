@@ -7,9 +7,6 @@ import { OrderListComponent } from 'orders/list';
 @Component({selector: 'orders', templateUrl: '../share/layout.module.html'})
 export class LayoutComponent
 {
-    constructor(App: TApplication)
-    {
-    }
 }
 
 const routes: Routes = [

@@ -1,23 +1,28 @@
 <div class="bread-layer">
-    streamserver
+    {{'doll.streamsrv.title'|translate}}
 </div>
 <div class="container-layer">
     <div class="row" margin-bottom>
         <div class="col-md-6">
             <div class="d-inline-block">
-                <button class="btn btn-sm btn-primary" type="button" (click)="OpenModal(content)">添加</button>
+                <button class="btn btn-sm btn-primary" type="button" (click)="NewServer(content)">{{'button.add'|translate}}</button>
+            </div>
+            <div class="d-inline-block">
+                <button class="btn btn-sm btn-primary" type="button" (click)="Refresh()">{{'button.refresh'|translate}}</button>
             </div>
         </div>
     </div>
     <table class="table table-bordered table-hover">
         <thead>
-            <th>地址</th>
-            <th>参数</th>
+            <th>{{'doll.streamsrv.url'|translate}}</th>
+            <th>{{'doll.streamsrv.params'|translate}}</th>
+            <th>{{'doll.streamsrv.room_count'|translate}}</th>
         </thead>
         <tbody>
-            <tr *ngFor="let item of ServerList" (click)="OpenModal(content,item)">
-                <td>{{item.URL}}</td>
-                <td>{{item.params}}</td>
+            <tr *ngFor="let srv of ServerList" (click)="NewServer(content, srv)">
+                <td>{{srv.URL}}</td>
+                <td>{{srv.params}}</td>
+                <td>{{srv.RoomCount}}</td>
             </tr>
         </tbody>
     </table>
@@ -32,16 +37,16 @@
         </div>
         <div class="modal-body">
             <div class="row" align-items-center justify-content-center m-t-30>
-                <label text-gray-light text-nowrap text-right class="col-md-2">{{'doll.stream.field.url'|translate}}：</label>
-                <div class="col-md-8"><input type="text" [(ngModel)]="IStream.URL" class="form-control"></div>
+                <label text-gray-light text-nowrap text-right class="col-md-2">{{'doll.streamsrv.url'|translate}}：</label>
+                <div class="col-md-8"><input type="text" [(ngModel)]="Editing.URL" class="form-control"></div>
             </div>
             <div class="row" align-items-center justify-content-center m-t-15>
-                <label text-gray-light text-nowrap text-right class="col-md-2">{{'doll.stream.field.params'|translate}}：</label>
-                <div class="col-md-8"><input type="text" [(ngModel)]="IStream.params" class="form-control"></div>
+                <label text-gray-light text-nowrap text-right class="col-md-2">{{'doll.streamsrv.params'|translate}}：</label>
+                <div class="col-md-8"><input type="text" [(ngModel)]="Editing.params" class="form-control"></div>
             </div>
         </div>
         <div class="modal-footer">
-            <button type="button" class="btn btn-default" (click)="c('Close click')" >{{'button.close'|translate}}</button>
-            <button type="button" class="btn btn-primary" (click)="ButtonOK()" >{{'button.ok'|translate}}</button>
+            <button type="button" class="btn btn-default" (click)="d('Close')" >{{'button.close'|translate}}</button>
+            <button type="button" class="btn btn-primary" (click)="c()" >{{'button.ok'|translate}}</button>
         </div>
 </ng-template>

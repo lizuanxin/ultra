@@ -1,7 +1,7 @@
 import {Injectable} from '@angular/core';
 import {CanActivate} from '@angular/router';
 
-import {TypeInfo} from 'UltraCreation/Core';
+import {TypeInfo} from 'UltraCreation/Core/TypeInfo';
 import {TBasicAuthService} from './cloud/basic_auth';
 
 @Injectable()

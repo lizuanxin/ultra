@@ -1,8 +1,8 @@
-import { Component, OnInit, ViewChild } from '@angular/core';
-import {THttpClient} from 'UltraCreation/Core';
-import { TFileService } from 'services/file';
+import {Component, OnInit, ViewChild} from '@angular/core';
+import {TypeInfo} from 'UltraCreation/Core/TypeInfo';
 
 import * as Types from 'services/cloud/types';
+import {TFileService} from 'services/file';
 
 @Component({templateUrl: './index.html'})
 export class TensPage implements OnInit
