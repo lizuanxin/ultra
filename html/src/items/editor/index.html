@@ -20,9 +20,8 @@
                 <div class="col-md-8">
                     <div class="img-preview" id="image-2">
                         <ng-container *ngFor="let pic of Item.Pictures">
-                            <span>
-                                <img [src]="pic.Path">
-                                <div class="del" (click)="RemovePicture(pic)"></div>
+                            <span [style.background-image]="'url(' + pic.Path + ')'">
+                                <button class="btn btn-sm btn-danger del" (click)="RemovePicture(pic)">{{'button.del'|translate}}</button>
                             </span>
                         </ng-container>
                     </div>
