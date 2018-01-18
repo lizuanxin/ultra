@@ -8,16 +8,6 @@ export abstract class TBasicModalView
     {
     }
 
-    OnClosed(Data: any): void
-    {
-
-    }
-
-    OnDismiss(Data: any): void
-    {
-
-    }
-
     SetModalParams(params: any)
     {
     }
@@ -27,15 +17,15 @@ export abstract class TBasicModalView
         if (this.ModalRef)
             this.ModalRef.close(Result);
         else
-            this.OnClosed(Result);
+            console.log('close called.');
     }
 
     Dismiss(Reason: any)
     {
         if (this.ModalRef)
-            this.ModalRef.close(Reason);
+            this.ModalRef.dismiss(Reason);
         else
-            this.OnDismiss(Reason);
+            console.log('dismiss called.');
     }
 
     get IsModal(): boolean
@@ -43,6 +33,5 @@ export abstract class TBasicModalView
         return TypeInfo.Assigned(this.ModalRef);
     }
 
-    App = window.App;
     ModalRef: any = null;
 }
