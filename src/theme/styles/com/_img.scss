@@ -1,58 +1,76 @@
-img{
-    &[rd-out-line]{
-        border-radius:50%;
-        border:solid 1px #efefef;
-        background-color:#f4f4f4;
-        padding:10px;
+img {
+    &[rd-out-line] {
+        border-radius: 50%;
+        border: solid 1px #efefef;
+        background-color: #f4f4f4;
+        padding: 10px;
     }
-    &[out-line]{
-        border:solid 1px #efefef;
-        background-color:#f4f4f4;
-        padding:10px;
+    &[out-line] {
+        border: solid 1px #efefef;
+        background-color: #f4f4f4;
+        padding: 10px;
     }
 }
-.img-preview,.img-container{
-    div.del{
+
+.img-preview,
+.img-container {
+    div.del {
         z-index: 1;
         position: absolute;
         width: 24px;
-        height:24px;
+        height: 24px;
         border-radius: 50%;
-        background-color: $red;;
-        right:-10px;
-        top:-10px;
-        font-size:1.6rem;
+        background-color: $red;
+        ;
+        right: -10px;
+        top: -10px;
+        font-size: 1.6rem;
         display: inline-flex;
         justify-content: center;
         align-items: center;
         transform: rotate(45deg);
         color: $white;
-        &:before{
+        &:before {
             font-family: 'iconfont';
             content: "\f102"
         }
     }
 }
-.img-preview{
-    display: inline-block;
-    span{
-        display: inline-block;
-        position: relative;
-    }
-    img{
-        width:80px;
-        height:80px;
-        margin-right:10px;
-    }
 
+.img-preview {
+    display: inline-block;
+    span {
+        position: relative;
+        display: inline-flex;
+        flex-direction: column;
+        justify-content: center;
+        text-align: center;
+        width: 80px;
+        height: 80px;
+        margin-right: 10px;
+        background-position: center center;
+        background-repeat: no-repeat;
+        background-size: contain;
+        &:hover{
+            button.del{
+                visibility: visible;
+            }
+        }
+        button{
+            display: inline-block;
+            visibility: hidden;
+            margin: auto 15px;
+            flex: 0 0 auto;
+        }
+    }
 }
 
-.img-container{
+.img-container {
     position: relative;
     display: flex;
     justify-content: center;
     align-items: center;
-    width:100%;
+    width: 100%;
     padding-top: 50%;
     padding-bottom: 50%;
     height: 0;
@@ -62,24 +80,23 @@ img{
     background-size: contain;
     background-position: center center;
     border-radius: 5px;
-    button.add{
+    button.add {
         background-color: transparent;
-        font-size:3rem;
+        font-size: 3rem;
         color: $blue;
     }
-
 }
 
-.package{
-    position:absolute;
+.package {
+    position: absolute;
     top: 0;
     right: 0;
     width: 0;
     height: 0;
     border-top: 30px solid $pink;
     border-left: 30px solid transparent;
-    &:before{
-        position:absolute;
+    &:before {
+        position: absolute;
         transform: rotate(45deg);
         top: -33px;
         right: 0;
