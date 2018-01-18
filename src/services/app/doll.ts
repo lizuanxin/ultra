@@ -26,9 +26,7 @@ export class TDollService
     SaveServer(Srv: Types.Doll.IStreamServer): Promise<Types.Doll.IStreamServer>
     {
         this.Auth.Grant(this.Http);
-
-        if (TypeInfo.Assigned(Srv.Id))
-        return this.Http.Post('/streamsrv/append', Srv).toPromise().then(res => res.Content);
+        return this.Http.Put('/streamsrv/store', Srv).toPromise().then(res => res.Content);
     }
 
     RoomList(): Promise<Array<Types.Doll.IRoom>>

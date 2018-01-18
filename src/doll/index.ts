@@ -19,7 +19,7 @@ const routes: Routes = [
         data: {LangId: 'doll', Icon: '&#xe907;', Role: ''},
 
         children: [
-            {path: 'stream', component: TStreamServerComponent, data: {LangId: 'stream', Role: ''}},
+            {path: 'stream', component: TStreamServerComponent, data: {LangId: 'streamsrv', Role: ''}},
             /// ...
             {path: 'room', component: DollRoomComponent, data: {LangId: 'room', Role: ''}},
             {path: '', redirectTo: 'room'}
