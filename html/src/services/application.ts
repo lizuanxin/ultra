@@ -4,7 +4,7 @@ import {TranslateService} from '@ngx-translate/core';
 
 import {TypeInfo} from 'UltraCreation/Core/TypeInfo';
 import {Platform} from 'UltraCreation/Core/Platform';
-import {NgbModal, NgbTooltipConfig, NgbModalOptions, NgbModalRef} from '@ng-bootstrap/ng-bootstrap';
+import {NgbModal, NgbModalOptions, NgbModalRef} from '../modal/modal.module';
 
 import {TShoppingCart} from './shopping_cart';
 

@@ -3,7 +3,6 @@ import {HttpClientModule, HttpClient} from '@angular/common/http';
 
 import {TranslateModule, TranslateLoader} from '@ngx-translate/core';
 import {TranslateHttpLoader} from '@ngx-translate/http-loader';
-import {NgbModule} from '@ng-bootstrap/ng-bootstrap';
 
 import {TApplication} from './application';
 import {TAuthService} from './authorize';
@@ -12,6 +11,8 @@ import {TFileService} from './file';
 import {TReceiptService} from 'services/receipt';
 
 import {TShoppingCart} from './shopping_cart';
+
+import { NgxModule } from 'share/ngx.module';
 
 // AoT requires an exported function for factories
 export function HttpLoaderFactory(http: HttpClient)
@@ -22,13 +23,13 @@ export function HttpLoaderFactory(http: HttpClient)
 @NgModule({
     imports: [
         HttpClientModule,
-        NgbModule.forRoot(),
+        NgxModule.forRoot(),
         TranslateModule.forRoot({loader: {provide: TranslateLoader, useFactory: HttpLoaderFactory, deps: [HttpClient]}}),
     ],
     exports: [
         HttpClientModule,
         TranslateModule,
-        NgbModule
+        NgxModule
     ],
     providers: [
         TApplication, TAuthService, TItemService, TShoppingCart, TFileService, TReceiptService

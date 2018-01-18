@@ -18,6 +18,7 @@ import {TabsModule} from 'ngx-bootstrap/tabs';
 // import {TimepickerModule} from 'ngx-bootstrap/timepicker';
 import {TooltipModule} from 'ngx-bootstrap/tooltip';
 import {TypeaheadModule} from 'ngx-bootstrap/typeahead';
+import { NgbModalModule } from 'modal/modal.module';
 
 const MODULE =
 [
@@ -29,6 +30,7 @@ const MODULE =
     // BsDatepickerModule,
     BsDropdownModule,
     ModalModule,
+    NgbModalModule,
     PaginationModule,
     PopoverModule,
     ProgressbarModule,
@@ -50,6 +52,7 @@ const MODULE =
         // BsDatepickerModule.forRoot(),
         BsDropdownModule.forRoot(),
         ModalModule.forRoot(),
+        NgbModalModule.forRoot(),
         PaginationModule.forRoot(),
         PopoverModule.forRoot(),
         ProgressbarModule.forRoot(),
