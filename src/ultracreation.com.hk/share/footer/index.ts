@@ -21,18 +21,15 @@ export class FooterComponent implements OnInit {
     {
         const timer = setInterval(() =>
         {
-            if (n > 0)
-            {
-                if (n < 100)
-                    n = 0;
-                else
-                    n = n - 100;
+            if (n < 100)
+                n = 0;
+            else
+                n = n - 100;
 
-                this.document.documentElement.scrollTo({top: n});
-                if (n === 0)
-                {
-                    clearInterval(timer);
-                }
+            this.document.documentElement.scrollTo({top: n});
+            if (n === 0)
+            {
+                clearInterval(timer);
             }
         }, 10);
     }

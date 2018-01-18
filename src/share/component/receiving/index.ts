@@ -3,8 +3,6 @@ import {Observable} from 'rxjs/Observable';
 import 'rxjs/add/operator/map';
 import 'rxjs/add/operator/debounceTime';
 import 'rxjs/add/operator/distinctUntilChanged';
-import {NgbTypeaheadSelectItemEvent} from '@ng-bootstrap/ng-bootstrap';
-
 import {Component, OnInit, Input, ViewChild} from '@angular/core';
 import {TypeInfo} from 'UltraCreation/Core/TypeInfo';
 import {THttpClient} from 'UltraCreation/Core/Http';
@@ -121,7 +119,7 @@ export class ReceivingComponent implements OnInit
             .catch(err => console.log(err));
     }
 
-    SelectCountry(Country: NgbTypeaheadSelectItemEvent): void
+    SelectCountry(Country: any): void
     {
         this.RefreshCityList(Country.item);
     }

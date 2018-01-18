@@ -132,13 +132,13 @@
             <div class="form-group row">
                 <label class="col-3 col-form-label" text-right text-nowrap text-gray-light>{{'profile.delivery.country'|translate}}：</label>
                 <div class="col-9">
-                    <input type="text" class="form-control" formControlName="Country" [ngbTypeahead]="SearchCountry" [(ngModel)]="ModalAddress.Country" (input)="OnCountryInput($event)" (selectItem)="SelectCountry($event)" required>
+                    <input type="text" class="form-control" formControlName="Country" [typeahead]="SearchCountry" [(ngModel)]="ModalAddress.Country" (input)="OnCountryInput($event)" (selectItem)="SelectCountry($event)" required>
                 </div>
             </div>
             <div class="form-group row">
                 <label class="col-3 col-form-label" text-right text-nowrap text-gray-light>{{'profile.delivery.city'|translate}}：</label>
                 <div class="col-9">
-                    <input type="text" class="form-control" formControlName="City" [ngbTypeahead]="SearchCity" [(ngModel)]="ModalAddress.City" required>
+                    <input type="text" class="form-control" formControlName="City" [typeahead]="SearchCity" [(ngModel)]="ModalAddress.City" required>
                 </div>
             </div>
             <div class="form-group row">
