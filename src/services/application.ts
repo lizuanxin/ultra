@@ -25,6 +25,8 @@ declare global
 @Injectable()
 export class TApplication
 {
+    IsMinScreen = false;
+
     constructor(Injector: Injector)
     {
         console.log('TApplication construct');

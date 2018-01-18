@@ -12,13 +12,6 @@ import {TItemSelectorComponent} from 'items/list/selector';
 @Component({selector: 'item-editor', templateUrl: './index.html'})
 export class TItemEditorComponent extends TBasicModalView implements OnInit
 {
-    constructor()
-    {
-        super();
-
-        this.ModalTitle = this.App.Translate('item.editor.title');
-    }
-
     SetModalParams(data: any) /**@override */
     {
         this.Regions = data.Regions;
