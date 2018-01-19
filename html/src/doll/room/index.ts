@@ -38,6 +38,10 @@ export class DollRoomComponent implements OnInit
         });
     }
 
+    NewRoom()
+    {
+    }
+
     OpenModal(content: HTMLTemplateElement, data?: Types.Doll.IRoom)
     {
         if (TypeInfo.Assigned(data))
@@ -70,7 +74,8 @@ export class DollRoomComponent implements OnInit
 
     }
 
-    RoomList = new Array<Types.Doll.IRoom>();
     DollList = new Array<Types.IPublished>();
+    RoomList = new Array<Types.Doll.IRoom>();
+
     RoomItem: Types.Doll.IRoom;
 }

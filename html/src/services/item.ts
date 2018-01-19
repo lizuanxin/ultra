@@ -6,6 +6,7 @@ import {TAssignable} from 'UltraCreation/Core/Persistable';
 import * as Types from './cloud/types';
 import {TAuthService} from './authorize';
 import {IItem, TItemTypeId, IProduct, IPackage, IProductInfo} from './cloud/types/item';
+import {DateUtils} from 'UltraCreation/Core/DateUtils';
 
 @Injectable()
 export class TItemService
@@ -248,6 +249,9 @@ class TItem extends TAssignable implements IItem
     protected AfterAssignProperties(): void /**@override */
     {
         super.AfterAssignProperties();
+
+        if (TypeInfo.IsString(this.Timestamp))
+            (this.Timestamp as Date) = DateUtils.FromISO8601(this.Timestamp);
     }
 
     private IndexOfPicture(f: Types.IPicture): number

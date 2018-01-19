@@ -54,7 +54,7 @@
                     <div class="package" *ngIf="item.IsPackage"></div>
                 </td>
                 <td>{{item.Name}}</td>
-                <td>{{item.Timestamp}}</td>
+                <td>{{item.Timestamp|date:'yyyy-MM-dd HH:mm'}}</td>
                 <td text-center>
                     <button class="btn btn-sm" (click)="Remove(item);$event.stopPropagation()">{{'button.del'|translate}}</button>
                 </td>
