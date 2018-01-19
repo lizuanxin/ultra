@@ -89,11 +89,7 @@ export class TItemListComponent implements OnInit
     private Refresh()
     {
         this.ItemService.List()
-            .then(list =>
-            {
-                this.Items = list;
-                console.log(list);
-            })
+            .then(list => this.Items = list)
             .catch(err => console.log(err));
     }
 
