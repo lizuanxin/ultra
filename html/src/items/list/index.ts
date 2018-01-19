@@ -11,15 +11,19 @@ import {DomainComponent} from 'share/component';
 @Component({selector: 'item-list', templateUrl: './index.html'})
 export class TItemListComponent implements OnInit
 {
-    constructor(private ItemSvc: TItemService)
+    constructor(private ItemService: TItemService)
     {
         this.Items = [];
     }
 
     ngOnInit()
     {
-        this.ItemSvc.Regions()
+        this.ItemService.Regions()
             .then(list => this.Regions = list)
+            .catch(err => console.log(err));
+
+        this.ItemService.Domains()
+            .then(list => this.Domains = list)
             .catch(err => console.log(err));
 
         this.Refresh();
@@ -27,13 +31,13 @@ export class TItemListComponent implements OnInit
 
     CreateNewProduct()
     {
-        this.ItemSvc.CreateProduct()
+        this.ItemService.CreateProduct()
             .then(product => this.OpenModal(product));
     }
 
     CreateNewPackage()
     {
-        this.ItemSvc.CreatePackage(Array.from(this.Selected.values()))
+        this.ItemService.CreatePackage(Array.from(this.Selected.values()))
             .then(pkg => this.OpenModal(pkg));
     }
 
@@ -44,7 +48,7 @@ export class TItemListComponent implements OnInit
 
     Remove(item: Types.IItem): void
     {
-        this.ItemSvc.Remove(item)
+        this.ItemService.Remove(item)
             .then(() => this.Refresh())
             .catch((err) => console.log(err));
     }
@@ -56,7 +60,7 @@ export class TItemListComponent implements OnInit
         if (TypeInfo.Assigned(Domains))
         {
             for (const Domain of Domains)
-                await this.ItemSvc.Publish(Domain.Id, Array.from(this.Selected.values()));
+                await this.ItemService.Publish(Domain.Id, Array.from(this.Selected.values()));
         }
     }
 
@@ -83,7 +87,7 @@ export class TItemListComponent implements OnInit
 
     private Refresh()
     {
-        this.ItemSvc.List()
+        this.ItemService.List()
             .then(list => this.Items = list)
             .catch(err => console.log(err));
     }
@@ -96,7 +100,7 @@ export class TItemListComponent implements OnInit
                 if (! TypeInfo.Assigned(RetVal))
                     return;
 
-                this.ItemSvc.Save(RetVal)
+                this.ItemService.Save(RetVal)
                     .then(() => this.Refresh())
                     .catch((err) => console.log(err));
             })
@@ -112,6 +116,8 @@ export class TItemListComponent implements OnInit
     App = window.App;
 
     Regions: Array<Types.IRegion>;
+    Domains: Array<Types.IDomain>;
+
     Items: Array<Types.IItem>;
     Selected = new Set<Types.IItem>();
 }
