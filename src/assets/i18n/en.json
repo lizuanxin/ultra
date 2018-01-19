@@ -106,6 +106,7 @@
         "avatar": "Avatar",
         "pictures": "Thumbnail",
         "timestamp": "Updated",
+        "action": "Action",
         "region": "Region",
         "retail": "Retail",
         "bulk": "Buck",
@@ -137,7 +138,8 @@
             "title": "Room Administration",
             "name": "Name",
             "device_id": "Device Id",
-            "coin": "Coins"
+            "coin": "Coins",
+            "action": "Action"
         }
     }
 }

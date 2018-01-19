@@ -27,6 +27,7 @@ export class TItemListComponent implements OnInit
             .catch(err => console.log(err));
 
         this.Refresh();
+
     }
 
     CreateNewProduct()
@@ -88,7 +89,11 @@ export class TItemListComponent implements OnInit
     private Refresh()
     {
         this.ItemService.List()
-            .then(list => this.Items = list)
+            .then(list =>
+            {
+                this.Items = list;
+                console.log(list);
+            })
             .catch(err => console.log(err));
     }
 

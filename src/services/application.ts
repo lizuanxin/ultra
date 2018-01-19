@@ -1,4 +1,5 @@
 import {Injectable, Injector, TemplateRef, ReflectiveInjector} from '@angular/core';
+
 import {Router} from '@angular/router';
 import {TranslateService} from '@ngx-translate/core';
 
@@ -90,6 +91,11 @@ export class TApplication
     {
         this.Translation.use(Value);
     }
+
+    transformDate(date) {
+        this.DateTrans.transform(date, 'yyyy-MM-dd');
+    }
+
 
     Translate(Key: string | string[]): any
     {

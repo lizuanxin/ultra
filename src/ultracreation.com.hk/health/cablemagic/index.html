@@ -201,10 +201,12 @@
             the body to produce endorphins, relieve pain;</p>
         <ul class="row">
             <li class="col-md-4 app-model">
-
+                    <video src="assets/video/one_hd.mp4" height="220" autoplay="autoplay" controls="controls">
+                        your browser does not support the video tag
+                    </video>
             </li>
             <li class="col-md-8" style="height:100px">
-                <swiper swiper-piker #FileSwiper [Config]="{pagination: '.swiper-pagination', paginationType: 'progress', slidesPerView: 2}">
+                <swiper swiper-piker #FileSwiper (OnSlideChanged)="ActiveIndex" [Config]="{pagination: '.swiper-pagination', loop: true, paginationType: 'progress', slidesPerView: 3}">
                     <div class="swiper-wrapper">
                         <div class="swiper-slide">
                             1
@@ -214,6 +216,9 @@
                         </div>
                         <div class="swiper-slide">
                             3
+                        </div>
+                        <div class="swiper-slide">
+                            4
                         </div>
                     </div>
                     <div class="swiper-pagination"></div>
