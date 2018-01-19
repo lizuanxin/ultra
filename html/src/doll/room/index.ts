@@ -11,13 +11,24 @@ import {TItemSelectorComponent} from 'items/list/selector';
 @Component({selector: 'doll-room', templateUrl: './index.html', providers: [TDollService]})
 export class DollRoomComponent implements OnInit
 {
-    constructor(private ItemSvc: TItemService, private DollSvc: TDollService)
+    constructor(private ItemService: TItemService, private DollService: TDollService)
     {
     }
 
     ngOnInit()
     {
-        this.DollSvc.RoomList().then(list =>
+        this.ItemService.Published().then(list =>
+        {
+            this.DollList = list;
+            console.log(list);
+        });
+
+        this.Refresh();
+    }
+
+    Refresh()
+    {
+        this.DollService.RoomList().then(list =>
         {
             this.RoomList = list;
 
@@ -25,21 +36,10 @@ export class DollRoomComponent implements OnInit
             {
             }
         });
-
-        this.ItemSvc.Published().then(list =>
-        {
-            this.DollList = list;
-            console.log(list);
-        });
-    }
-
-    Refresh()
-    {
     }
 
     OpenModal(content: HTMLTemplateElement, data?: Types.Doll.IRoom)
     {
-        // let IsNewAdded: boolean = false;
         if (TypeInfo.Assigned(data))
             this.RoomItem = data;
         else
