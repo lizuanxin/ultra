@@ -92,11 +92,6 @@ export class TApplication
         this.Translation.use(Value);
     }
 
-    transformDate(date) {
-        this.DateTrans.transform(date, 'yyyy-MM-dd');
-    }
-
-
     Translate(Key: string | string[]): any
     {
         return this.Translation.instant(Key);
