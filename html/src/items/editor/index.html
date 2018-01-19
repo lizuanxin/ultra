@@ -70,6 +70,7 @@
                 </div>
             </div>
         </tab>
+<!-- product -->
         <tab heading="{{'item.editor.property'|translate}}" *ngIf="Item.IsProduct">
             <div class="row row-all align-items-center" m-t-30 padding>
                 <label text-gray-light text-nowrap text-right class="col-md-2">{{'item.model'|translate}}: </label>
@@ -131,9 +132,11 @@
                 </div>
 
         </tab>
+
         <tab heading="{{'item.editor.detail'|translate}}">
             <quill-editor class="form-control" [(ngModel)]="Item.Html" (ready)="OnQuillCreated($event)"></quill-editor>
         </tab>
+<!-- Package -->
         <tab heading="{{'item.editor.related'|translate}}" *ngIf="Item.IsPackage">
             <div class="associated" m-h-10 m-v-20>
                 <ul class="row" dnd-sortable-container [sortableData]="Item.ProductInfoList">
@@ -158,8 +161,8 @@
             </div>
         </tab>
     </tabset>
-
 </div>
+
 <div class="modal-footer">
     <button type="button" class="btn btn-default" (click)="Dismiss('close button')">{{'button.close'|translate}}</button>
     <button type="button" class="btn btn-primary" (click)="Close(Item)">{{'button.ok'|translate}}</button>

@@ -1,12 +1,14 @@
 import {Injectable} from '@angular/core';
+
 import {TypeInfo} from 'UltraCreation/Core/TypeInfo';
+import {DateUtils} from 'UltraCreation/Core/DateUtils';
 import {TRestClient} from 'UltraCreation/Core/Http';
 import {TAssignable} from 'UltraCreation/Core/Persistable';
+import {TBase64Encoding} from 'UltraCreation/Encoding/Base64';
 
 import * as Types from './cloud/types';
 import {TAuthService} from './authorize';
 import {IItem, TItemTypeId, IProduct, IPackage, IProductInfo} from './cloud/types/item';
-import {DateUtils} from 'UltraCreation/Core/DateUtils';
 
 @Injectable()
 export class TItemService
@@ -146,6 +148,7 @@ export class TItemService
     {
         let NewItem: TItem;
 
+        console.log(item);
         if (item.TypeId === Types.TItemTypeId.Package)
             NewItem = new TPackage();
         else
@@ -246,14 +249,6 @@ class TItem extends TAssignable implements IItem
             this.PricingList.splice(Idx, 1);
     }
 
-    protected AfterAssignProperties(): void /**@override */
-    {
-        super.AfterAssignProperties();
-
-        if (TypeInfo.IsString(this.Timestamp))
-            (this.Timestamp as Date) = DateUtils.FromISO8601(this.Timestamp);
-    }
-
     private IndexOfPicture(f: Types.IPicture): number
     {
         for (let I = 0; I < this.Pictures.length; I ++)
@@ -299,25 +294,55 @@ class TItem extends TAssignable implements IItem
 
         const RetVal = Object.assign({}, this);
 
-        if (! TypeInfo.IsString(this.ExtraProp))
-            RetVal.ExtraProp = JSON.stringify(RetVal.ExtraProp);
-
+        RetVal.Html = TBase64Encoding.EncodeToString(this.Html);
+        RetVal.ExtraProp = TBase64Encoding.EncodeToString(JSON.stringify(RetVal.ExtraProp));
         RetVal.Pictures = RetVal.Pictures.map(iter => (iter as Types.IPicture).Id);
+
         return RetVal;
     }
 
-    Id: Types.TIdentify = null;
-    Category_Id: string = null;
+    protected AfterAssignProperties(): void /**@override */
+    {
+        super.AfterAssignProperties();
 
-    Name: string = '';
-    AvatarUrl: string = null;
-    Html: string = null;
-    ExtraProp: any | TypeInfo.TKeyValueHash<string> = {};
+        if (TypeInfo.Assigned(this.Html))
+        try
+        {
+            this.Html = TBase64Encoding.DecodeToString(this.Html);
+        }
+        catch (e)
+        {
+            delete this.Html;
+            console.warn(e);
+        }
+
+        if (TypeInfo.Assigned(this.ExtraProp))
+        try
+        {
+            this.ExtraProp = JSON.parse(TBase64Encoding.DecodeToString(this.ExtraProp as string));
+        }
+        catch (e)
+        {
+            this.ExtraProp = {};
+            console.warn(e);
+        }
+
+        if (TypeInfo.IsString(this.Timestamp))
+            (this.Timestamp as Date) = DateUtils.FromISO8601(this.Timestamp);
+    }
+
+    Id: Types.TIdentify;
+    Category_Id: string;
+
+    Name: string;
+    AvatarUrl: string;
+    Html: string;
 
     Pictures: Array<Types.IPicture | Types.TIdentify> = [];
     PricingList: Array<Types.ILocalizedPricing> = [];
 
-    readonly Timestamp: Date;
+    ExtraProp: TypeInfo.TKeyValueHash<string> | string = {};
+    readonly Timestamp: Date = new Date();
 }
 
 /* TProduct */
