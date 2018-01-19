@@ -13,19 +13,35 @@
             </div>
         </div>
     </div>
-    <div class="list-room">
-        <ul class="row">
-            <li class="col-2">
-                <div class="item-room" (click)="OpenModal(contentroom)">
-                    <span>name</span>
-                </div>
-            </li>
-            <li class="col-2">
-                <div class="item-room">
-                    <span>name</span>
-                </div>
-            </li>
-        </ul>
+    <div class="table-responsive" margin-vertical>
+        <table class="table table-bordered">
+            <thead>
+                <tr>
+                    <th width="2%" text-center>
+                        <input type="checkbox" >
+                    </th>
+                    <th>{{'doll.room.name'|translate}}</th>
+                    <th width="20%" text-center>{{'doll.room.device_id'|translate}}</th>
+                    <th width="12%" text-center>{{'doll.room.coin'|translate}}</th>
+                    <th width="15%" text-center>{{'doll.room.action'|translate}}</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td text-center>
+                        <input type="checkbox">
+                    </td>
+                    <td class="position-relative">
+
+                    </td>
+                    <td></td>
+                    <td></td>
+                    <td text-center>
+                        <button class="btn btn-sm">{{'button.del'|translate}}</button>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
     </div>
 </div>
 

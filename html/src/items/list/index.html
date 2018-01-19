@@ -39,8 +39,9 @@
                     <input type="checkbox" [ngModel]="IsSelectedAll" (ngModelChange)="ToggleSelectAll()">
                 </th>
                 <th width="5%">{{'item.avatar'|translate}}</th>
-                <th width="15%">{{'item.name'|translate}}</th>
-                <th width="12%" text-center>{{'item.timestamp'|translate}}</th>
+                <th width="20%">{{'item.name'|translate}}</th>
+                <th  text-center>{{'item.timestamp'|translate}}</th>
+                <th width="15%" text-center>{{'item.action'|translate}}</th>
             </tr>
         </thead>
         <tbody>
@@ -49,10 +50,11 @@
                     <input type="checkbox" [ngModel]="Selected.has(item)" (ngModelChange)="SelectionChanged($event, item)">
                 </td>
                 <td class="position-relative">
-                    <img width="60" height="60" src="{{item.AvatarUrl}}">
+                    <img width="60" height="60" src="{{item.AvatarUrl === null ? 'assets/images/pic-sm-empty.gif' : item.AvatarUrl}}">
                     <div class="package" *ngIf="item.IsPackage"></div>
                 </td>
                 <td>{{item.Name}}</td>
+                <td>{{item.Timestamp}}</td>
                 <td text-center>
                     <button class="btn btn-sm" (click)="Remove(item);$event.stopPropagation()">{{'button.del'|translate}}</button>
                 </td>
