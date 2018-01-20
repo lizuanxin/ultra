@@ -80,6 +80,9 @@ img {
     background-size: contain;
     background-position: center center;
     border-radius: 5px;
+    &.transparent{
+        background-color: transparent;
+    }
     button.add {
         background-color: transparent;
         font-size: 3rem;
