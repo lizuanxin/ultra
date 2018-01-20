@@ -118,7 +118,8 @@ export class TItemService
     {
         if (TypeInfo.Assigned(Domain_Id))
         {
-            console.log('list domain items');
+            const Ary: Types.IPublished[] = await this.Http.Get('/publish/', {Domain_Id: 'kktYWb9kklZYlL8k'}).toPromise().then((res) => res.Content);
+            return Ary;
         }
         else
         {
@@ -127,10 +128,9 @@ export class TItemService
                 await this.Domains();
                 await this.List();
 
-                const Ary: Types.IPublished[] =
-                    await this.Http.Get('/publish/', {Domain_Id: 'kktYWb9kklZYlL8k'}).toPromise().then((res) => res.Content);
-                this.PublishedSnap = new Map<Types.TIdentify, Types.IPublished>();
+                const Ary: Types.IPublished[] = await this.Http.Get('/publish/listmy').toPromise().then((res) => res.Content);
 
+                this.PublishedSnap = new Map<Types.TIdentify, Types.IPublished>();
                 for (const Iter of Ary)
                 {
                     Iter.Item = this.ItemsSnap.get(Iter.Item as Types.TIdentify);
@@ -138,9 +138,8 @@ export class TItemService
 
                     this.PublishedSnap.set(Iter.Id, Iter);
                 }
+                return Array.from(this.PublishedSnap.values());
             }
-
-            return Array.from(this.PublishedSnap.values());
         }
     }
 

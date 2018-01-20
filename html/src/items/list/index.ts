@@ -54,15 +54,10 @@ export class TItemListComponent implements OnInit
             .catch((err) => console.log(err));
     }
 
-    async Publish()
+    Publish(domain: Types.IDomain)
     {
-        const Domains = await App.ShowModal(DomainComponent, {}, {size: 'lg'});
-
-        if (TypeInfo.Assigned(Domains))
-        {
-            for (const Domain of Domains)
-                await this.ItemService.Publish(Domain.Id, Array.from(this.Selected.values()));
-        }
+        console.log(domain);
+        return this.ItemService.Publish(domain.Id, Array.from(this.Selected.values()));
     }
 
     ToggleSelectAll()

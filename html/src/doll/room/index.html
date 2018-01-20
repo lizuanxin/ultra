@@ -6,7 +6,7 @@
     <div class="row" margin-bottom>
         <div class="col-md-6">
             <div class="d-inline-block">
-                <button class="btn btn-sm btn-primary" type="button" (click)="OpenModal(contentroom)">{{'button.add'|translate}}</button>
+                <button class="btn btn-sm btn-primary" type="button" (click)="OpenModal(content)">{{'button.add'|translate}}</button>
             </div>
             <div class="d-inline-block">
                 <button class="btn btn-sm btn-primary" type="button" (click)="Refresh()">{{'button.refresh'|translate}}</button>
@@ -17,9 +17,6 @@
         <table class="table table-bordered">
             <thead>
                 <tr>
-                    <th width="2%" text-center>
-                        <input type="checkbox" >
-                    </th>
                     <th>{{'doll.room.name'|translate}}</th>
                     <th width="20%" text-center>{{'doll.room.device_id'|translate}}</th>
                     <th width="12%" text-center>{{'doll.room.coin'|translate}}</th>
@@ -27,15 +24,10 @@
                 </tr>
             </thead>
             <tbody>
-                <tr>
-                    <td text-center>
-                        <input type="checkbox">
-                    </td>
-                    <td class="position-relative">
-
-                    </td>
-                    <td></td>
-                    <td></td>
+                <tr *ngFor="let room of RoomList" (click)="OpenModal(content, room)">
+                    <td class="position-relative">{{room.Name}}</td>
+                    <td>{{room.DeviceId}}</td>
+                    <td>{{room.Coins}}</td>
                     <td text-center>
                         <button class="btn btn-sm">{{'button.del'|translate}}</button>
                     </td>
@@ -55,13 +47,13 @@
     <div class="modal-body">
         <div class="row" align-items-center  m-t-30>
             <label text-gray-light text-nowrap text-right class="col-md-2">{{'doll.room.name'|translate}}：</label>
-            <div class="col-md-3"><input type="text" [(ngModel)]="RoomItem.Name" class="form-control"></div>
+            <div class="col-md-3"><input type="text" [(ngModel)]="Editing.Name" class="form-control"></div>
             <label text-gray-light text-nowrap text-right class="col-md-2">{{'doll.room.coin'|translate}}：</label>
-            <div class="col-md-3"><input type="text" [(ngModel)]="RoomItem.Coin" class="form-control"></div>
+            <div class="col-md-3"><input type="text" [(ngModel)]="Editing.Coin" class="form-control"></div>
         </div>
         <div class="row" align-items-center  m-t-30>
             <label text-gray-light text-nowrap text-right class="col-md-2">{{'doll.room.device_id'|translate}}：</label>
-            <div class="col-md-3"><input type="text" [(ngModel)]="RoomItem.DeviceId" class="form-control"></div>
+            <div class="col-md-3"><input type="text" [(ngModel)]="Editing.DeviceId" class="form-control"></div>
         </div>
         <div class="row" align-items-center  m-t-30>
         </div>
@@ -72,9 +64,9 @@
         <!-- <div class="row justify-content-md-center" align-items-center m-t-15>
             <label text-gray-light text-nowrap text-right class="col-md-2" for="member-name">{{'produce.public.pro_img'|translate}}：</label>
             <div class="col-md-8">
-                <div class="img-preview" id="image-2" *ngIf="RoomItem.Doll">
+                <div class="img-preview" id="image-2" *ngIf="Editing.Doll">
                     <span>
-                        <img [src]="RoomItem.Doll">
+                        <img [src]="Editing.Doll">
                         <button (click)="RemovePicture(Picture)"><i icon>&#xf14e;</i></button>
                     </span>
                 </div>
@@ -85,7 +77,7 @@
         </div> -->
     </div>
     <div class="modal-footer">
-            <button type="button" class="btn btn-default" (click)="c('Close click')" >{{'button.close'|translate}}</button>
-            <button type="button" class="btn btn-primary" (click)="ButtonOK()" >{{'button.ok'|translate}}</button>
+            <button type="button" class="btn btn-default" (click)="d('Close click')" >{{'button.close'|translate}}</button>
+            <button type="button" class="btn btn-primary" (click)="c()" >{{'button.ok'|translate}}</button>
     </div>
 </ng-template>

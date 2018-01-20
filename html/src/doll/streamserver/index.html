@@ -5,7 +5,7 @@
     <div class="row" margin-bottom>
         <div class="col-md-6">
             <div class="d-inline-block">
-                <button class="btn btn-sm btn-primary" type="button" (click)="NewServer(content)">{{'button.add'|translate}}</button>
+                <button class="btn btn-sm btn-primary" type="button" (click)="OpenModal(content)">{{'button.add'|translate}}</button>
             </div>
             <div class="d-inline-block">
                 <button class="btn btn-sm btn-primary" type="button" (click)="Refresh()">{{'button.refresh'|translate}}</button>
@@ -19,7 +19,7 @@
             <th>{{'doll.streamsrv.room_count'|translate}}</th>
         </thead>
         <tbody>
-            <tr *ngFor="let srv of ServerList" (click)="NewServer(content, srv)">
+            <tr *ngFor="let srv of ServerList" (click)="OpenModal(content, srv)">
                 <td>{{srv.URL}}</td>
                 <td>{{srv.params}}</td>
                 <td>{{srv.RoomCount}}</td>

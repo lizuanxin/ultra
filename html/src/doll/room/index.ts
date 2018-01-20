@@ -1,7 +1,7 @@
 import {Component, OnInit, TemplateRef } from '@angular/core';
-import {TypeInfo} from 'UltraCreation/Core/TypeInfo';
-import {THttpClient} from 'UltraCreation/Core/Http';
+import {NgbModal} from 'modal/modal';
 
+import {TypeInfo} from 'UltraCreation/Core/TypeInfo';
 import {Types} from 'services';
 import {TItemService} from 'services';
 import {TDollService} from 'services/app/doll';
@@ -11,7 +11,8 @@ import {TItemSelectorComponent} from 'items/list/selector';
 @Component({selector: 'doll-room', templateUrl: './index.html', providers: [TDollService]})
 export class DollRoomComponent implements OnInit
 {
-    constructor(private ItemService: TItemService, private DollService: TDollService)
+    constructor(private ItemService: TItemService, private DollService: TDollService,
+        private Modal: NgbModal)
     {
     }
 
@@ -38,44 +39,56 @@ export class DollRoomComponent implements OnInit
         });
     }
 
-    NewRoom()
+    OpenModal(content: HTMLTemplateElement, Room?: Types.Doll.IRoom)
     {
-    }
-
-    OpenModal(content: HTMLTemplateElement, data?: Types.Doll.IRoom)
-    {
-        if (TypeInfo.Assigned(data))
-            this.RoomItem = data;
+        if (TypeInfo.Assigned(Room))
+            this.Editing = Object.assign({}, Room);
         else
-            this.RoomItem = new Object() as Types.Doll.IRoom;
+            this.Editing = this.DollService.RoomCreate();
 
-        App.ShowModal(content, this.RoomItem, {size: 'lg'})
-            .then()
-            .catch((err) => console.log(err));
+
+        this.Modal.open(content).result
+            .then(async RetVal =>
+            {
+                RetVal = await this.DollService.RoomStore(this.Editing);
+                this.Editing = null;
+
+                for (let I = 0; I < this.RoomList.length; I ++)
+                {
+                    const Room = this.RoomList[I];
+                    if (Room.Id === RetVal.Id)
+                    {
+                        this.RoomList[I] = RetVal;
+                        return;
+                    }
+                }
+                this.RoomList.push(RetVal);
+            })
+            .catch(err =>
+            {
+                this.Editing = null;
+
+                if (err instanceof Error)
+                    App.ShowError(err);
+                else
+                    console.log(err);
+            });
     }
 
     OpenItemList()
     {
+        /*
         App.ShowModal(TItemSelectorComponent, {}, {size: 'lg'})
         .then((SelectedItems) =>
         {
             this.RoomItem.Doll = SelectedItems[0].AvatarUrl;
 
         });
-    }
-
-    RemovePicture(Picture)
-    {
-        this.RoomItem.Doll = null;
-    }
-
-    ButtonOK()
-    {
-
+        */
     }
 
     DollList = new Array<Types.IPublished>();
     RoomList = new Array<Types.Doll.IRoom>();
 
-    RoomItem: Types.Doll.IRoom;
+    Editing: Types.Doll.IRoom;
 }
