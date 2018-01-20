@@ -50,8 +50,9 @@
                     <input type="checkbox" [ngModel]="IsSelectedAll" (ngModelChange)="ToggleSelectAll()">
                 </th>
                 <th width="15%" text-center>{{'item.avatar'|translate}}</th>
-                <th width="50%">{{'item.name'|translate}}</th>
-                <th  text-center>{{'item.timestamp'|translate}}</th>
+                <th width="40%">{{'item.name'|translate}}</th>
+                <th width="15%"  text-center>{{'item.timestamp'|translate}}</th>
+                <th width="13%" text-center>{{'item.pubstatus'|translate}}</th>
                 <th width="15%" text-center>{{'item.action'|translate}}</th>
             </tr>
         </thead>
@@ -66,6 +67,9 @@
                 </td>
                 <td class="align-middle">{{item.Name}}</td>
                 <td class="align-middle">{{item.Timestamp|date:'yyyy-MM-dd HH:mm'}}</td>
+                <td class="align-middle">
+
+                </td>
                 <td class="align-middle" text-center>
                     <button class="btn btn-sm" (click)="Remove(item);$event.stopPropagation()">{{'button.del'|translate}}</button>
                 </td>

@@ -107,6 +107,7 @@
         "avatar": "Avatar",
         "pictures": "Thumbnail",
         "timestamp": "Updated",
+        "pubstatus": "status",
         "action": "Action",
         "region": "Region",
         "retail": "Retail",

@@ -36,8 +36,8 @@
                 <h5 class="card-header">{{'item.editor.pricing'|translate}}</h5>
                 <div class="card-body">
                     <div class="row row-all align-items-center">
-                        <label text-gray-light text-nowrap text-right class="col-md-2">{{'item.region'|translate}}: </label>
-                        <div class="col-md-4">
+                        <label text-gray-light text-nowrap  class="col-md-1">{{'item.region'|translate}}: </label>
+                        <div class="col-md-5">
                             <div class="btn-group" dropdown>
                                 <button dropdownToggle type="button" class="form-control dropdown-toggle">
                                     {{CurrPricing.Region}}
@@ -52,19 +52,19 @@
                         </div>
                         <label text-gray-light text-nowrap text-right class="col-md-2">{{'item.retail'|translate}}: </label>
                         <div class="col-md-4">
-                            <input type="text" class="form-control" min="1" [(ngModel)]="CurrPricing.Retail">
+                            <input type="number" class="form-control" step="0.01" min="1" [(ngModel)]="CurrPricing.Retail">
                         </div>
-                        <label text-gray-light text-nowrap text-right class="col-md-2">{{'item.bulk'|translate}}: </label>
+                        <label text-gray-light text-nowrap  class="col-md-1">{{'item.bulk'|translate}}: </label>
                         <div class="col-md-4">
-                            <input type="text" class="form-control" min="0" [(ngModel)]="CurrPricing.Bulk">
+                            <input type="number" class="form-control" step="0.01" min="0" [(ngModel)]="CurrPricing.Bulk">
                         </div>
-                        <label text-gray-light text-nowrap text-right class="col-md-2">{{'item.bulkcount'|translate}}: </label>
+                        <label text-gray-light text-nowrap text-right class="col-md-2 offset-1">{{'item.bulkcount'|translate}}: </label>
                         <div class="col-md-4">
-                            <input type="text" class="form-control" min="0" [(ngModel)]="CurrPricing.BulkCount">
+                            <input type="number" class="form-control" min="0" step="500" [(ngModel)]="CurrPricing.BulkCount">
                         </div>
-                        <label text-gray-light text-nowrap text-right class="col-md-2">{{'item.distribute'|translate}}: </label>
+                        <label text-gray-light text-nowrap  class="col-md-1">{{'item.distribute'|translate}}: </label>
                         <div class="col-md-4">
-                            <input type="text" min="0" class="form-control" [(ngModel)]="CurrPricing.Distribute">
+                            <input type="number" min="0" step="0.01" class="form-control" [(ngModel)]="CurrPricing.Distribute">
                         </div>
                     </div>
                 </div>
@@ -73,28 +73,28 @@
 <!-- product -->
         <tab heading="{{'item.editor.property'|translate}}" *ngIf="Item.IsProduct">
             <div class="row row-all align-items-center" m-t-30 padding>
-                <label text-gray-light text-nowrap text-right class="col-md-2">{{'item.model'|translate}}: </label>
-                <div class="col-md-4">
+                <label text-gray-light text-nowrap text-right class="col-md-1">{{'item.model'|translate}}: </label>
+                <div class="col-md-5">
                     <input type="text" class="form-control" min="1" [(ngModel)]="Item.Model">
                 </div>
-                <label text-gray-light text-nowrap text-right class="col-md-2">{{'item.unit'|translate}}: </label>
-                <div class="col-md-4">
+                <label text-gray-light text-nowrap text-right class="col-md-1">{{'item.unit'|translate}}: </label>
+                <div class="col-md-5">
                     <input type="text" class="form-control" min="1" [(ngModel)]="Item.Unit">
                 </div>
-                <label text-gray-light text-nowrap text-right class="col-md-2">{{'item.width'|translate}}: </label>
-                <div class="col-md-4">
-                    <input type="text" class="form-control" min="1" [(ngModel)]="Item.Width">
+                <label text-gray-light text-nowrap text-right class="col-md-1">{{'item.width'|translate}}: </label>
+                <div class="col-md-5">
+                    <input type="number" class="form-control" min="1" [(ngModel)]="Item.Width">
                 </div>
-                <label text-gray-light text-nowrap text-right class="col-md-2">{{'item.height'|translate}}: </label>
-                <div class="col-md-4">
-                    <input type="text" class="form-control" min="1" [(ngModel)]="Item.Height">
+                <label text-gray-light text-nowrap text-right class="col-md-1">{{'item.height'|translate}}: </label>
+                <div class="col-md-5">
+                    <input type="number" class="form-control" min="1" [(ngModel)]="Item.Height">
                 </div>
-                <label text-gray-light text-nowrap text-right class="col-md-2">{{'item.depth'|translate}}: </label>
-                <div class="col-md-4">
+                <label text-gray-light text-nowrap text-right class="col-md-1">{{'item.depth'|translate}}: </label>
+                <div class="col-md-5">
                     <input type="text" class="form-control" min="1" [(ngModel)]="Item.Depth">
                 </div>
-                <label text-gray-light text-nowrap text-right class="col-md-2">{{'item.weight'|translate}}: </label>
-                <div class="col-md-4">
+                <label text-gray-light text-nowrap text-right class="col-md-1">{{'item.weight'|translate}}: </label>
+                <div class="col-md-5">
                     <input type="text" class="form-control" min="1" [(ngModel)]="Item.Weight">
                 </div>
             </div>
