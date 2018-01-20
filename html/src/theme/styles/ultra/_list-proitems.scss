@@ -1,0 +1,28 @@
+.list-pro-items {
+    h2 {
+        font-size: 16px;
+        text-align: center;
+        color: $gray-light;
+    }
+    .item-price {
+        display: flex;
+        justify-content: center;
+        span{
+            flex: 0 0 auto;
+            padding: 0 10px;
+            background-color: $pink;
+            color: $white;
+        }
+    }
+    p {
+        font-size: 14px;
+        text-align: center;
+    }
+    li {
+        border: solid 1px $gray-lighter;
+        border-right-color: transparent;
+        &:last-child {
+            border-right-color: $gray-lighter;
+        }
+    }
+}
