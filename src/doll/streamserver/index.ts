@@ -24,7 +24,7 @@ export class TStreamServerComponent implements OnInit
             this.ServerList = list);
     }
 
-    NewServer(content: HTMLTemplateElement, Srv?: Types.Doll.IStreamServer)
+    OpenModal(content: HTMLTemplateElement, Srv?: Types.Doll.IStreamServer)
     {
         if (TypeInfo.Assigned(Srv))
             this.Editing = Object.assign({}, Srv);

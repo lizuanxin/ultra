@@ -31,9 +31,12 @@
                 <span class="caret"></span>
             </button>
             <ul *dropdownMenu class="dropdown-menu dropdown-menu-right">
-                <ng-container *ngFor="let item of Domains; let i = index">
+                <ng-container *ngFor="let domain of Domains; let i = index">
                     <li role="menuitem" text-right>
-                        <a class="dropdown-item" href="javascript:void(0)"><img [src]="item.AvatarUrl">{{item.Name}}<button class="btn btn-sm btn-primary" m-l-10>{{'button.publish'|translate}}</button></a>
+                        <a class="dropdown-item" href="javascript:void(0)">
+                            <img [src]="domain.AvatarUrl">{{domain.Name}}
+                            <button class="btn btn-sm btn-primary" m-l-10 (click)="Publish(domain)">{{'button.publish'|translate}}</button>
+                        </a>
                     </li>
                     <li class="divider dropdown-divider" *ngIf="i !== Domains.length-1"></li>
                 </ng-container>

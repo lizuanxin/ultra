@@ -40,7 +40,7 @@ export class TDollService
         return Object.create({});
     }
 
-    RoomSave(Room: Types.Doll.IRoom): Promise<Types.Doll.IRoom>
+    RoomStore(Room: Types.Doll.IRoom): Promise<Types.Doll.IRoom>
     {
         this.Auth.Grant(this.Http);
         return this.Http.Put('/room/store', JSON.stringify(Room)).toPromise().then(res => res.Content);
