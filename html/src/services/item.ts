@@ -294,38 +294,13 @@ class TItem extends TAssignable implements IItem
 
         const RetVal = Object.assign({}, this);
 
-        RetVal.Html = TBase64Encoding.EncodeToString(this.Html);
-        RetVal.ExtraProp = TBase64Encoding.EncodeToString(JSON.stringify(RetVal.ExtraProp));
         RetVal.Pictures = RetVal.Pictures.map(iter => (iter as Types.IPicture).Id);
-
         return RetVal;
     }
 
     protected AfterAssignProperties(): void /**@override */
     {
         super.AfterAssignProperties();
-
-        if (TypeInfo.Assigned(this.Html))
-        try
-        {
-            this.Html = TBase64Encoding.DecodeToString(this.Html);
-        }
-        catch (e)
-        {
-            delete this.Html;
-            console.warn(e);
-        }
-
-        if (TypeInfo.Assigned(this.ExtraProp))
-        try
-        {
-            this.ExtraProp = JSON.parse(TBase64Encoding.DecodeToString(this.ExtraProp as string));
-        }
-        catch (e)
-        {
-            this.ExtraProp = {};
-            console.warn(e);
-        }
 
         if (TypeInfo.IsString(this.Timestamp))
             (this.Timestamp as Date) = DateUtils.FromISO8601(this.Timestamp);
@@ -341,7 +316,7 @@ class TItem extends TAssignable implements IItem
     Pictures: Array<Types.IPicture | Types.TIdentify> = [];
     PricingList: Array<Types.ILocalizedPricing> = [];
 
-    ExtraProp: TypeInfo.TKeyValueHash<string> | string = {};
+    ExtraProp: TypeInfo.TKeyValueHash<string> = {};
     readonly Timestamp: Date = new Date();
 }
 
