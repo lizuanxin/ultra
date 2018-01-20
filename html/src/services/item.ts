@@ -147,7 +147,6 @@ export class TItemService
     {
         let NewItem: TItem;
 
-        console.log(item);
         if (item.TypeId === Types.TItemTypeId.Package)
             NewItem = new TPackage();
         else
