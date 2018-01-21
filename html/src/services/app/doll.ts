@@ -32,7 +32,7 @@ export class TDollService
     RoomList(): Promise<Array<Types.Doll.IRoom>>
     {
         this.Auth.Grant(this.Http);
-        return this.Http.Get('/room').toPromise().then(res => res.Content);
+        return this.Http.Get('/room/listowner').toPromise().then(res => res.Content);
     }
 
     RoomCreate(): Types.Doll.IRoom
