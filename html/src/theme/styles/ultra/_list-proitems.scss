@@ -1,4 +1,5 @@
 .list-pro-items {
+
     h2 {
         font-size: 16px;
         text-align: center;
@@ -19,10 +20,11 @@
         text-align: center;
     }
     li {
-        border: solid 1px $gray-lighter;
-        border-right-color: transparent;
-        &:last-child {
-            border-right-color: $gray-lighter;
+        padding:0;
+        .border-clip{
+            margin:10px;
+            border: solid 1px $gray-lighter;
         }
     }
+
 }
