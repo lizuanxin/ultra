@@ -1,35 +1,26 @@
-.split-line
-{
-    height:1px;
-    margin:16px auto;
-    overflow: hidden;
-    text-align: center;
-    >span{
-        display: inline-flex;
-        justify-content: center;
+    .split-line {
         height: 1px;
-        background-color: $gray-lighter;
-
-        &.wid-150
-        {
-            width: 150px;
-        }
-
-        &.wid-300
-        {
-            width: 300px;
-        }
-
-        i
-        {
+        margin: 16px auto;
+        overflow: hidden;
+        text-align: center;
+        >span {
+            display: inline-flex;
+            justify-content: center;
             height: 1px;
-            width: 33%;
-            background-color: lighten($blue,20%);
-            &:after{
-                content: "i"
+            background-color: $gray-lighter;
+            &.wid-150 {
+                width: 150px;
+            }
+            &.wid-300 {
+                width: 300px;
+            }
+            i {
+                height: 1px;
+                width: 33%;
+                background-color: lighten($blue, 20%);
+                &:after {
+                    content: "i"
+                }
             }
         }
     }
-}
-
-
