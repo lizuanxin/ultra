@@ -185,6 +185,22 @@
     }
     .app-model{
         @extend .animate;
+        .crop{
+            z-index: 1;
+            position:absolute;
+            width: 240px;
+            height: 426px;
+            background-image: url(/assets/images/site/iPhone-X-Mockup.png);
+            background-size: cover;
+            background-repeat: no-repeat;
+        }
+        .video-clip{
+            display: inline-block;
+            overflow: hidden;
+            padding-left: 2px;
+            border-radius: 50px;
+        }
+
     }
 }
 
