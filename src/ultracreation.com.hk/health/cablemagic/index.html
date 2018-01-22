@@ -201,9 +201,12 @@
             the body to produce endorphins, relieve pain;</p>
         <ul class="row">
             <li class="col-md-4 app-model">
-                    <video src="assets/video/one_hd.mp4" height="220" autoplay="autoplay" controls="controls">
-                        your browser does not support the video tag
-                    </video>
+                    <div class="crop"></div>
+                    <div class="video-clip">
+                        <video src="assets/video/one_hd.mp4" width="236" height="420" autoplay="autoplay" loop>
+                            your browser does not support the video tag
+                        </video>
+                    </div>
             </li>
             <li class="col-md-8" style="height:100px">
                 <swiper swiper-piker #FileSwiper (OnSlideChanged)="ActiveIndex" [Config]="{pagination: '.swiper-pagination', loop: true, paginationType: 'progress', slidesPerView: 3}">
