@@ -21,15 +21,6 @@ export class TItemEditorComponent extends TBasicModalView implements OnInit
     ngOnInit()
     {
         this.CurrPricing = this.Item.GetPricing(this.Regions[0].Name, 0);
-
-        const _FormPriceControl = new FormControl('', [Validators.pattern(/^\d+(\.\d{2})?$/)]);
-        this.FormGroupPrice = new FormGroup({
-            Retail: _FormPriceControl,
-            BulkCount: _FormPriceControl,
-            Bulk: _FormPriceControl,
-            Distribute: _FormPriceControl
-        });
-
     }
 
     AddPicture()
@@ -77,6 +68,11 @@ export class TItemEditorComponent extends TBasicModalView implements OnInit
         */
     }
 
+    OnChange(e)
+    {
+       return e.target.value = parseFloat(parseFloat(e.target.value).toFixed(2));
+    }
+
     RemoveProduct(ProductInfo: Types.IProductInfo)
     {
         const Package = this.Item as Types.IPackage;
@@ -98,10 +94,11 @@ export class TItemEditorComponent extends TBasicModalView implements OnInit
     }
 
     CurrPricing: Types.ILocalizedPricing;
-    FormGroupPrice: FormGroup;
 
     @Input() Regions: Array<Types.IRegion>;
     @Input() Item: Types.IItem;
 
 
 }
+
+
