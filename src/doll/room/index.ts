@@ -47,7 +47,7 @@ export class DollRoomComponent implements OnInit
             this.Editing = this.DollService.RoomCreate();
 
 
-        this.Modal.open(content).result
+        this.Modal.open(content, {size: 'lg'}).result
             .then(async RetVal =>
             {
                 RetVal = await this.DollService.RoomStore(this.Editing);
