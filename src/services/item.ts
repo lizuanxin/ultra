@@ -4,7 +4,6 @@ import {TypeInfo} from 'UltraCreation/Core/TypeInfo';
 import {DateUtils} from 'UltraCreation/Core/DateUtils';
 import {TRestClient} from 'UltraCreation/Core/Http';
 import {TAssignable} from 'UltraCreation/Core/Persistable';
-import {TBase64Encoding} from 'UltraCreation/Encoding/Base64';
 
 import * as Types from './cloud/types';
 import {TAuthService} from './authorize';
