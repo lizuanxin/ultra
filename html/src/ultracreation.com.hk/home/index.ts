@@ -10,6 +10,7 @@ export class HomePage implements OnInit
     {
         this.Items = [];
     }
+
     ngOnInit()
     {
         const dom: any = document.querySelector('body');
@@ -26,6 +27,11 @@ export class HomePage implements OnInit
 
             })
             .catch(err => console.log(err));
+    }
+
+    OpenItem(item: Types.IPublished)
+    {
+
     }
 
     Items: Array<Types.IPublished>;
