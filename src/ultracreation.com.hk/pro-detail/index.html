@@ -1,0 +1,113 @@
+<div class="container" m-t-30>
+    <ul class="row justify-content-between" no-padding>
+        <li class="col-md-7">
+            <div class="gallery-top" style="background-image:url(assets/images/site/pro.jpg)">
+
+            </div>
+            <div class="gallery-thumbs">
+                <swiper #ThumbsSwiper [Config]="{spaceBetween: 10,
+                    slidesPerView: 'auto',
+                    touchRatio: 1,
+                    nextButton: '.swiper-button-next',
+                    prevButton: '.swiper-button-prev'}">
+                    <div class="swiper-wrapper">
+                        <div class="swiper-slide" [class.active]="CurrentIndex===i" (mouseover)="SlideClick(i)" *ngFor="let item of thumbs;let i=index" [ngStyle]="{background:'url(' + item.imgUrl + ')'}"></div>
+                    </div>
+                    <div class="swiper-button-next swiper-button-white"></div>
+                    <div class="swiper-button-prev swiper-button-white"></div>
+                </swiper>
+            </div>
+        </li>
+        <li class="col-md-4" margin-vertical>
+            <div padding-horizontal>
+                <h2>Thunderbolt</h2>
+                <p text-gray margin-vertical>USB cable/方贴/葫芦贴/ iphone头/type C头/电池包</p>
+                <p text-primary margin-vertical f-24>￥399.00</p>
+                <p margin-vertical f-16>&nbsp;</p>
+                <div class="row" justify-content-end>
+                    <div class="col-md-6">
+                        <div class="input-group" margin-bottom>
+                            <span class="input-group-addon" id="btnGroupAddon">-</span>
+                            <span class="form-control" text-center>1</span>
+                            <span class="input-group-addon" id="btnGroupAddon">+</span>
+                        </div>
+                        <button type="button" class="btn btn-primary btn-block" [routerLink]="['/order']" margin-vertical>Buy Now</button>
+                        <button type="button" class="btn btn-success btn-block" (click)="AddCart()">Add To Cart</button>
+                    </div>
+                </div>
+            </div>
+        </li>
+    </ul>
+
+    <div>
+        <ul class="nav nav-tabs justify-content-start" style="width:100%"  m-t-15>
+            <li class="nav-item">
+                <a class="nav-link active" f-18>
+                    产品描述
+                </a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" f-18>
+                    产品评价
+                </a>
+            </li>
+        </ul>
+        <div class="tabs-content">
+            <ul class="list-decimal">
+                <h2>包装内容</h2>
+                <li>
+                    1
+                </li>
+                <li>
+                    XX
+                </li>
+                <li>
+                   XXX
+                </li>
+            </ul>
+            <ul class="list-disc">
+                <h2>产品概述</h2>
+                <li>
+                    No extra battery required
+                </li>
+                <li>
+                    Easy to carry and use
+                </li>
+                <li>
+                   Three favorite program preloaded, also allow user to download their most used program to line control for easy access.
+                </li>
+            </ul>
+            <ul class="list-circle">
+                <h2>规范</h2>
+                <li>
+                    Size: 1.2m (±0.02m)
+                </li>
+                <li>
+                   Weight: 14g±2g
+                </li>
+                <li>
+                   Compatible with Android 4.3 or above and OTG function/IOS 8.0 or above, with Bluetooth 4.0(BLE)
+                </li>
+                <li>
+                    Pulse width range: 4-400us
+                </li>
+                <li>
+                    Output voltage range: 5-100Vpp±10%
+                </li>
+                <li>
+                    Output frequency range: 1-1200Hz±20%
+                </li>
+                <li>
+                    Input current: 10-50mA
+                </li>
+                <li>
+                    Wireless transmission frequency: 2402-2480MHz
+                </li>
+                <li>
+                    Wireless transmission power: 0 dB
+                </li>
+            </ul>
+        </div>
+
+    </div>
+</div>

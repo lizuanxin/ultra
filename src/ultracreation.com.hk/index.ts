@@ -19,6 +19,7 @@ import { AboutPage } from './about';
 import { ContactPage } from './contact';
 import { TeamsPage } from './teams';
 import { PrivacyPage } from './privacy';
+import { ProDetailPage } from './pro-detail';
 
 
 @Component({templateUrl: '../share/layout.domain.html'})
@@ -32,8 +33,8 @@ const routes: Routes = [
             {path: 'home', component: HomePage},
             {path: 'health', component: HealthPage},
             {path: 'health/cable', component: CableMagicPage},
-
             {path: 'detail/:id', component: DetailPage},
+            {path: 'pro-detail/:id', data: {}, component: ProDetailPage},
             {path: 'cart', component: CartPage},
             {path: 'tens', component: TensPage},
             {path: 'order', component: OrderInfoPage},
@@ -62,6 +63,7 @@ const routes: Routes = [
         CableMagicPage,
         HealthPage,
         DetailPage,
+        ProDetailPage,
         RelateComponent,
         CartPage,
         AboutPage,
