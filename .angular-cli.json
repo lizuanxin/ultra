@@ -23,6 +23,7 @@
             "theme/styles/app.scss"
         ],
         "scripts": [
+
         ],
         "environmentSource": "environments/environment.ts",
         "environments": {
