@@ -1,0 +1,12 @@
+.detail-spec{
+    color: $gray-light;
+    a{
+        display: inline-block;
+        margin-right: 5px;
+        padding: 2px 15px;
+        border: solid 1px $gray-lighter;
+        &.active{
+            border-color: $red;
+        }
+    }
+}
