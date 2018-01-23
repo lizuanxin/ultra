@@ -11,6 +11,7 @@ import {TReceiptService} from 'services/receipt';
 import {TShoppingCart} from './shopping_cart';
 
 import { NgxModule } from 'share/ngx.module';
+import { DOMAIN_CONFIG, DOMAIN_DI_CONFIG, TDomainService } from 'services/domain';
 
 // AoT requires an exported function for factories
 export function HttpLoaderFactory(http: HttpClient)
@@ -31,7 +32,7 @@ export function HttpLoaderFactory(http: HttpClient)
     ],
     providers: [
         TApplication, TAuthService, TItemService, TShoppingCart, TFileService, TReceiptService,
-        {provide: DOMAIN_CONFIG, useValue: DOMAIN_DI_CONFIG}
+        {provide: DOMAIN_CONFIG, useValue: DOMAIN_DI_CONFIG}, TDomainService
     ],
 })
 export class ServiceModule
@@ -41,5 +42,4 @@ export class ServiceModule
 export {TApplication, TAuthService, TItemService, TShoppingCart, TFileService, TReceiptService};
 
 import * as Types from './cloud/types';
-import { DOMAIN_CONFIG, DOMAIN_DI_CONFIG } from 'services/domain';
 export {Types};
