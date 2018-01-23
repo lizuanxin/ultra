@@ -11,6 +11,8 @@ const proData = [
     {imgUrl: 'assets/images/site/pro.jpg'},
     {imgUrl: 'assets/images/site/pro.jpg'},
     {imgUrl: 'assets/images/site/pro.jpg'},
+    {imgUrl: 'assets/images/site/pro.jpg'},
+    {imgUrl: 'assets/images/site/pro.jpg'},
 ];
 
 @Component({selector: 'app-productdetail-page', templateUrl: './index.html'})

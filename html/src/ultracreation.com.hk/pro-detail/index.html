@@ -13,8 +13,10 @@
                     <div class="swiper-wrapper">
                         <div class="swiper-slide" [class.active]="CurrentIndex===i" (mouseover)="SlideClick(i)" *ngFor="let item of thumbs;let i=index" [ngStyle]="{background:'url(' + item.imgUrl + ')'}"></div>
                     </div>
-                    <div class="swiper-button-next swiper-button-white"></div>
-                    <div class="swiper-button-prev swiper-button-white"></div>
+                    <ng-template [ngIf]="thumbs.length > 6">
+                        <div class="swiper-button-next swiper-button-white"></div>
+                        <div class="swiper-button-prev swiper-button-white"></div>
+                    </ng-template>
                 </swiper>
             </div>
         </li>
@@ -25,8 +27,13 @@
                 <p text-red margin-vertical f-24>￥399.00</p>
                 <p margin-vertical f-16>&nbsp;</p>
                 <div class="row" m-b-30>
-                    <div class="col-md-3" text-gray-light f-14>选择规格：</div>
-                    <div class="col-md-9"></div>
+                    <div class="col-auto" text-gray-light f-14>选择规格：</div>
+                    <div class="col-md-9">
+                        <span class="detail-spec">
+                            <a class="active">蓝</a>
+                            <a>红</a>
+                        </span>
+                    </div>
                 </div>
                 <div class="row" justify-content-end m-t-50>
                     <div class="col-md-3">
