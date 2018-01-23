@@ -5,6 +5,7 @@ import {TypeInfo} from 'UltraCreation/Core/TypeInfo';
 import {TAuthService} from 'services';
 import { log } from 'util';
 
+
 @Component({selector: 'site-navbar', templateUrl: './index.html'})
 
 export class SiteNavbarComponent implements OnInit
