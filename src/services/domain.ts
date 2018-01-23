@@ -1,5 +1,4 @@
-import {Injectable, Inject} from '@angular/core';
-import { InjectionToken } from '@angular/core/src/di/injection_token';
+import {Injectable, Inject, InjectionToken} from '@angular/core';
 
 import {TypeInfo} from 'UltraCreation/Core/TypeInfo';
 import {TRestClient} from 'UltraCreation/Core/Http';
@@ -8,13 +7,14 @@ import {TRestClient} from 'UltraCreation/Core/Http';
 import * as Types from './cloud/types';
 
 export const DOMAIN_CONFIG = new InjectionToken<IDomainConfig>('domain.config');
-export const DOMAIN_DI_CONFIG: IDomainConfig = {Id: ''};
+export const DOMAIN_DI_CONFIG: IDomainConfig = {Id: 'kktYWb9kklZYlL8k'};
 
 @Injectable()
 export class TDomainService
 {
     constructor(@Inject(DOMAIN_CONFIG) private Config: IDomainConfig)
     {
+        console.log('id ' + Config.Id);
     }
 
     List(): Promise<Array<Types.IPublished>>
