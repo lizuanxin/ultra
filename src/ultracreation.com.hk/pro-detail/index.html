@@ -1,12 +1,12 @@
 <div class="container" m-t-30>
-    <ul class="row justify-content-between" no-padding>
-        <li class="col-md-7">
+    <ul class="row justify-content-between">
+        <li class="col-md-6">
             <div class="gallery-top" style="background-image:url(assets/images/site/pro.jpg)">
 
             </div>
             <div class="gallery-thumbs">
                 <swiper #ThumbsSwiper [Config]="{spaceBetween: 10,
-                    slidesPerView: 'auto',
+                    slidesPerView: 6,
                     touchRatio: 1,
                     nextButton: '.swiper-button-next',
                     prevButton: '.swiper-button-prev'}">
@@ -18,20 +18,30 @@
                 </swiper>
             </div>
         </li>
-        <li class="col-md-4" margin-vertical>
+        <li class="col-md-6" margin-vertical>
             <div padding-horizontal>
                 <h2>Thunderbolt</h2>
                 <p text-gray margin-vertical>USB cable/方贴/葫芦贴/ iphone头/type C头/电池包</p>
-                <p text-primary margin-vertical f-24>￥399.00</p>
+                <p text-red margin-vertical f-24>￥399.00</p>
                 <p margin-vertical f-16>&nbsp;</p>
-                <div class="row" justify-content-end>
-                    <div class="col-md-6">
-                        <div class="input-group" margin-bottom>
+                <div class="row" m-b-30>
+                    <div class="col-md-3" text-gray-light f-14>选择规格：</div>
+                    <div class="col-md-9"></div>
+                </div>
+                <div class="row" justify-content-end m-t-50>
+                    <div class="col-md-3">
+                        <div class="input-group input-group-sm">
                             <span class="input-group-addon" id="btnGroupAddon">-</span>
-                            <span class="form-control" text-center>1</span>
+                            <span class="form-control justify-content-center">1</span>
                             <span class="input-group-addon" id="btnGroupAddon">+</span>
                         </div>
-                        <button type="button" class="btn btn-primary btn-block" [routerLink]="['/order']" margin-vertical>Buy Now</button>
+                    </div>
+                </div>
+                <div class="row" justify-content-end margin-top>
+                    <div class="col-md-3">
+                        <button type="button" class="btn btn-primary btn-block" [routerLink]="['/order']">Buy Now</button>
+                    </div>
+                    <div class="col-md-3">
                         <button type="button" class="btn btn-success btn-block" (click)="AddCart()">Add To Cart</button>
                     </div>
                 </div>
