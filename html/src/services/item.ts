@@ -117,7 +117,7 @@ export class TItemService
     {
         if (TypeInfo.Assigned(Domain_Id))
         {
-            const Ary: Types.IPublished[] = await this.Http.Get('/publish/', {Domain_Id: 'kktYWb9kklZYlL8k'}).toPromise().then((res) => res.Content);
+            const Ary: Types.IPublished[] = await this.Http.Get('/publish/', {Domain_Id: Domain_Id}).toPromise().then((res) => res.Content);
             return Ary;
         }
         else

@@ -31,7 +31,7 @@ export class TFileService
         return Array.from(this.FilesCache.values());
     }
 
-    GetFile(FileId: string): Types.IFile
+    GetCached(FileId: string): Types.IFile
     {
         if (TypeInfo.Assigned(this.FilesCache))
         {

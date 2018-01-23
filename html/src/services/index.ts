@@ -30,7 +30,8 @@ export function HttpLoaderFactory(http: HttpClient)
         NgxModule
     ],
     providers: [
-        TApplication, TAuthService, TItemService, TShoppingCart, TFileService, TReceiptService
+        TApplication, TAuthService, TItemService, TShoppingCart, TFileService, TReceiptService,
+        {provide: DOMAIN_CONFIG, useValue: DOMAIN_DI_CONFIG}
     ],
 })
 export class ServiceModule
@@ -40,4 +41,5 @@ export class ServiceModule
 export {TApplication, TAuthService, TItemService, TShoppingCart, TFileService, TReceiptService};
 
 import * as Types from './cloud/types';
+import { DOMAIN_CONFIG, DOMAIN_DI_CONFIG } from 'services/domain';
 export {Types};
