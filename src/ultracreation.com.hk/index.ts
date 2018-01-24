@@ -20,6 +20,9 @@ import { ContactPage } from './contact';
 import { TeamsPage } from './teams';
 import { PrivacyPage } from './privacy';
 import { ProDetailPage } from './pro-detail';
+import { TDomainService, DOMAIN_CONFIG, IDomainConfig } from 'services/domain';
+
+const DOMAIN_DI_CONFIG: IDomainConfig = {Id: 'kktYWb9kklZYlL8k'};
 
 
 @Component({templateUrl: '../share/layout.domain.html'})
@@ -73,7 +76,8 @@ const routes: Routes = [
         OrderInfoPage,
         SiteNavbarComponent,
         FooterComponent
-    ]
+    ],
+    providers: [{provide: DOMAIN_CONFIG, useValue: DOMAIN_DI_CONFIG}, TDomainService]
 })
 export class UltraCreationDomain
 {
