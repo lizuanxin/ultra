@@ -1,12 +1,20 @@
-.flex
-{
+.flex {
     display: flex;
     align-items: center;
-    &.flex-start{
+    &.flex-direction-column {
+        flex-direction: column;
+        >*{
+            width:100%;
+        }
+    }
+    &.flex-start {
         align-items: flex-start;
     }
     >li {
         position: relative;
         flex: 0 0 auto;
+    }
+    &.flex-between {
+        justify-content: space-between;
     }
 }
