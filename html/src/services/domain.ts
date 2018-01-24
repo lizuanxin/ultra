@@ -7,7 +7,6 @@ import {TRestClient} from 'UltraCreation/Core/Http';
 import * as Types from './cloud/types';
 
 export const DOMAIN_CONFIG = new InjectionToken<IDomainConfig>('domain.config');
-export const DOMAIN_DI_CONFIG: IDomainConfig = {Id: 'kktYWb9kklZYlL8k'};
 
 @Injectable()
 export class TDomainService
