@@ -14,17 +14,10 @@ export class HomePage implements OnInit
     ngOnInit()
     {
        this.DomainService.List().then(list =>
-       {
-            for (let item of list)
-            {
-                if (item.Item['AvatarUrl'] === null) item.Item['AvatarUrl'] = 'assets/images/pic-big-empty.gif';
-            }
-            this.Items = list;
-            console.log(this.Items);
-       })
+            this.Items = list)
        .catch(err => console.log(err));
 
     }
 
-    Items: Array<Types.IPublished>;
+    Items: Array<Types.IPublishedSnap>;
 }
