@@ -7,8 +7,8 @@
     <ul class="row list-pro-items" margin>
         <li class="col-md-2" *ngFor="let item of Items">
             <div class="border-clip">
-                <div class="img-container transparent"  [style.background-image]="'url('+ item.Item.AvatarUrl +')'" [routerLink]="['/pro-detail', item.Id]"></div>
-                <h2>{{item.Item.Name}}</h2>
+                <div class="img-container transparent"  [style.background-image]="'url('+ item.AvatarUrl +')'" [routerLink]="['/pro-detail', item.Id]"></div>
+                <h2>{{item.Name}}</h2>
                 <div class="item-price">
                     <span>{{item.Pricing.Retail}}</span>
                 </div>

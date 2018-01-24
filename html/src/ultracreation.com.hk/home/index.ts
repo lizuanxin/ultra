@@ -13,9 +13,11 @@ export class HomePage implements OnInit
     ngOnInit()
     {
        this.DomainService.List().then(list =>
-            this.Items = list)
+        {
+            this.Items = list;
+            console.log(this.Items);
+        })
        .catch(err => console.log(err));
-
     }
 
     Items: Array<Types.IPublishedSnap>;
