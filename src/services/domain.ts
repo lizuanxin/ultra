@@ -16,7 +16,7 @@ export class TDomainService
         console.log('id ' + Config.Id);
     }
 
-    List(): Promise<Array<Types.IPublished>>
+    List(): Promise<Array<Types.IPublishedSnap>>
     {
         return this.Http.Get('/', {Domain_Id: this.Config.Id}).toPromise().then((res) => res.Content);
     }
