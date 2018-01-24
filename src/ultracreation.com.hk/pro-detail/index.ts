@@ -1,8 +1,8 @@
 import { Component, OnInit, ViewChild, ElementRef, Renderer } from '@angular/core';
 import { Router, ActivatedRoute, Params } from '@angular/router';
-import 'rxjs/add/operator/switchMap';
-import {Types, TAuthService, TItemService} from 'services';
+import {Types} from 'services';
 import {SwiperComp} from 'UltraCreation/ng-ion/swiper';
+import {TDomainService} from 'services/domain';
 
 const proData = [
     {imgUrl: 'assets/images/site/pro.jpg'},
@@ -17,7 +17,7 @@ const proData = [
 
 @Component({selector: 'app-productdetail-page', templateUrl: './index.html'})
 export class ProDetailPage implements OnInit {
-    constructor(private elementRef: ElementRef, private renderer: Renderer, private route: ActivatedRoute, private ItemService: TItemService)
+    constructor(private elementRef: ElementRef, private renderer: Renderer, private route: ActivatedRoute, private DomainService: TDomainService)
     {
 
     }
@@ -25,8 +25,13 @@ export class ProDetailPage implements OnInit {
     {
         this.ThumbsSwiper.Update();
         console.log(this.route.params['value'].id);
-        let item = this.ItemService.GetCached(this.route.params['value'].id);
-        console.log(item);
+
+        this.DomainService.Open(this.route.params['value'].id).then(item =>
+        {
+            console.log(item);
+        })
+        .catch(err => console.log(err));
+
 
         // this.route.params['value'].id
         //     .switchMap((params: Params) =>

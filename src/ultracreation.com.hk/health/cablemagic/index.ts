@@ -13,19 +13,6 @@ export class CableMagicPage implements OnInit
     ngOnInit()
     {
         this.document.documentElement.scrollTo({top: 0});
-
-        // const dom: any = document.querySelector('#ShowVideoSwiper > div');
-        // const dom2: any = document.querySelector('#FileSwiper > div');
-
-        // const fileswiper = new Swiper(this.FileSwiper.Ref.nativeElement.querySelector('swiper > div'));
-        // const showvideoswiper = new Swiper(this.ShowVideoSwiper.Ref.nativeElement.querySelector('swiper > div'));
-        // console.log(this.FileSwiper.Ref.nativeElement.querySelector('swiper > div'));
-
-        // fileswiper.params.control = showvideoswiper;
-        // showvideoswiper.params.control = fileswiper;
-        // this.FileSwiper.Config.control = this.ShowVideoSwiper.Ref.nativeElement.querySelector('swiper > div');
-
-
     }
 
     get ActiveIndex(): number
