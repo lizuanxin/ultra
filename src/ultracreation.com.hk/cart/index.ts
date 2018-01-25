@@ -11,7 +11,7 @@ export class CartPage implements OnInit
     constructor(private CartSvc: TShoppingCart, private ReceiptSvc: TReceiptService,
         private ItemSvc: TItemService, private router: Router)
     {
-        this.ItemModels = [];
+        this.Manifests = [];
     }
 
     ngOnInit()
@@ -24,102 +24,84 @@ export class CartPage implements OnInit
             })
             .then(() =>
             {
-                this.ItemModels =
-                    this.CartSvc.List().map((ShoppingItem) => new TItemModel(ShoppingItem));
+                this.Refresh();
             });
+    }
+
+    Refresh()
+    {
+        this.Manifests = this.CartSvc.List();
     }
 
     get AllItemSelected(): boolean
     {
-        if (this.ItemModels.length === 0)
-            return false;
-
-        return TItemModel.SelectedNum === this.ItemModels.length;
+        return this.Manifests.length === this.CartSvc.Selected.size && this.Manifests.length > 0;
     }
 
     ToggleSelectAll()
     {
-        let Selected = ! this.AllItemSelected;
-        this.ItemModels.forEach((ItemModel) => ItemModel.IsSelected = Selected);
+        if (this.CartSvc.Selected.size < this.Manifests.length)
+            this.Manifests.forEach((Manifest) => this.CartSvc.Selected.add(Manifest));
+        else
+            this.CartSvc.Selected.clear();
     }
 
-    get SelectedItemNum(): number
+    SelectionChanged(Selected: boolean, Manifest: Types.IManifest)
     {
-        return TItemModel.SelectedNum;
+        if (Selected)
+            this.CartSvc.Selected.add(Manifest);
+        else
+            this.CartSvc.Selected.delete(Manifest);
     }
 
-    Delete(ItemModel: TItemModel)
+    IsSelected(Manifest: Types.IManifest)
     {
-        ItemModel.IsSelected = false;
-        this.CartSvc.Remove(ItemModel.Source.Id);
+        return this.CartSvc.Selected.has(Manifest);
     }
 
-    AddQty(ItemModel: TItemModel)
+    get SelectedNum(): number
     {
-        this.CartSvc.Update(ItemModel.Source.Id, ItemModel.Source.Qty++);
+        return this.CartSvc.Selected.size;
     }
 
-    SubQty(ItemModel: TItemModel)
+    Delete(Manifest: Types.IManifest)
     {
-        if (ItemModel.Source.Qty === 1)
+        this.CartSvc.Remove(Manifest);
+        this.Refresh();
+    }
+
+    AddQty(Manifest: Types.IManifest)
+    {
+        Manifest.Qty ++;
+        this.CartSvc.Update(Manifest);
+    }
+
+    SubQty(Manifest: Types.IManifest)
+    {
+        if (Manifest.Qty === 1)
             return;
 
-        this.CartSvc.Update(ItemModel.Source.Id, ItemModel.Source.Qty--);
+        Manifest.Qty--;
+        this.CartSvc.Update(Manifest);
     }
 
     get TotalPrice()
     {
         let RetVal = 0;
-        this.ItemModels.forEach((ItemModel) =>
-        {
-            if (ItemModel.IsSelected)
-                RetVal += ItemModel.Source.Price;
-        });
+        this.CartSvc.Selected.forEach((Manifest) => RetVal += Manifest.Price);
         return RetVal;
     }
 
     CommitReceipt()
     {
-        this.router.navigate(['order'], { queryParams: { page: 1 } });
-        // let Receipt = new TReceipt();
-        // this.ItemModels.forEach((ItemModel) =>
-        // {
-        //     if (ItemModel.IsSelected)
-        //         Receipt.AddManifest(ItemModel.Source);
-        // });
-        // Receipt.Status = Types.TReceiptStatus.WaitForPayment;
-        // Receipt.ToAddress = 'awerwer';
-        // this.ReceiptSvc.Append(Receipt);
+        // this.router.navigate(['order'], { queryParams: { page: 1 } });
+        let Receipt = new TReceipt();
+        this.CartSvc.Selected.forEach((Manifest) => Receipt.AddManifest(Manifest));
+        Receipt.Status = Types.TReceiptStatus.WaitForPayment;
+        Receipt.ToAddress = 'awerwer';
+        this.ReceiptSvc.Save(Receipt);
     }
 
     App = window.App;
-    ItemModels: Array<TItemModel>;
-}
-
-class TItemModel
-{
-    static SelectedNum: number = 0;
-    constructor(public Source: Types.IManifest)
-    {
-    }
-
-    get IsSelected(): boolean
-    {
-        return this._IsSelected;
-    }
-
-    set IsSelected(Selected: boolean)
-    {
-        if (this._IsSelected === Selected)
-            return;
-
-        if (Selected)
-            TItemModel.SelectedNum ++;
-        else
-            TItemModel.SelectedNum --;
-
-        this._IsSelected = Selected;
-    }
-
-    private _IsSelected: boolean = false;
+    Manifests: Array<Types.IManifest>;
 }
