@@ -9,7 +9,7 @@ import {TDollService} from 'services/app/doll';
 import {TItemSelectorComponent} from 'items/list/selector';
 
 @Component({selector: 'doll-room', templateUrl: './index.html', providers: [TDollService]})
-export class DollRoomComponent implements OnInit
+export class TDollRoomComponent implements OnInit
 {
     constructor(private ItemService: TItemService, private DollService: TDollService,
         private Modal: NgbModal)
@@ -32,10 +32,7 @@ export class DollRoomComponent implements OnInit
         this.DollService.RoomList().then(list =>
         {
             this.RoomList = list;
-
-            if (list.length === 0)
-            {
-            }
+            console.log(list);
         });
     }
 
