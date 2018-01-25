@@ -29,26 +29,24 @@ export class TShoppingCart
             ShoppingItem.Qty = Qty;
         }
 
-        ShoppingItem.Price = this.CalSubTotalOf(ShoppingItem);
+        ShoppingItem.Price = this.SubtotalOf(ShoppingItem);
         this.ItemCache.set(PublishedItem.Id, ShoppingItem);
+        this.Selected.add(ShoppingItem);
     }
 
-    Update(Id: string, Qty: number)
+    Update(Manifest: Types.IManifest)
     {
-        const ShoppingItem = this.ItemCache.get(Id);
-        if (TypeInfo.Assigned(ShoppingItem))
-        {
-            ShoppingItem.Qty = Qty;
-            ShoppingItem.Price = this.CalSubTotalOf(ShoppingItem);
-        }
+        Manifest.Price = this.SubtotalOf(Manifest);
     }
 
-    Remove(Id: string)
+    Remove(Manifest: Types.IManifest)
     {
-        this.ItemCache.delete(Id);
+        if (this.Selected.has(Manifest))
+            this.Selected.delete(Manifest);
+        this.ItemCache.delete(Manifest.Id);
     }
 
-    private CalSubTotalOf(Item: Types.IManifest)
+    private SubtotalOf(Item: Types.IManifest)
     {
         if (Item.Pricing.BulkCount > 0)
         {
@@ -61,4 +59,5 @@ export class TShoppingCart
     }
 
     ItemCache: Map<string, Types.IManifest> = new Map<string, Types.IManifest>();
+    Selected = new Set<Types.IManifest>();
 }
