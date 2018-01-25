@@ -23,7 +23,7 @@ export class TDomainService
 
     Open(Published_Id: Types.TIdentify): Promise<Types.IPublished>
     {
-        return this.Http.Get('/', {Id: Published_Id}).toPromise().then((res) => res.Content);
+        return this.Http.Get('/open', {Id: Published_Id}).toPromise().then((res) => res.Content);
     }
 
     private Http = new TRestClient('/api/publish');

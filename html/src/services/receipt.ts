@@ -13,25 +13,21 @@ export class TReceiptService
     {
     }
 
-    async List(): Promise<Array<TReceipt>>
+    async List(): Promise<Array<Types.IReceipt>>
     {
         if (! TypeInfo.Assigned(this.ReceiptSnap))
         {
             this.Auth.Grant(this.Http);
             const Ary: Array<Types.IReceipt> = await this.Http.Get('/').toPromise().then((res) => res.Content);
 
-            this.ReceiptSnap = new Map<string, TReceipt>();
+            this.ReceiptSnap = new Map<string, Types.IReceipt>();
             for (const Iter of Ary)
-            {
-                const Receipt = new TReceipt();
-                Receipt.Assign(Iter);
-                this.ReceiptSnap.set(Iter.Id, Receipt);
-            }
+                this.HashReceipt(Iter);
         }
         return Array.from(this.ReceiptSnap.values());
     }
 
-    async Append(Receipt: TReceipt)
+    async Save(Receipt: Types.IReceipt)
     {
         if (Receipt.Manifests.length === 0)
             return;
@@ -39,20 +35,13 @@ export class TReceiptService
             await this.List();
 
         this.Auth.Grant(this.Http);
-        const RetVal = await this.Http.Post('/append', Receipt).toPromise().then((res) => res.Content);
-        const RetReceipt = new TReceipt();
-        RetReceipt.Assign(RetVal);
-        this.ReceiptSnap.set(RetVal.Id, RetReceipt);
+        if (! TypeInfo.Assigned(Receipt.Id))
+            this.HashReceipt(await this.Http.Post('/store', Receipt).toPromise().then((res) => res.Content));
+        else
+            this.HashReceipt(await this.Http.Put('/store', Receipt).toPromise().then((res) => res.Content));
     }
 
-    async Update(Receipt: TReceipt)
-    {
-        this.Auth.Grant(this.Http);
-        await this.Http.Post('/update', Receipt).toPromise();
-        this.ReceiptSnap.set(Receipt.Id, Receipt);
-    }
-
-    async Remove(Receipt: TReceipt)
+    async Remove(Receipt: Types.IReceipt)
     {
         this.Auth.Grant(this.Http);
         await this.Http.Post('/remove',
@@ -60,13 +49,34 @@ export class TReceiptService
         this.ReceiptSnap.delete(Receipt.Id);
     }
 
+    private HashReceipt(Receipt: Types.IReceipt)
+    {
+        const NewReceipt = new TReceipt();
+        NewReceipt.Assign(Receipt, true);
+        this.ReceiptSnap.set(Receipt.Id, Receipt);
+    }
+
     private Http = new TRestClient('/api/receipt');
-    private ReceiptSnap: Map<string, TReceipt>;
+    private ReceiptSnap: Map<string, Types.IReceipt>;
+}
+
+declare module './cloud/types/receipt'
+{
+    interface IReceipt
+    {
+        readonly IsParent: boolean;
+
+        AddManifest(Manifest: Types.IManifest);
+        RemoveManifest(Manifest: Types.IManifest);
+
+        AddChildReceipt(Receipt: Types.IReceipt);
+        RemoveChildReceipt(Receipt: Types.IReceipt);
+    }
 }
 
 export class TReceipt extends TAssignable implements Types.IReceipt
 {
-    IsParentReceipt()
+    get IsParent(): boolean
     {
         return TypeInfo.Assigned(this.SellerChildReceiptMap);
     }
@@ -85,15 +95,15 @@ export class TReceipt extends TAssignable implements Types.IReceipt
             this.Manifests.splice(Idx, 1);
     }
 
-    AddChildReceipt(Receipt: TReceipt)
+    AddChildReceipt(Receipt: Types.IReceipt)
     {
         if (! TypeInfo.Assigned(this.SellerChildReceiptMap))
-            this.SellerChildReceiptMap = new Map<string, TReceipt>();
+            this.SellerChildReceiptMap = new Map<string, Types.IReceipt>();
 
         this.SellerChildReceiptMap.set(Receipt.Seller_Id, Receipt);
     }
 
-    RemoveChildReceipt(Receipt: TReceipt)
+    RemoveChildReceipt(Receipt: Types.IReceipt)
     {
         if (! TypeInfo.Assigned(this.SellerChildReceiptMap))
             return;
@@ -112,7 +122,7 @@ export class TReceipt extends TAssignable implements Types.IReceipt
 
     set ChildReceipts(Values: Array<Types.IReceipt>)
     {
-        this.SellerChildReceiptMap = new Map<string, TReceipt>();
+        this.SellerChildReceiptMap = new Map<string, Types.IReceipt>();
         for (const iter of Values)
         {
             const Receipt = new TReceipt();
@@ -146,6 +156,6 @@ export class TReceipt extends TAssignable implements Types.IReceipt
     Timestamp: Date = null;
 
     Manifests: Types.IManifest[] = [];
-    SellerChildReceiptMap: Map<string, TReceipt>;
+    SellerChildReceiptMap: Map<string, Types.IReceipt>;
 }
 
