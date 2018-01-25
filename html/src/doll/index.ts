@@ -4,7 +4,7 @@ import {SharedModule, RouterModule, Routes} from 'share';
 import {TApplication} from 'services/application';
 
 import {TFileLibComponent} from 'share/component';
-import {DollRoomComponent} from 'doll/room';
+import {TDollRoomComponent} from 'doll/room';
 import {TItemSelectorComponent} from 'items/list/selector';
 import {ItemsModule, ItemShareModule} from 'items';
 import {TStreamServerComponent} from './streamserver';
@@ -21,7 +21,7 @@ const routes: Routes = [
         children: [
             {path: 'stream', component: TStreamServerComponent, data: {LangId: 'streamsrv', Role: ''}},
             /// ...
-            {path: 'room', component: DollRoomComponent, data: {LangId: 'room', Role: ''}},
+            {path: 'room', component: TDollRoomComponent, data: {LangId: 'room', Role: ''}},
             {path: '', redirectTo: 'room'}
         ]
     }
@@ -35,13 +35,13 @@ const routes: Routes = [
     ],
     declarations: [
         LayoutComponent,
-        DollRoomComponent,
+        TDollRoomComponent,
         TStreamServerComponent
     ],
     entryComponents: [
         TFileLibComponent,
         TItemSelectorComponent,
-        DollRoomComponent,
+        TDollRoomComponent,
         TStreamServerComponent
     ],
     providers: [TApplication]
