@@ -3,17 +3,8 @@ import { Router, ActivatedRoute, Params } from '@angular/router';
 import {Types} from 'services';
 import {SwiperComp} from 'UltraCreation/ng-ion/swiper';
 import {TDomainService} from 'services/domain';
+import { TypeInfo } from 'UltraCreation/Core/TypeInfo';
 
-const proData = [
-    {imgUrl: 'assets/images/site/pro.jpg'},
-    {imgUrl: 'assets/images/site/pro.jpg'},
-    {imgUrl: 'assets/images/site/pro.jpg'},
-    {imgUrl: 'assets/images/site/pro.jpg'},
-    {imgUrl: 'assets/images/site/pro.jpg'},
-    {imgUrl: 'assets/images/site/pro.jpg'},
-    {imgUrl: 'assets/images/site/pro.jpg'},
-    {imgUrl: 'assets/images/site/pro.jpg'},
-];
 
 @Component({selector: 'app-productdetail-page', templateUrl: './index.html'})
 export class ProDetailPage implements OnInit {
@@ -23,32 +14,22 @@ export class ProDetailPage implements OnInit {
     }
     ngOnInit()
     {
-        this.ThumbsSwiper.Update();
-        console.log(this.route.params['value'].id);
 
         this.DomainService.Open(this.route.params['value'].id).then(item =>
         {
-            console.log(item);
+            if (TypeInfo.Assigned(item)) this.AvatarUrl = item.Item['AvatarUrl'];
+            this.PublishedItem = item;
+            this.ThumbsSwiper.Update();
+            console.log(this.PublishedItem);
         })
         .catch(err => console.log(err));
 
-
-        // this.route.params['value'].id
-        //     .switchMap((params: Params) =>
-        //     {
-        //         console.log(params);
-
-        //     });
-                //    this.ItemService.GetCached(params['Id']))
-            // .subscribe((contact :Contact) => this.contact = contact);
     }
 
-
-
-    SlideClick($index)
+    SlideClick(item, $index)
     {
+        this.AvatarUrl = item.Path;
         this.CurrentIndex = $index;
-
     }
 
     AddCart()
@@ -110,10 +91,9 @@ export class ProDetailPage implements OnInit {
 
     }
 
-
-
-    thumbs: Array<object> = proData;
+    PublishedItem: Types.IPublished;
     CurrentIndex: number = 0;
+    AvatarUrl: string;
     StyleGalleryClone: object = {};
     @ViewChild('ThumbsSwiper') private ThumbsSwiper: SwiperComp;
 }

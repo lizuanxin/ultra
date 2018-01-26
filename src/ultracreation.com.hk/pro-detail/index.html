@@ -1,7 +1,7 @@
 <div class="container" m-t-30>
     <ul class="row justify-content-between">
         <li class="col-md-6">
-            <div class="gallery-top" style="background-image:url(assets/images/site/pro.jpg)">
+            <div class="gallery-top" [ngStyle]="{'background-image':'url(' + AvatarUrl + ')'}">
 
             </div>
             <div class="gallery-thumbs">
@@ -11,9 +11,9 @@
                     nextButton: '.swiper-button-next',
                     prevButton: '.swiper-button-prev'}">
                     <div class="swiper-wrapper">
-                        <div class="swiper-slide" [class.active]="CurrentIndex===i" (mouseover)="SlideClick(i)" *ngFor="let item of thumbs;let i=index" [ngStyle]="{background:'url(' + item.imgUrl + ')'}"></div>
+                        <div class="swiper-slide" [class.active]="CurrentIndex===i" (mouseover)="SlideClick(item, i)" *ngFor="let item of PublishedItem.Item.Pictures; let i=index" [ngStyle]="{'background-image':'url(' + item.Path + ')'}"></div>
                     </div>
-                    <ng-template [ngIf]="thumbs.length > 6">
+                    <ng-template [ngIf]="PublishedItem.Item.Pictures.length > 6">
                         <div class="swiper-button-next swiper-button-white"></div>
                         <div class="swiper-button-prev swiper-button-white"></div>
                     </ng-template>
@@ -22,9 +22,9 @@
         </li>
         <li class="col-md-6" margin-vertical>
             <div padding-horizontal>
-                <h2>Thunderbolt</h2>
-                <p text-gray margin-vertical>USB cable/方贴/葫芦贴/ iphone头/type C头/电池包</p>
-                <p text-red margin-vertical f-24>￥399.00</p>
+                <h2>{{PublishedItem.Item.Name}}</h2>
+                <!-- <p text-gray margin-vertical>USB cable/方贴/葫芦贴/ iphone头/type C头/电池包</p> -->
+                <p text-red margin-vertical f-24><span>{{PublishedItem.Item.PricingList[0].Region}}</span>{{PublishedItem.Item.PricingList[0].Retail}}</p>
                 <p margin-vertical f-16>&nbsp;</p>
                 <div class="row" m-b-30>
                     <div class="col-auto" text-gray-light f-14>选择规格：</div>
@@ -45,9 +45,9 @@
                     </div>
                 </div>
                 <div class="row" justify-content-end margin-top>
-                    <div class="col-md-3">
+                    <!-- <div class="col-md-3">
                         <button type="button" class="btn btn-primary btn-block" [routerLink]="['/order']">Buy Now</button>
-                    </div>
+                    </div> -->
                     <div class="col-md-3">
                         <button type="button" class="btn btn-success btn-block" (click)="AddCart()">Add To Cart</button>
                     </div>
