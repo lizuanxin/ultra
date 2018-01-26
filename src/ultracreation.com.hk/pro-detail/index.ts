@@ -18,7 +18,9 @@ export class ProDetailPage implements OnInit {
         this.DomainService.Open(this.route.params['value'].id).then(item =>
         {
             if (TypeInfo.Assigned(item)) this.AvatarUrl = item.Item['AvatarUrl'];
-            this.PublishedItem = item;
+            this.PublishedItem = item.Item as Types.IItem;
+            this.PublishedPrice = (item.Item as Types.IItem).PricingList[0] as Types.ILocalizedPricing;
+            this.PublishedPic = (item.Item as Types.IItem).Pictures as Array<Types.IPicture>;
             this.ThumbsSwiper.Update();
             console.log(this.PublishedItem);
         })
@@ -91,9 +93,11 @@ export class ProDetailPage implements OnInit {
 
     }
 
-    PublishedItem: Types.IPublished;
+    PublishedItem = new Object() as Types.IItem;
+    PublishedPic = new Array<Types.IPicture>();
+    PublishedPrice = new Object() as Types.ILocalizedPricing;
     CurrentIndex: number = 0;
-    AvatarUrl: string;
+    AvatarUrl: string = null;
     StyleGalleryClone: object = {};
     @ViewChild('ThumbsSwiper') private ThumbsSwiper: SwiperComp;
 }
