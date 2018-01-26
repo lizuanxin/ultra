@@ -6,6 +6,23 @@ import * as Types from './cloud/types';
 @Injectable()
 export class TShoppingCart
 {
+    constructor()
+    {
+        this.LoadFromLocalCache();
+    }
+
+    LoadFromLocalCache()
+    {
+        const ManifestItems = JSON.parse(localStorage.getItem('last_manifest_items')) as Array<Types.IManifest>;
+        if (TypeInfo.Assigned(ManifestItems))
+            ManifestItems.forEach(Manifest => this.ItemCache.set(Manifest.Id, Manifest));
+    }
+
+    SaveToLocalCache()
+    {
+        localStorage.setItem('last_manifest_items', JSON.stringify(Array.from(this.ItemCache.values())));
+    }
+
     List(): Array<Types.IManifest>
     {
         return Array.from(this.ItemCache.values());
@@ -14,6 +31,12 @@ export class TShoppingCart
     Size(): number
     {
         return this.ItemCache.size;
+    }
+
+    Clear()
+    {
+        this.ItemCache.clear();
+        this.SaveToLocalCache();
     }
 
     Add(PublishedItem: Types.IPublished, Qty: number = 1)
@@ -32,11 +55,13 @@ export class TShoppingCart
         ShoppingItem.Price = this.SubtotalOf(ShoppingItem);
         this.ItemCache.set(PublishedItem.Id, ShoppingItem);
         this.Selected.add(ShoppingItem);
+        this.SaveToLocalCache();
     }
 
     Update(Manifest: Types.IManifest)
     {
         Manifest.Price = this.SubtotalOf(Manifest);
+        this.SaveToLocalCache();
     }
 
     Remove(Manifest: Types.IManifest)
@@ -44,6 +69,7 @@ export class TShoppingCart
         if (this.Selected.has(Manifest))
             this.Selected.delete(Manifest);
         this.ItemCache.delete(Manifest.Id);
+        this.SaveToLocalCache();
     }
 
     private SubtotalOf(Item: Types.IManifest)
@@ -58,6 +84,6 @@ export class TShoppingCart
             return Item.Qty * Item.Pricing.Retail;
     }
 
-    ItemCache: Map<string, Types.IManifest> = new Map<string, Types.IManifest>();
     Selected = new Set<Types.IManifest>();
+    protected ItemCache: Map<string, Types.IManifest> = new Map<string, Types.IManifest>();
 }
