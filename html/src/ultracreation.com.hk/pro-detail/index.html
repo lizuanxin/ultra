@@ -11,9 +11,9 @@
                     nextButton: '.swiper-button-next',
                     prevButton: '.swiper-button-prev'}">
                     <div class="swiper-wrapper">
-                        <div class="swiper-slide" [class.active]="CurrentIndex===i" (mouseover)="SlideClick(item, i)" *ngFor="let item of PublishedItem.Item.Pictures; let i=index" [ngStyle]="{'background-image':'url(' + item.Path + ')'}"></div>
+                        <div class="swiper-slide" [class.active]="CurrentIndex===i" (mouseover)="SlideClick(item, i)" *ngFor="let item of PublishedPic; let i=index" [ngStyle]="{'background-image':'url(' + item.Path + ')'}"></div>
                     </div>
-                    <ng-template [ngIf]="PublishedItem.Item.Pictures.length > 6">
+                    <ng-template [ngIf]="PublishedPic.length > 6">
                         <div class="swiper-button-next swiper-button-white"></div>
                         <div class="swiper-button-prev swiper-button-white"></div>
                     </ng-template>
@@ -22,9 +22,9 @@
         </li>
         <li class="col-md-6" margin-vertical>
             <div padding-horizontal>
-                <h2>{{PublishedItem.Item.Name}}</h2>
+                <h2>{{PublishedItem.Name}}</h2>
                 <!-- <p text-gray margin-vertical>USB cable/方贴/葫芦贴/ iphone头/type C头/电池包</p> -->
-                <p text-red margin-vertical f-24><span>{{PublishedItem.Item.PricingList[0].Region}}</span>{{PublishedItem.Item.PricingList[0].Retail}}</p>
+                <p text-red margin-vertical f-24><span>{{PublishedPrice.Region}}</span>{{PublishedPrice.Retail}}</p>
                 <p margin-vertical f-16>&nbsp;</p>
                 <div class="row" m-b-30>
                     <div class="col-auto" text-gray-light f-14>选择规格：</div>
