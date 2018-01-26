@@ -13,32 +13,46 @@ export class TReceiptService
     {
     }
 
-    async List(): Promise<Array<Types.IReceipt>>
+    async BuyList(): Promise<Array<Types.IReceipt>>
     {
-        if (! TypeInfo.Assigned(this.ReceiptSnap))
+        if (! TypeInfo.Assigned(this.BuyReceiptSnap))
         {
             this.Auth.Grant(this.Http);
             const Ary: Array<Types.IReceipt> = await this.Http.Get('/').toPromise().then((res) => res.Content);
 
-            this.ReceiptSnap = new Map<string, Types.IReceipt>();
+            this.BuyReceiptSnap = new Map<string, Types.IReceipt>();
             for (const Iter of Ary)
-                this.HashReceipt(Iter);
+                this.HashReceipt(this.BuyReceiptSnap, Iter);
         }
-        return Array.from(this.ReceiptSnap.values());
+        return Array.from(this.BuyReceiptSnap.values());
+    }
+
+    async SellList(): Promise<Array<Types.IReceipt>>
+    {
+        if (! TypeInfo.Assigned(this.SellReceiptSnap))
+        {
+            this.Auth.Grant(this.Http);
+            const Ary: Array<Types.IReceipt> = await this.Http.Get('/selllist').toPromise().then((res) => res.Content);
+
+            this.SellReceiptSnap = new Map<string, Types.IReceipt>();
+            for (const Iter of Ary)
+                this.HashReceipt(this.SellReceiptSnap, Iter);
+        }
+        return Array.from(this.SellReceiptSnap.values());
     }
 
     async Save(Receipt: Types.IReceipt)
     {
         if (Receipt.Manifests.length === 0)
             return;
-        if (! TypeInfo.Assigned(this.ReceiptSnap))
-            await this.List();
+        if (! TypeInfo.Assigned(this.BuyReceiptSnap))
+            await this.BuyList();
 
         this.Auth.Grant(this.Http);
         if (! TypeInfo.Assigned(Receipt.Id))
-            this.HashReceipt(await this.Http.Post('/store', Receipt).toPromise().then((res) => res.Content));
+            this.HashReceipt(this.BuyReceiptSnap, await this.Http.Post('/store', Receipt).toPromise().then((res) => res.Content));
         else
-            this.HashReceipt(await this.Http.Put('/store', Receipt).toPromise().then((res) => res.Content));
+            this.HashReceipt(this.BuyReceiptSnap, await this.Http.Put('/store', Receipt).toPromise().then((res) => res.Content));
     }
 
     async Remove(Receipt: Types.IReceipt)
@@ -46,18 +60,19 @@ export class TReceiptService
         this.Auth.Grant(this.Http);
         await this.Http.Post('/remove',
             {Id: Receipt.Id, ChildReceipts: Receipt.ChildReceipts.map((Receipt) => Receipt.Id)}).toPromise();
-        this.ReceiptSnap.delete(Receipt.Id);
+        this.BuyReceiptSnap.delete(Receipt.Id);
     }
 
-    private HashReceipt(Receipt: Types.IReceipt)
+    private HashReceipt(Snap: Map<string, Types.IReceipt>, Receipt: Types.IReceipt)
     {
         const NewReceipt = new TReceipt();
         NewReceipt.Assign(Receipt, true);
-        this.ReceiptSnap.set(Receipt.Id, Receipt);
+        Snap.set(Receipt.Id, Receipt);
     }
 
     private Http = new TRestClient('/api/receipt');
-    private ReceiptSnap: Map<string, Types.IReceipt>;
+    private BuyReceiptSnap: Map<string, Types.IReceipt>;
+    private SellReceiptSnap: Map<string, Types.IReceipt>;
 }
 
 declare module './cloud/types/receipt'
