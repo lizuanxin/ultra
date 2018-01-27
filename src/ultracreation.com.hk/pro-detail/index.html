@@ -24,7 +24,17 @@
             <div padding-horizontal>
                 <h2>{{PublishedItem.Name}}</h2>
                 <!-- <p text-gray margin-vertical>USB cable/方贴/葫芦贴/ iphone头/type C头/电池包</p> -->
-                <p text-red margin-vertical f-24><span class="tag-region">{{PublishedPrice.Region}}</span>{{PublishedPrice.Retail}}</p>
+                <ul class="row justify-content-start align-items-center" margin-top>
+                    <li class="col-auto" no-padding>
+                        <span class="tag-region">{{PublishedPrice.Region}}</span>&nbsp;
+                    </li>
+                    <li text-red class="col" no-padding f-20>
+                        {{PublishedPrice.Retail}}
+                    </li>
+                </ul>
+                <ul class="row detail-description">
+                    <li class="col">0000000</li>
+                </ul>
                 <p margin-vertical f-16>&nbsp;</p>
                 <div class="row" m-b-30>
                     <!-- <div class="col-auto" text-gray-light f-14>选择规格：</div>
