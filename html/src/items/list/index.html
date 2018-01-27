@@ -34,7 +34,8 @@
                 <ng-container *ngFor="let domain of Domains; let i = index">
                     <li role="menuitem" text-right>
                         <a class="dropdown-item" href="javascript:void(0)">
-                            <img [src]="domain.AvatarUrl">{{domain.Name}}
+                            <!-- <img [src]="domain.AvatarUrl"> -->
+                            {{domain.Name}}
                             <button class="btn btn-sm btn-primary" m-l-10 (click)="Publish(domain)">{{'button.publish'|translate}}</button>
                         </a>
                     </li>
