@@ -8,7 +8,7 @@ import { TypeInfo } from 'UltraCreation/Core/TypeInfo';
 
 @Component({selector: 'app-productdetail-page', templateUrl: './index.html'})
 export class ProDetailPage implements OnInit {
-    constructor(private elementRef: ElementRef, private renderer: Renderer, private route: ActivatedRoute, private DomainService: TDomainService)
+    constructor(private elementRef: ElementRef, private renderer: Renderer, private router: Router, private route: ActivatedRoute, private DomainService: TDomainService)
     {
 
     }
@@ -17,12 +17,15 @@ export class ProDetailPage implements OnInit {
 
         this.DomainService.Open(this.route.params['value'].id).then(item =>
         {
-            if (TypeInfo.Assigned(item)) this.AvatarUrl = item.Item['AvatarUrl'];
-            this.PublishedItem = item.Item as Types.IItem;
-            this.PublishedPrice = (item.Item as Types.IItem).PricingList[0] as Types.ILocalizedPricing;
-            this.PublishedPic = (item.Item as Types.IItem).Pictures as Array<Types.IPicture>;
-            this.ThumbsSwiper.Update();
-            console.log(this.PublishedItem);
+            if (TypeInfo.Assigned(item))
+            {
+                this.AvatarUrl = item.Item['AvatarUrl'];
+                this.PublishedItem = item.Item as Types.IItem;
+                this.PublishedPrice = (item.Item as Types.IItem).PricingList[0] as Types.ILocalizedPricing;
+                this.PublishedPic = (item.Item as Types.IItem).Pictures as Array<Types.IPicture>;
+                this.ThumbsSwiper.Update();
+                console.log(this.PublishedItem);
+            }
         })
         .catch(err => console.log(err));
 
@@ -34,9 +37,22 @@ export class ProDetailPage implements OnInit {
         this.CurrentIndex = $index;
     }
 
+    AddSubQty(n: string)
+    {
+        if (n === '-' && this.Quantity > 1)
+        {
+            this.Quantity --;
+        }
+        else if (n === '+')
+        {
+            this.Quantity ++;
+        }
+    }
+
     AddCart()
     {
-        this.ObjClone();
+        // this.ObjClone();
+        setTimeout(() => this.router.navigate(['/cart']));
 
     }
 
@@ -98,6 +114,7 @@ export class ProDetailPage implements OnInit {
     PublishedPrice = new Object() as Types.ILocalizedPricing;
     CurrentIndex: number = 0;
     AvatarUrl: string = null;
+    Quantity: number = 1;
     StyleGalleryClone: object = {};
     @ViewChild('ThumbsSwiper') private ThumbsSwiper: SwiperComp;
 }
