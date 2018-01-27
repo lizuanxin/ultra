@@ -1,21 +1,21 @@
-.detail-spec{
+.detail-spec {
     color: $gray-light;
-    a{
+    a {
         display: inline-block;
         margin-right: 5px;
         padding: 2px 15px;
         border: solid 1px $gray-lighter;
-        &.active{
+        &.active {
             border-color: $red;
         }
     }
 }
 
-.detail-description{
+.detail-description {
     background-color: $gray-lighter;
 }
 
-.tag-region{
+.tag-region {
     vertical-align: middle;
     padding: 2px 5px;
     display: inline-block;
@@ -23,4 +23,31 @@
     color: white;
     text-transform: uppercase;
     background-color: $site-primary;
+}
+
+.gallery-view {
+    display: none;
+    z-index: 999999999;
+    position:absolute;
+    left: 0;
+    top: 0;
+    width: 500px;
+    height: 500px;
+    overflow: hidden;
+    background-color:#f8f8f8;
+}
+
+.mask{
+    display: none;
+    position: absolute;
+    background: rgba(252, 242, 157, .5);
+    cursor: move;
+}
+
+.gallery-bigImg{
+    width: 100%;
+    transform: scale(1.5);
+    position: absolute;
+    top:0;
+    left:0;
 }

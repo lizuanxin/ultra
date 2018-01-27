@@ -24,6 +24,7 @@ export class ProDetailPage implements OnInit {
                 this.PublishedPrice = (item.Item as Types.IItem).PricingList[0] as Types.ILocalizedPricing;
                 this.PublishedPic = (item.Item as Types.IItem).Pictures as Array<Types.IPicture>;
                 this.ThumbsSwiper.Update();
+                this.LeftViewListen();
                 console.log(this.PublishedItem);
             }
         })
@@ -54,6 +55,48 @@ export class ProDetailPage implements OnInit {
         // this.ObjClone();
         setTimeout(() => this.router.navigate(['/cart']));
 
+    }
+
+    LeftViewListen()
+    {
+
+        this.LeftView.nativeElement.addEventListener('mouseover', this.MouseHandler.bind(this));
+        this.LeftView.nativeElement.addEventListener('mouseout', this.MouseHandler.bind(this));
+        this.LeftView.nativeElement.addEventListener('mousemove', this.MouseHandler.bind(this));
+
+    }
+
+
+    CalculateMaskWH()
+    {
+        let mask_width = this.LeftView.nativeElement.clientWidth / this.BigImg.nativeElement.clientWidth * this.RightView.nativeElement.clientWidth;
+        let mask_height = this.LeftView.nativeElement.clientHeight / this.BigImg.nativeElement.clientHeight * this.RightView.nativeElement.clientHeight;
+        this.Mask.nativeElement.style.width = mask_width + 'px';
+        this.Mask.nativeElement.style.height = mask_height + 'px';
+
+
+   }
+
+
+    private MouseHandler(e: MouseEvent): void
+    {
+        console.log(e);
+        this.CalculateMaskWH();
+        switch (e.type)
+        {
+        case 'mouseover':
+            this.RightView.nativeElement.style.display = 'block';
+            this.Mask.nativeElement.style.display = 'block';
+            break;
+        case 'mouseout':
+            this.RightView.nativeElement.style.display = 'none';
+            this.Mask.nativeElement.style.display = 'none';
+            break;
+        case 'mousemove':
+            // let left = e.pageX - this.LeftView.nativeElement.offset().left - this.Mask.nativeElement.clientWidth / 2;
+            // var top=event.pageY-$(this).offset().top-$('.mask').height()/2;
+            break;
+        }
     }
 
     ObjClone()
@@ -117,4 +160,9 @@ export class ProDetailPage implements OnInit {
     Quantity: number = 1;
     StyleGalleryClone: object = {};
     @ViewChild('ThumbsSwiper') private ThumbsSwiper: SwiperComp;
+    @ViewChild('leftview') private LeftView: ElementRef;
+    @ViewChild('rightview') private RightView: ElementRef;
+    @ViewChild('bigImg') private BigImg: ElementRef;
+    @ViewChild('mask') private Mask: ElementRef;
+
 }
