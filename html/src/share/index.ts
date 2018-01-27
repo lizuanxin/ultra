@@ -15,7 +15,7 @@ import {SwiperComp} from 'UltraCreation/ng-ion/swiper';
 import {ReceivingComponent} from './component/receiving';
 import * as Comp from './component';
 import {TApplication} from 'services';
-import {ScrollViewDirective} from 'directive/scrollview';
+
 
 @NgModule({
     imports: [
@@ -28,7 +28,6 @@ import {ScrollViewDirective} from 'directive/scrollview';
         ScrollToModule.forRoot()
     ],
     declarations: [
-        ScrollViewDirective,
         NavbarComponent,
         SidebarComponent,
         SwiperComp,
