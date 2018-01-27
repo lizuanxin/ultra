@@ -24,7 +24,7 @@ export class ProDetailPage implements OnInit {
                 this.PublishedPrice = (item.Item as Types.IItem).PricingList[0] as Types.ILocalizedPricing;
                 this.PublishedPic = (item.Item as Types.IItem).Pictures as Array<Types.IPicture>;
                 this.ThumbsSwiper.Update();
-                this.LeftViewListen();
+                // this.LeftViewListen();
                 console.log(this.PublishedItem);
             }
         })
