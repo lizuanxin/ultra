@@ -1,8 +1,8 @@
 <div class="container" m-t-30>
     <ul class="row justify-content-between">
         <li class="col-md-6">
-            <div class="gallery-top" [ngStyle]="{'background-image':'url(' + AvatarUrl + ')'}">
-
+            <div class="gallery-top" #leftview [ngStyle]="{'background-image':'url(' + AvatarUrl + ')'}">
+                <div class="mask" #mask></div>
             </div>
             <div class="gallery-thumbs">
                 <swiper #ThumbsSwiper [Config]="{spaceBetween: 10,
@@ -20,11 +20,28 @@
                 </swiper>
             </div>
         </li>
-        <li class="col-md-6" margin-vertical>
+        <li class="col-md-6">
+            <div class="gallery-view" #rightview>
+                    <img class="gallery-bigImg" #bigImg src="{{AvatarUrl}}" />
+            </div>
             <div padding-horizontal>
-                <h2>{{PublishedItem.Name}}</h2>
+
                 <!-- <p text-gray margin-vertical>USB cable/方贴/葫芦贴/ iphone头/type C头/电池包</p> -->
-                <ul class="row justify-content-start align-items-center" margin-top>
+                <ul class="row justify-content-start align-items-center">
+                    <li class="col-10" no-padding><h2>{{PublishedItem.Name}}</h2></li>
+                    <li class="col-2" text-right>
+                            <div class="btn-group" dropdown placement="bottom right">
+                                <button dropdownToggle type="button" class="form-control dropdown-toggle btn-sm">
+                                    {{PublishedPrice.Region}}
+                                    <span class="caret"></span>
+                                </button>
+                                <ul *dropdownMenu class="dropdown-menu dropdown-menu-right" role="menu">
+                                    <li role="menuitem">
+                                        <a class="dropdown-item" href="javascript:void(0)"></a>
+                                    </li>
+                                </ul>
+                            </div>
+                    </li>
                     <li class="col-auto" no-padding>
                         <span class="tag-region">{{PublishedPrice.Region}}</span>&nbsp;
                     </li>
@@ -32,8 +49,8 @@
                         {{PublishedPrice.Retail}}
                     </li>
                 </ul>
-                <ul class="row detail-description">
-                    <li class="col">0000000</li>
+                <ul class="row detail-description" margin-top>
+                    <li class="col" f-12>Discount：{{PublishedPrice.Discount}}</li>
                 </ul>
                 <p margin-vertical f-16>&nbsp;</p>
                 <div class="row" m-b-30>
