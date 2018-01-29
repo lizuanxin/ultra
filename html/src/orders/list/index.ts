@@ -29,7 +29,9 @@ export class OrderListComponent implements OnInit
     async Refresh()
     {
         this.ReceiptList = await this.ReceiptSvc.SellList();
-        console.log('receipt ' + JSON.stringify(this.ReceiptList));
+        console.log(this.ReceiptList);
+
+        // console.log('receipt ' + JSON.stringify(this.ReceiptList));
     }
 
     ReceiptList: Array<Types.IReceipt>;

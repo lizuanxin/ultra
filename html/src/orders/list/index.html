@@ -45,7 +45,7 @@
                 <td colspan="6"></td>
             </tr>
             <tr class="t-title">
-                <td colspan="6">
+                <td colspan="8">
                     <div text-left p-5>
                         <span text-gray-light>{{Receipt.Timestamp}}</span>
                         <span text-gray-light margin-left>订单号：</span>
@@ -54,23 +54,22 @@
                     </div>
                 </td>
             </tr>
-            <tr>
-                <td colspan="2" *ngFor="let Manifest of Receipt.Manifests">
+            <tr *ngFor="let Manifest of Receipt.Manifests; let i = index">
+                <td colspan="2">
                     <div class="row" align-items-center>
                         <div class="col-md-2" text-left>
-                            <img src="{{Manifest.Item.AvatarUrl === null ? 'assets/images/pic-sm-empty.gif' : Manifest.Item.AvatarUrl}}" title=""  width="60" height="60">
+                            <img src="{{Manifest.Item.AvatarUrl === null ? 'assets/images/pic-sm-empty.gif' : Manifest.Item.AvatarUrl}}" title=""  width="60" height="60" margin>
                         </div>
                         <div class="col-md-8" text-left >
                             <h6>{{Manifest.Item.Name}}</h6>
-
                         </div>
-                        <div class="col-md-2" f-16 text-gray-light>x4</div>
+                        <div class="col-md-2" f-16 text-gray-light>x{{Manifest.Qty}}</div>
                     </div>
                 </td>
-                <td>XXXX</td>
-                <td>总额：¥1000</td>
-                <td>已付款<br>订单详情</td>
-                <td>评价</td>
+                <td class="align-middle">XXXX</td>
+                <td class="align-middle">总额：{{Manifest.Price}}</td>
+                <td class="align-middle" *ngIf="i === 0" [attr.rowspan]="Receipt.Manifests.length">已付款<br>订单详情</td>
+                <td class="align-middle">评价</td>
             </tr>
         </tbody>
     </table>
