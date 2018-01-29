@@ -21,6 +21,8 @@ import { TeamsPage } from './teams';
 import { PrivacyPage } from './privacy';
 import { ProDetailPage } from './pro-detail';
 import { TDomainService, DOMAIN_CONFIG, IDomainConfig } from 'services/domain';
+import { UOrderListComponent } from 'share/component/orderlist';
+
 
 const DOMAIN_DI_CONFIG: IDomainConfig = {Id: 'kktYWb9kklZYlL8k'};
 
@@ -39,6 +41,7 @@ const routes: Routes = [
             {path: 'detail/:id', component: DetailPage},
             {path: 'pro-detail/:id', data: {}, component: ProDetailPage},
             {path: 'cart', component: CartPage},
+            {path: 'myorder', component: UOrderListComponent},
             {path: 'tens', component: TensPage},
             {path: 'order', component: OrderInfoPage},
             {path: 'about', component: AboutPage},
@@ -69,6 +72,7 @@ const routes: Routes = [
         ProDetailPage,
         RelateComponent,
         CartPage,
+        UOrderListComponent,
         AboutPage,
         ContactPage,
         TeamsPage,
