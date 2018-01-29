@@ -24,7 +24,7 @@ export class ProDetailPage implements OnInit {
                 this.PublishedPrice = (item.Item as Types.IItem).PricingList[0] as Types.ILocalizedPricing;
                 this.PublishedPic = (item.Item as Types.IItem).Pictures as Array<Types.IPicture>;
                 this.ThumbsSwiper.Update();
-                // this.LeftViewListen();
+                this.LeftViewListen();
                 console.log(this.PublishedItem);
             }
         })
@@ -74,28 +74,57 @@ export class ProDetailPage implements OnInit {
         this.Mask.nativeElement.style.width = mask_width + 'px';
         this.Mask.nativeElement.style.height = mask_height + 'px';
 
-
    }
 
 
     private MouseHandler(e: MouseEvent): void
     {
-        console.log(e);
+        let view_width = this.LeftView.nativeElement.clientWidth;
+        let view_height = this.LeftView.nativeElement.clientHeight;
+
         this.CalculateMaskWH();
         switch (e.type)
         {
-        case 'mouseover':
-            this.RightView.nativeElement.style.display = 'block';
-            this.Mask.nativeElement.style.display = 'block';
-            break;
-        case 'mouseout':
-            this.RightView.nativeElement.style.display = 'none';
-            this.Mask.nativeElement.style.display = 'none';
-            break;
-        case 'mousemove':
-            // let left = e.pageX - this.LeftView.nativeElement.offset().left - this.Mask.nativeElement.clientWidth / 2;
-            // var top=event.pageY-$(this).offset().top-$('.mask').height()/2;
-            break;
+            case 'mouseover':
+                this.RightView.nativeElement.style.display = 'block';
+                this.Mask.nativeElement.style.display = 'block';
+                break;
+
+            case 'mouseout':
+                this.RightView.nativeElement.style.display = 'none';
+                this.Mask.nativeElement.style.display = 'none';
+                break;
+
+            case 'mousemove':
+
+                let left = e.pageX - e.movementX - this.Mask.nativeElement.clientWidth / 2;
+                let top = e.pageY -  e.movementY - this.Mask.nativeElement.clientHeight / 2;
+
+                if (left < 0)
+                {
+                    left = 0;
+                }
+                else if (left > e.clientX - this.Mask.nativeElement.clientWidth)
+                {
+                    left = e.clientX - this.Mask.nativeElement.clientWidth;
+                }
+
+                if (top < 0){
+                    top = 0;
+                }
+                else if (top > e.clientY - this.Mask.nativeElement.clientHeight)
+                {
+                    top = e.clientY - this.Mask.nativeElement.clientHeight;
+                }
+
+                this.Mask.nativeElement.style.left = left + 'px';
+                this.Mask.nativeElement.style.top = top + 'px';
+
+                let rate = this.BigImg.nativeElement.clientWidth / view_width;
+                this.BigImg.nativeElement.style.left = - rate * left + 'px';
+                this.BigImg.nativeElement.style.top = - rate * top + 'px';
+
+                break;
         }
     }
 
