@@ -41,7 +41,7 @@ export class NavbarComponent implements OnInit
         });
 
     }
-
+    /*
     @HostListener('window:scroll', [])
     onWindowScroll() {
       const number =  this.document.documentElement.scrollTop || this.document.body.scrollTop || 0;
@@ -54,6 +54,7 @@ export class NavbarComponent implements OnInit
       }
 
     }
+    */
 
     toggleSidebar()
     {
