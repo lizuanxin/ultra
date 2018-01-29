@@ -4,32 +4,7 @@
     background-size: cover;
     background-position: center;
 }
-.gallery-top {
-    height: 300px;
-    width: 100%;
-    background-repeat: no-repeat;
-    background-size: cover;
-}
-.gallery-thumbs {
-    position:relative;
-    height: 80px;
-    box-sizing: border-box;
-    padding: 10px 0;
-}
-.gallery-thumbs .swiper-slide {
-    width: 25%;
-    height: 96%;
-    border:solid 2px transparent;
-    // opacity: 0.4;
-    &.active{
-        border:solid 2px $red;
-    }
-    background-repeat: no-repeat;
-    background-size: cover;
-}
-.gallery-thumbs .swiper-slide-active {
-    opacity: 1;
-}
+
 
 // swiper {
 //     &[BannerSwiper] {
