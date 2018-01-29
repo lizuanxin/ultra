@@ -1,0 +1,277 @@
+<div class="container">
+
+    <table class="table table-sm table-bordered table-middled table-head-nowrap table-header-normal table-header-center table-order">
+        <thead class="thead-default">
+            <tr>
+                <th width="30%" text-left>
+                    <div class="drop-list">
+                        <ol>
+                            <li>近三个月订单
+                                <i class="arrow"></i>
+                            </li>
+                        </ol>
+                        <ul>
+                            <li>近三个月订单
+                                <i class="arrow"></i>
+                            </li>
+                            <li>近三个月订单</li>
+                            <li>今年内订单</li>
+                            <li>2016年订单</li>
+                            <li>2015年订单</li>
+                            <li>2014年订单</li>
+                        </ul>
+                    </div>
+                </th>
+                <th width="20%">订单详情</th>
+                <th width="10%">收货人</th>
+                <th width="10%">金额</th>
+                <th width="15%">
+                    <div class="drop-list">
+                        <ol>
+                            <li>全部状态
+                                <i class="arrow"></i>
+                            </li>
+                        </ol>
+                        <ul>
+                            <li>全部状态
+                                <i class="arrow"></i>
+                            </li>
+                            <li>全部状态</li>
+                            <li>等待付款</li>
+                            <li>等待收货</li>
+                            <li>已完成</li>
+                            <li>已取肖</li>
+                        </ul>
+                    </div>
+                </th>
+                <th width="15%">操作</th>
+            </tr>
+            <tr class="spacing">
+                <th colspan="6"></th>
+            </tr>
+        </thead>
+        <tbody *ngFor="let Receipt of ReceiptList">
+            <tr>
+                <td colspan="6" style="padding: 0">
+                    <div class="order-split-header">
+                        <ul class="row">
+                            <li class="col-md-2 text-left">
+                                <span class="dealtime" title="2016-12-30 11:18:14">2016-12-30 11:18:14</span>
+
+                            </li>
+                            <li class="col-md-2 text-left">
+                                <span class="number">
+                                    订单号：
+                                    <a href="#none">47474329554</a>
+                                </span>
+                            </li>
+                            <li class="col-md-8">
+                                <span class="">您订单中的商品在不同库房或属不同商家，故拆分为以下订单分开配送，给您带来的不便敬请谅解。</span>
+                            </li>
+                        </ul>
+                        <ul class="row">
+                            <li class="col-md-2 text-left">收货人：李钻新</li>
+                            <li class="col-md-2 text-left">
+                                <span class="order-count">订单金额：
+                                    <em>¥24.60</em>
+                                </span>
+                            </li>
+                            <li class="col-md-2">
+                                <span class="order-pay">
+                                    支付方式: 在线支付
+                                </span>
+                            </li>
+                            <li class="col-md-3">
+                                <span class="order-status">
+                                    订单状态：已拆分
+                                </span>
+                            </li>
+                            <li class="col-md-3 text-right">
+                                查看拆分详情&gt;
+                            </li>
+                        </ul>
+                    </div>
+                </td>
+            </tr>
+            <tr>
+                <td colspan="6">
+                    <div class="order-split-list">
+                        <ul class="row">
+                            <li class="col-md-2 text-left">
+                                <span class="dealtime" title="2016-12-30 11:18:14">2016-12-30 11:18:14</span>
+                            </li>
+                            <li class="col-md-2 text-left">
+                                <span class="number">
+                                    订单号：
+                                    <a href="#none">47474329554</a>
+                                </span>
+                            </li>
+                            <li class="col-md-2 text-left">
+                                <span class="order-shop">
+                                    XX旗舰店
+                                </span>
+                            </li>
+                            <li class="col-md-6 text-right">
+                                <a>删除</a>
+                            </li>
+                        </ul>
+                    </div>
+                </td>
+            </tr>
+            <tr>
+                <td colspan="2">
+                    <div class="row" align-items-center>
+                        <div class="col-md-2" text-left>
+                            <img src="/uploads/806799653b361520df6e1a8f3d20335258fa8258.jpg" title="" width="60" height="60" margin>
+                        </div>
+                        <div class="col-md-8" text-left>
+                            <h6>xxxxxx</h6>
+                        </div>
+                        <div class="col-md-2" f-16 text-gray-light>x1</div>
+                    </div>
+                </td>
+                <td class="align-middle">XXXX</td>
+                <td class="align-middle">总额：100</td>
+                <td class="align-middle">已付款
+                    <br>订单详情</td>
+                <td class="align-middle">评价</td>
+            </tr>
+            <tr>
+                <td colspan="2">
+                    <div class="row" align-items-center>
+                        <div class="col-md-2" text-left>
+                            <img src="/uploads/806799653b361520df6e1a8f3d20335258fa8258.jpg" title="" width="60" height="60" margin>
+                        </div>
+                        <div class="col-md-8" text-left>
+                            <h6>xxxxxx</h6>
+                        </div>
+                        <div class="col-md-2" f-16 text-gray-light>x1</div>
+                    </div>
+                </td>
+                <td class="align-middle">XXXX</td>
+                <td class="align-middle">总额：100</td>
+                <td class="align-middle">已付款
+                    <br>订单详情</td>
+                <td class="align-middle">评价</td>
+            </tr>
+
+            <tr class="spacing">
+                <td colspan="6"></td>
+            </tr>
+            <tr class="t-title">
+                <td colspan="8">
+                    <div text-left p-5>
+                        <span text-gray-light>{{Receipt.Timestamp}}</span>
+                        <span text-gray-light margin-left>订单号：</span>
+                        <span>{{Receipt.Id}}</span>
+                        <span pull-right>
+                            <i icon>&#xe900;</i>
+                        </span>
+                    </div>
+                </td>
+            </tr>
+            <tr *ngFor="let Manifest of Receipt.Manifests; let i = index">
+                <td colspan="2">
+                    <div class="row" align-items-center>
+                        <div class="col-md-2" text-left>
+                            <img src="{{Manifest.Item.AvatarUrl === null ? 'assets/images/pic-sm-empty.gif' : Manifest.Item.AvatarUrl}}" title="" width="60"
+                                height="60" margin>
+                        </div>
+                        <div class="col-md-8" text-left>
+                            <h6>{{Manifest.Item.Name}}</h6>
+                        </div>
+                        <div class="col-md-2" f-16 text-gray-light>x{{Manifest.Qty}}</div>
+                    </div>
+                </td>
+                <td class="align-middle">XXXX</td>
+                <td class="align-middle">总额：{{Manifest.Price}}</td>
+                <td class="align-middle" *ngIf="i === 0" [attr.rowspan]="Receipt.Manifests.length">已付款
+                    <br>订单详情</td>
+                <td class="align-middle">评价</td>
+            </tr>
+        </tbody>
+    </table>
+</div>
+
+
+<ng-template #content let-c="close" let-d="dismiss">
+    <div class="modal-header">
+        <h4 class="modal-title" p-l-10>订单详情 </h4>
+        <button type="button" class="close" aria-label="Close" (click)="d('Cross click')">
+            <span aria-hidden="true">&times;</span>
+        </button>
+    </div>
+    <div class="modal-body" p-30 style="min-height:500px">
+        <div class="list-group-item-notflex">
+            <div class="row" align-items-center>
+                <label text-gray-light text-nowrap text-right class="col-md-1" for="member-recommend">订单号：</label>
+                <div class="col-md-3">20685555266602</div>
+                <label text-gray-light text-nowrap text-right class="col-md-1" for="member-points">收件人：</label>
+                <div class="col-md-3">XXX</div>
+                <label text-gray-light text-nowrap text-right class="col-md-1">手机：</label>
+                <div class="col-md-3">
+                    18559996660
+                </div>
+
+            </div>
+
+            <div class="row" align-items-center m-t-15>
+                <label text-gray-light text-nowrap text-right class="col-md-1" for="member-name">邮箱：</label>
+                <div class="col-md-3">13959613000@139.com</div>
+                <label text-gray-light text-nowrap text-right class="col-md-1" for="member-tel">收货地址：</label>
+                <div class="col">广东省珠海市XXXXXXXXXXXXXXXXXXXXXXXXX</div>
+            </div>
+        </div>
+
+        <div class="list-group-item-notflex" m-t-20>
+            <div class="row" align-items-center m-t-15>
+                <label text-gray-light text-nowrap text-right class="col-md-1">订单状态：</label>
+                <div class="col-md-3">
+                    <span class="text-danger">未发货</span>
+                </div>
+                <label text-gray-light text-nowrap text-right class="col-md-1" for="member-date">金额：</label>
+                <div class="col-md-3">
+                    ￥1000.00
+                </div>
+                <label text-gray-light text-nowrap text-right class="col-md-1" for="member-date">运费：</label>
+                <div class="col-md-3">
+                    ￥0.0
+                </div>
+            </div>
+            <div class="row" align-items-center m-t-15>
+                <label text-gray-light text-nowrap text-right class="col-md-1" for="member-mail">下单日期：</label>
+                <div class="col-md-3">
+                    2017-05-20
+                </div>
+                <label text-gray-light text-nowrap text-right class="col-md-1">支付时间：</label>
+                <div class="col-md-3">
+                    2017-05-20
+                </div>
+            </div>
+        </div>
+
+        <ul class="list-group" m-t-20>
+            <li class="list-group-item">
+                <div class="input-group">
+                    <div class="dropdown" ngbDropdown>
+                        <button class="btn btn-secondary dropdown-toggle" type="button" ngbDropdownToggle>
+                            选择物流快递
+                        </button>
+                        <div class="dropdown-menu">
+                            <a class="dropdown-item">EMS</a>
+                            <a class="dropdown-item">顺风</a>
+                            <a class="dropdown-item">圆通</a>
+                        </div>
+                    </div>
+                    <input type="text" class="form-control" placeholder="请输入物流单号">
+                    <button type="button" class="btn btn-primary" style="margin-left:5px">保存</button>
+                </div>
+            </li>
+        </ul>
+
+
+    </div>
+    <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" (click)="c('Close click')">关闭</button>
+    </div>
+</ng-template>
