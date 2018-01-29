@@ -81,19 +81,20 @@ table.table {
         tbody {
             border-top: none;
             td {
-                border: solid 1px lighten($gray-light, 30%);
+                border: solid 1px lighten($gray-light, 40%);
                 text-align: center;
                 font-size: 12px;
             }
-            .spacing {
-                background-color: transparent;
-                td {
-                    height: 20px;
-                    border: none;
-                }
-            }
+
             tr.t-title {
                 background-color: $gray-lighter;
+            }
+        }
+        tr.spacing {
+            background-color: transparent;
+            td, th {
+                height: 20px;
+                border-color: transparent;
             }
         }
     }
