@@ -20,9 +20,11 @@ export class UOrderListComponent implements OnInit
 
     async Refresh()
     {
-        this.ReceiptList = await this.ReceiptSvc.SellList();
-        console.log(this.ReceiptList);
-
+        this.ReceiptList = await this.ReceiptSvc.BuyList();
+        this.ReceiptList.forEach(item =>
+        {
+            console.log(item);
+        });
         // console.log('receipt ' + JSON.stringify(this.ReceiptList));
     }
 
