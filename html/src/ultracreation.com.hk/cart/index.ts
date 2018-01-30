@@ -9,23 +9,14 @@ import * as Types from 'services/cloud/types';
 export class CartPage implements OnInit
 {
     constructor(private CartSvc: TShoppingCart, private ReceiptSvc: TReceiptService,
-        private ItemSvc: TItemService, private router: Router)
+        private router: Router)
     {
         this.Manifests = [];
     }
 
     ngOnInit()
     {
-        this.ItemSvc.Published()
-            .then((PublishedList) =>
-            {
-                console.log('published list len: ' + PublishedList.length);
-                PublishedList.forEach((Published) => this.CartSvc.Add(Published));
-            })
-            .then(() =>
-            {
-                this.Refresh();
-            });
+        this.Refresh();
     }
 
     Refresh()
@@ -95,6 +86,9 @@ export class CartPage implements OnInit
     CommitReceipt()
     {
         // this.router.navigate(['order'], { queryParams: { page: 1 } });
+        if (this.CartSvc.Selected.size === 0)
+            console.error('No item selected');
+
         let Receipt = new TReceipt();
         this.CartSvc.Selected.forEach((Manifest) => Receipt.AddManifest(Manifest));
         Receipt.Status = Types.TReceiptStatus.WaitForPayment;
