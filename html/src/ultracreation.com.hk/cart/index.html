@@ -20,28 +20,28 @@
                         <td colspan="2">
                             <div class="row" align-items-center>
                                 <div class="col-md-2" text-left>
-                                    <img src="{{Manifest.Item.AvatarUrl}}" title=""  width="60" height="60">
+                                    <img src="{{Manifest.Item.AvatarUrl}}" title=""  [routerLink]="['/pro-detail', Manifest.Id]"  width="60" height="60">
                                 </div>
                                 <div class="col-md-8" text-left>
                                     <h6>{{Manifest.Item.Name}}</h6>
                                 </div>
                             </div>
                         </td>
-                        <td>{{Manifest.Pricing.Retail}}</td>
-                        <td>
-                            <div class="input-group" padding-horizontal>
-                                <span class="input-group-addon" id="btnGroupAddon" (click)="AddQty(Manifest)">-</span>
-                                <span class="form-control" text-center>{{Manifest.Qty}}</span>
-                                <span class="input-group-addon" id="btnGroupAddon" (click)="SubQty(Manifest)">+</span>
+                        <td class="align-middle">{{Manifest.Pricing.Retail}}</td>
+                        <td class="align-middle">
+                            <div class="input-group input-group-sm" padding-horizontal>
+                                <span class="input-group-addon handle-pointer" id="btnGroupAddon" (click)="SubQty(Manifest)">-</span>
+                                <span class="form-control justify-content-center">{{Manifest.Qty}}</span>
+                                <span class="input-group-addon handle-pointer" id="btnGroupAddon" (click)="AddQty(Manifest)">+</span>
                             </div>
                         </td>
-                        <td>{{Manifest.Price}}</td>
-                        <td (click)="Delete(Manifest)">删除</td>
+                        <td class="align-middle">{{Manifest.Price}}</td>
+                        <td class="align-middle" text-center><a href="javascript:void(0)" class="btn btn-sm btn-link" (click)="Delete(Manifest)">删除</a></td>
                     </tr>
                 </tbody>
                 <tfoot class="no-border">
                     <tr>
-                        <td><input type="checkbox"></td>
+                        <td><input type="checkbox" [ngModel]="AllItemSelected" (ngModelChange)="ToggleSelectAll()"></td>
                         <td>全选</td>
                         <td><a>删除选中的商品</a></td>
                         <td colspan="3" text-right>
