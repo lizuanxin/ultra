@@ -1,5 +1,28 @@
+.table-order {
+    tbody {
+
+        td {
+            border: solid 1px lighten($gray-light, 40%);
+            text-align: center;
+            font-size: 12px;
+        }
+
+        tr.t-title {
+            background-color: lighten($gray-lighter,5%);
+        }
+    }
+    tr.spacing {
+        background-color: transparent;
+        td, th {
+            height: 20px;
+            border-top-color: transparent;
+            border-left-color: transparent;
+            border-right-color: transparent;
+        }
+    }
+}
 .order-split-header{
-    background-color: #f2f2f2;
+    background-color: lighten($gray-lighter,5%);
     ul{
         margin: 0;
         border-bottom: solid 1px white;
