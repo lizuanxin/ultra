@@ -51,97 +51,132 @@
             </tr>
         </thead>
         <tbody *ngFor="let Receipt of ReceiptList">
-            <tr>
-                <td colspan="6" style="padding: 0">
-                    <div class="order-split-header">
-                        <ul class="row">
-                            <li class="col-md-2 text-left">
-                                <span class="dealtime" title="{{Receipt.Timestamp}}">{{Receipt.Timestamp}}</span>
-
-                            </li>
-                            <li class="col-md-3 text-left">
-                                <span class="number">
-                                    订单号：
-                                    <a href="#none">{{Receipt.Id}}</a>
-                                </span>
-                            </li>
-                            <li class="col-md-7">
-                                <span class="">您订单中的商品在不同库房或属不同商家，故拆分为以下订单分开配送，给您带来的不便敬请谅解。</span>
-                            </li>
-                        </ul>
-                        <ul class="row">
-                            <li class="col-md-2 text-left">收货人：{{Receipt.ToAddress}}</li>
-                            <li class="col-md-2 text-left">
-                                <span class="order-count">订单金额：
-                                    <em>¥24.60</em>
-                                </span>
-                            </li>
-                            <li class="col-md-2">
-                                <span class="order-pay">
-                                    支付方式: 在线支付
-                                </span>
-                            </li>
-                            <li class="col-md-3">
-                                <span class="order-status">
-                                    订单状态：已拆分
-                                </span>
-                            </li>
-                            <li class="col-md-3 text-right">
-                                查看拆分详情&gt;
-                            </li>
-                        </ul>
-                    </div>
-                </td>
-            </tr>
-            <ng-container *ngFor="let ipts of Receipt.ChildReceipts">
+            <ng-template [ngIf]="Receipt.HasChildReceipt">
                 <tr>
-                    <td colspan="6">
-                        <div class="order-split-list">
+                    <td colspan="6" style="padding: 0">
+                        <div class="order-split-header">
                             <ul class="row">
                                 <li class="col-md-2 text-left">
-                                    <span class="dealtime" title="{{ipts.Timestamp}}">{{ipts.Timestamp}}</span>
+                                    <span class="dealtime" title="{{Receipt.Timestamp}}">{{Receipt.Timestamp}}</span>
+
                                 </li>
-                                <li class="col-md-2 text-left">
-                                    <span class="number">
-                                        订单号：
-                                        <a href="#none">{{ipts.Seller_Id}}</a>
+                                <li class="col-md-3 text-left" text-gray-light>
+                                    订单号：
+                                    <span text-gray>
+                                        {{Receipt.Id}}
                                     </span>
                                 </li>
-                                <li class="col-md-2 text-left">
-                                    <span class="order-shop">
-                                        XX旗舰店
+                                <li class="col-md-7 text-right">
+                                    <span text-gray-light>您订单中的商品在不同库房或属不同商家，故拆分为以下订单分开配送，给您带来的不便敬请谅解。</span>
+                                </li>
+                            </ul>
+                            <ul class="row">
+                                <li class="col-md-2 text-left" text-gray-light>收货人：<span text-gray>{{Receipt.ToAddress}}</span></li>
+                                <li class="col-md-2 text-left" text-gray-light>
+                                    订单金额：
+                                    <span text-gray>
+                                        ¥24.60
                                     </span>
                                 </li>
-                                <li class="col-md-6 text-right">
-                                    <a>删除</a>
+                                <li class="col-md-2" text-gray-light>
+                                    支付方式：
+                                    <span text-gray>
+                                        在线支付
+                                    </span>
+                                </li>
+                                <li class="col-md-3" text-gray-light>
+                                    订单状态：
+                                    <span text-gray>
+                                        已拆分
+                                    </span>
+                                </li>
+                                <li class="col-md-3 text-right">
+                                    查看拆分详情&gt;
                                 </li>
                             </ul>
                         </div>
                     </td>
                 </tr>
-                <ng-container *ngFor="let Manifest of ipts.Manifests">
+
+                <ng-container *ngFor="let ipts of Receipt.ChildReceipts">
                     <tr>
-                        <td colspan="2">
-                            <div class="row" align-items-center>
-                                <div class="col-md-2" text-left>
-                                    <img src="{{Manifest.Item.AvatarUrl === null ? 'assets/images/pic-sm-empty.gif' : Manifest.Item.AvatarUrl}}" title="" width="60" height="60" margin>
-                                </div>
-                                <div class="col-md-8" text-left>
-                                    <h6>{{Manifest.Item.Name}}</h6>
-                                </div>
-                                <div class="col-md-2" f-16 text-gray-light>x1</div>
+                        <td colspan="6">
+                            <div class="order-split-list">
+                                <ul class="row">
+                                    <li class="col-md-2 text-left">
+                                        <span class="dealtime" title="{{ipts.Timestamp}}">{{ipts.Timestamp}}</span>
+                                    </li>
+                                    <li class="col-md-2 text-left">
+                                        <span class="number">
+                                            订单号：
+                                            <a href="#none">{{ipts.Seller_Id}}</a>
+                                        </span>
+                                    </li>
+                                    <li class="col-md-2 text-left">
+                                        <span class="order-shop">
+                                            XX旗舰店
+                                        </span>
+                                    </li>
+                                    <li class="col-md-6 text-right">
+                                        <a>删除</a>
+                                    </li>
+                                </ul>
                             </div>
                         </td>
-                        <td class="align-middle">XXXX</td>
-                        <td class="align-middle">总额：100</td>
-                        <td class="align-middle">已付款
-                            <br>订单详情</td>
-                        <td class="align-middle">评价</td>
                     </tr>
+                    <ng-container *ngFor="let Manifest of ipts.Manifests">
+                        <tr>
+                            <td colspan="2">
+                                <div class="row" align-items-center>
+                                    <div class="col-md-2" text-left>
+                                        <img src="{{Manifest.Item.AvatarUrl === null ? 'assets/images/pic-sm-empty.gif' : Manifest.Item.AvatarUrl}}" title="" width="60" height="60" margin>
+                                    </div>
+                                    <div class="col-md-8" text-left>
+                                        <h6>{{Manifest.Name}}</h6>
+                                    </div>
+                                    <div class="col-md-2" f-16 text-gray-light>x{{Manifest.Qty}}</div>
+                                </div>
+                            </td>
+                            <td class="align-middle">XXXX</td>
+                            <td class="align-middle">总额：{{Manifest.Price}}</td>
+                            <td class="align-middle">已付款
+                                <br>订单详情</td>
+                            <td class="align-middle">评价</td>
+                        </tr>
+                    </ng-container>
                 </ng-container>
-            </ng-container>
+            </ng-template>
+            <ng-template [ngIf]="!Receipt.HasChildReceipt">
+                    <tr class="t-title">
+                            <td colspan="8">
+                                <div text-left p-5>
+                                    <span text-gray-light>{{Receipt.Timestamp}}</span>
+                                    <span text-gray-light margin-left>订单号：</span>
+                                    <span>{{Receipt.Id}}</span>
+                                    <span pull-right>删除</span>
+                                </div>
+                            </td>
+                        </tr>
+                        <tr *ngFor="let Manifest of Receipt.Manifests; let i = index">
+                            <td colspan="2">
+                                <div class="row" align-items-center>
+                                    <div class="col-md-2" text-left>
+                                        <img src="{{Manifest.Item.AvatarUrl === null ? 'assets/images/pic-sm-empty.gif' : Manifest.Item.AvatarUrl}}" title=""  width="60" height="60" margin>
+                                    </div>
+                                    <div class="col-md-8" text-left >
+                                        <h6>{{Manifest.Item.Name}}</h6>
+                                    </div>
+                                    <div class="col-md-2" f-16 text-gray-light>x{{Manifest.Qty}}</div>
+                                </div>
+                            </td>
+                            <td class="align-middle">XXXX</td>
+                            <td class="align-middle">总额：{{Manifest.Price}}</td>
+                            <td class="align-middle" *ngIf="i === 0" [attr.rowspan]="Receipt.Manifests.length">已付款<br>订单详情</td>
+                            <td class="align-middle">评价</td>
+                        </tr>
+            </ng-template>
             <tr class="spacing">
-                <td colspan="6">{{Receipt.Manifests}}</td>
+                <td colspan="6"></td>
             </tr>
         </tbody>
     </table>
