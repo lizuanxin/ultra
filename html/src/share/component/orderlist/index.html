@@ -56,21 +56,21 @@
                     <div class="order-split-header">
                         <ul class="row">
                             <li class="col-md-2 text-left">
-                                <span class="dealtime" title="2016-12-30 11:18:14">2016-12-30 11:18:14</span>
+                                <span class="dealtime" title="{{Receipt.Timestamp}}">{{Receipt.Timestamp}}</span>
 
                             </li>
-                            <li class="col-md-2 text-left">
+                            <li class="col-md-3 text-left">
                                 <span class="number">
                                     订单号：
-                                    <a href="#none">47474329554</a>
+                                    <a href="#none">{{Receipt.Id}}</a>
                                 </span>
                             </li>
-                            <li class="col-md-8">
+                            <li class="col-md-7">
                                 <span class="">您订单中的商品在不同库房或属不同商家，故拆分为以下订单分开配送，给您带来的不便敬请谅解。</span>
                             </li>
                         </ul>
                         <ul class="row">
-                            <li class="col-md-2 text-left">收货人：李钻新</li>
+                            <li class="col-md-2 text-left">收货人：{{Receipt.ToAddress}}</li>
                             <li class="col-md-2 text-left">
                                 <span class="order-count">订单金额：
                                     <em>¥24.60</em>
@@ -93,101 +93,55 @@
                     </div>
                 </td>
             </tr>
-            <tr>
-                <td colspan="6">
-                    <div class="order-split-list">
-                        <ul class="row">
-                            <li class="col-md-2 text-left">
-                                <span class="dealtime" title="2016-12-30 11:18:14">2016-12-30 11:18:14</span>
-                            </li>
-                            <li class="col-md-2 text-left">
-                                <span class="number">
-                                    订单号：
-                                    <a href="#none">47474329554</a>
-                                </span>
-                            </li>
-                            <li class="col-md-2 text-left">
-                                <span class="order-shop">
-                                    XX旗舰店
-                                </span>
-                            </li>
-                            <li class="col-md-6 text-right">
-                                <a>删除</a>
-                            </li>
-                        </ul>
-                    </div>
-                </td>
-            </tr>
-            <tr>
-                <td colspan="2">
-                    <div class="row" align-items-center>
-                        <div class="col-md-2" text-left>
-                            <img src="/uploads/806799653b361520df6e1a8f3d20335258fa8258.jpg" title="" width="60" height="60" margin>
+            <ng-container *ngFor="let ipts of Receipt.ChildReceipts">
+                <tr>
+                    <td colspan="6">
+                        <div class="order-split-list">
+                            <ul class="row">
+                                <li class="col-md-2 text-left">
+                                    <span class="dealtime" title="{{ipts.Timestamp}}">{{ipts.Timestamp}}</span>
+                                </li>
+                                <li class="col-md-2 text-left">
+                                    <span class="number">
+                                        订单号：
+                                        <a href="#none">{{ipts.Seller_Id}}</a>
+                                    </span>
+                                </li>
+                                <li class="col-md-2 text-left">
+                                    <span class="order-shop">
+                                        XX旗舰店
+                                    </span>
+                                </li>
+                                <li class="col-md-6 text-right">
+                                    <a>删除</a>
+                                </li>
+                            </ul>
                         </div>
-                        <div class="col-md-8" text-left>
-                            <h6>xxxxxx</h6>
-                        </div>
-                        <div class="col-md-2" f-16 text-gray-light>x1</div>
-                    </div>
-                </td>
-                <td class="align-middle">XXXX</td>
-                <td class="align-middle">总额：100</td>
-                <td class="align-middle">已付款
-                    <br>订单详情</td>
-                <td class="align-middle">评价</td>
-            </tr>
-            <tr>
-                <td colspan="2">
-                    <div class="row" align-items-center>
-                        <div class="col-md-2" text-left>
-                            <img src="/uploads/806799653b361520df6e1a8f3d20335258fa8258.jpg" title="" width="60" height="60" margin>
-                        </div>
-                        <div class="col-md-8" text-left>
-                            <h6>xxxxxx</h6>
-                        </div>
-                        <div class="col-md-2" f-16 text-gray-light>x1</div>
-                    </div>
-                </td>
-                <td class="align-middle">XXXX</td>
-                <td class="align-middle">总额：100</td>
-                <td class="align-middle">已付款
-                    <br>订单详情</td>
-                <td class="align-middle">评价</td>
-            </tr>
-
+                    </td>
+                </tr>
+                <ng-container *ngFor="let Manifest of ipts.Manifests">
+                    <tr>
+                        <td colspan="2">
+                            <div class="row" align-items-center>
+                                <div class="col-md-2" text-left>
+                                    <img src="{{Manifest.Item.AvatarUrl === null ? 'assets/images/pic-sm-empty.gif' : Manifest.Item.AvatarUrl}}" title="" width="60" height="60" margin>
+                                </div>
+                                <div class="col-md-8" text-left>
+                                    <h6>{{Manifest.Item.Name}}</h6>
+                                </div>
+                                <div class="col-md-2" f-16 text-gray-light>x1</div>
+                            </div>
+                        </td>
+                        <td class="align-middle">XXXX</td>
+                        <td class="align-middle">总额：100</td>
+                        <td class="align-middle">已付款
+                            <br>订单详情</td>
+                        <td class="align-middle">评价</td>
+                    </tr>
+                </ng-container>
+            </ng-container>
             <tr class="spacing">
-                <td colspan="6"></td>
-            </tr>
-            <tr class="t-title">
-                <td colspan="8">
-                    <div text-left p-5>
-                        <span text-gray-light>{{Receipt.Timestamp}}</span>
-                        <span text-gray-light margin-left>订单号：</span>
-                        <span>{{Receipt.Id}}</span>
-                        <span pull-right>
-                            <i icon>&#xe900;</i>
-                        </span>
-                    </div>
-                </td>
-            </tr>
-            <tr *ngFor="let Manifest of Receipt.Manifests; let i = index">
-                <td colspan="2">
-                    <div class="row" align-items-center>
-                        <div class="col-md-2" text-left>
-                            <img src="{{Manifest.Item.AvatarUrl === null ? 'assets/images/pic-sm-empty.gif' : Manifest.Item.AvatarUrl}}" title="" width="60"
-                                height="60" margin>
-                        </div>
-                        <div class="col-md-8" text-left>
-                            <h6>{{Manifest.Item.Name}}</h6>
-                        </div>
-                        <div class="col-md-2" f-16 text-gray-light>x{{Manifest.Qty}}</div>
-                    </div>
-                </td>
-                <td class="align-middle">XXXX</td>
-                <td class="align-middle">总额：{{Manifest.Price}}</td>
-                <td class="align-middle" *ngIf="i === 0" [attr.rowspan]="Receipt.Manifests.length">已付款
-                    <br>订单详情</td>
-                <td class="align-middle">评价</td>
+                <td colspan="6">{{Receipt.Manifests}}</td>
             </tr>
         </tbody>
     </table>
