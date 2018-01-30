@@ -1,6 +1,6 @@
 import { Component, OnInit, ViewChild, ElementRef, Renderer } from '@angular/core';
 import { Router, ActivatedRoute, Params } from '@angular/router';
-import {Types} from 'services';
+import {Types, TShoppingCart} from 'services';
 import {SwiperComp} from 'UltraCreation/ng-ion/swiper';
 import {TDomainService} from 'services/domain';
 import { TypeInfo } from 'UltraCreation/Core/TypeInfo';
@@ -8,7 +8,8 @@ import { TypeInfo } from 'UltraCreation/Core/TypeInfo';
 
 @Component({selector: 'app-productdetail-page', templateUrl: './index.html'})
 export class ProDetailPage implements OnInit {
-    constructor(private elementRef: ElementRef, private renderer: Renderer, private router: Router, private route: ActivatedRoute, private DomainService: TDomainService)
+    constructor(private elementRef: ElementRef, private renderer: Renderer, private router: Router,
+        private route: ActivatedRoute, private DomainService: TDomainService, private CartSvc: TShoppingCart)
     {
 
     }
@@ -19,6 +20,7 @@ export class ProDetailPage implements OnInit {
         {
             if (TypeInfo.Assigned(item))
             {
+                this.Published = item;
                 this.AvatarUrl = item.Item['AvatarUrl'];
                 this.PublishedItem = item.Item as Types.IItem;
                 this.PublishedPrice = (item.Item as Types.IItem).PricingList[0] as Types.ILocalizedPricing;
@@ -53,8 +55,8 @@ export class ProDetailPage implements OnInit {
     AddCart()
     {
         // this.ObjClone();
+        this.CartSvc.Add(this.Published);
         setTimeout(() => this.router.navigate(['/cart']));
-
     }
 
     LeftViewListen()
@@ -181,6 +183,7 @@ export class ProDetailPage implements OnInit {
 
     }
 
+    Published: Types.IPublished;
     PublishedItem = new Object() as Types.IItem;
     PublishedPic = new Array<Types.IPicture>();
     PublishedPrice = new Object() as Types.ILocalizedPricing;

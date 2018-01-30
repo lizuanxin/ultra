@@ -67,7 +67,7 @@ export class TReceiptService
     {
         const NewReceipt = new TReceipt();
         NewReceipt.Assign(Receipt, true);
-        Snap.set(Receipt.Id, Receipt);
+        Snap.set(Receipt.Id, NewReceipt);
     }
 
     private Http = new TRestClient('/api/receipt');
