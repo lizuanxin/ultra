@@ -22,6 +22,8 @@ export class CartPage implements OnInit
     Refresh()
     {
         this.Manifests = this.CartSvc.List();
+        console.log(this.Manifests);
+
     }
 
     get AllItemSelected(): boolean
