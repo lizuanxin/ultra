@@ -80,6 +80,7 @@ declare module './cloud/types/receipt'
     interface IReceipt
     {
         readonly IsParent: boolean;
+        readonly HasChildReceipt: boolean;
 
         AddManifest(Manifest: Types.IManifest);
         RemoveManifest(Manifest: Types.IManifest);
@@ -93,7 +94,12 @@ export class TReceipt extends TAssignable implements Types.IReceipt
 {
     get IsParent(): boolean
     {
-        return TypeInfo.Assigned(this.SellerChildReceiptMap);
+        return ! TypeInfo.Assigned((this as any).ParentId);
+    }
+
+    get HasChildReceipt(): boolean
+    {
+        return TypeInfo.Assigned(this.SellerChildReceiptMap) && this.SellerChildReceiptMap.size > 0;
     }
 
     AddManifest(Manifest: Types.IManifest)
