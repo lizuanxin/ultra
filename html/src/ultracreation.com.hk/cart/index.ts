@@ -1,6 +1,6 @@
 import {Component, OnInit, ViewChild} from '@angular/core';
 import { RouterLink, Router } from '@angular/router';
-import {TItemService} from 'services';
+import {TItemService, TAuthService} from 'services';
 import * as Types from 'services/cloud/types';
 import { TShoppingCart } from 'services/shopping_cart';
 
@@ -8,20 +8,19 @@ import { TShoppingCart } from 'services/shopping_cart';
 @Component({selector: 'app-shopcart-page', templateUrl: './index.html'})
 export class CartPage implements OnInit
 {
-    constructor(private CartSvc: TShoppingCart, private router: Router)
+    constructor(private AuthSvc: TAuthService, private CartSvc: TShoppingCart, private router: Router)
     {
         this.Manifests = [];
     }
 
     ngOnInit()
     {
-        setTimeout(() => this.Refresh());
+        this.Refresh();
     }
 
-    Refresh()
+    async Refresh()
     {
-        this.Manifests = this.CartSvc.List();
-        console.log('Cart items: ' + JSON.stringify(this.Manifests));
+        this.Manifests = await this.CartSvc.List();
     }
 
     get AllItemSelected(): boolean
@@ -39,10 +38,7 @@ export class CartPage implements OnInit
 
     SelectionChanged(Selected: boolean, Manifest: Types.IManifest)
     {
-        if (Selected)
-            this.CartSvc.Selected.add(Manifest);
-        else
-            this.CartSvc.Selected.delete(Manifest);
+        return this.CartSvc.SelectionChanged(Selected, Manifest);
     }
 
     IsSelected(Manifest: Types.IManifest)

@@ -3,7 +3,7 @@ import {Observable} from 'rxjs/Observable';
 import 'rxjs/add/operator/map';
 import 'rxjs/add/operator/debounceTime';
 import 'rxjs/add/operator/distinctUntilChanged';
-import {Component, OnInit, Input, ViewChild} from '@angular/core';
+import {Component, OnInit, Input, ViewChild, Output, EventEmitter} from '@angular/core';
 import {TypeInfo} from 'UltraCreation/Core/TypeInfo';
 import {THttpClient} from 'UltraCreation/Core/Http';
 import {Types, TAuthService} from 'services';
@@ -141,9 +141,20 @@ export class ReceivingComponent implements OnInit
             }
     }
 
+    get Selected(): Types.IUserAddress
+    {
+        return this._Selected;
+    }
+
+    set Selected(Address: Types.IUserAddress)
+    {
+        this._Selected = Address;
+        this.OnSelected.emit(this._Selected);
+    }
+
     AddressList: Array<Types.IUserAddress> = [];
     IsShowAddresses: boolean = false;
-    Selected: Types.IUserAddress;
+    _Selected: Types.IUserAddress;
     ModalTitle: string;
     ModalAddress: Types.IUserAddress;
     CountryList: string[] = [];
@@ -164,5 +175,6 @@ export class ReceivingComponent implements OnInit
     SearchCountry: (input: Observable<string>) => Observable<string[]>;
     JSONObject: any;
     @Input() toggleTheme: boolean = false;
+    @Output() OnSelected = new EventEmitter<Types.IUserAddress>();
 }
 
