@@ -1,7 +1,6 @@
 import {Component, OnInit, ViewChild} from '@angular/core';
 import { RouterLink, Router } from '@angular/router';
 import {TItemService} from 'services';
-import { TReceiptService, TReceipt } from 'services/receipt';
 import * as Types from 'services/cloud/types';
 import { TShoppingCart } from 'services/shopping_cart';
 
@@ -9,8 +8,7 @@ import { TShoppingCart } from 'services/shopping_cart';
 @Component({selector: 'app-shopcart-page', templateUrl: './index.html'})
 export class CartPage implements OnInit
 {
-    constructor(private CartSvc: TShoppingCart, private ReceiptSvc: TReceiptService,
-        private router: Router)
+    constructor(private CartSvc: TShoppingCart, private router: Router)
     {
         this.Manifests = [];
     }
@@ -85,17 +83,12 @@ export class CartPage implements OnInit
         return RetVal;
     }
 
-    CommitReceipt()
+    Settlement()
     {
-        // this.router.navigate(['order'], { queryParams: { page: 1 } });
         if (this.CartSvc.Selected.size === 0)
             console.error('No item selected');
-
-        let Receipt = new TReceipt();
-        this.CartSvc.Selected.forEach((Manifest) => Receipt.AddManifest(Manifest));
-        Receipt.Status = Types.TReceiptStatus.WaitForPayment;
-        Receipt.ToAddress = 'awerwer';
-        this.ReceiptSvc.Save(Receipt);
+        else
+            this.router.navigate(['order']);
     }
 
     App = window.App;

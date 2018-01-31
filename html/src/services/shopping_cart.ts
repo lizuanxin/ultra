@@ -32,6 +32,7 @@ export class TShoppingCart
                 }
             }
         }
+        this.Selected.clear();
     }
 
     SaveToLocalCache()
