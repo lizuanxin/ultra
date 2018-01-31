@@ -63,6 +63,37 @@ export class TReceiptService
         this.BuyReceiptSnap.delete(Receipt.Id);
     }
 
+    async Deliver(Receipt: Types.IReceipt) // seller
+    {
+        const NewStatus = await this.Http.Post('/deliver', {Id: Receipt.Id}).toPromise().then((res) => res.Content);
+        const ReceiptObj = this.SellReceiptSnap.get(Receipt.Id);
+        if (TypeInfo.Assigned(ReceiptObj))
+            ReceiptObj.Status = NewStatus;
+    }
+
+    async Confirm(Receipt: Types.IReceipt) // buyer
+    {
+        const NewStatus = await this.Http.Post('/confirm', {Id: Receipt.Id}).toPromise().then((res) => res.Content);
+        const ReceiptObj = this.BuyReceiptSnap.get(Receipt.Id);
+        if (TypeInfo.Assigned(ReceiptObj))
+            ReceiptObj.Status = NewStatus;
+    }
+
+    async Refund(Receipt: Types.IReceipt)
+    {
+        const NewStatus = await this.Http.Post('/refund', {Id: Receipt.Id}).toPromise().then((res) => res.Content);
+        const ReceiptObj = this.BuyReceiptSnap.get(Receipt.Id);
+        if (TypeInfo.Assigned(ReceiptObj))
+            ReceiptObj.Status = NewStatus;
+    }
+
+    async Cancel(Receipt: Types.IReceipt)
+    {
+        const NewStatus = await this.Http.Post('/cancel', {Id: Receipt.Id}).toPromise().then((res) => res.Content);
+        if (NewStatus === Types.TReceiptStatus.Cancel)
+            this.BuyReceiptSnap.delete(Receipt.Id);
+    }
+
     private HashReceipt(Snap: Map<string, Types.IReceipt>, Receipt: Types.IReceipt)
     {
         const NewReceipt = new TReceipt();

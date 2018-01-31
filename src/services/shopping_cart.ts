@@ -2,20 +2,36 @@ import {Injectable} from '@angular/core';
 import {TypeInfo} from 'UltraCreation/Core/TypeInfo';
 
 import * as Types from './cloud/types';
+import { TDomainService } from 'services/domain';
 
 @Injectable()
 export class TShoppingCart
 {
-    constructor()
+    constructor(private DomainSvc: TDomainService)
     {
         this.LoadFromLocalCache();
     }
 
-    LoadFromLocalCache()
+    async LoadFromLocalCache()
     {
+        console.log('Load shopping item from cache...');
         const ManifestItems = JSON.parse(localStorage.getItem('last_manifest_items')) as Array<Types.IManifest>;
         if (TypeInfo.Assigned(ManifestItems))
-            ManifestItems.forEach(Manifest => this.ItemCache.set(Manifest.Id, Manifest));
+        {
+            for (let Manifest of ManifestItems)
+            {
+                try
+                {
+                    const Published = await this.DomainSvc.Open(Manifest.Id);
+                    if (TypeInfo.Assigned(Published))
+                        this.Add(Published, Manifest.Qty);
+                }
+                catch (err)
+                {
+                    console.log(err);
+                }
+            }
+        }
     }
 
     SaveToLocalCache()

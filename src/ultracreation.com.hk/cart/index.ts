@@ -1,8 +1,9 @@
 import {Component, OnInit, ViewChild} from '@angular/core';
 import { RouterLink, Router } from '@angular/router';
-import {TShoppingCart, TItemService} from 'services';
+import {TItemService} from 'services';
 import { TReceiptService, TReceipt } from 'services/receipt';
 import * as Types from 'services/cloud/types';
+import { TShoppingCart } from 'services/shopping_cart';
 
 
 @Component({selector: 'app-shopcart-page', templateUrl: './index.html'})
@@ -16,14 +17,13 @@ export class CartPage implements OnInit
 
     ngOnInit()
     {
-        this.Refresh();
+        setTimeout(() => this.Refresh());
     }
 
     Refresh()
     {
         this.Manifests = this.CartSvc.List();
-        console.log(this.Manifests);
-
+        console.log('Cart items: ' + JSON.stringify(this.Manifests));
     }
 
     get AllItemSelected(): boolean
