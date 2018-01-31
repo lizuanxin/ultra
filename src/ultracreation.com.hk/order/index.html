@@ -23,7 +23,7 @@
         </ul>
     </div>
     <div>
-        <receiv [toggleTheme]="true"></receiv>
+        <receiv [toggleTheme]="true" (OnSelected)="SelectUserAddress($event)"></receiv>
         <div class="card" margin-top>
             <div class="card-header" p-5>
                 <span class="title">支付方式</span>

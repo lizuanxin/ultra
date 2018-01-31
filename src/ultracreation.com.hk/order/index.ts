@@ -16,8 +16,20 @@ export class OrderInfoPage implements OnInit
         this.SelectedGoods = Array.from(this.Cart.Selected.values());
     }
 
+    SelectUserAddress(Address: Types.IUserAddress)
+    {
+        console.log('selected user address');
+        this.SelectedAddress  = Address;
+    }
+
     async SubmitOrder()
     {
+        if (! TypeInfo.Assigned(this.SelectedAddress))
+        {
+            console.log('err no selected address...');
+            return;
+        }
+
         const Receipt = new TReceipt();
         this.SelectedGoods.forEach((Selected) => Receipt.AddManifest(Selected));
         Receipt.ToAddress = '';
@@ -25,6 +37,7 @@ export class OrderInfoPage implements OnInit
         console.log('the receipt submit success...');
     }
 
+    SelectedAddress: Types.IUserAddress;
     SelectedGoods: Array<Types.IManifest>;
     App = window.App;
 }
