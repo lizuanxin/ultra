@@ -9,12 +9,13 @@ export class TShoppingCart
 {
     constructor(private DomainSvc: TDomainService)
     {
-        this.LoadFromLocalCache();
     }
 
     async LoadFromLocalCache()
     {
         console.log('Load shopping item from cache...');
+        this.IsLocalCacheLoaded = false;
+        this.ItemCache.clear();
         const ManifestItems = JSON.parse(localStorage.getItem('last_manifest_items')) as Array<Types.IManifest>;
         if (TypeInfo.Assigned(ManifestItems))
         {
@@ -32,7 +33,7 @@ export class TShoppingCart
                 }
             }
         }
-        this.Selected.clear();
+        this.IsLocalCacheLoaded = true;
     }
 
     SaveToLocalCache()
@@ -40,8 +41,11 @@ export class TShoppingCart
         localStorage.setItem('last_manifest_items', JSON.stringify(Array.from(this.ItemCache.values())));
     }
 
-    List(): Array<Types.IManifest>
+    async List(): Promise<Array<Types.IManifest>>
     {
+        if (! this.IsLocalCacheLoaded)
+            await this.LoadFromLocalCache();
+
         return Array.from(this.ItemCache.values());
     }
 
@@ -103,4 +107,5 @@ export class TShoppingCart
 
     Selected = new Set<Types.IManifest>();
     protected ItemCache: Map<string, Types.IManifest> = new Map<string, Types.IManifest>();
+    protected IsLocalCacheLoaded: boolean = false;
 }
