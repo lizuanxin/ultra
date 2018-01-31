@@ -1,9 +1,10 @@
 import { Component, OnInit, ViewChild, ElementRef, Renderer } from '@angular/core';
 import { Router, ActivatedRoute, Params } from '@angular/router';
-import {Types, TShoppingCart} from 'services';
+import {Types} from 'services';
 import {SwiperComp} from 'UltraCreation/ng-ion/swiper';
 import {TDomainService} from 'services/domain';
 import { TypeInfo } from 'UltraCreation/Core/TypeInfo';
+import { TShoppingCart } from 'services/shopping_cart';
 
 
 @Component({selector: 'app-productdetail-page', templateUrl: './index.html'})

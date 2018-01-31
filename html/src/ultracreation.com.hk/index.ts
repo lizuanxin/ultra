@@ -22,6 +22,7 @@ import { PrivacyPage } from './privacy';
 import { ProDetailPage } from './pro-detail';
 import { TDomainService, DOMAIN_CONFIG, IDomainConfig } from 'services/domain';
 import { UOrderListComponent } from 'share/component/orderlist';
+import { TShoppingCart } from 'services/shopping_cart';
 
 
 const DOMAIN_DI_CONFIG: IDomainConfig = {Id: 'kktYWb9kklZYlL8k'};
@@ -81,7 +82,7 @@ const routes: Routes = [
         SiteNavbarComponent,
         FooterComponent
     ],
-    providers: [{provide: DOMAIN_CONFIG, useValue: DOMAIN_DI_CONFIG}, TDomainService]
+    providers: [{provide: DOMAIN_CONFIG, useValue: DOMAIN_DI_CONFIG}, TDomainService, TShoppingCart]
 })
 export class UltraCreationDomain
 {

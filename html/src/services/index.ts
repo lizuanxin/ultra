@@ -8,8 +8,6 @@ import {TItemService} from './item';
 import {TFileService} from './file';
 import {TReceiptService} from 'services/receipt';
 
-import {TShoppingCart} from './shopping_cart';
-
 import { NgxModule } from 'share/ngx.module';
 
 // AoT requires an exported function for factories
@@ -30,14 +28,14 @@ export function HttpLoaderFactory(http: HttpClient)
         NgxModule
     ],
     providers: [
-        TApplication, TAuthService, TItemService, TShoppingCart, TFileService, TReceiptService
+        TApplication, TAuthService, TItemService, TFileService, TReceiptService
     ],
 })
 export class ServiceModule
 {
 }
 
-export {TApplication, TAuthService, TItemService, TShoppingCart, TFileService, TReceiptService};
+export {TApplication, TAuthService, TItemService, TFileService, TReceiptService};
 
 import * as Types from './cloud/types';
 export {Types};
