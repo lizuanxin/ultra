@@ -53,39 +53,22 @@
                         </tr>
                     </thead>
                     <tbody>
-                        <tr>
+                        <tr *ngFor="let Selected of SelectedGoods">
                             <td>
                                 <div class="row" align-items-center justify-content-between>
                                     <div class="col-md-2" text-left>
-                                        <img src="https://img10.360buyimg.com/N6/s60x60_jfs/t4342/155/3609233741/276893/9e00f98f/58e4add8Nd2e50d3f.jpg" title=""
+                                        <img src="{{Selected.Item.AvatarUrl}}" title=""
                                             width="60" height="60">
                                     </div>
                                     <div class="col-md-9" text-left>
-                                        <h6 margin-top>Cablemagic</h6>
+                                        <h6 margin-top>{{Selected.Item.Name}}</h6>
                                     </div>
                                 </div>
                             </td>
                             <td text-center>
-                                1
+                                {{Selected.Qty}}
                             </td>
-                            <td text-center>¥318.00</td>
-                        </tr>
-                        <tr>
-                            <td>
-                                <div class="row" align-items-center justify-content-between>
-                                    <div class="col-md-2" text-left>
-                                        <img src="https://img10.360buyimg.com/N6/s60x60_jfs/t4342/155/3609233741/276893/9e00f98f/58e4add8Nd2e50d3f.jpg" title=""
-                                            width="60" height="60">
-                                    </div>
-                                    <div class="col-md-9" text-left>
-                                        <h6 margin-top>Cablemagic</h6>
-                                    </div>
-                                </div>
-                            </td>
-                            <td text-center>
-                                1
-                            </td>
-                            <td text-center>¥318.00</td>
+                            <td text-center>¥ {{Selected.Price}}</td>
                         </tr>
                     </tbody>
                 </table>
@@ -131,7 +114,7 @@
 
         </div>
         <div text-right margin-top>
-            <button class="btn btn-lg btn-danger">提交订单</button>
+            <button class="btn btn-lg btn-danger" (click)="SubmitOrder()">提交订单</button>
         </div>
     </div>
 </div>
