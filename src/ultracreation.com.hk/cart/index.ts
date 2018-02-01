@@ -15,12 +15,12 @@ export class CartPage implements OnInit
 
     ngOnInit()
     {
-        this.Refresh();
+        this.CartSvc.Init().then(() => this.Refresh());
     }
 
-    async Refresh()
+    Refresh()
     {
-        this.Manifests = await this.CartSvc.List();
+        this.Manifests = this.CartSvc.List();
     }
 
     get AllItemSelected(): boolean
@@ -31,7 +31,7 @@ export class CartPage implements OnInit
     ToggleSelectAll()
     {
         if (this.CartSvc.Selected.size < this.Manifests.length)
-            this.Manifests.forEach((Manifest) => this.CartSvc.Selected.add(Manifest));
+            this.Manifests.forEach((Manifest) => this.SelectionChanged(true, Manifest));
         else
             this.CartSvc.Selected.clear();
     }

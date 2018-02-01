@@ -11,12 +11,17 @@ export class TShoppingCart
     {
     }
 
-    async List(): Promise<Array<Types.IManifest>>
+    async Init()
     {
         if (! TypeInfo.Assigned(this.RevertingCache))
             this.RevertingCache = this.RevertFromLocalCache();
 
-        return this.RevertingCache.then(() => Array.from(this.ItemCache.values()));
+        return await this.RevertingCache;
+    }
+
+    List(): Array<Types.IManifest>
+    {
+        return Array.from(this.ItemCache.values());
     }
 
     Size(): number

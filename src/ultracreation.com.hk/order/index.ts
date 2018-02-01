@@ -13,12 +13,12 @@ export class OrderInfoPage implements OnInit
 
     ngOnInit()
     {
-        this.SelectedGoods = Array.from(this.Cart.Selected.values());
+        this.Cart.Init().then(() => this.SelectedGoods = Array.from(this.Cart.Selected));
     }
 
     SelectUserAddress(Address: Types.IUserAddress)
     {
-        console.log('selected user address');
+        console.log('selected user address: ' + JSON.stringify(Address));
         this.SelectedAddress  = Address;
     }
 
@@ -32,8 +32,9 @@ export class OrderInfoPage implements OnInit
 
         const Receipt = new TReceipt();
         this.SelectedGoods.forEach((Selected) => Receipt.AddManifest(Selected));
-        Receipt.ToAddress = '';
+        Receipt.ToAddress = JSON.stringify(this.SelectedAddress);
         await this.ReceiptSvc.Save(Receipt);
+        this.Cart.Clear();
         console.log('the receipt submit success...');
     }
 
