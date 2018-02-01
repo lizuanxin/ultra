@@ -1,4 +1,16 @@
 .table-order {
+    thead {
+        th {
+            padding: 10px;
+        }
+    }
+    thead tr.spacing {
+        th {
+            height: 20px;
+            border-left: solid 1px transparent;
+            border-right: solid 1px transparent;
+        }
+    }
     tbody {
         td {
             border: solid 1px lighten($gray-light, 40%);
@@ -8,15 +20,12 @@
         tr.t-title {
             background-color: lighten($gray-lighter, 5%);
         }
-    }
-    tr.spacing {
-        background-color: transparent;
-        td,
-        th {
-            height: 20px;
-            border-top-color: transparent;
-            border-left-color: transparent;
-            border-right-color: transparent;
+        tr.spacing {
+            background-color: transparent;
+            td {
+                height: 20px;
+                border: solid 1px transparent;
+            }
         }
     }
 }
@@ -42,6 +51,43 @@
             padding: 10px;
         }
     }
+}
+
+.order-detail {
+    padding:16px;
+    font-size: 12px;
+    .title,
+    .order-content {
+        label {
+            padding: 0;
+            text-align: right;
+            color: $gray-light;
+        }
+    }
+    .split-dash-line li{
+        margin: 16px 0;
+        border-bottom: dashed 1px $gray-lighter;
+    }
+    .pro-list{
+        h2{
+            font-size:14px;
+            margin-bottom: 10px;
+        }
+        p{
+            margin: 3px 0 0;
+            font-size: 12px;
+            color: $gray-light;
+        }
+    }
+
+    .order-total{
+        font-size: 15px;
+        label{
+            padding: 0;
+            color: $gray-light;
+        }
+    }
+
 }
 
 .order-complate {
