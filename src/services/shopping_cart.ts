@@ -9,6 +9,7 @@ export class TShoppingCart
 {
     constructor(private DomainSvc: TDomainService)
     {
+        setTimeout(() => this.Init());
     }
 
     async Init()
