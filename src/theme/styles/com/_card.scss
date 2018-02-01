@@ -1,41 +1,33 @@
-.card{
-    .default-tips,.action-tips{
+.card {
+    .default-tips,
+    .action-tips {
         display: inline-block;
-        color:white;
+        color: white;
         font-size: 12px;
         padding: 5px;
     }
-    .default-tips{
-        background-color:$gray;
-
+    .default-tips {
+        background-color: $gray;
     }
-    .action-tips{
+    .action-tips {
         cursor: pointer;
-        background-color:$brand-primary;
+        background-color: $brand-primary;
     }
-    .card-header{
-        .title{
+    .card-header {
+        .title {
             display: inline-block;
-            font-size:.9rem;
+            font-size: .9rem;
             padding: 0.25rem 0.5rem;
         }
-        button.btn-icon{
-            background-color:transparent;
+        button.btn-icon {
+            background-color: transparent;
             font-size: 1.8rem;
-            margin-top:-5px;
+            margin-top: -5px;
         }
     }
-}
-.card-body{
-    ul.row{
-        padding:30px 15px;
-        border-bottom:solid 1px #e1e1e1;
-        &:last-child{
-            border-bottom-color: transparent;
+    &.card-receiv {
+        .card-body {
+            padding: 0;
         }
-    }
-    .card-detail{
-        color:#636363;
-        margin:0 0 2em 0;
     }
 }
