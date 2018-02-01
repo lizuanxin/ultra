@@ -18,7 +18,7 @@
             <div class="row" m-t-15>
                 <label class="col-md-2"></label>
                 <div class="col-md-5">
-                    <img class="img-fluid" src="" />
+                    <img class="img-fluid" src="{{Item.AvatarUrl}}" />
                 </div>
             </div>
             <div class="row" align-items-center m-t-15>
@@ -26,8 +26,8 @@
                 <div class="col-md-8">
                     <div class="img-preview" id="image-2">
                         <ng-container *ngFor="let pic of Item.Pictures">
-                            <span [style.background-image]="'url(' + pic.Path + ')'">
-                                <button class="btn btn-sm btn-danger del" (click)="RemovePicture(pic)">{{'button.del'|translate}}</button>
+                            <span [style.background-image]="'url(' + pic.Path + ')'" (click)="SetAvatar(pic.Path)">
+                                <button class="btn btn-sm btn-danger del fix" (click)="RemovePicture(pic)">{{'button.del'|translate}}</button>
                             </span>
                         </ng-container>
                     </div>
@@ -38,7 +38,13 @@
                     </button>
                 </div>
             </div>
-            <div class="card" margin-top>
+            <div class="row" align-items-center m-t-15>
+                <label text-gray-light text-nowrap text-right class="col-md-2">{{'item.description'|translate}}:</label>
+                <div class="col-md-8">
+                        <input type="text" class="form-control">
+                </div>
+            </div>
+            <!-- <div class="card" margin-top>
                 <h5 class="card-header">{{'item.editor.pricing'|translate}}</h5>
 
                 <div class="card-body">
@@ -76,9 +82,9 @@
                     </div>
                 </div>
 
-            </div>
+            </div> -->
         </tab>
-<!-- product -->
+        <!-- product -->
         <tab heading="{{'item.editor.property'|translate}}" *ngIf="Item.IsProduct">
             <div class="row row-all align-items-center" m-t-30 padding>
                 <label text-gray-light text-nowrap text-right class="col-md-1">{{'item.model'|translate}}: </label>
@@ -107,48 +113,87 @@
                 </div>
             </div>
             <div class="card" margin-top>
-                    <h5 class="card-header">
-                        <button class="btn-icon float-right"><i icon>&#xf100;</i></button>
-                        自定义类别
-                    </h5>
-                    <div class="card-body">
-                        <table class="table table-bordered">
-                                <thead>
-                                <tr>
-                                    <th width="33%" text-center>
-                                        名称
-                                    </th>
-                                    <th width="33%" text-center>
-                                        值
-                                    </th>
-                                    <th width="33%" text-center>操作</th>
-                                </tr>
-                                </thead>
-                                <tbody>
-                                    <tr>
-                                        <td text-center>
-                                            <input type="text" class="form-control">
-                                        </td>
-                                        <td>
-                                            <input type="text" class="form-control">
-                                        </td>
-                                        <td text-right><button class="btn btn-sm btn-danger">{{'button.del'|translate}}</button></td>
-                                    </tr>
-                                </tbody>
-                        </table>
-                    </div>
+                <h5 class="card-header">
+                    <button class="btn-icon float-right">
+                        <i icon>&#xf100;</i>
+                    </button>
+                    自定义类别
+                </h5>
+                <div class="card-body">
+                    <table class="table table-bordered">
+                        <thead>
+                            <tr>
+                                <th width="33%" text-center>
+                                    名称
+                                </th>
+                                <th width="33%" text-center>
+                                    值
+                                </th>
+                                <th width="33%" text-center>操作</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td text-center>
+                                    <input type="text" class="form-control">
+                                </td>
+                                <td>
+                                    <input type="text" class="form-control">
+                                </td>
+                                <td text-right>
+                                    <button class="btn btn-sm btn-danger">{{'button.del'|translate}}</button>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
                 </div>
+            </div>
 
         </tab>
 
         <tab heading="{{'item.editor.detail'|translate}}">
-                <div [froalaEditor] [(froalaModel)]="Item.Html"></div>
+            <div [froalaEditor] [(froalaModel)]="Item.Html"></div>
 
             <!-- <quill-editor class="form-control" [options]="editorConfig" [(ngModel)]="preHtml" (blur)="onEditorBlured($event)"
             (focus)="onEditorFocused($event)" (change)="onContentChanged($event)" (ready)="OnQuillCreated($event)"></quill-editor>
             <textarea [(ngModel)]="testHtml" (ngModelChange)="PlanTextChanged($event)"></textarea> -->
         </tab>
-<!-- Package -->
+
+        <tab heading="{{'item.editor.pricing'|translate}}">
+            <div class="row row-all align-items-center" margin-top>
+                <label text-gray-light text-nowrap class="col-md-1">{{'item.region'|translate}}: </label>
+                <div class="col-md-5">
+                    <div class="btn-group" dropdown>
+                        <button dropdownToggle type="button" class="form-control dropdown-toggle">
+                            {{CurrPricing.Region}}
+                            <span class="caret"></span>
+                        </button>
+                        <ul *dropdownMenu class="dropdown-menu" role="menu">
+                            <li role="menuitem" *ngFor="let region of Regions">
+                                <a class="dropdown-item" href="javascript:void(0)" (click)="CurrPricing=Item.GetPricing(region.Name)">{{region.Name}}</a>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+                <label text-gray-light text-nowrap text-right class="col-md-2">{{'item.retail'|translate}}: </label>
+                <div class="col-md-4">
+                    <input type="number" class="form-control" step="0.01" min="1" [(ngModel)]="CurrPricing.Retail" (keyup)="OnChange($event)">
+                </div>
+                <label text-gray-light text-nowrap class="col-md-1">{{'item.bulk'|translate}}: </label>
+                <div class="col-md-4">
+                    <input type="number" class="form-control" step="0.01" min="0" [(ngModel)]="CurrPricing.Bulk" (keyup)="OnChange($event)">
+                </div>
+                <label text-gray-light text-nowrap text-right class="col-md-2 offset-1">{{'item.bulkcount'|translate}}: </label>
+                <div class="col-md-4">
+                    <input type="number" class="form-control" min="0" step="500" [(ngModel)]="CurrPricing.BulkCount">
+                </div>
+                <label text-gray-light text-nowrap class="col-md-1">{{'item.distribute'|translate}}: </label>
+                <div class="col-md-4">
+                    <input type="number" min="0" step="0.01" class="form-control" [(ngModel)]="CurrPricing.Distribute">
+                </div>
+            </div>
+        </tab>
+        <!-- Package -->
         <tab heading="{{'item.editor.related'|translate}}" *ngIf="Item.IsPackage">
             <div class="associated" m-h-10 m-v-20>
                 <ul class="row" dnd-sortable-container [sortableData]="Item.ProductInfoList">
