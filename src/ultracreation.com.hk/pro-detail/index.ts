@@ -80,13 +80,13 @@ export class ProDetailPage implements OnInit {
    }
 
 
-    private MouseHandler(e: MouseEvent): void
+    private MouseHandler(event): void
     {
         let view_width = this.LeftView.nativeElement.clientWidth;
         let view_height = this.LeftView.nativeElement.clientHeight;
 
-        this.CalculateMaskWH();
-        switch (e.type)
+        // this.CalculateMaskWH();
+        switch (event.type)
         {
             case 'mouseover':
                 this.RightView.nativeElement.style.display = 'block';
@@ -99,29 +99,19 @@ export class ProDetailPage implements OnInit {
                 break;
 
             case 'mousemove':
+                event = event || window.event;
 
-                let left = e.pageX - e.movementX - this.Mask.nativeElement.clientWidth / 2;
-                let top = e.pageY -  e.movementY - this.Mask.nativeElement.clientHeight / 2;
+                let left = event.clientX - event.movementX - this.Mask.nativeElement.offsetWidth * 3.2;
+                let top = event.clientY -  event.movementY - this.Mask.nativeElement.offsetHeight * 2;
 
-                if (left < 0)
-                {
-                    left = 0;
-                }
-                else if (left > e.clientX - this.Mask.nativeElement.clientWidth)
-                {
-                    left = e.clientX - this.Mask.nativeElement.clientWidth;
-                }
+                left = left < 0 ? 0 : left;
+                left = left > event.offsetWidth - this.Mask.nativeElement.offsetWidth ? event.offsetWidth - this.Mask.nativeElement.offsetWidth : left;
+                top = top < 0 ? 0 : top;
+                top = top > event.offsetHeight - this.Mask.nativeElement.offsetHeight ? event.offsetHeight - this.Mask.nativeElement.offsetHeight : top;
 
-                if (top < 0){
-                    top = 0;
-                }
-                else if (top > e.clientY - this.Mask.nativeElement.clientHeight)
-                {
-                    top = e.clientY - this.Mask.nativeElement.clientHeight;
-                }
 
-                this.Mask.nativeElement.style.left = left + 'px';
-                this.Mask.nativeElement.style.top = top + 'px';
+                this.Mask.nativeElement.style.left = left  + 'px';
+                this.Mask.nativeElement.style.top = top  + 'px';
 
                 let rate = this.BigImg.nativeElement.clientWidth / view_width;
                 this.BigImg.nativeElement.style.left = - rate * left + 'px';

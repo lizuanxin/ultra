@@ -28,7 +28,7 @@
 .gallery-top {
     overflow: hidden;
     position: relative;
-    height: 300px;
+    height: 320px;
     width: 100%;
     background-repeat: no-repeat;
     background-size: cover;
@@ -68,6 +68,8 @@
 
 .mask{
     display: none;
+    width: 100px;
+    height: 100px;
     position: absolute;
     background: rgba(252, 242, 157, .5);
     cursor: move;
