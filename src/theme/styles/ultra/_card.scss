@@ -1,0 +1,13 @@
+.card-body{
+    >ul.row{
+        padding:30px 15px;
+        border-bottom:solid 1px #e1e1e1;
+        &:last-child{
+            border-bottom-color: transparent;
+        }
+    }
+    .card-detail{
+        color:#636363;
+        margin:0 0 2em 0;
+    }
+}
