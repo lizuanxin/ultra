@@ -1,13 +1,12 @@
 import {NgModule, Component} from '@angular/core';
 import {SharedModule, RouterModule, Routes} from 'share';
-import {QuillEditorModule} from 'ngx-quill-editor';
-
 import {TApplication} from 'services/application';
 
 import {PicturesComponent} from './pictures';
 import {TItemListComponent} from './list';
 import {TItemEditorComponent} from './editor';
 import {TItemSelectorComponent} from 'items/list/selector';
+import {FroalaEditorModule, FroalaViewModule} from 'angular-froala-wysiwyg';
 
 @Component({selector: 'items', templateUrl: '../share/layout.module.html'})
 export class LayoutComponent
@@ -34,7 +33,9 @@ const routes: Routes = [
 @NgModule({
     imports: [
         SharedModule,
-        QuillEditorModule,
+        // QuillEditorModule,
+        FroalaEditorModule.forRoot(),
+        FroalaViewModule.forRoot()
     ],
     declarations: [
         LayoutComponent,

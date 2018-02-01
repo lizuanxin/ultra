@@ -8,6 +8,7 @@ import {TItemService} from 'services/item';
 
 import {TBasicModalView} from 'share/component/basicmodal';
 import {TItemSelectorComponent} from 'items/list/selector';
+import { log } from 'util';
 
 @Component({selector: 'item-editor', templateUrl: './index.html'})
 export class TItemEditorComponent extends TBasicModalView implements OnInit
@@ -21,6 +22,8 @@ export class TItemEditorComponent extends TBasicModalView implements OnInit
     ngOnInit()
     {
         this.CurrPricing = this.Item.GetPricing(this.Regions[0].Name, 0);
+        console.log(this.Item);
+
     }
 
     AddPicture()
@@ -35,22 +38,6 @@ export class TItemEditorComponent extends TBasicModalView implements OnInit
         this.Item.Pictures.splice(Idx, 1);
     }
 
-    OnQuillCreated(quill)
-    {
-        const toolbar = quill.getModule('toolbar');
-        toolbar.addHandler('image', this.QuillImageHandler.bind(this, quill));
-    }
-
-    QuillImageHandler(quill)
-    {
-        App.ShowModal(TFileLibComponent, {Multiple: false, ModalMode: true}, {size: 'lg'})
-            .then((Pictures) =>
-            {
-                const range = quill.getSelection(true);
-                const index = range.index + range.length;
-                quill.editor.insertEmbed(range.index, 'image', Pictures[0].Path);
-            });
-    }
 
     AddProduct()
     {
@@ -92,6 +79,7 @@ export class TItemEditorComponent extends TBasicModalView implements OnInit
     {
         ProductInfo.Qty ++;
     }
+
 
     CurrPricing: Types.ILocalizedPricing;
 
