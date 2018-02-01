@@ -41,7 +41,7 @@ img {
     display: inline-block;
     span {
         position: relative;
-        display: inline-flex;
+        display: inline-block;
         flex-direction: column;
         justify-content: center;
         text-align: center;
@@ -60,7 +60,12 @@ img {
             display: inline-block;
             visibility: hidden;
             margin: auto 15px;
-            flex: 0 0 auto;
+            // flex: 0 0 auto;
+            &.fix{
+
+                left: 20px;
+                bottom: -30px;
+            }
         }
     }
 }

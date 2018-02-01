@@ -26,6 +26,11 @@ export class TItemEditorComponent extends TBasicModalView implements OnInit
 
     }
 
+    SetAvatar(url)
+    {
+        this.Item.AvatarUrl = url;
+    }
+
     AddPicture()
     {
         App.ShowModal(TFileLibComponent, {Multiple: true, ModalMode: true}, {size: 'lg'})

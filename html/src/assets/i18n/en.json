@@ -106,6 +106,7 @@
         "name": "Name",
         "avatar": "Avatar",
         "pictures": "Thumbnail",
+        "description": "Description",
         "timestamp": "Updated",
         "pubstatus": "status",
         "action": "Action",
