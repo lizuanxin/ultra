@@ -9,112 +9,130 @@
                 <p>我的购物车</p>
             </li>
             <li>
-                <div class="step-inner-bar cur-inner-bar">
+                <div class="step-inner-bar" [class.cur-inner-bar]="!OrderComplate">
                     <span>2</span>
                 </div>
                 <p>填写核对订单信息</p>
             </li>
             <li>
-                <div class="step-inner-bar">
+                <div class="step-inner-bar" [class.cur-inner-bar]="OrderComplate">
                     <span>3</span>
                 </div>
                 <p>成功提交订单</p>
             </li>
         </ul>
     </div>
-    <div>
-        <receiv [toggleTheme]="true" (OnSelected)="SelectUserAddress($event)"></receiv>
-        <div class="card" margin-top>
-            <div class="card-header" p-5>
-                <span class="title">支付方式</span>
-            </div>
-            <div class="card-body">
-                <div padding>
-                    <span class="select-box active">在线支付
-                        <i></i>
-                    </span>
-                    <span class="select-box">货到付款
-                        <i></i>
-                    </span>
+    <ng-template [ngIf]="!OrderComplate">
+        <div>
+            <receiv [toggleTheme]="true" (OnSelected)="SelectUserAddress($event)"></receiv>
+            <div class="card" margin-top>
+                <div class="card-header" p-5>
+                    <span class="title">支付方式</span>
+                </div>
+                <div class="card-body">
+                    <div padding>
+                        <span class="select-box active">在线支付
+                            <i></i>
+                        </span>
+                        <span class="select-box">货到付款
+                            <i></i>
+                        </span>
+                    </div>
                 </div>
             </div>
-        </div>
-        <div class="card" margin-top>
-            <div class="card-header" p-5>
-                <span class="title">清单列表</span>
-            </div>
-            <div class="card-body">
-                <table class="table table-bordered table-condensed table-middled table-header-normal">
-                    <thead>
-                        <tr>
-                            <th width="50%">商品</th>
-                            <th width="20%" text-center>数量</th>
-                            <th width="30%" text-center>金额</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <tr *ngFor="let Selected of SelectedGoods">
-                            <td>
-                                <div class="row" align-items-center justify-content-between>
-                                    <div class="col-md-2" text-left>
-                                        <img src="{{Selected.Item.AvatarUrl}}" title=""
-                                            width="60" height="60">
+            <div class="card" margin-top>
+                <div class="card-header" p-5>
+                    <span class="title">清单列表</span>
+                </div>
+                <div class="card-body">
+                    <table class="table table-bordered table-condensed table-middled table-header-normal">
+                        <thead>
+                            <tr>
+                                <th width="50%">商品</th>
+                                <th width="20%" text-center>数量</th>
+                                <th width="30%" text-center>金额</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr *ngFor="let Selected of SelectedGoods">
+                                <td>
+                                    <div class="row" align-items-center justify-content-between>
+                                        <div class="col-md-2" text-left>
+                                            <img src="{{Selected.Item.AvatarUrl}}" title=""
+                                                width="60" height="60">
+                                        </div>
+                                        <div class="col-md-9" text-left>
+                                            <h6 margin-top>{{Selected.Item.Name}}</h6>
+                                        </div>
                                     </div>
-                                    <div class="col-md-9" text-left>
-                                        <h6 margin-top>{{Selected.Item.Name}}</h6>
-                                    </div>
-                                </div>
-                            </td>
-                            <td text-center>
-                                {{Selected.Qty}}
-                            </td>
-                            <td text-center>¥ {{Selected.Price}}</td>
-                        </tr>
-                    </tbody>
-                </table>
-            </div>
-        </div>
-        <div class="card" margin-top>
-            <div class="card-header" p-5>
-                <span class="title">发票信息</span>
-            </div>
-            <div class="card-body">
-                <div padding>
-                    <span class="select-box active">普通发票
-                        <i></i>
-                    </span>
-                    <span class="select-box">电子发票
-                        <i></i>
-                    </span>
-                    <span class="select-box">增值税发票
-                        <i></i>
-                    </span>
+                                </td>
+                                <td text-center>
+                                    {{Selected.Qty}}
+                                </td>
+                                <td text-center>¥ {{Selected.Price}}</td>
+                            </tr>
+                        </tbody>
+                    </table>
                 </div>
             </div>
-        </div>
+            <div class="card" margin-top>
+                <div class="card-header" p-5>
+                    <span class="title">发票信息</span>
+                </div>
+                <div class="card-body">
+                    <div padding>
+                        <span class="select-box active">普通发票
+                            <i></i>
+                        </span>
+                        <span class="select-box">电子发票
+                            <i></i>
+                        </span>
+                        <span class="select-box">增值税发票
+                            <i></i>
+                        </span>
+                    </div>
+                </div>
+            </div>
 
-        <div class="grid" margin-top padding>
-            <ul class="row">
-                <li class="col-8 col-md-11" text-right>
-                    <span text-danger>1</span> 件商品，总商品金额：</li>
-                <li class="col-4 col-md-1" text-right no-padding>￥3188.00</li>
-            </ul>
-            <ul class="row">
-                <li class="col-8 col-md-11" text-right>运费：</li>
-                <li class="col-4 col-md-1" text-right no-padding>￥0.00</li>
-            </ul>
-            <ul class="row">
-                <li class="col-8 col-md-11" text-right>优惠：</li>
-                <li class="col-4 col-md-1" text-right no-padding>￥0.00</li>
-            </ul>
-            <ul class="row">
-                <li class="col-8 col-md-11" text-right>应付总额：</li>
-                <li class="col-4 col-md-1" text-right no-padding>￥3188.00</li>
-            </ul>
+            <div class="grid" margin-top padding>
+                <ul class="row">
+                    <li class="col-8 col-md-11" text-right>
+                        <span text-danger>1</span> 件商品，总商品金额：</li>
+                    <li class="col-4 col-md-1" text-right no-padding>￥3188.00</li>
+                </ul>
+                <ul class="row">
+                    <li class="col-8 col-md-11" text-right>运费：</li>
+                    <li class="col-4 col-md-1" text-right no-padding>￥0.00</li>
+                </ul>
+                <ul class="row">
+                    <li class="col-8 col-md-11" text-right>优惠：</li>
+                    <li class="col-4 col-md-1" text-right no-padding>￥0.00</li>
+                </ul>
+                <ul class="row">
+                    <li class="col-8 col-md-11" text-right>应付总额：</li>
+                    <li class="col-4 col-md-1" text-right no-padding>￥3188.00</li>
+                </ul>
 
+            </div>
+            <div text-right margin-top>
+                <button class="btn btn-lg btn-danger" (click)="SubmitOrder()">提交订单</button>
+            </div>
         </div>
-        <div text-right margin-top>
-            <button class="btn btn-lg btn-danger" (click)="SubmitOrder()">提交订单</button>
+    </ng-template>
+    <ng-template [ngIf]="OrderComplate">
+        <div class="order-complate">
+            <ul class="row justify-content-center align-items-center">
+                <li class="col-md-1">
+                    <i class="icon"></i>
+                </li>
+                <li class="col-md-3">
+                    <h2>订单提交成功</h2>
+                    <p>单号：100000000000000000020170201</p>
+                    <p>订单金额：¥1000元</p>
+                    <p>支付方式：Paypal</p>
+                    <button class="btn btn-success" m-t-30>查看订单详情</button>
+                </li>
+            </ul>
         </div>
-    </div>
+    </ng-template>
 </div>
