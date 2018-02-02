@@ -6,7 +6,7 @@ import {Types} from 'services';
 import {TItemService} from 'services';
 import {TDollService} from 'services/app/doll';
 
-import {TItemSelectorComponent} from 'items/list/selector';
+import {TItemSelectorComponent} from 'items/selector';
 
 @Component({selector: 'doll-room', templateUrl: './index.html', providers: [TDollService]})
 export class TDollRoomComponent implements OnInit

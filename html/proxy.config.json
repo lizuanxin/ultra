@@ -1,6 +1,6 @@
 {
     "/api/*": {
-        "target": "http://localhost:8200",
+        "target": "http://192.168.1.2:8200",
         "secure": false,
         "changeOrigin": true,
         "logLevel": "debug",
@@ -8,7 +8,7 @@
     },
 
     "/uploads/*": {
-        "target": "http://localhost:8200",
+        "target": "http://192.168.1.2:8200",
         "secure": false,
         "changeOrigin": true,
         "logLevel": "debug"

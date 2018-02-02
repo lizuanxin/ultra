@@ -89,6 +89,11 @@
 
             "categories": "Categories",
             "pack": "Pack"
+        },
+
+        "pictures":
+        {
+            "title": "Pictures"
         }
     },
     "item":
@@ -104,6 +109,7 @@
         },
 
         "name": "Name",
+        "snap": "Description",
         "avatar": "Avatar",
         "pictures": "Thumbnail",
         "description": "Description",
@@ -133,6 +139,7 @@
             "title": "Live Stream Server",
             "url": "URL",
             "params": "Parameters",
+            "bandwidth": "Band Width",
             "room_count": "Room Count"
         },
 

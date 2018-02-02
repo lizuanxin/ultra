@@ -7,7 +7,7 @@ import * as Types from 'services/cloud/types';
 import {TItemService} from 'services/item';
 
 import {TBasicModalView} from 'share/component/basicmodal';
-import {TItemSelectorComponent} from 'items/list/selector';
+import {TItemSelectorComponent} from 'items/selector';
 import { log } from 'util';
 
 @Component({selector: 'item-editor', templateUrl: './index.html'})
@@ -17,6 +17,7 @@ export class TItemEditorComponent extends TBasicModalView implements OnInit
     {
         this.Regions = data.Regions;
         this.Item = data.Item.Clone();
+        this.Items = data.items;
     }
 
     ngOnInit()
@@ -41,21 +42,14 @@ export class TItemEditorComponent extends TBasicModalView implements OnInit
         this.Item.Pictures.splice(Idx, 1);
     }
 
-
     AddProduct()
     {
-        /*
         App.ShowModal(TItemSelectorComponent,
-            {FilterItems: this.FilterProducts, FilterType: Types.TItemTypeId.Package}, {size: 'lg'})
+            {Items: this.Items, FilterType: Types.TItemTypeId.Package}, {size: 'lg'})
             .then((SelectedItems) =>
             {
-                if (! TypeInfo.Assigned(SelectedItems))
-                    return;
-
-                for (let SelectedItem of SelectedItems)
-                    (this.Item as TPackage).Add(SelectedItem, 1);
+                console.log(SelectedItems);
             });
-        */
     }
 
     OnChange(e)
@@ -83,7 +77,6 @@ export class TItemEditorComponent extends TBasicModalView implements OnInit
         ProductInfo.Qty ++;
     }
 
-
     CurrPricing: Types.ILocalizedPricing;
     EditConfig: Object =
     {
@@ -94,8 +87,5 @@ export class TItemEditorComponent extends TBasicModalView implements OnInit
 
     @Input() Regions: Array<Types.IRegion>;
     @Input() Item: Types.IItem;
-
-
+    @Input() Items: Array<Types.IProduct>; // for package
 }
-
-

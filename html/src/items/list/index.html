@@ -1,27 +1,13 @@
 <div class="row">
     <div class="col-md-6">
-        <div class="btn-group" dropdown>
-            <button dropdownToggle type="button" class="btn-sm form-control dropdown-toggle" (click)="App.ShowToast('success','wwwwwwww',1000)">
-                {{'items.list.categories'|translate}}
-                <span class="caret"></span>
-            </button>
-            <ul *dropdownMenu class="dropdown-menu" role="menu">
-                <li role="menuitem">
-                    <a class="dropdown-item" href="javascript:void(0)">......</a>
-                </li>
-                <li role="menuitem">
-                    <a class="dropdown-item" href="javascript:void(0)">......</a>
-                </li>
-                <li role="menuitem">
-                    <a class="dropdown-item" href="javascript:void(0)">......</a>
-                </li>
-            </ul>
-        </div>
         <div class="d-inline-block">
-            <button class="btn btn-sm btn-outline-primary" type="button" (click)="CreateNewProduct()">{{'button.add'|translate}}</button>
+            <button class="btn btn-sm btn-primary" type="button" (click)="Refresh()">{{'button.refresh'|translate}}</button>
         </div>
     </div>
     <div class="col-md-6" text-right>
+        <div class="d-inline-block">
+            <button class="btn btn-sm btn-outline-primary" type="button" (click)="CreateNewProduct()">{{'button.add'|translate}}</button>
+        </div>
         <div class="d-inline-block">
             <button class="btn btn-sm btn-primary" type="button" [disabled]="Selected.size<2" (click)="CreateNewPackage()">{{'items.list.pack'|translate}}</button>
         </div>

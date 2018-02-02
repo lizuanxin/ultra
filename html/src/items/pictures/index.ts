@@ -5,7 +5,7 @@ import {THttpClient} from 'UltraCreation/Core/Http';
 import {Types} from 'services';
 
 @Component({selector: 'pic-list', templateUrl: './index.html'})
-export class PicturesComponent implements OnInit
+export class TPicturesComponent implements OnInit
 {
     constructor()
     {

@@ -5,23 +5,25 @@
     <div class="row" margin-bottom>
         <div class="col-md-6">
             <div class="d-inline-block">
-                <button class="btn btn-sm btn-primary" type="button" (click)="OpenModal(content)">{{'button.add'|translate}}</button>
+                <button class="btn btn-sm btn-primary" type="button" (click)="Refresh()">{{'button.refresh'|translate}}</button>
             </div>
             <div class="d-inline-block">
-                <button class="btn btn-sm btn-primary" type="button" (click)="Refresh()">{{'button.refresh'|translate}}</button>
+                <button class="btn btn-sm btn-primary" type="button" (click)="OpenModal(content)">{{'button.add'|translate}}</button>
             </div>
         </div>
     </div>
     <table class="table table-bordered table-hover">
         <thead>
             <th>{{'doll.streamsrv.url'|translate}}</th>
-            <th>{{'doll.streamsrv.params'|translate}}</th>
+            <!-- <th>{{'doll.streamsrv.params'|translate}}</th> -->
+            <th>{{'doll.streamsrv.bandwidth'|translate}}</th>
             <th>{{'doll.streamsrv.room_count'|translate}}</th>
         </thead>
         <tbody>
             <tr *ngFor="let srv of ServerList" (click)="OpenModal(content, srv)">
                 <td>{{srv.URL}}</td>
-                <td>{{srv.params}}</td>
+                <!-- <td>{{srv.params}}</td> -->
+                <td>{{srv.BandWidth}}</td>
                 <td>{{srv.RoomCount}}</td>
             </tr>
         </tbody>
@@ -43,6 +45,10 @@
         <div class="row" align-items-center justify-content-center m-t-15>
             <label text-gray-light text-nowrap text-right class="col-md-2">{{'doll.streamsrv.params'|translate}}：</label>
             <div class="col-md-8"><input type="text" [(ngModel)]="Editing.params" class="form-control"></div>
+        </div>
+        <div class="row" align-items-center justify-content-center m-t-15>
+            <label text-gray-light text-nowrap text-right class="col-md-2">{{'doll.streamsrv.bandwidth'|translate}}：</label>
+            <div class="col-md-8"><input type="text" [(ngModel)]="Editing.BandWidth" class="form-control"></div>
         </div>
     </div>
     <div class="modal-footer">

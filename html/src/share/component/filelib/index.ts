@@ -80,6 +80,7 @@ export class TFileLibComponent extends TBasicModalView implements OnInit
 
     @Input() MultiSelection: boolean = true;
     @Output() OnPictureSelected = new EventEmitter<Array<Types.IFile>>();
+
     @ViewChild('content') contentRef: ElementRef;
 }
 
