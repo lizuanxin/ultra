@@ -71,7 +71,7 @@
                                 </li>
                             </ul>
                             <ul class="row">
-                                <li class="col-md-2 text-left" text-gray-light>收货人：<span text-gray>{{Receipt.ToAddress}}</span></li>
+                                <li class="col-md-2 text-left" text-gray-light>收货人：<span text-gray>{{Receipt.Address.Recipient}}</span></li>
                                 <li class="col-md-2 text-left" text-gray-light>
                                     订单金额：
                                     <span text-gray>
@@ -171,7 +171,7 @@
                             </td>
                             <td class="align-middle">XXXX</td>
                             <td class="align-middle">总额：{{Manifest.Price}}</td>
-                            <td class="align-middle" *ngIf="i === 0" [attr.rowspan]="Receipt.Manifests.length">已付款<br><a [routerLink]="['/ordetail', Manifest.Id]">订单详情</a></td>
+                            <td class="align-middle" *ngIf="i === 0" [attr.rowspan]="Receipt.Manifests.length">{{Status(Receipt.Status)}}<br><a [routerLink]="['/ordetail', Manifest.Id]">订单详情</a></td>
                             <td class="align-middle">评价</td>
                         </tr>
             </ng-template>
