@@ -85,6 +85,7 @@ export class TItemEditorComponent extends TBasicModalView implements OnInit
 
 
     CurrPricing: Types.ILocalizedPricing;
+    EditConfig: Object = { charCounterCount: false, heightMin: 100, heightMax: 500 };
 
     @Input() Regions: Array<Types.IRegion>;
     @Input() Item: Types.IItem;

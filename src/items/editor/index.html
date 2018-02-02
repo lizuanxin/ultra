@@ -153,7 +153,7 @@
         </tab>
 
         <tab heading="{{'item.editor.detail'|translate}}">
-            <div [froalaEditor] [(froalaModel)]="Item.Html"></div>
+            <div [froalaEditor]="EditConfig" [(froalaModel)]="Item.Html" m-t-15></div>
 
             <!-- <quill-editor class="form-control" [options]="editorConfig" [(ngModel)]="preHtml" (blur)="onEditorBlured($event)"
             (focus)="onEditorFocused($event)" (change)="onContentChanged($event)" (ready)="OnQuillCreated($event)"></quill-editor>
