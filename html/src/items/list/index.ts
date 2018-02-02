@@ -106,7 +106,7 @@ export class TItemListComponent implements OnInit
 
                 this.ItemService.Save(RetVal)
                     .then(() => this.Refresh())
-                    .catch((err) => console.log(err));
+                    .catch(err => App.ShowError(err));
             })
             .catch(err =>
             {
