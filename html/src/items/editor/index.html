@@ -24,15 +24,15 @@
             <div class="row" m-t-15>
                 <label class="col-md-2"></label>
                 <div class="col-md-5">
-                    <img class="img-fluid" src="{{Item.AvatarUrl}}" />
+                    <img width="200" height="200" src="{{Item.AvatarUrl}}" />
                 </div>
             </div>
             <div class="row" align-items-center m-t-15>
                 <label text-gray-light text-nowrap text-right class="col-md-2" for="member-name">{{'item.pictures'|translate}}: </label>
                 <div class="col-md-8">
-                    <div class="img-preview" id="image-2">
-                        <ng-container *ngFor="let pic of Item.Pictures">
-                            <span [style.background-image]="'url(' + pic.Path + ')'" (click)="SetAvatar(pic.Path)">
+                    <div class="img-preview" id="image-2" dnd-sortable-container [sortableData]="Item.Pictures">
+                        <ng-container *ngFor="let pic of Item.Pictures; let i = index">
+                            <span [style.background-image]="'url(' + pic.Path + ')'" (click)="SetAvatar(pic.Path)" dnd-sortable [sortableIndex]="i">
                                 <button class="btn btn-sm btn-danger del fix" (click)="RemovePicture(pic)">{{'button.del'|translate}}</button>
                             </span>
                         </ng-container>
