@@ -4,7 +4,7 @@ import {THttpClient} from 'UltraCreation/Core/Http';
 
 import {Types, TItemService} from 'services';
 import {TDollService} from 'services/app/doll';
-import {NgbModal} from 'modal/modal';
+import {NgbModal} from 'share/modal';
 
 @Component({selector: 'doll-streamserver', templateUrl: './index.html', providers: [TDollService]})
 export class TStreamServerComponent implements OnInit
@@ -31,7 +31,7 @@ export class TStreamServerComponent implements OnInit
         else
             this.Editing = this.DollService.ServerCreate();
 
-        this.Modal.open(content).result
+        this.Modal.Open(content).result
             .then(async RetVal =>
             {
                 RetVal = await this.DollService.ServerStore(this.Editing);

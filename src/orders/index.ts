@@ -1,8 +1,8 @@
-import { NgModule, Component } from '@angular/core';
-import { SharedModule, RouterModule, Routes } from 'share';
-import { TApplication } from 'services/application';
-import { OrderListComponent } from 'orders/list';
+import {NgModule, Component} from '@angular/core';
+import {Routes, RouterModule} from '@angular/router';
+import {SharedModule} from 'share';
 
+import {OrderListComponent} from 'orders/list';
 
 @Component({selector: 'orders', templateUrl: '../share/layout.module.html'})
 export class LayoutComponent
@@ -36,10 +36,7 @@ const routes: Routes = [
     ],
     exports: [
     ],
-    providers: [TApplication]
 })
-
-
 export class OrdersModule
 {
 }

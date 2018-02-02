@@ -5,7 +5,7 @@ import {TranslateService} from '@ngx-translate/core';
 
 import {TypeInfo} from 'UltraCreation/Core/TypeInfo';
 import {Platform} from 'UltraCreation/Core/Platform';
-import {NgbModal, NgbModalOptions, NgbModalRef} from '../modal/modal.module';
+import {NgbModal, NgbModalOptions, NgbModalRef} from 'share/modal';
 
 import {TShoppingCart} from './shopping_cart';
 
@@ -97,6 +97,7 @@ export class TApplication
         return this.Translation.instant(Key);
     }
 
+    /*
     async ShowModal(content: any, data?: any, opts?: NgbModalOptions): Promise<any>
     {
         const ModalRef = this.Modal.open(content, opts);
@@ -108,6 +109,7 @@ export class TApplication
         }
         return ModalRef.result;
     }
+    */
 
     ShowAlert(Opts: IAlertOptions | string): Promise<any>
     {
@@ -117,33 +119,51 @@ export class TApplication
         if (! TypeInfo.Assigned(Opts.Buttons))
             Opts.Buttons = [{Text: 'OK'}];
 
-        const ModalRef = this.Modal.open(TAlertComponent, {backdrop: false, windowClass: 'modal-alert'});
-        ModalRef.componentInstance.Opts = Opts;
+        const ModalRef = this.Modal.Open(TAlertComponent, Opts, {backdrop: false, windowClass: 'modal-alert'});
 
         return ModalRef.result.catch((err) => ModalRef.close(null));
     }
 
     ShowError(err: any)
     {
-        this.ShowToast('error', err.message);
+        if (err instanceof Error)
+        {
+            const msg: any = err.message;
+
+            if (TypeInfo.IsObject(msg))
+            {
+                // from http request
+                if (TypeInfo.Assigned(msg.err))
+                    this.ShowToast('error', msg.err);
+                else
+                    this.ShowToast('error', JSON.stringify(msg.err));
+            }
+        }
+        else if (TypeInfo.IsString(err))
+            this.ShowToast('error', err);
     }
 
     ShowToast(type: 'success' | 'info' | 'warning' | 'error',
         message: string, duration: number = 1500): void
     {
+        if (['error', 'warning'].indexOf(type) !== -1)
+            duration *= 10;
+
         const ToastOpts: IToastOptions =
         {
             Type: type,
             Message: message
         };
-        const ModalRef = this.Modal.open(TToastComponent, {backdrop: false, windowClass: 'toast-default'});
-        ModalRef.componentInstance.Opts = ToastOpts;
+
+        const ModalRef = this.Modal.Open(TToastComponent, ToastOpts, {backdrop: true, windowClass: 'toast-default'});
         setTimeout(() => ModalRef.dismiss(), duration);
     }
 
     Platform = new Platform();
     Router: Router;
     Translation: TranslateService;
-    Modal: NgbModal;
     ShoppingCart: TShoppingCart;
+
+    // impossable to globally use
+    private Modal: NgbModal;
 }

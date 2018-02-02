@@ -1,7 +1,7 @@
 import {Component, EventEmitter, Input, Output} from '@angular/core';
 
 import {TypeInfo} from 'UltraCreation/Core/TypeInfo';
-import {TBasicModalView} from 'share/component/basicmodal';
+import {TBasicModalView} from 'share/modal';
 
 import * as Types from 'services/cloud/types';
 
@@ -24,7 +24,7 @@ export class TItemSelectorComponent extends TBasicModalView
         */
     }
 
-    SetModalParams(params: any)
+    SetModalParams(params: any) /**@override */
     {
         console.log(params);
     }
@@ -35,10 +35,6 @@ export class TItemSelectorComponent extends TBasicModalView
 
     ToggleSelectAll()
     {
-        /*
-        const Selected = ! this.AllItemSelected;
-        this.ItemModels.forEach((ItemModel) => ItemModel.IsSelected = Selected);
-        */
     }
 
     ButtonCancel()

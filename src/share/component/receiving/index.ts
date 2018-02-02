@@ -7,12 +7,13 @@ import {Component, OnInit, Input, ViewChild, Output, EventEmitter} from '@angula
 import {TypeInfo} from 'UltraCreation/Core/TypeInfo';
 import {THttpClient} from 'UltraCreation/Core/Http';
 import {Types, TAuthService} from 'services';
+import {NgbModal} from 'share/modal';
 
 @Component({ selector: 'receiv', templateUrl: './index.html' })
 
 export class ReceivingComponent implements OnInit
 {
-    constructor(private Auth: TAuthService)
+    constructor(private Auth: TAuthService, private Modal: NgbModal)
     {
     }
 
@@ -75,7 +76,7 @@ export class ReceivingComponent implements OnInit
         else
             this.ModalTitle = App.Translate('profile.delivery.new');
 
-        App.Modal.open(ModalContent).result
+        this.Modal.Open(ModalContent).result
             .then(ok =>
             {
                 if (TypeInfo.Assigned(data))

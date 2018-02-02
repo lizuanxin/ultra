@@ -1,6 +1,6 @@
 import {NgModule, Component} from '@angular/core';
-import {SharedModule, RouterModule, Routes} from 'share';
-import {TApplication} from 'services/application';
+import {Routes, RouterModule} from '@angular/router';
+import {SharedModule} from 'share';
 
 import {TPicturesComponent} from './pictures';
 import {TItemListComponent} from './list';
@@ -11,7 +11,7 @@ import {FroalaEditorModule, FroalaViewModule} from 'angular-froala-wysiwyg';
 @Component({selector: 'items', templateUrl: '../share/layout.module.html'})
 export class LayoutComponent
 {
-    constructor(App: TApplication)
+    constructor()
     {
     }
 }

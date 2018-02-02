@@ -12,7 +12,7 @@
             <button class="btn btn-sm btn-primary" type="button" [disabled]="Selected.size<2" (click)="CreateNewPackage()">{{'items.list.pack'|translate}}</button>
         </div>
         <div class="btn-group" dropdown>
-            <button dropdownToggle type="button" class="btn-sm form-control dropdown-toggle" placement="bottom right">
+            <button [disabled]="Selected.size==0" dropdownToggle type="button" class="btn-sm form-control dropdown-toggle" placement="bottom right">
                 {{'button.publish'|translate}}
                 <span class="caret"></span>
             </button>
@@ -22,7 +22,7 @@
                         <a class="dropdown-item" href="javascript:void(0)">
                             <!-- <img [src]="domain.AvatarUrl"> -->
                             {{domain.Name}}
-                            <button class="btn btn-sm btn-primary" m-l-10 (click)="Publish(domain)">{{'button.publish'|translate}}</button>
+                            <button class="btn btn-sm btn-primary" m-l-10 [disabled]="Selected.size==0" (click)="Publish(domain)">{{'button.publish'|translate}}</button>
                         </a>
                     </li>
                     <li class="divider dropdown-divider" *ngIf="i !== Domains.length-1"></li>

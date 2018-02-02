@@ -2,7 +2,7 @@ import {Component, OnInit, Input, Output, ElementRef, ViewChild, EventEmitter} f
 
 import {Types} from 'services';
 import {TFileService} from 'services/file';
-import {TBasicModalView} from '../basicmodal';
+import {TBasicModalView} from '../../modal';
 
 @Component({selector: 'file-lib', templateUrl: './index.html'})
 export class TFileLibComponent extends TBasicModalView implements OnInit
