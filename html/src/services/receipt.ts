@@ -86,6 +86,7 @@ declare module './cloud/types/receipt'
     {
         readonly IsParent: boolean;
         readonly HasChildReceipt: boolean;
+        readonly Address: Types.IUserAddress;
 
         AddManifest(Manifest: Types.IManifest);
         RemoveManifest(Manifest: Types.IManifest);
@@ -116,6 +117,14 @@ export class TReceipt extends TAssignable implements Types.IReceipt
         const Idx = this.IndexOfManifest(ManifestOrId);
         if (Idx !== -1)
             this.Manifests.splice(Idx, 1);
+    }
+
+    get Address(): Types.IUserAddress
+    {
+        if (TypeInfo.Assigned(this.ToAddress))
+            return JSON.parse(this.ToAddress);
+        else
+            return null;
     }
 
     private IndexOfManifest(ManifestOrId: Types.IManifest | Types.TIdentify)
