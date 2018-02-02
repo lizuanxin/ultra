@@ -15,95 +15,69 @@ export class TReceiptService
 
     async BuyList(): Promise<Array<Types.IReceipt>>
     {
-        if (! TypeInfo.Assigned(this.BuyReceiptSnap))
-        {
-            this.Auth.Grant(this.Http);
-            const Ary: Array<Types.IReceipt> = await this.Http.Get('/').toPromise().then((res) => res.Content);
-
-            this.BuyReceiptSnap = new Map<string, Types.IReceipt>();
-            for (const Iter of Ary)
-                this.HashReceipt(this.BuyReceiptSnap, Iter);
-        }
-        return Array.from(this.BuyReceiptSnap.values());
+        this.Auth.Grant(this.Http);
+        const Ary: Array<Types.IReceipt> = await this.Http.Get('/').toPromise().then((res) => res.Content);
+        return Ary.map((Iter) => this.CreateReceipt(Iter));
     }
 
     async SellList(): Promise<Array<Types.IReceipt>>
     {
-        if (! TypeInfo.Assigned(this.SellReceiptSnap))
-        {
-            this.Auth.Grant(this.Http);
-            const Ary: Array<Types.IReceipt> = await this.Http.Get('/selllist').toPromise().then((res) => res.Content);
+        this.Auth.Grant(this.Http);
+        const Ary: Array<Types.IReceipt> = await this.Http.Get('/selllist').toPromise().then((res) => res.Content);
+        return Ary.map((Iter) => this.CreateReceipt(Iter));
+    }
 
-            this.SellReceiptSnap = new Map<string, Types.IReceipt>();
-            for (const Iter of Ary)
-                this.HashReceipt(this.SellReceiptSnap, Iter);
-        }
-        return Array.from(this.SellReceiptSnap.values());
+    CreateReceipt(Ref?: Types.IReceipt)
+    {
+        const Receipt = new TReceipt();
+        if (TypeInfo.Assigned(Ref))
+            Receipt.Assign(Ref, true);
+
+        return Receipt;
     }
 
     async Save(Receipt: Types.IReceipt)
     {
         if (Receipt.Manifests.length === 0)
-            return;
-        if (! TypeInfo.Assigned(this.BuyReceiptSnap))
-            await this.BuyList();
+            return new Error('no added manifests');
 
         this.Auth.Grant(this.Http);
         if (! TypeInfo.Assigned(Receipt.Id))
-            this.HashReceipt(this.BuyReceiptSnap, await this.Http.Post('/store', Receipt).toPromise().then((res) => res.Content));
+            await this.Http.Post('/append', Receipt).toPromise().then((res) => res.Content);
         else
-            this.HashReceipt(this.BuyReceiptSnap, await this.Http.Put('/store', Receipt).toPromise().then((res) => res.Content));
-    }
-
-    async Remove(Receipt: Types.IReceipt)
-    {
-        this.Auth.Grant(this.Http);
-        await this.Http.Post('/remove',
-            {Id: Receipt.Id, ChildReceipts: Receipt.ChildReceipts.map((Receipt) => Receipt.Id)}).toPromise();
-        this.BuyReceiptSnap.delete(Receipt.Id);
+            return new Error('can not change receipt by this way');
     }
 
     async Deliver(Receipt: Types.IReceipt) // seller
     {
         const NewStatus = await this.Http.Post('/deliver', {Id: Receipt.Id}).toPromise().then((res) => res.Content);
-        const ReceiptObj = this.SellReceiptSnap.get(Receipt.Id);
-        if (TypeInfo.Assigned(ReceiptObj))
-            ReceiptObj.Status = NewStatus;
+        if (NewStatus === Types.TReceiptStatus.Delivering)
+            Receipt.Status = NewStatus;
     }
 
     async Confirm(Receipt: Types.IReceipt) // buyer
     {
         const NewStatus = await this.Http.Post('/confirm', {Id: Receipt.Id}).toPromise().then((res) => res.Content);
-        const ReceiptObj = this.BuyReceiptSnap.get(Receipt.Id);
-        if (TypeInfo.Assigned(ReceiptObj))
-            ReceiptObj.Status = NewStatus;
+        if (NewStatus === Types.TReceiptStatus.Done)
+            Receipt.Status = NewStatus;
     }
 
     async Refund(Receipt: Types.IReceipt)
     {
         const NewStatus = await this.Http.Post('/refund', {Id: Receipt.Id}).toPromise().then((res) => res.Content);
-        const ReceiptObj = this.BuyReceiptSnap.get(Receipt.Id);
-        if (TypeInfo.Assigned(ReceiptObj))
-            ReceiptObj.Status = NewStatus;
+        if (NewStatus === Types.TReceiptStatus.Refunding)
+            Receipt.Status = NewStatus;
     }
 
     async Cancel(Receipt: Types.IReceipt)
     {
-        const NewStatus = await this.Http.Post('/cancel', {Id: Receipt.Id}).toPromise().then((res) => res.Content);
+        const NewStatus =
+            await this.Http.Post('/cancel', {Id: Receipt.Id, Status: Receipt.Status}).toPromise().then((res) => res.Content);
         if (NewStatus === Types.TReceiptStatus.Cancel)
-            this.BuyReceiptSnap.delete(Receipt.Id);
-    }
-
-    private HashReceipt(Snap: Map<string, Types.IReceipt>, Receipt: Types.IReceipt)
-    {
-        const NewReceipt = new TReceipt();
-        NewReceipt.Assign(Receipt, true);
-        Snap.set(Receipt.Id, NewReceipt);
+            Receipt.Status = NewStatus;
     }
 
     private Http = new TRestClient('/api/receipt');
-    private BuyReceiptSnap: Map<string, Types.IReceipt>;
-    private SellReceiptSnap: Map<string, Types.IReceipt>;
 }
 
 declare module './cloud/types/receipt'
@@ -115,9 +89,6 @@ declare module './cloud/types/receipt'
 
         AddManifest(Manifest: Types.IManifest);
         RemoveManifest(Manifest: Types.IManifest);
-
-        AddChildReceipt(Receipt: Types.IReceipt);
-        RemoveChildReceipt(Receipt: Types.IReceipt);
     }
 }
 
@@ -130,7 +101,7 @@ export class TReceipt extends TAssignable implements Types.IReceipt
 
     get HasChildReceipt(): boolean
     {
-        return TypeInfo.Assigned(this.SellerChildReceiptMap) && this.SellerChildReceiptMap.size > 0;
+        return TypeInfo.Assigned(this.ChildReceipts) && this.ChildReceipts.length > 0;
     }
 
     AddManifest(Manifest: Types.IManifest)
@@ -145,42 +116,6 @@ export class TReceipt extends TAssignable implements Types.IReceipt
         const Idx = this.IndexOfManifest(ManifestOrId);
         if (Idx !== -1)
             this.Manifests.splice(Idx, 1);
-    }
-
-    AddChildReceipt(Receipt: Types.IReceipt)
-    {
-        if (! TypeInfo.Assigned(this.SellerChildReceiptMap))
-            this.SellerChildReceiptMap = new Map<string, Types.IReceipt>();
-
-        this.SellerChildReceiptMap.set(Receipt.Seller_Id, Receipt);
-    }
-
-    RemoveChildReceipt(Receipt: Types.IReceipt)
-    {
-        if (! TypeInfo.Assigned(this.SellerChildReceiptMap))
-            return;
-
-        this.SellerChildReceiptMap.delete(Receipt.Seller_Id);
-    }
-
-    get ChildReceipts(): Array<Types.IReceipt>
-    {
-        if (! TypeInfo.Assigned(this.SellerChildReceiptMap))
-            return [];
-
-        const _ChildReceipts = [];
-        return Array.from(this.SellerChildReceiptMap.values());
-    }
-
-    set ChildReceipts(Values: Array<Types.IReceipt>)
-    {
-        this.SellerChildReceiptMap = new Map<string, Types.IReceipt>();
-        for (const iter of Values)
-        {
-            const Receipt = new TReceipt();
-            Receipt.Assign(iter);
-            this.AddChildReceipt(Receipt);
-        }
     }
 
     private IndexOfManifest(ManifestOrId: Types.IManifest | Types.TIdentify)
@@ -208,6 +143,6 @@ export class TReceipt extends TAssignable implements Types.IReceipt
     Timestamp: Date = null;
 
     Manifests: Types.IManifest[] = [];
-    SellerChildReceiptMap: Map<string, Types.IReceipt>;
+    ChildReceipts: Array<Types.IReceipt>;
 }
 
