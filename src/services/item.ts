@@ -268,10 +268,8 @@ class TItem extends TAssignable implements IItem
 
     protected PersistValueOf(): this /** @override */
     {
-        if (this.Pictures.length > 0)
+        if (this.Pictures.length > 0 && ! TypeInfo.Assigned(this.AvatarUrl))
             this.AvatarUrl = (this.Pictures[0] as Types.IPicture).Path;
-        else
-            this.AvatarUrl = null;
 
         for (let I = this.PricingList.length - 1; I >= 0; I --)
         {
