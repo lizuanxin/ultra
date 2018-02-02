@@ -9,6 +9,11 @@ export class TAlertComponent implements OnInit
         this.Opts = {};
     }
 
+    SetModalParams(opts: IAlertOptions)
+    {
+        this.Opts = opts;
+    }
+
     ngOnInit()
     {
         if (! TypeInfo.Assigned(this.Opts.Inputs))

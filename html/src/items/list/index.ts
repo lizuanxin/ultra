@@ -3,6 +3,7 @@ import {Component, EventEmitter, Input, Output, OnInit} from '@angular/core';
 import {TypeInfo} from 'UltraCreation/Core/TypeInfo';
 import {TItemService} from 'services/item';
 import {TFileLibComponent} from 'share/component/filelib';
+import {NgbModal} from 'share/modal';
 
 import * as Types from 'services/cloud/types';
 import {TItemEditorComponent} from '../editor';
@@ -11,7 +12,7 @@ import {DomainComponent} from 'share/component';
 @Component({selector: 'item-list', templateUrl: './index.html'})
 export class TItemListComponent implements OnInit
 {
-    constructor(private ItemService: TItemService)
+    constructor(private ItemService: TItemService, private Modal: NgbModal)
     {
         this.Items = [];
     }
@@ -57,7 +58,7 @@ export class TItemListComponent implements OnInit
     {
         this.ItemService.Remove(item)
             .then(() => this.Refresh())
-            .catch((err) => console.log(err));
+            .catch(err => App.ShowError(err));
     }
 
     Publish(domain: Types.IDomain)
@@ -89,7 +90,7 @@ export class TItemListComponent implements OnInit
 
     private OpenModal(Item: Types.IItem): Promise<any>
     {
-        return App.ShowModal(TItemEditorComponent, {Regions: this.Regions, Item: Item, Items: this.Items}, {size: 'lg'})
+        return this.Modal.Open(TItemEditorComponent, {Regions: this.Regions, Item: Item, Items: this.Items}, {size: 'lg'}).result
             .then(RetVal =>
             {
                 if (! TypeInfo.Assigned(RetVal))

@@ -18,7 +18,7 @@ import {TabsModule} from 'ngx-bootstrap/tabs';
 // import {TimepickerModule} from 'ngx-bootstrap/timepicker';
 import {TooltipModule} from 'ngx-bootstrap/tooltip';
 import {TypeaheadModule} from 'ngx-bootstrap/typeahead';
-import { NgbModalModule } from 'modal/modal.module';
+import {NgbModalModule} from './modal/modal.module';
 
 const MODULE =
 [

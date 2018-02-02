@@ -1,5 +1,5 @@
 import {Component, OnInit, TemplateRef } from '@angular/core';
-import {NgbModal} from 'modal/modal';
+import {NgbModal} from 'share/modal';
 
 import {TypeInfo} from 'UltraCreation/Core/TypeInfo';
 import {Types} from 'services';
@@ -44,7 +44,7 @@ export class TDollRoomComponent implements OnInit
             this.Editing = this.DollService.RoomCreate();
 
 
-        this.Modal.open(content, {size: 'lg'}).result
+        this.Modal.Open(content, {size: 'lg'}).result
             .then(async RetVal =>
             {
                 RetVal = await this.DollService.RoomStore(this.Editing);

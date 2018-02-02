@@ -1,5 +1,6 @@
 import {NgModule, Component} from '@angular/core';
-import {SharedModule, RouterModule, Routes} from 'share';
+import {Routes, RouterModule} from '@angular/router';
+import {SharedModule} from 'share';
 
 import {TApplication} from 'services/application';
 import {ItemShareModule} from 'items';

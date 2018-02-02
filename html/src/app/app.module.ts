@@ -3,7 +3,9 @@ import {BrowserModule} from '@angular/platform-browser';
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 import {Routes, RouterModule} from '@angular/router';
 import {NgxModule} from '../share/ngx.module';
+
 import {ServiceModule, TAuthService} from 'services';
+import {SharedModule} from 'share';
 
 import {AppComponent} from './app.component';
 
@@ -41,6 +43,7 @@ const routes: Routes =
         BrowserModule,
         BrowserAnimationsModule,
         RouterModule.forRoot(routes),
+        SharedModule,
         ServiceModule,
     ],
     providers: [],

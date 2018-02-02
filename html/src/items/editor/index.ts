@@ -6,13 +6,18 @@ import {TFileLibComponent} from 'share/component/filelib';
 import * as Types from 'services/cloud/types';
 import {TItemService} from 'services/item';
 
-import {TBasicModalView} from 'share/component/basicmodal';
 import {TItemSelectorComponent} from 'items/selector';
 import { log } from 'util';
+import {NgbModal, TBasicModalView} from 'share/modal';
 
 @Component({selector: 'item-editor', templateUrl: './index.html'})
 export class TItemEditorComponent extends TBasicModalView implements OnInit
 {
+    constructor(private Modal: NgbModal)
+    {
+        super();
+    }
+
     SetModalParams(data: any) /**@override */
     {
         this.Regions = data.Regions;
@@ -32,7 +37,7 @@ export class TItemEditorComponent extends TBasicModalView implements OnInit
 
     AddPicture()
     {
-        App.ShowModal(TFileLibComponent, {Multiple: true, ModalMode: true}, {size: 'lg'})
+        this.Modal.Open(TFileLibComponent, {Multiple: true, ModalMode: true}, {size: 'lg'}).result
             .then(Pictures => this.Item.AddPictures(Pictures));
     }
 
@@ -44,8 +49,7 @@ export class TItemEditorComponent extends TBasicModalView implements OnInit
 
     AddProduct()
     {
-        App.ShowModal(TItemSelectorComponent,
-            {Items: this.Items, FilterType: Types.TItemTypeId.Package}, {size: 'lg'})
+        this.Modal.Open(TItemSelectorComponent, {Items: this.Items, FilterType: Types.TItemTypeId.Package}, {size: 'lg'}).result
             .then((SelectedItems) =>
             {
                 console.log(SelectedItems);
@@ -78,6 +82,7 @@ export class TItemEditorComponent extends TBasicModalView implements OnInit
     }
 
     CurrPricing: Types.ILocalizedPricing;
+
     EditConfig: Object =
     {
         charCounterCount: false,

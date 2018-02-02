@@ -157,7 +157,7 @@
 <!-- Package -->
         <tab heading="{{'item.editor.related'|translate}}" *ngIf="Item.IsPackage">
             <div class="associated" m-h-10 m-v-20>
-                <ul class="row" dnd-sortable-container [sortableData]="Item.ProductInfoList">
+                <ul class="row" dnd-sortable-container>
                     <li class="col-2" m-b-15 *ngFor="let iter of Item.ProductInfoList; let i = index" dnd-sortable [sortableIndex]="i">
                         <div class="img-container" placement="top" tooltip="{{iter.Product.Name}}" [style.background-image]="'url('+ iter.Product.AvatarUrl +')'">
                             <div class="del" (click)="RemovePackageProduct(iter.Product)"></div>

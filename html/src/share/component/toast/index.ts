@@ -8,6 +8,11 @@ export class TToastComponent
     {
     }
 
+    SetModalParams(opts: IToastOptions)
+    {
+        this.Opts = opts;
+    }
+
     @Input() Opts: IToastOptions;
 }
 
@@ -17,4 +22,3 @@ export interface IToastOptions
     Message?: string;
     Position?: string;
 }
-

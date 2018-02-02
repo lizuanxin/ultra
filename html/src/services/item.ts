@@ -14,6 +14,14 @@ export class TItemService
 {
     constructor(private Auth: TAuthService)
     {
+        Auth.OnStateChange.subscribe(state =>
+        {
+            console.log('ItemService: authorize state changed, destroying cache.');
+            this.RegionsSnap = undefined;
+            this.DomainsSnap = undefined;
+            this.ItemsSnap = undefined;
+            this.PublishedSnap = undefined;
+        });
     }
 
     async Regions(): Promise<Array<Types.IRegion>>
@@ -47,6 +55,17 @@ export class TItemService
 
             for (const iter of ary)
                 this.HashItem(iter);
+
+            const Values = this.ItemsSnap.values();
+            for (let iter = Values.next(); ! iter.done; iter = Values.next())
+            {
+                if (! iter.value.IsPackage)
+                    continue;
+
+                console.log('hashing package products');
+                for (const info of (iter.value as TPackage).ProductInfoList)
+                    info.Product = this.ItemsSnap.get(info.Product as string);
+            }
         }
 
         return Array.from(this.ItemsSnap.values());

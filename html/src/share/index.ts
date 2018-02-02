@@ -1,8 +1,7 @@
 import {NgModule} from '@angular/core';
-
+import {Routes, RouterModule} from '@angular/router';
 import {CommonModule} from '@angular/common';
 import {FormsModule, ReactiveFormsModule} from '@angular/forms';
-import {Routes, RouterModule} from '@angular/router';
 
 import {TranslateModule} from '@ngx-translate/core';
 import {NgxModule} from 'share/ngx.module';
@@ -13,9 +12,8 @@ import {NavbarComponent} from 'share/navbar';
 import {SidebarComponent} from 'share/sidebar';
 import {SwiperComp} from 'UltraCreation/ng-ion/swiper';
 import {ReceivingComponent} from './component/receiving';
-import * as Comp from './component';
-import {TApplication} from 'services';
 
+import * as Comp from './component';
 
 @NgModule({
     imports: [
@@ -60,10 +58,10 @@ import {TApplication} from 'services';
         Comp.TAlertComponent,
         Comp.TToastComponent,
     ],
-    providers: [TApplication]
 })
 export class SharedModule
 {
 }
 
-export {Routes, RouterModule};
+export * from './component';
+export * from './modal';
