@@ -30,7 +30,7 @@ export class OrderInfoPage implements OnInit
             return;
         }
 
-        const Receipt = new TReceipt();
+        const Receipt = this.ReceiptSvc.CreateReceipt();
         this.SelectedGoods.forEach((Selected) => Receipt.AddManifest(Selected));
         Receipt.ToAddress = JSON.stringify(this.SelectedAddress);
         await this.ReceiptSvc.Save(Receipt);
