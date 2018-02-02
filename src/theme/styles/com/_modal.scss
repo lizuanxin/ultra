@@ -54,8 +54,8 @@
     .modal-lg {
         max-width: 1000px;
         .modal-body{
-            height: 520px;
-            overflow:auto;
+            height: 600px;
+            overflow-y:auto;
         }
     }
 }
