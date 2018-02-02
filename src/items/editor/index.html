@@ -15,6 +15,12 @@
                 <!-- <label text-gray-light text-nowrap text-right class="col-md-2">{{'items.list.field.snap'|translate}}: </label>
                             <div class="col-md-3"><input type="text" class="form-control"></div> -->
             </div>
+            <div class="row" align-items-center m-t-15>
+                <label text-gray-light text-nowrap text-right class="col-md-2">{{'items.list.field.snap'|translate}}:</label>
+                <div class="col-md-8">
+                        <input type="text" class="form-control" [(ngModel)]="Item.Snap">
+                </div>
+            </div>
             <div class="row" m-t-15>
                 <label class="col-md-2"></label>
                 <div class="col-md-5">
@@ -38,12 +44,7 @@
                     </button>
                 </div>
             </div>
-            <div class="row" align-items-center m-t-15>
-                <label text-gray-light text-nowrap text-right class="col-md-2">{{'item.description'|translate}}:</label>
-                <div class="col-md-8">
-                        <input type="text" class="form-control">
-                </div>
-            </div>
+
             <!-- <div class="card" margin-top>
                 <h5 class="card-header">{{'item.editor.pricing'|translate}}</h5>
 
