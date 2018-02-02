@@ -34,7 +34,7 @@ export class TItemListComponent implements OnInit
     {
         this.ItemService.List()
             .then(list => this.Items = list)
-            .catch(err => console.log(err));
+            .catch(err => App.ShowError(err));
     }
 
     CreateNewProduct()
@@ -73,6 +73,14 @@ export class TItemListComponent implements OnInit
             this.Items.forEach(iter => this.Selected.add(iter));
         else
             this.Selected.clear();
+    }
+
+    ToggleSelect(Item: Types.IItem)
+    {
+        if (this.Selected.has(Item))
+            this.Selected.delete(Item);
+        else
+            this.Selected.add(Item);
     }
 
     get IsSelectedAll(): boolean
