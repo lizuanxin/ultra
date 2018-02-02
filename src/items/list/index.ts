@@ -27,7 +27,13 @@ export class TItemListComponent implements OnInit
             .catch(err => console.log(err));
 
         this.Refresh();
+    }
 
+    Refresh()
+    {
+        this.ItemService.List()
+            .then(list => this.Items = list)
+            .catch(err => console.log(err));
     }
 
     CreateNewProduct()
@@ -81,16 +87,9 @@ export class TItemListComponent implements OnInit
             this.Selected.delete(Item);
     }
 
-    private Refresh()
-    {
-        this.ItemService.List()
-            .then(list => this.Items = list)
-            .catch(err => console.log(err));
-    }
-
     private OpenModal(Item: Types.IItem): Promise<any>
     {
-        return App.ShowModal(TItemEditorComponent, {Regions: this.Regions, Item: Item}, {size: 'lg'})
+        return App.ShowModal(TItemEditorComponent, {Regions: this.Regions, Item: Item, Items: this.Items}, {size: 'lg'})
             .then(RetVal =>
             {
                 if (! TypeInfo.Assigned(RetVal))

@@ -2,10 +2,10 @@ import {NgModule, Component} from '@angular/core';
 import {SharedModule, RouterModule, Routes} from 'share';
 import {TApplication} from 'services/application';
 
-import {PicturesComponent} from './pictures';
+import {TPicturesComponent} from './pictures';
 import {TItemListComponent} from './list';
 import {TItemEditorComponent} from './editor';
-import {TItemSelectorComponent} from 'items/list/selector';
+import {TItemSelectorComponent} from 'items/selector';
 import {FroalaEditorModule, FroalaViewModule} from 'angular-froala-wysiwyg';
 
 @Component({selector: 'items', templateUrl: '../share/layout.module.html'})
@@ -22,7 +22,7 @@ const routes: Routes = [
 
         children: [
             {path: 'list', component: TItemListComponent, data: {LangId: 'list', Role: ''}},
-            {path: 'pictures', component: PicturesComponent, data: {LangId: 'pictures', Role: ''}},
+            {path: 'pictures', component: TPicturesComponent, data: {LangId: 'pictures', Role: ''}},
 
             /// ...
             {path: '', redirectTo: 'list'}
@@ -42,7 +42,7 @@ const routes: Routes = [
         TItemSelectorComponent,
         TItemEditorComponent,
         TItemListComponent,
-        PicturesComponent
+        TPicturesComponent
     ],
     entryComponents: [
         TItemListComponent,
@@ -51,9 +51,9 @@ const routes: Routes = [
     ],
     exports: [
         SharedModule,
-        TItemEditorComponent,
         TItemListComponent,
-        TItemSelectorComponent
+        TItemEditorComponent,
+        TItemSelectorComponent,
     ],
 })
 export class ItemShareModule
@@ -67,8 +67,6 @@ export class ItemShareModule
         ItemShareModule,
     ],
     entryComponents: [
-        TItemEditorComponent,
-        TItemListComponent,
     ]
 })
 export class ItemsModule

@@ -2,11 +2,11 @@ import {NgModule, Component} from '@angular/core';
 import {SharedModule, RouterModule, Routes} from 'share';
 
 import {TApplication} from 'services/application';
+import {ItemShareModule} from 'items';
 
 import {TFileLibComponent} from 'share/component';
 import {TDollRoomComponent} from 'doll/room';
-import {TItemSelectorComponent} from 'items/list/selector';
-import {ItemsModule, ItemShareModule} from 'items';
+import {TItemSelectorComponent} from 'items/selector';
 import {TStreamServerComponent} from './streamserver';
 
 @Component({selector: 'doll', templateUrl: '../share/layout.module.html'})
@@ -30,8 +30,8 @@ const routes: Routes = [
 @NgModule({
     imports: [
         RouterModule.forChild(routes),
-        ItemShareModule,
         SharedModule,
+        ItemShareModule,
     ],
     declarations: [
         LayoutComponent,
@@ -39,10 +39,8 @@ const routes: Routes = [
         TStreamServerComponent
     ],
     entryComponents: [
-        TFileLibComponent,
-        TItemSelectorComponent,
         TDollRoomComponent,
-        TStreamServerComponent
+        TStreamServerComponent,
     ],
     providers: [TApplication]
 })
