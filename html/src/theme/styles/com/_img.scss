@@ -39,11 +39,12 @@ img {
 
 .img-preview {
     display: inline-block;
+    vertical-align: middle;
     span {
         position: relative;
-        display: inline-block;
+        display: inline-flex;
         flex-direction: column;
-        justify-content: center;
+        // justify-content: center;
         text-align: center;
         width: 80px;
         height: 80px;
@@ -57,12 +58,10 @@ img {
             }
         }
         button{
+            position: absolute;
             display: inline-block;
             visibility: hidden;
-            margin: auto 15px;
-            // flex: 0 0 auto;
             &.fix{
-
                 left: 20px;
                 bottom: -30px;
             }
