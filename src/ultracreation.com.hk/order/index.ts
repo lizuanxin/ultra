@@ -40,6 +40,5 @@ export class OrderInfoPage implements OnInit
 
     SelectedAddress: Types.IUserAddress;
     SelectedGoods: Array<Types.IManifest>;
-    OrderComplate: Boolean = false;
     App = window.App;
 }

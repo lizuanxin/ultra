@@ -23,6 +23,7 @@ import { ProDetailPage } from './pro-detail';
 import { TDomainService, DOMAIN_CONFIG, IDomainConfig } from 'services/domain';
 import { UOrderListComponent, UOrderDetailComponent } from 'share/component/order';
 import { TShoppingCart } from 'services/shopping_cart';
+import { OrderComplatePage } from './ordercomplate';
 
 
 
@@ -47,6 +48,7 @@ const routes: Routes = [
             {path: 'ordetail/:id', component: UOrderDetailComponent},
             {path: 'tens', component: TensPage},
             {path: 'order', component: OrderInfoPage},
+            {path: 'ordercomplate', component: OrderComplatePage},
             {path: 'about', component: AboutPage},
             {path: 'contact', component: ContactPage},
             {path: 'teams', component: TeamsPage},
@@ -82,6 +84,7 @@ const routes: Routes = [
         TeamsPage,
         PrivacyPage,
         OrderInfoPage,
+        OrderComplatePage,
         SiteNavbarComponent,
         FooterComponent
     ],
