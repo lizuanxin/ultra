@@ -1,0 +1,180 @@
+.site-header {
+    background: #f9f9f9;
+    background-image: linear-gradient(#fff, #f8f8f8);
+    >div:nth-child(1) ul {
+        height: 100px;
+    }
+    >div:nth-child(2) ul {
+        height: 36px;
+    }
+    >div {
+        &:first-child {
+            border-bottom: solid 1px #f2f2f2;
+        }
+        &:last-child {
+            border-top: solid 1px #ffffff;
+        }
+    }
+    .site-logo {
+        @extend .animate;
+        max-width: 100%;
+        transform-origin: left center;
+    }
+    &.fixed {
+        position: fixed;
+        right: 0;
+        left: 0;
+        z-index: 1030;
+        >div:first-child ul {
+            height: 50px;
+        }
+        .site-logo {
+            transform: scale(.7);
+        }
+    }
+}
+
+.header-menu,
+.header-action {
+    display: inline-block;
+}
+
+.header-menu {
+    a {
+        cursor: pointer;
+        display: inline-block;
+        padding: 0 15px;
+        font-size: 14px;
+        color: #c8c8c8;
+        &:hover,
+        &.active {
+            color: #666666;
+            text-decoration: none;
+        }
+        &:not([href]) {
+            color: #c8c8c8;
+        }
+    }
+}
+
+.header-action {
+    margin-left: 15px;
+    border-left: solid 1px #f2f2f2;
+    >div {
+        display: inline-block;
+        margin-left: 20px;
+        text-align: center;
+    }
+    .account {
+        position: relative;
+        color: #c8c8c8;
+        font-size: 13px;
+        &:hover {
+            div.item-hover {
+                display: block;
+            }
+        }
+        i {
+            font-family: 'iconfont';
+            font-style: normal;
+            font-size: 16px;
+            color: #666666;
+            &:before {
+                content: "\e902";
+            }
+        }
+    }
+    .shop-cart {
+        cursor: pointer;
+        i {
+            vertical-align: middle;
+            font-family: 'iconfont';
+            font-style: normal;
+            font-size: 20px;
+            color: #666666;
+            &:before {
+                content: "\e912";
+            }
+        }
+        em {
+            vertical-align: middle;
+            display: inline-block;
+            font-size: 12px;
+            font-style: normal;
+            text-align: center;
+            width: 20px;
+            height: 20px;
+            line-height: 20px;
+            color: white;
+            background-color: #c8c8c8;
+            border-radius: 50%;
+        }
+    }
+    .language {
+        position: relative;
+        cursor: pointer;
+        background-color: #f2f2f2;
+        font-size: 14px;
+        padding: 3px 10px;
+        border-radius: 6px;
+        &:hover {
+            div.item-hover {
+                display: block;
+            }
+        }
+        i {
+            display: inline-block;
+            font-family: 'iconfont';
+            font-style: normal;
+            color: #999;
+            transform: rotate(180deg);
+            &:before {
+                content: "\f3d8";
+            }
+        }
+    }
+    div.item-hover {
+        transition: all .3s ease-out;
+        display: none;
+        z-index: 1;
+        position: absolute;
+        left: 50%;
+        top: 32px;
+        width: 120px;
+        margin-left: -60px;
+        padding: 2px 0;
+        background: #fff;
+        border: 1px solid #d6d6d6;
+        border-color: rgba(0, 0, 0, .08);
+        border-radius: 6px;
+        box-shadow: 0 20px 40px rgba(0, 0, 0, .15);
+        &:before {
+            content: '';
+            position: absolute;
+            top: -10px;
+            left: 50px;
+            border-left: 10px solid transparent;
+            border-right: 10px solid transparent;
+            border-bottom: 10px solid #d6d6d6;
+        }
+        &:after {
+            content: '';
+            position: absolute;
+            top: -9px;
+            left: 50px;
+            border-left: 10px solid transparent;
+            border-right: 10px solid transparent;
+            border-bottom: 10px solid #fff;
+        }
+        p {
+            margin: 0;
+            padding: 3px 10px;
+            font-size: 12px;
+            white-space: nowrap;
+            a {
+                color: #666;
+                text-decoration: none;
+            }
+        }
+    }
+}
