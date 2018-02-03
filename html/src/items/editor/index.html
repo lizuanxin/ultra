@@ -21,7 +21,8 @@
                         <input type="text" class="form-control" [(ngModel)]="Item.Snap">
                 </div>
             </div>
-            <div class="row" m-t-15>
+<!-- Product -->
+            <div class="row" m-t-15 *ngIf="Item.IsProduct">
                 <label class="col-md-2"></label>
                 <div class="col-md-5">
                     <ng-template [ngIf]="Item.AvatarUrl !== undefined">
@@ -29,7 +30,7 @@
                     </ng-template>
                 </div>
             </div>
-            <div class="row" align-items-center m-t-15>
+            <div class="row" align-items-center m-t-15 *ngIf="Item.IsProduct">
                 <label text-gray-light text-nowrap text-right class="col-md-2" for="member-name">{{'item.pictures'|translate}}: </label>
                 <div class="col-md-8">
                     <div class="img-preview" id="image-2" dnd-sortable-container [sortableData]="Item.Pictures">
@@ -46,8 +47,30 @@
                     </button>
                 </div>
             </div>
+<!-- Package -->
+            <div class="associated"*ngIf="Item.IsPackage">
+                <ul class="row" dnd-sortable-container>
+                    <li class="col-2" m-b-15 *ngFor="let iter of Item.ProductInfoList; let i = index" dnd-sortable [sortableIndex]="i">
+                        <div class="img-container" placement="top" tooltip="{{iter.Product.Name}}" [style.background-image]="'url('+ iter.Product.AvatarUrl +')'">
+                            <div class="del" (click)="RemovePackageProduct(iter.Product)"></div>
+                        </div>
+                        <div class="input-group input-group-sm" m-t-10>
+                            <span class="input-group-addon" id="btnGroupAddon" (click)="SubQty(iter)">-</span>
+                            <span class="form-control justify-content-center">{{iter.Qty}}</span>
+                            <span class="input-group-addon" id="btnGroupAddon" (click)="AddQty(iter)">+</span>
+                        </div>
+                    </li>
+                    <li class="col-2" m-b-15>
+                        <div class="img-container">
+                            <button class="add" (click)="AddProduct()">
+                                <i icon>&#xf100;</i>
+                            </button>
+                        </div>
+                    </li>
+                </ul>
+            </div>
         </tab>
-<!-- product -->
+
         <tab heading="{{'item.editor.property'|translate}}" *ngIf="Item.IsProduct">
             <div class="row row-all align-items-center" m-t-30 padding>
                 <label text-gray-light text-nowrap text-right class="col-md-1">{{'item.model'|translate}}: </label>
@@ -111,15 +134,10 @@
                     </table>
                 </div>
             </div>
-
         </tab>
 
         <tab heading="{{'item.editor.detail'|translate}}">
             <div [froalaEditor]="EditConfig" [(froalaModel)]="Item.Html" m-t-15></div>
-
-            <!-- <quill-editor class="form-control" [options]="editorConfig" [(ngModel)]="preHtml" (blur)="onEditorBlured($event)"
-            (focus)="onEditorFocused($event)" (change)="onContentChanged($event)" (ready)="OnQuillCreated($event)"></quill-editor>
-            <textarea [(ngModel)]="testHtml" (ngModelChange)="PlanTextChanged($event)"></textarea> -->
         </tab>
 
         <tab heading="{{'item.editor.pricing'|translate}}">
@@ -154,30 +172,6 @@
                 <div class="col-md-4">
                     <input type="number" min="0" step="0.01" class="form-control" [(ngModel)]="CurrPricing.Distribute">
                 </div>
-            </div>
-        </tab>
-<!-- Package -->
-        <tab heading="{{'item.editor.related'|translate}}" *ngIf="Item.IsPackage">
-            <div class="associated" m-h-10 m-v-20>
-                <ul class="row" dnd-sortable-container>
-                    <li class="col-2" m-b-15 *ngFor="let iter of Item.ProductInfoList; let i = index" dnd-sortable [sortableIndex]="i">
-                        <div class="img-container" placement="top" tooltip="{{iter.Product.Name}}" [style.background-image]="'url('+ iter.Product.AvatarUrl +')'">
-                            <div class="del" (click)="RemovePackageProduct(iter.Product)"></div>
-                        </div>
-                        <div class="input-group input-group-sm" m-t-10>
-                            <span class="input-group-addon" id="btnGroupAddon" (click)="SubQty(iter)">-</span>
-                            <span class="form-control justify-content-center">{{iter.Qty}}</span>
-                            <span class="input-group-addon" id="btnGroupAddon" (click)="AddQty(iter)">+</span>
-                        </div>
-                    </li>
-                    <li class="col-2" m-b-15>
-                        <div class="img-container">
-                            <button class="add" (click)="AddProduct()">
-                                <i icon>&#xf100;</i>
-                            </button>
-                        </div>
-                    </li>
-                </ul>
             </div>
         </tab>
     </tabset>
