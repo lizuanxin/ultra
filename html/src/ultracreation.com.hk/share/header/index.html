@@ -1,0 +1,61 @@
+<div class="site-header"  [class.fixed]="navIsFixed">
+    <div>
+        <div class="container">
+            <ul class="row justify-content-between align-items-center">
+                <li class="col-2" text-left>
+                    <img src="assets/images/site/logo.png" class="site-logo">
+                </li>
+                <li class="col-10" text-right>
+                    <div class="header-menu">
+                        <a [routerLink]="['/home']" [routerLinkActive]="['active']">HOME</a>
+                        <a [routerLink]="['/health']" [routerLinkActive]="['active']">HEALTHCARE</a>
+                        <a>AV PRODUCT</a>
+                        <a>GADQET</a>
+                    </div>
+                    <div class="header-action">
+                        <div class="account">
+                            <i></i>
+                            <!-- {{Auth.Me.FirstName}} -->
+                            <div class="item-hover">
+                                <p *ngIf="Auth.IsLogin">
+                                    <a href="javascript:void(0)" [routerLink]="['/admin']">{{'site.ucenter.title'|translate}}</a>
+                                </p>
+                                <p *ngIf="!Auth.IsLogin">
+                                    <a href="javascript:void(0)" [routerLink]="['/login']">{{'button.login'|translate}}</a>
+                                </p>
+                                <p *ngIf="Auth.IsLogin">
+                                    <a href="javascript:void(0)" (click)="Logout()">{{'button.logout'|translate}}</a>
+                                </p>
+                            </div>
+                        </div>
+                        <div class="shop-cart" [routerLink]="['/cart']">
+                            <i></i>
+                            <em>0</em>
+                        </div>
+                        <div class="language">
+                            <div>{{App.Language|translate}} &nbsp;<i></i></div>
+                            <div class="item-hover">
+                                <p *ngFor="let lang of App.Languages">
+                                    <a href="javascript:void(0)" (click)="ChangeLang(lang)">{{lang|translate}}</a>
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                </li>
+            </ul>
+        </div>
+    </div>
+    <!-- <div>
+        <div class="container">
+            <ul class="row align-items-center">
+                <li class="col-6">
+                    <a>概览</a>
+                    <a>设计</a>
+                    <a>功能</a>
+                </li>
+                <li class="col-6" text-right>2</li>
+            </ul>
+        </div>
+    </div> -->
+
+</div>
