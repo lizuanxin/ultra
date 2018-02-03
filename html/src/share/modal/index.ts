@@ -1,4 +1,4 @@
 export * from './modal-ref';
 
-export * from './base-view';
-export * from './service';
+export * from './modal-view';
+export * from './modal-service';

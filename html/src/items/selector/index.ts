@@ -1,62 +1,64 @@
-import {Component, EventEmitter, Input, Output} from '@angular/core';
+import {Component, EventEmitter, Input, Output, OnInit} from '@angular/core';
 
 import {TypeInfo} from 'UltraCreation/Core/TypeInfo';
-import {TBasicModalView} from 'share/modal';
+import {TItemService} from 'services/item';
 
 import * as Types from 'services/cloud/types';
+import {TItemEditorComponent} from '../editor';
+import {TBasicModalView} from 'share';
 
 @Component({selector: 'item-selector', templateUrl: './index.html'})
-export class TItemSelectorComponent extends TBasicModalView
+export class TItemSelectorComponent extends TBasicModalView implements OnInit
 {
-    OnInit()
+    constructor(private ItemService: TItemService)
     {
-        /*
-        TItemModel.SelectedNum = 0;
-        console.log(JSON.stringify(this.FilterItems) + ' ' + this.FilterType);
-        this.ItemSvc.List().then((ItemList) =>
+        super();
+        this.Items = [];
+    }
+
+    ngOnInit()
+    {
+        this.Refresh();
+    }
+
+    Refresh()
+    {
+        this.ItemService.List().then(list =>
         {
-            for (const Item of ItemList)
-            {
-                if (! this.IsNeedToFiltered(Item))
-                    this.ItemModels.push(new TItemModel(Item));
-            }
-        });
-        */
-    }
-
-    SetModalParams(params: any) /**@override */
-    {
-        console.log(params);
-    }
-
-    ToggleSelect(item: Types.IItem)
-    {
+            this.Items = list;
+        })
+        .catch(err => App.ShowError(err));
     }
 
     ToggleSelectAll()
     {
+        if (this.Selected.size < this.Items.length)
+            this.Items.forEach(iter => this.Selected.add(iter));
+        else
+            this.Selected.clear();
     }
 
-    ButtonCancel()
+    ToggleSelect(Item: Types.IItem)
     {
-        console.log('button cancel');
-        this.Close(null);
+        if (this.Selected.has(Item))
+            this.Selected.delete(Item);
+        else
+            this.Selected.add(Item);
     }
 
-    ButtonOK()
+    get IsSelectedAll(): boolean
     {
-        /*
-        console.log('button ok');
-        const SelectedItems = [];
-        this.ItemModels.forEach((ItemModel) =>
-        {
-            if (ItemModel.IsSelected)
-                SelectedItems.push(ItemModel.Source);
-        });
-        this.Close(SelectedItems);
-        */
+        return this.Items.length > 0 && this.Selected.size === this.Items.length;
     }
 
+    SelectionChanged(Selected: boolean, Item: Types.IItem)
+    {
+        if (Selected)
+            this.Selected.add(Item);
+        else
+            this.Selected.delete(Item);
+    }
+
+    Items: Array<Types.IItem>;
     Selected = new Set<Types.IItem>();
-    @Input() Items: Array<Types.IItem> = [];
 }

@@ -33,13 +33,11 @@ import * as Comp from './component';
         Comp.TFileLibComponent,
         Comp.TAlertComponent,
         Comp.TToastComponent,
-        Comp.DomainComponent
     ],
     entryComponents: [
         Comp.TFileLibComponent,
         Comp.TAlertComponent,
         Comp.TToastComponent,
-        Comp.DomainComponent
     ],
     exports: [
         CommonModule,

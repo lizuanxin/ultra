@@ -3,7 +3,7 @@ import {NgModule, ModuleWithProviders} from '@angular/core';
 import {NgbModalBackdrop} from './modal-backdrop';
 import {NgbModalWindow} from './modal-window';
 import {NgbModalStack} from './modal-stack';
-import {NgbModal} from './service';
+import {NgbModal} from './modal-service';
 
 @NgModule({
     declarations: [NgbModalBackdrop, NgbModalWindow],
