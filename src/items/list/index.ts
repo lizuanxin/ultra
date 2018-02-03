@@ -2,12 +2,10 @@ import {Component, EventEmitter, Input, Output, OnInit} from '@angular/core';
 
 import {TypeInfo} from 'UltraCreation/Core/TypeInfo';
 import {TItemService} from 'services/item';
-import {TFileLibComponent} from 'share/component/filelib';
 import {NgbModal} from 'share/modal';
 
 import * as Types from 'services/cloud/types';
 import {TItemEditorComponent} from '../editor';
-import {DomainComponent} from 'share/component';
 
 @Component({selector: 'item-list', templateUrl: './index.html'})
 export class TItemListComponent implements OnInit

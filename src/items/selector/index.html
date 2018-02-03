@@ -1,22 +1,26 @@
-<div class="table-responsive">
-    <table class="table table-bordered table-hover table-fixed">
+<div class="table-responsive" margin-vertical>
+    <table class="table table-bordered table-hover">
         <thead>
-        <tr>
-            <th class="col-1" text-center>
-                <input type="checkbox" [ngModel]="AllItemSelected" (ngModelChange)="ToggleSelectAll()">
-            <th class="col-5">{{'item.id'|translate}}</th>
-            <th class="col-6">{{'item.name'|translate}}</th>
-        </tr>
+            <tr>
+                <th width="2%" text-center>
+                    <input type="checkbox" [ngModel]="IsSelectedAll" (ngModelChange)="ToggleSelectAll()">
+                </th>
+                <th width="15%" text-center>{{'item.avatar'|translate}}</th>
+                <th width="40%">{{'item.name'|translate}}</th>
+                <th width="15%"  text-center>{{'item.timestamp'|translate}}</th>
+            </tr>
         </thead>
         <tbody>
-            <tr *ngFor="let item of Items" (click)="ToggleSelect(item)" >
-                <td class="col-1" text-center (click)="$event.stopPropagation()">
-                    <input type="checkbox" [(ngModel)]="item.IsSelected">
+            <tr *ngFor="let item of Items" (click)="ToggleSelect(item)">
+                <td text-center (click)="$event.stopPropagation()" class="align-middle">
+                    <input type="checkbox" [ngModel]="Selected.has(item)" (ngModelChange)="SelectionChanged($event, item)">
                 </td>
-                <td class="col-5">
-                    <img width=60 src="{{item.AvatarUrl}}">
+                <td class="position-relative" text-center>
+                    <img width="60" height="60" src="{{item.AvatarUrl === null ? 'assets/images/pic-sm-empty.gif' : item.AvatarUrl}}">
+                    <div class="package" *ngIf="item.IsPackage"></div>
                 </td>
-                <td class="col-6">{{item.Name}}</td>
+                <td class="align-middle">{{item.Name}}</td>
+                <td class="align-middle">{{item.Timestamp|date:'yyyy-MM-dd HH:mm'}}</td>
             </tr>
         </tbody>
     </table>
@@ -26,4 +30,3 @@
     <button type="button" class="btn btn-sm btn-default" (click)="OnClosed()" >{{'button.cancle'|translate}}</button>
     <button type="button" class="btn btn-sm btn-primary" (click)="ButtonOK()" >{{'button.confirm'|translate}}</button>
 </div>
-
