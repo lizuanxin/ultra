@@ -28,6 +28,8 @@ export class TItemEditorComponent extends TBasicModalView implements OnInit
     ngOnInit()
     {
         this.CurrPricing = this.Item.GetPricing(this.Regions[0].Name, 0);
+        console.log(this.Item);
+
     }
 
     SetAvatar(url)
