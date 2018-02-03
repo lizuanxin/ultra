@@ -24,6 +24,7 @@ import { TDomainService, DOMAIN_CONFIG, IDomainConfig } from 'services/domain';
 import { UOrderListComponent, UOrderDetailComponent } from 'share/component/order';
 import { TShoppingCart } from 'services/shopping_cart';
 import { OrderComplatePage } from './ordercomplate';
+import { SiteHeaderComponent } from './share/header';
 
 
 
@@ -86,6 +87,7 @@ const routes: Routes = [
         OrderInfoPage,
         OrderComplatePage,
         SiteNavbarComponent,
+        SiteHeaderComponent,
         FooterComponent
     ],
     providers: [{provide: DOMAIN_CONFIG, useValue: DOMAIN_DI_CONFIG}, TDomainService, TShoppingCart]

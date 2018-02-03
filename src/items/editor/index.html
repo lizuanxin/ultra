@@ -24,7 +24,9 @@
             <div class="row" m-t-15>
                 <label class="col-md-2"></label>
                 <div class="col-md-5">
-                    <img width="200" height="200" src="{{Item.AvatarUrl}}" />
+                    <ng-template [ngIf]="Item.AvatarUrl !== undefined">
+                        <img width="200" height="200" src="{{Item.AvatarUrl}}" />
+                    </ng-template>
                 </div>
             </div>
             <div class="row" align-items-center m-t-15>
