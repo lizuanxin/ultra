@@ -18,8 +18,6 @@ const routes: Routes =
         loadChildren: '../login/#LoginModule'},
     {path: 'signup',
         loadChildren: '../signup/#SignupModule'},
-    {path: 'not-found',
-        loadChildren: '../not-found/#NotFoundModule'},
 
     {path: 'admin', data: {LangId: 'me', Role: ''}, canActivate: [TAuthService],
         children: [
@@ -32,7 +30,7 @@ const routes: Routes =
     },
 
     /// ...
-    {path: '**', redirectTo: 'not-found'},
+    {path: '**', redirectTo: ''},
 ];
 
 @NgModule({
