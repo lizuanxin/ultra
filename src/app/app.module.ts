@@ -19,6 +19,9 @@ const routes: Routes =
     {path: 'signup',
         loadChildren: '../signup/#SignupModule'},
 
+    {path: 'extcall/:id',
+        loadChildren: '../ultracreation.com.hk/extcall/#ExtCallModule'},
+
     {path: 'admin', data: {LangId: 'me', Role: ''}, canActivate: [TAuthService],
         children: [
             {path: 'account', loadChildren: '../profile/#ProfileModule', data: {LangId: 'profile', Icon: '&#xe909;', Role: ''}},
