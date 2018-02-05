@@ -1,4 +1,4 @@
-<div class="container" m-t-30>
+<!-- <div class="container" m-t-30>
     <ul class="row justify-content-between">
         <li class="col-md-6">
             <div class="gallery-top" #leftview [ngStyle]="{'background-image':'url(' + AvatarUrl + ')'}">
@@ -26,7 +26,7 @@
             </div>
             <div padding-horizontal>
 
-                <!-- <p text-gray margin-vertical>USB cable/方贴/葫芦贴/ iphone头/type C头/电池包</p> -->
+                <p text-gray margin-vertical>USB cable/方贴/葫芦贴/ iphone头/type C头/电池包</p>
                 <ul class="row justify-content-start align-items-center">
                     <li class="col-12" no-padding><h2>{{PublishedItem.Name}}</h2></li>
                     <li class="col-12" no-padding><p text-gray>{{PublishedItem.Snap}}</p></li>
@@ -42,13 +42,13 @@
                 </ul>
                 <p margin-vertical f-16>&nbsp;</p>
                 <div class="row" m-b-30>
-                    <!-- <div class="col-auto" text-gray-light f-14>选择规格：</div>
+                    <div class="col-auto" text-gray-light f-14>选择规格：</div>
                     <div class="col-md-9">
                         <span class="detail-spec">
                             <a class="active">蓝</a>
                             <a>红</a>
                         </span>
-                    </div> -->
+                    </div>
                 </div>
                 <div class="row" justify-content-end m-t-50>
                     <div class="col-md-3">
@@ -60,9 +60,9 @@
                     </div>
                 </div>
                 <div class="row" justify-content-end margin-top>
-                    <!-- <div class="col-md-3">
+                    <div class="col-md-3">
                         <button type="button" class="btn btn-primary btn-block" [routerLink]="['/order']">Buy Now</button>
-                    </div> -->
+                    </div>
                     <div class="col-md-3">
                         <button type="button" class="btn btn-success btn-block" (click)="AddCart()">Add To Cart</button>
                     </div>
@@ -70,7 +70,6 @@
             </div>
         </li>
     </ul>
-    <!--
     <div>
         <ul class="nav nav-tabs justify-content-start" style="width:100%"  m-t-15>
             <li class="nav-item">
@@ -81,7 +80,7 @@
         </ul>
         <div class="tabs-content" [innerHTML]="PublishedItem.Html">
 
-            <!-- <ul class="list-decimal">
+            <ul class="list-decimal">
                 <div [innerHTML]="PublishedItem.Html"></div>
                 <h2>包装内容</h2>
                 <li>
@@ -139,5 +138,70 @@
         </div>
 
 
-    </div>-->
+    </div>
+</div> -->
+
+
+<div class="container">
+    <div class="row item-detail">
+        <div class="col-5">
+            <div class="item-avatar-view">
+                <ul>
+                    <li><img class="img-fluid" src="assets/images/site/2018020566823459.jpg"></li>
+                    <li><img class="img-fluid" src="assets/images/site/2018020566823459.jpg"></li>
+                    <li><img class="img-fluid" src="assets/images/site/2018020566823459.jpg"></li>
+                </ul>
+            </div>
+            <img class="img-fluid" [src]="AvatarUrl">
+        </div>
+        <div class="col-7">
+            <h2>{{PublishedItem.Name}}</h2>
+            <h3>{{PublishedItem.Snap}}xxxxxxxxxxxxxxxxx</h3>
+            <div class="split-line"></div>
+            <ul class="row align-items-start spec">
+                <li class="col-2"><span text-gray-light m-t-5>颜色选择：</span></li>
+                <li class="col-10 param-color">
+                    <span><i><em [ngStyle]="{'background-color':'cornflowerblue'}"></em></i>蓝色</span>
+                    <span><i><em [ngStyle]="{'background-color':'indianred'}"></em></i>红色</span>
+                </li>
+            </ul>
+            <ul class="row align-items-start spec">
+                <li class="col-2"><span text-gray-light m-t-5>规格选择：</span></li>
+                <li class="col-10 param-spec">
+                    <span>普通</span>
+                    <span class="active">除霾除甲醛高复合芯片</span>
+                </li>
+            </ul>
+            <ul class="row align-items-center quantity" m-t-30>
+                <li class="col-2"><span text-gray-light>数量选择：</span></li>
+                <li class="col-10">
+                    <label class="decre"></label>
+                    <em>1</em>
+                    <label class="incre"></label>
+                </li>
+            </ul>
+            <ul class="row align-items-center" m-t-30>
+                <li class="col-2"><span text-gray-light>服务说明：</span></li>
+                <li class="col-10"><span text-gray-light>* 拆封后不支持 7 日无理由退货</span></li>
+            </ul>
+        </div>
+    </div>
+    <div class="card">
+        <div class="card-header">搭配购买</div>
+        <div class="card-body item-other-list">
+            <ul class="row">
+                <li class="col-3">
+                    <button class="btn-add-item"></button>
+                </li>
+                <li class="col-3">
+                    <button class="btn-add-item"></button>
+                </li>
+                <li class="col-3">
+                    <button class="btn-add-item"></button>
+                </li>
+                <li class="col-3">4</li>
+                <li class="col-3">5</li>
+            </ul>
+        </div>
+    </div>
 </div>
