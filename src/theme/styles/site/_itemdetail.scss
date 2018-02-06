@@ -10,9 +10,9 @@
             flex-direction: column;
             justify-content: center;
         }
-        li{
+        li {
             margin-bottom: 15px;
-            img{
+            img {
                 border-radius: 5px;
                 border: solid 1px rgb(238, 238, 238);
             }
@@ -33,7 +33,6 @@
     }
     .spec {
         margin-top: 15px;
-
         padding: 0 15px;
         span {
             display: inline-block;
@@ -76,17 +75,17 @@
             padding: 5px 10px;
             border: solid 2px #F2F2F2;
             border-radius: 5px;
-            &.active{
+            &.active {
                 border-color: cornflowerblue;
             }
         }
     }
     .quantity {
         font-size: 14px;
-        label{
+        label {
             cursor: pointer;
             width: 30px;
-            height:30px;
+            height: 30px;
             margin: 0;
             font-size: 18px;
             color: #666;
@@ -95,24 +94,22 @@
             display: inline-flex;
             align-items: center;
             justify-content: center;
-            box-shadow: 0 0 15px rgba(0,0,0, .1);
+            box-shadow: 0 0 15px rgba(0, 0, 0, .1);
             font-weight: 600;
-            &.decre{
+            &.decre {
                 &:before {
                     font-family: 'iconfont';
                     content: "\f1fc";
                 }
             }
-            &.incre{
+            &.incre {
                 &:before {
                     font-family: 'iconfont';
                     content: "\f102";
                 }
             }
-
         }
-
-        em{
+        em {
             margin: 0 10px;
             display: inline-block;
             font-style: normal;
@@ -121,15 +118,15 @@
 }
 
 .item-other-list {
-    padding: 0;
-    >ul.row{
+    margin: 0;
+    li {
+        margin: 0;
         padding: 0;
-        border-bottom: none;
     }
-    button.btn-add-item{
+    button.btn-add-item {
         position: absolute;
-        top: 0;
-        right: 0;
+        top: 3px;
+        right: 3px;
         width: 30px;
         height: 30px;
         color: white;
@@ -140,6 +137,91 @@
         &:before {
             font-family: 'iconfont';
             content: "\f102";
+        }
+    }
+    .item-wrap {
+        border: solid 1px #F8F8F8;
+    }
+    .title,
+    .description,
+    .price {
+        text-align: center;
+    }
+    .title {
+        font-size: 18px;
+        font-weight: 600;
+        margin-bottom: 5px;
+    }
+    .description {
+        font-size: 12px;
+        margin-bottom: 5px;
+        color: $gray-light;
+    }
+    .price {
+        font-weight: 600;
+        span {
+            display: inline-block;
+            margin-right: 5px;
+        }
+        .pricing {
+            font-size: 18px;
+            color: #de2340;
+        }
+        .market {
+            font-size: 14px;
+            color: #c4c4c6;
+            text-decoration: line-through;
+        }
+    }
+}
+
+.item-spec-list {
+    margin: 0;
+    li {
+        padding: 15px 20px;
+        font-size: 14px;
+    }
+}
+
+.toolbar-buy{
+    border-top: solid 1px #dedede;
+    border-bottom: solid 1px #dedede;
+    margin-top: 15px;
+    padding: 15px 0;
+    background-color: #F8F8F8;
+    &.fixed {
+        position: fixed;
+        left: 0;
+        right: 0;
+        bottom: 0;
+    }
+    .title {
+        font-size: 14px;
+        color: #959595;
+    }
+
+    h2, p{
+        font-size:14px;
+        margin: 0;
+    }
+
+    h2{
+        font-weight: 600;
+        margin-bottom: 5px;
+    }
+
+    p{
+        color: #959595;
+        font-size: 13px;
+    }
+
+    .pay-action {
+        span {
+            display: inline-block;
+            margin-right: 10px;
+            color: #d44d44;
+            font-size: 20px;
+            font-weight: 600;
         }
     }
 }

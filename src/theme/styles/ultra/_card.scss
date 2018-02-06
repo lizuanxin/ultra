@@ -1,13 +1,24 @@
-.receiving-body{
-    >ul.row{
-        padding:30px 15px;
-        border-bottom:solid 1px #e1e1e1;
-        &:last-child{
+.receiving-body {
+    >ul.row {
+        padding: 30px 15px;
+        border-bottom: solid 1px #e1e1e1;
+        &:last-child {
             border-bottom-color: transparent;
         }
     }
-    .card-detail{
-        color:#636363;
-        margin:0 0 2em 0;
+    .card-detail {
+        color: #636363;
+        margin: 0 0 2em 0;
+    }
+}
+
+.card-item-default {
+    border: solid 1px rgba(0, 0, 0, 0.05);
+    .card-header {
+        background-color: rgba(0, 0, 0, 0.01);
+        border-bottom: solid 1px rgba(0, 0, 0, 0.05);
+    }
+    .card-body {
+        padding: 0;
     }
 }

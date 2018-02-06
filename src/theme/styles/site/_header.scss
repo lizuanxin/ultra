@@ -1,6 +1,6 @@
 .site-header {
-    background: #f9f9f9;
-    background-image: linear-gradient(#fff, #f8f8f8);
+    background: #000;
+    // background-image: linear-gradient(#fff, #f8f8f8);
     >div:nth-child(1) ul {
         height: 100px;
     }
@@ -9,16 +9,55 @@
     }
     >div {
         &:first-child {
-            border-bottom: solid 1px #f2f2f2;
+            // border-bottom: solid 1px #f2f2f2;
         }
         &:last-child {
-            border-top: solid 1px #ffffff;
+            // border-top: solid 1px #ffffff;
         }
     }
     .site-logo {
         @extend .animate;
         max-width: 100%;
         transform-origin: left center;
+    }
+    &.theme-light {
+        background: #f9f9f9;
+        background-image: linear-gradient(#fff, #f8f8f8);
+        .header-menu a {
+            color: #c8c8c8;
+            &:hover,
+            &.active {
+                color: #666666;
+                text-decoration: none;
+            }
+            &:not([href]) {
+                color: #c8c8c8;
+            }
+        }
+        .header-action {
+            border-left: solid 1px #f2f2f2;
+            .account {
+                color: #c8c8c8;
+                i {
+                    color: #666666;
+                }
+            }
+            .shop-cart {
+                i {
+                    color: #666666;
+                }
+                em {
+                    color: white;
+                    background-color: #c8c8c8;
+                }
+            }
+            .language {
+                background-color: #f2f2f2;
+                i {
+                    color: #999;
+                }
+            }
+        }
     }
     &.fixed {
         position: fixed;
@@ -29,6 +68,9 @@
             height: 50px;
         }
         .site-logo {
+            transform: scale(.7);
+        }
+        .logo-ico {
             transform: scale(.7);
         }
     }
@@ -48,7 +90,7 @@
         color: #c8c8c8;
         &:hover,
         &.active {
-            color: #666666;
+            color: #a31a2f;
             text-decoration: none;
         }
         &:not([href]) {
@@ -59,7 +101,7 @@
 
 .header-action {
     margin-left: 15px;
-    border-left: solid 1px #f2f2f2;
+    border-left: solid 1px #2a2a2a;
     >div {
         display: inline-block;
         margin-left: 20px;
@@ -67,7 +109,6 @@
     }
     .account {
         position: relative;
-        color: #c8c8c8;
         font-size: 13px;
         &:hover {
             div.item-hover {
@@ -78,7 +119,7 @@
             font-family: 'iconfont';
             font-style: normal;
             font-size: 16px;
-            color: #666666;
+            color: #F2F2F2;
             &:before {
                 content: "\e902";
             }
@@ -91,7 +132,7 @@
             font-family: 'iconfont';
             font-style: normal;
             font-size: 20px;
-            color: #666666;
+            color: #F2F2F2;
             &:before {
                 content: "\e912";
             }
@@ -106,7 +147,7 @@
             height: 20px;
             line-height: 20px;
             color: white;
-            background-color: #c8c8c8;
+            background-color: #a31a2f;
             border-radius: 50%;
         }
     }

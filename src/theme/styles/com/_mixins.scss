@@ -73,6 +73,10 @@
 
 @mixin flex()
 {
+    &[flex-dir-column], &.flex-dir-column
+    {
+        flex-direction: column;
+    }
     &[align-items-center], &.align-items-center
     {
         align-items: center;
