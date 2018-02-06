@@ -25,6 +25,7 @@ import { UOrderListComponent, UOrderDetailComponent } from 'share/component/orde
 import { TShoppingCart } from 'services/shopping_cart';
 import { OrderComplatePage } from './ordercomplate';
 import { SiteHeaderComponent } from './share/header';
+import { ProCenterPage } from './pro-center';
 
 
 
@@ -40,6 +41,7 @@ const routes: Routes = [
     {path: '', component: LayoutComponent,
         children: [
             {path: 'home', component: HomePage},
+            {path: 'pro-center', component: ProCenterPage},
             {path: 'health', component: HealthPage},
             {path: 'health/cable', component: CableMagicPage},
             {path: 'detail/:id', component: DetailPage},
@@ -71,6 +73,7 @@ const routes: Routes = [
     declarations: [
         LayoutComponent,
         HomePage,
+        ProCenterPage,
         TensPage,
         CableMagicPage,
         HealthPage,
