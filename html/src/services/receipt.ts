@@ -36,6 +36,11 @@ export class TReceiptService
         return Receipt;
     }
 
+    async CreateWithGift(GiftReceipting: Types.IGiftReceipting)
+    {
+        return await this.Http.Post('/appendfromgift', GiftReceipting).toPromise().then((res) => res.Content);
+    }
+
     async Save(Receipt: Types.IReceipt)
     {
         if (Receipt.Manifests.length === 0)
@@ -149,6 +154,7 @@ export class TReceipt extends TAssignable implements Types.IReceipt
     ToAddress: string = null;      // of JSON address redundancy storage
     Memo: string = null;
     Status: Types.TReceiptStatus = null;
+    Amount: number = 0;
     Timestamp: Date = null;
 
     Manifests: Types.IManifest[] = [];
