@@ -1,0 +1,11 @@
+button {
+    &.btn-outline-gray {
+        background-color: #F9F9F9;
+        border: solid 1px #e0e0e0;
+    }
+    &.btn-cust-primary {
+        color: white;
+        background-color: #5e89de;
+        border: solid 1px #4f70b3;
+    }
+}
