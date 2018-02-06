@@ -106,6 +106,7 @@
 }
 
 .content-pro-container {
+    @extend.animate;
     height: 720px;
     background-repeat: no-repeat;
     background-size: cover;
@@ -136,7 +137,7 @@
         }
     }
     .preview-img{
-        max-width: 70%;
+        max-width: 80%;
     }
     button.btn-more {
         display: block;
@@ -146,13 +147,25 @@
     }
 }
 
+.pro-rover-active {
+    li{
+        &:hover {
+            background-color: rgba(255,255,255,.1);
+        }
+    }
+}
+
 .pro-show-list {
     padding-bottom: 15px;
+    font-size: 12px;
     span {
         margin-top: -20px;
         display: block;
         text-align: center;
         color: white;
+    }
+    img {
+        width: 60%;
     }
     &.active{
         background-color: rgba(0,0,0,.7);
