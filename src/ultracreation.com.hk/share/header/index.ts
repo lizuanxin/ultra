@@ -1,4 +1,5 @@
-import {Component, OnInit, Inject, HostListener} from '@angular/core';
+import {Component, OnInit, DoCheck, Inject, HostListener} from '@angular/core';
+import {Router} from '@angular/router';
 import {DOCUMENT} from '@angular/platform-browser';
 import {TypeInfo} from 'UltraCreation/Core/TypeInfo';
 
@@ -8,10 +9,10 @@ import { log } from 'util';
 
 @Component({selector: 'site-header', templateUrl: './index.html'})
 
-export class SiteHeaderComponent implements OnInit
+export class SiteHeaderComponent implements OnInit, DoCheck
 {
 
-    constructor(public Auth: TAuthService, @Inject(DOCUMENT) private document: Document)
+    constructor(public Auth: TAuthService, @Inject(DOCUMENT) private document: Document, private router: Router)
     {
 
     }
@@ -19,6 +20,16 @@ export class SiteHeaderComponent implements OnInit
     ngOnInit()
     {
 
+
+
+    }
+
+    ngDoCheck()
+    {
+        if (this.router.routerState.snapshot.url.indexOf('pro-detail') === 1)
+            this.isDetail = true;
+        else
+            this.isDetail = false;
     }
 
     @HostListener('window:scroll', [])
@@ -56,5 +67,6 @@ export class SiteHeaderComponent implements OnInit
     MenuItems = new Array<object>();
     IsAdmin: boolean = App.Router.routerState.snapshot.url.split('/')[1] === 'admin';
     isCollapsed: boolean = false;
+    isDetail: boolean = false;
     navIsFixed: boolean = false;
 }

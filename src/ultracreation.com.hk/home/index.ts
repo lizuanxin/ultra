@@ -1,24 +1,36 @@
 import {Component, OnInit, ViewChild, ElementRef} from '@angular/core';
 import * as Types from 'services/cloud/types';
-import {TDomainService} from 'services/domain';
 
 @Component({templateUrl: './index.html'})
 export class HomePage implements OnInit
 {
-    constructor(private DomainService: TDomainService)
+    constructor()
     {
-        this.Items = [];
+
     }
 
     ngOnInit()
     {
-       this.DomainService.List().then(list =>
-        {
-            this.Items = list;
-            console.log(this.Items);
-        })
-       .catch(err => console.log(err));
+
     }
 
-    Items: Array<Types.IPublishedSnap>;
+
+    SwitchIndex(n: number)
+    {
+        this.ActiveIndex = n;
+    }
+
+    get PicPath(): string
+    {
+        switch (this.ActiveIndex)
+        {
+            case 0: return 'assets/images/site/2018020622666.jpg';
+            case 1: return 'assets/images/site/2018020622888.jpg';
+        }
+
+    }
+
+
+    ActiveIndex: number = 0;
+
 }

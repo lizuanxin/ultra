@@ -1,19 +1,52 @@
-<div class="container">
-    <nav margin-top>
-        <ol class="breadcrumb">
-            <li class="breadcrumb-item">Product List</li>
-        </ol>
-    </nav>
-    <ul class="row list-pro-items" margin>
-        <li class="col-md-2" *ngFor="let item of Items">
-            <div class="border-clip">
-                <div class="img-container transparent"  [style.background-image]="'url('+ item.AvatarUrl +')'" [routerLink]="['/pro-detail', item.Id]"></div>
-                <h2>{{item.Name}}</h2>
-                <div class="item-price">
-                    <span>{{item.Pricing.Retail}}</span>
+<div class="content-pro-container flex-box flex-dir-column justify-content-end" [style.background-image]="'url(' + PicPath + ')'">
+    <div class="container">
+        <ul class="row pro-show-header">
+            <li class="col-3">
+                <ng-template [ngIf]="ActiveIndex == 0">
+                    <h2>小摩线按摩仪</h2>
+                    <h3>便携式设计，让你随时随地松一松</h3>
+                    <p>
+                        <img src="assets/images/site/icon-app.png">专用App，多变的按摩模式
+                    </p>
+                    <p>
+                        <img src="assets/images/site/icon-spec.png">高规格升级贴片
+                    </p>
+                    <p>
+                        <img src="assets/images/site/icon-ele.png">全新交换电流
+                    </p>
+                    <button class="btn btn-more">了解更多</button>
+                </ng-template>
+            </li>
+            <li class="col-3 offset-1">
+                <img class="preview-img" *ngIf="ActiveIndex == 0" src="assets/images/site/2018020699888123.png">
+                <img class="preview-img" *ngIf="ActiveIndex == 1" src="assets/images/site/2018020699666324.png">
+            </li>
+        </ul>
+        <ul class="row justify-content-between" m-t-30>
+            <li class="col-3">
+                <div class="pro-show-list" [class.active]="ActiveIndex == 0" (click)="SwitchIndex(0)">
+                    <div class="img-container transparent">
+                        <img class="img-fluid" src="assets/images/site/xmx.png">
+                    </div>
+                    <span>小摩线智能按摩仪</span>
                 </div>
-            </div>
-        </li>
-
-    </ul>
+            </li>
+            <li class="col-3">
+                <div class="pro-show-list" [class.active]="ActiveIndex == 1" (click)="SwitchIndex(1)">
+                    <div class="img-container transparent">
+                        <img class="img-fluid" src="assets/images/site/wdj.png">
+                    </div>
+                    <span>CareMagic温度计</span>
+                </div>
+            </li>
+            <li class="col-3">
+                <div class="pro-show-list" [class.active]="ActiveIndex == 2" (click)="SwitchIndex(2)">
+                    <div class="img-container transparent">
+                        <img class="img-fluid" src="assets/images/site/ykq.png">
+                    </div>
+                    <span>CareMagic温度计</span>
+                </div>
+            </li>
+        </ul>
+    </div>
 </div>

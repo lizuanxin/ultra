@@ -1,16 +1,20 @@
-<div class="site-header"  [class.fixed]="navIsFixed">
+<div class="site-header"  [class.fixed]="navIsFixed" [class.theme-light]="isDetail">
     <div>
         <div class="container">
             <ul class="row justify-content-between align-items-center">
                 <li class="col-2" text-left>
-                    <img src="assets/images/site/logo.png" class="site-logo">
+                    <div class="logo-ico" [class.darken]="isDetail"></div>
+                    <!-- <img src="assets/images/site/logo.png" class="site-logo"> -->
                 </li>
                 <li class="col-10" text-right>
                     <div class="header-menu">
-                        <a [routerLink]="['/home']" [routerLinkActive]="['active']">HOME</a>
+                        <a [routerLink]="['/home']" [routerLinkActive]="['active']">首页</a>
+                        <a [routerLink]="['/pro-center']" [routerLinkActive]="['active']">产品中心</a>
                         <a [routerLink]="['/health']" [routerLinkActive]="['active']">HEALTHCARE</a>
-                        <a>AV PRODUCT</a>
-                        <a>GADQET</a>
+                        <a href="javascript:void(0)">应用下载</a>
+
+
+
                     </div>
                     <div class="header-action">
                         <div class="account">

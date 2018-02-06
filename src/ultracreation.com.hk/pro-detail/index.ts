@@ -1,4 +1,5 @@
-import { Component, OnInit, ViewChild, ElementRef, Renderer } from '@angular/core';
+import { Component, OnInit, ViewChild, ElementRef, Renderer, Inject, HostListener } from '@angular/core';
+import {DOCUMENT} from '@angular/platform-browser';
 import { Router, ActivatedRoute, Params } from '@angular/router';
 import {Types} from 'services';
 import {SwiperComp} from 'UltraCreation/ng-ion/swiper';
@@ -10,12 +11,13 @@ import { TShoppingCart } from 'services/shopping_cart';
 @Component({selector: 'app-productdetail-page', templateUrl: './index.html'})
 export class ProDetailPage implements OnInit {
     constructor(private elementRef: ElementRef, private renderer: Renderer, private router: Router,
-        private route: ActivatedRoute, private DomainService: TDomainService, private CartSvc: TShoppingCart)
+        private route: ActivatedRoute, private DomainService: TDomainService, private CartSvc: TShoppingCart, @Inject(DOCUMENT) private document: Document)
     {
 
     }
     ngOnInit()
     {
+        console.log(this.route);
 
         this.DomainService.Open(this.route.params['value'].id).then(item =>
         {
@@ -174,6 +176,18 @@ export class ProDetailPage implements OnInit {
 
     }
 
+    @HostListener('window:scroll', [])
+    onWindowScroll() {
+      const number =  this.document.documentElement.scrollTop || this.document.body.scrollTop || 0;
+      const footer_link: any = document.querySelector('.most-link') as HTMLElement;
+      if (number < footer_link.getBoundingClientRect().top) {
+        this.ToolPayFix = true;
+      } else {
+        this.ToolPayFix = false;
+      }
+
+    }
+
     Published: Types.IPublished;
     PublishedItem = new Object() as Types.IItem;
     PublishedPic = new Array<Types.IPicture>();
@@ -182,6 +196,7 @@ export class ProDetailPage implements OnInit {
     AvatarUrl: string = null;
     Quantity: number = 1;
     StyleGalleryClone: object = {};
+    ToolPayFix: boolean = false;
     @ViewChild('ThumbsSwiper') private ThumbsSwiper: SwiperComp;
     @ViewChild('leftview') private LeftView: ElementRef;
     @ViewChild('rightview') private RightView: ElementRef;
