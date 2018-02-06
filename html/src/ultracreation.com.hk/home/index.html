@@ -22,27 +22,27 @@
                 <img class="preview-img" *ngIf="ActiveIndex == 1" src="assets/images/site/2018020699666324.png">
             </li>
         </ul>
-        <ul class="row justify-content-between" m-t-30>
-            <li class="col-3">
-                <div class="pro-show-list" [class.active]="ActiveIndex == 0" (click)="SwitchIndex(0)">
+        <ul class="row justify-content-between pro-rover-active" m-t-30>
+            <li class="col-2" (mouseover)="SwitchIndex(0)">
+                <div class="pro-show-list">
                     <div class="img-container transparent">
-                        <img class="img-fluid" src="assets/images/site/xmx.png">
+                        <img src="assets/images/site/xmx.png">
                     </div>
                     <span>小摩线智能按摩仪</span>
                 </div>
             </li>
-            <li class="col-3">
-                <div class="pro-show-list" [class.active]="ActiveIndex == 1" (click)="SwitchIndex(1)">
+            <li class="col-2" (mouseover)="SwitchIndex(1)">
+                <div class="pro-show-list">
                     <div class="img-container transparent">
-                        <img class="img-fluid" src="assets/images/site/wdj.png">
+                        <img src="assets/images/site/wdj.png">
                     </div>
                     <span>CareMagic温度计</span>
                 </div>
             </li>
-            <li class="col-3">
-                <div class="pro-show-list" [class.active]="ActiveIndex == 2" (click)="SwitchIndex(2)">
+            <li class="col-2" (mouseover)="SwitchIndex(2)">
+                <div class="pro-show-list">
                     <div class="img-container transparent">
-                        <img class="img-fluid" src="assets/images/site/ykq.png">
+                        <img src="assets/images/site/ykq.png">
                     </div>
                     <span>CareMagic温度计</span>
                 </div>
