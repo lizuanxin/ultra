@@ -18,18 +18,35 @@
             <thead>
                 <tr>
                     <th>{{'doll.room.name'|translate}}</th>
-                    <th width="20%" text-center>{{'doll.room.device_id'|translate}}</th>
-                    <th width="12%" text-center>{{'doll.room.coin'|translate}}</th>
-                    <th width="15%" text-center>{{'doll.room.action'|translate}}</th>
+                    <th width="10%" text-center>{{'doll.room.device_id'|translate}}</th>
+                    <th width="10%" text-center>{{'doll.room.coin'|translate}}</th>
+                    <th width="70%" text-center>{{'doll.room.streams'|translate}}</th>
+                    <th width="10%" text-center>{{'doll.room.action'|translate}}</th>
                 </tr>
             </thead>
             <tbody>
-                <tr *ngFor="let room of RoomList" (click)="OpenModal(content, room)">
+                <tr *ngFor="let room of RoomList" >
                     <td class="position-relative">{{room.Name}}</td>
                     <td>{{room.DeviceId}}</td>
-                    <td>{{room.Coins}}</td>
+                    <td>{{room.Coin}}</td>
+                    <td>
+                        <ul>
+                            <li><b>{{'doll.room.front_stream'|translate}}:</b>
+                                <ul>
+                                    <li>{{room.UpStreams[0]}}</li>
+                                    <!-- <li>{{room.Streams[0]}}</li> -->
+                                </ul>
+                            </li>
+                            <li><b>{{'doll.room.top_stream'|translate}}:</b>
+                                <ul>
+                                    <li>{{room.UpStreams[1]}}</li>
+                                    <!-- <li>{{room.Streams[1]}}</li> -->
+                                </ul>
+                            </li>
+                        </ul>
+                    </td>
                     <td text-center>
-                        <button class="btn btn-sm">{{'doll.room.maintaince'|translate}}</button>
+                        <button class="btn btn-sm" (click)="OpenModal(content, room)">{{'doll.room.offline'|translate}}</button>
                     </td>
                 </tr>
             </tbody>
@@ -58,7 +75,7 @@
         <div class="row" align-items-center  m-t-30>
         </div>
         <div m-t-15>
-            <item-selector TableHeader = "false"></item-selector>
+            <item-selector Header="false"></item-selector>
         </div>
 
         <!-- <div class="row justify-content-md-center" align-items-center m-t-15>
