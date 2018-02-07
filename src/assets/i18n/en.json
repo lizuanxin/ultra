@@ -149,7 +149,11 @@
             "name": "Name",
             "device_id": "Device Id",
             "coin": "Coins",
-            "action": "Action"
+            "action": "Action",
+            "front_stream": "Front",
+            "top_stream": "Top",
+            "offline": "Go Offline",
+            "online": "Online"
         }
     }
 }
