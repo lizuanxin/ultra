@@ -46,6 +46,24 @@ export class TDollService
         return this.Http.Put('/room/store', JSON.stringify(Room)).toPromise().then(res => res.Content);
     }
 
+    Enter(Room: Types.Doll.IRoom): Promise<void>
+    {
+        this.Auth.Grant(this.Http);
+        return this.Http.Get('/room/enter', {Room_Id: Room.Id}).toPromise().then(res => res.Content);
+    }
+
+    Leave(Room: Types.Doll.IRoom): Promise<void>
+    {
+        this.Auth.Grant(this.Http);
+        return this.Http.Get('/room/leave', {Room_Id: Room.Id}).toPromise().then(res => res.Content);
+    }
+
+    Queue(Room: Types.Doll.IRoom): Promise<void>
+    {
+        this.Auth.Grant(this.Http);
+        return this.Http.Get('/room/queue', {Room_Id: Room.Id}).toPromise().then(res => res.Content);
+    }
+
     /*
     PostMessage(RoomId: Types.TIdentify, Text: string): Promise<void>
     {

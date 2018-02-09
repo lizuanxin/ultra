@@ -21,7 +21,7 @@ export class TDollRoomComponent implements OnInit
         this.ItemService.Published().then(list =>
         {
             this.DollList = list;
-            console.log(list);
+            // console.log(list);
         });
 
         this.Refresh();
@@ -72,16 +72,19 @@ export class TDollRoomComponent implements OnInit
             });
     }
 
-    OpenItemList()
+    Enter(Room: Types.Doll.IRoom): void
     {
-        /*
-        App.ShowModal(TItemSelectorComponent, {}, {size: 'lg'})
-        .then((SelectedItems) =>
-        {
-            this.RoomItem.Doll = SelectedItems[0].AvatarUrl;
+        this.DollService.Enter(Room);
+    }
 
-        });
-        */
+    Leave(Room: Types.Doll.IRoom): void
+    {
+        this.DollService.Leave(Room);
+    }
+
+    Queue(Room: Types.Doll.IRoom): void
+    {
+        this.DollService.Queue(Room);
     }
 
     DollList = new Array<Types.IPublished>();
