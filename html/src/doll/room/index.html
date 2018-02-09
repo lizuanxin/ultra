@@ -47,6 +47,9 @@
                     </td>
                     <td text-center>
                         <button class="btn btn-sm" (click)="OpenModal(content, room)">{{'doll.room.offline'|translate}}</button>
+                        <button class="btn btn-sm" (click)="Enter(room)">Enter</button>
+                        <button class="btn btn-sm" (click)="Leave(room)">Leave</button>
+                        <button class="btn btn-sm" (click)="Queue(room)">Queue</button>
                     </td>
                 </tr>
             </tbody>
