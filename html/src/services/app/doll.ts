@@ -32,6 +32,8 @@ export class TDollService
     RoomList(): Promise<Array<Types.Doll.IRoom>>
     {
         this.Auth.Grant(this.Http);
+        // this.Http.Get('/room').toPromise().then(res => console.log(res.Content));
+
         return this.Http.Get('/room/listowner').toPromise().then(res => res.Content);
     }
 
@@ -49,19 +51,19 @@ export class TDollService
     Enter(Room: Types.Doll.IRoom): Promise<void>
     {
         this.Auth.Grant(this.Http);
-        return this.Http.Get('/room/enter', {Room_Id: Room.Id}).toPromise().then(res => res.Content);
+        return this.Http.Get('/room/enter', {Id: Room.Id}).toPromise().then(res => res.Content);
     }
 
     Leave(Room: Types.Doll.IRoom): Promise<void>
     {
         this.Auth.Grant(this.Http);
-        return this.Http.Get('/room/leave', {Room_Id: Room.Id}).toPromise().then(res => res.Content);
+        return this.Http.Get('/room/leave', {Id: Room.Id}).toPromise().then(res => res.Content);
     }
 
     Queue(Room: Types.Doll.IRoom): Promise<void>
     {
         this.Auth.Grant(this.Http);
-        return this.Http.Get('/room/queue', {Room_Id: Room.Id}).toPromise().then(res => res.Content);
+        return this.Http.Get('/room/queue', {Id: Room.Id}).toPromise().then(res => res.Content);
     }
 
     /*
